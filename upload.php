@@ -10,6 +10,7 @@ $conn = new mysqli($servername, $username, $password, "osureplay");
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
+	header("Location:index.php?error=3");
 }
 
 //-- Upload check --
@@ -19,7 +20,7 @@ $file_name = basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 // Check if image file is a actual replay osu file or fake
-if(isset($_POST["submit"])) {
+/*if(isset($_POST["submit"])) {
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
     if($check !== false) {
         //osr
@@ -28,11 +29,13 @@ if(isset($_POST["submit"])) {
         //not a osr
         $uploadOk = 0;
     }
-}
+}*/
+
 // Allow certain file formats
 if($imageFileType != "osr") {
     echo "Sorry, only osu replay files are allowed.";
     $uploadOk = 0;
+	header("Location:index.php?error=1");
 }
 
 //Check if request already exists
@@ -43,6 +46,7 @@ if($result->num_rows > 0){
 		if($row["OFN"] == $file_name){
 			echo 'file already requested';
 			$uploadOk = 0;
+			header("Location:index.php?error=2");
 		}
 	}
 }
@@ -50,6 +54,7 @@ if($result->num_rows > 0){
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
+	header("Location:index.php?error=4");
 // if everything is ok, try to upload file
 } else {
 	
@@ -73,7 +78,17 @@ if ($uploadOk == 0) {
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
     } else {
         echo "Sorry, there was an error uploading your file.";
+		header("Location:index.php?error=4");
     }
 }
+//Errors :
+/*
+	1="File is not a osu replay"
+	2="File already been requested"
+	3="Database connection error"
+	4="Upload error"
+*/
+//header("Location:index.php");
+exit;
 ?>
 

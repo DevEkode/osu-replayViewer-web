@@ -17,6 +17,7 @@
     <input type="submit" value="Upload Replay" name="submit">
 	<?php
 		$errors = array (
+			0 => "Upload successful",
 			1 => "File is not a osu replay",
 			2 => "File has already been requested",
 			3 => "Database connection error",
@@ -24,7 +25,7 @@
 		);
 
 		$error_id = isset($_GET['error']) ? (int)$_GET['error'] : 0;
-		if ($error_id != 0) {
+		if ($error_id != -1) {
 			echo '<br>';
 			echo '<span style="text-align:center" class=errorText>'.$errors[$error_id].'</span>';
 		}

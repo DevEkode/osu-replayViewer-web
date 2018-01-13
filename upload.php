@@ -83,12 +83,13 @@ if ($uploadOk == 0) {
 }
 //Errors :
 /*
+	0="Upload successful"
 	1="File is not a osu replay"
 	2="File already been requested"
 	3="Database connection error"
 	4="Upload error"
 */
-//header("Location:index.php");
+header("Location:index.php?error=0");
 exit;
 ?>
 

@@ -21,7 +21,8 @@
 			1 => "File is not a osu replay",
 			2 => "File has already been requested",
 			3 => "Database connection error",
-			4 => "Upload error"
+			4 => "Upload error",
+			5 => "File has been already processed"
 		);
 
 		$error_id = isset($_GET['error']) ? (int)$_GET['error'] : 0;

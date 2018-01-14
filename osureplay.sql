@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 14 jan. 2018 à 14:15
+-- Généré le :  Dim 14 jan. 2018 à 14:19
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `osureplay`
 --
+CREATE DATABASE IF NOT EXISTS `osureplay` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `osureplay`;
 
 -- --------------------------------------------------------
 

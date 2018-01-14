@@ -1,4 +1,14 @@
 <?php
+// -- Fonctions --
+function getPlayerName($fileName){ //Return player name of the replay
+	$pName = explode(" ",$fileName);
+	return $pName[0];
+}
+
+//--Connect to osu API --
+$apiKey = "db27f0ffe486b0d734802a31bfc2deb9e8369c63";
+
+
 //-- Connect to mysql request database --
 $servername = "localhost";
 $username = "root";
@@ -59,23 +69,48 @@ if ($uploadOk == 0) {
 } else {
 	
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-		//Create a request ticket
+		//-- Check if player already exist in player database --
+		//Sql request
+		$playerName = getPlayerName($file_name);
+		$result = $conn->query("SELECT userName FROM playerlist WHERE userName='$playerName'");
+		if($result->num_rows == 0){
+			//Player is not into database
+			//Create entry for player
+			$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_user?k=$apiKey&u=$playerName");
+			$json = json_decode($apiRequest, true);
+			$playerId = $json[0]['user_id'];
+			
+			//Send info to database
+			$sql = "INSERT INTO playerlist (userId,userName) VALUES ('$playerId','$playerName')";
+			if ($conn->query($sql) === TRUE) {
+				//row created
+			} else {
+				echo "Error: " . $sql . "<br>" . $conn->error;
+			}
+		}
+		
+		//-- Create a request ticket --
 		date_default_timezone_set('Europe/Paris');
-		$id = uniqid();
+		$replayId = uniqid();
+		$result = $conn->query("SELECT userId FROM playerlist WHERE userName='$playerName'");
+		while ($row = $result->fetch_assoc()) {
+			$playerId = $row['userId'];
+		}
 		$date = date('Y-m-d');
-		$sql = "INSERT INTO requestlist (id,OFN,date) VALUES ('$id','$file_name','$date')";
+		$sql = "INSERT INTO requestlist (replayId,OFN,date,playerId) VALUES ('$replayId','$file_name','$date','$playerId')";
 		if ($conn->query($sql) === TRUE) {
-		//row created
+			//row created
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
 		}
 		
 		//Deplacement du fichier en liste d'attente
-		mkdir('requestList/'.$id, 0777, true);
-		rename('uploads/'.$file_name,'requestList/'.$id.'/'.$file_name);
+		mkdir('requestList/'.$replayId, 0777, true);
+		rename('uploads/'.$file_name,'requestList/'.$replayId.'/'.$file_name);
 		
 		//upload finised
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+		header("Location:index.php?error=0");
     } else {
         echo "Sorry, there was an error uploading your file.";
 		header("Location:index.php?error=4");
@@ -89,7 +124,7 @@ if ($uploadOk == 0) {
 	3="Database connection error"
 	4="Upload error"
 */
-header("Location:index.php?error=0");
+$conn->close();
 exit;
 ?>
 

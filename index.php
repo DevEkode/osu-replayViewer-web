@@ -39,5 +39,4 @@
 	osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert
 	 | Website created by <a href="https://osu.ppy.sh/u/3481725">codevirtuel</a>
 </footer>
-
 </html>

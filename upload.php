@@ -61,6 +61,18 @@ if($result->num_rows > 0){
 	}
 }
 
+//Check if replay has already been process
+$result = $conn->query('SELECT OFN FROM replaylist');
+if($result->num_rows > 0){
+	while($row = $result->fetch_assoc()){
+		if($row["OFN"] == $file_name){
+			echo 'file has already been requested';
+			$uploadOk = 0;
+			header("Location:index.php?error=5");
+		}
+	}
+}
+
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
@@ -123,6 +135,7 @@ if ($uploadOk == 0) {
 	2="File already been requested"
 	3="Database connection error"
 	4="Upload error"
+	5="File has been already processed"
 */
 $conn->close();
 exit;

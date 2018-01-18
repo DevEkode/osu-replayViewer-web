@@ -40,6 +40,25 @@ function getBeatmapId($md5,$api){
 	$id = $json[0]["beatmap_id"];
 	return $id;
 }
+
+function getBeatmapSetId($md5,$api){
+	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$md5");
+	$json = json_decode($apiRequest, true);
+	$id = $json[0]["beatmapset_id"];
+	return $id;
+}
+
+function generateBtFileName($beatmapId,$api){
+	//Setid Artist - Title
+	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&b=$beatmapId");
+	$json = json_decode($apiRequest, true);
+	$beatmapSetId = $json[0]["beatmapset_id"];
+	$artist = $json[0]["artist"];
+	$title = $json[0]["title"];
+	$BFN = $beatmapSetId." ".$artist." - ".$title.".osz";
+	
+	return $BFN;
+}
 // ******************** CORE **********************************
 
 //-- Upload check --
@@ -124,17 +143,20 @@ if ($uploadOk == 0) {
 		date_default_timezone_set('Europe/Paris');
 		$replayId = uniqid();
 		$beatmapId = getBeatmapId(getBeatmapMD5($file_name),$apiKey);
+		$beatmapSetId = getBeatmapSetId(getBeatmapMD5($file_name),$apiKey);
+		//Encode to Base64 to avoid sql syntax error
+		$beatmapName = base64_encode(generateBtFileName($beatmapId,$apiKey));
+		$replayName = base64_encode($file_name);
 		$result = $conn->query("SELECT userId FROM playerlist WHERE userName='$playerName'");
 		while ($row = $result->fetch_assoc()) {
 			$playerId = $row['userId'];
 		}
-		$date = date('Y-m-d');
-		$sql = "INSERT INTO requestlist (replayId,beatmapId,OFN,date,playerId) VALUES ('$replayId','$beatmapId','$file_name','$date','$playerId')";
+		$sql = "INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,playerId) VALUES ('$replayId','$beatmapId','$beatmapSetId','$replayName','$beatmapName','$playerId')";
 		if ($conn->query($sql) === TRUE) {
 			//row created
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
-			header("Location:index.php?error=3&sqlErr=".$conn->error);
+			//header("Location:index.php?error=3&sqlErr=".$conn->error);
 			exit;
 		}
 		

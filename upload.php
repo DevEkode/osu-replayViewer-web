@@ -1,10 +1,5 @@
 <?php
-// -- Fonctions --
-function getPlayerName($fileName){ //Return player name of the replay
-	$pName = explode(" ",$fileName);
-	return $pName[0];
-}
-
+// ******************** Variables **********************************
 //--Connect to osu API --
 $apiKey = "db27f0ffe486b0d734802a31bfc2deb9e8369c63";
 
@@ -14,6 +9,7 @@ $servername = "localhost";
 $username = "root";
 $password = "";
 
+// ******************** Connection **********************************
 // Create connection
 $conn = new mysqli($servername, $username, $password, "osureplay");
 
@@ -21,7 +17,30 @@ $conn = new mysqli($servername, $username, $password, "osureplay");
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 	header("Location:index.php?error=3");
+	exit;
 }
+
+// ******************** Fonctions **********************************
+function getPlayerName($fileName){ //Return player name of the replay
+	$pName = explode(" ",$fileName);
+	return $pName[0];
+}
+
+function getBeatmapMD5($fileName){
+	$myfile = fopen("./uploads/".$fileName, "r") or die("Unable to open file!");
+	$replay_content = fread($myfile,filesize("./uploads/".$fileName));
+	fclose($myfile);
+	$md5 = substr($replay_content,7,32);
+	return $md5;
+}
+
+function getBeatmapId($md5,$api){
+	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$md5");
+	$json = json_decode($apiRequest, true);
+	$id = $json[0]["beatmap_id"];
+	return $id;
+}
+// ******************** CORE **********************************
 
 //-- Upload check --
 $target_dir = "uploads/";
@@ -104,16 +123,19 @@ if ($uploadOk == 0) {
 		//-- Create a request ticket --
 		date_default_timezone_set('Europe/Paris');
 		$replayId = uniqid();
+		$beatmapId = getBeatmapId(getBeatmapMD5($file_name),$apiKey);
 		$result = $conn->query("SELECT userId FROM playerlist WHERE userName='$playerName'");
 		while ($row = $result->fetch_assoc()) {
 			$playerId = $row['userId'];
 		}
 		$date = date('Y-m-d');
-		$sql = "INSERT INTO requestlist (replayId,OFN,date,playerId) VALUES ('$replayId','$file_name','$date','$playerId')";
+		$sql = "INSERT INTO requestlist (replayId,beatmapId,OFN,date,playerId) VALUES ('$replayId','$beatmapId','$file_name','$date','$playerId')";
 		if ($conn->query($sql) === TRUE) {
 			//row created
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
+			header("Location:index.php?error=3&sqlErr=".$conn->error);
+			exit;
 		}
 		
 		//Deplacement du fichier en liste d'attente

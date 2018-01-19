@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  Dim 14 jan. 2018 à 14:19
+-- Généré le :  ven. 19 jan. 2018 à 13:40
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -36,6 +36,13 @@ CREATE TABLE IF NOT EXISTS `playerlist` (
   `userName` varchar(256) NOT NULL COMMENT 'osu username'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `playerlist`
+--
+
+INSERT INTO `playerlist` (`userId`, `userName`) VALUES
+(3481725, 'codevirtuel');
+
 -- --------------------------------------------------------
 
 --
@@ -45,10 +52,11 @@ CREATE TABLE IF NOT EXISTS `playerlist` (
 DROP TABLE IF EXISTS `replaylist`;
 CREATE TABLE IF NOT EXISTS `replaylist` (
   `replayId` varchar(13) NOT NULL,
+  `beatmapId` int(11) NOT NULL,
   `userId` int(10) NOT NULL,
   `OFN` text NOT NULL,
-  `date` date NOT NULL,
-  `permanent` tinyint(1) NOT NULL
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `permanent` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -60,8 +68,12 @@ CREATE TABLE IF NOT EXISTS `replaylist` (
 DROP TABLE IF EXISTS `requestlist`;
 CREATE TABLE IF NOT EXISTS `requestlist` (
   `replayId` varchar(13) NOT NULL COMMENT 'id du request',
+  `beatmapId` int(6) NOT NULL,
+  `beatmapSetId` int(10) NOT NULL,
   `OFN` longtext NOT NULL COMMENT 'osu file name',
-  `date` date NOT NULL COMMENT 'date de depot du replay',
+  `BFN` longtext NOT NULL COMMENT 'Beatmap File Name',
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'date de depot du replay',
+  `duration` int(11) NOT NULL COMMENT 'Durée du replay',
   `priority` smallint(1) NOT NULL DEFAULT '0' COMMENT 'priorite',
   `playerId` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

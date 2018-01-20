@@ -1,0 +1,64 @@
+body {
+    background-image: url("../images/background.png");
+}
+
+#logo{
+	margin: auto;
+}
+
+#logo img{
+	display: block;
+	margin:auto;
+	background-color: rgba(150, 150, 150, .5);
+	border-radius:50px;
+	padding:1% 1% 1% 1%;
+}
+
+#uploadReplay{
+	margin-top:2%;
+	margin-left:27%;
+	margin-right:27%;
+	padding-top:2%;
+	padding-bottom:2%;
+	text-align:center;
+	background-color: rgba(150, 150, 150, .5);
+	border-radius:50px;
+	font-family:"Verdana";
+}
+
+.errorText{
+	color:black;
+	font-family: "Verdana";
+}
+
+#buttonBlock{
+	width:50%;
+	height:10%;
+	background-color: rgba(150, 150, 150, .5);
+	border-radius:50px;
+	margin:auto;
+	margin-top:2%;
+	margin-bottom:5%;
+	text-align:center;
+}
+
+#buttonBlock img{
+	display: block;
+	height:150px;
+	margin:2% 2% 1% 1%;
+	display:inline-block;
+}
+
+footer{
+	font-family: "Verdana";
+	position:fixed;
+	width:100%;
+	text-align:center;
+	margin-left:-1%;
+	padding-right:1%;
+	padding-top:1%;
+	padding-bottom:1%;
+    bottom: 0;
+	background-color: rgba(150, 150, 150, .5);
+}
+

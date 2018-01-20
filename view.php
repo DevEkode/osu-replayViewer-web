@@ -37,7 +37,8 @@
 		</span>
 	
 		<video poster="" controls>
-			<source src="terracid.mp4"  type='video/mp4'>
+			<source src="terracid.flv" type='video/flv'>
+			<!-- <source src="terracid.mp4"  type='video/mp4'> -->
 		</video>
 		
 		<section>

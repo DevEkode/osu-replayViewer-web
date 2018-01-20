@@ -20,6 +20,10 @@ if ($conn->connect_error) {
 	exit;
 }
 
+//create folder upload if does not exist
+if (!file_exists('./uploads')) {
+    mkdir('./uploads', 0777, true);
+}
 // ******************** Fonctions **********************************
 function getPlayerName($fileName){ //Return player name of the replay
 	$pName = explode(" ",$fileName);
@@ -65,6 +69,12 @@ function getReplayDuration($md5,$api){
 	$json = json_decode($apiRequest, true);
 	$id = $json[0]["total_length"];
 	return $id;
+}
+
+function getBeatmap($md5,$api){
+	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$md5");
+	$json = json_decode($apiRequest, true);
+	return $json;
 }
 // ******************** CORE **********************************
 
@@ -150,9 +160,10 @@ if ($uploadOk == 0) {
 		date_default_timezone_set('Europe/Paris');
 		$replayId = uniqid();
 		$beatmapMD5 = getBeatmapMD5($file_name);
-		$beatmapId = getBeatmapId($beatmapMD5,$apiKey);
-		$beatmapSetId = getBeatmapSetId($beatmapMD5,$apiKey);
-		$replayDuration = getReplayDuration($beatmapMD5,$apiKey);
+		$beatmapJson = getBeatmap($beatmapMD5,$apiKey);
+		$beatmapId = $beatmapJson[0]["beatmap_id"];
+		$beatmapSetId = $beatmapJson[0]["beatmapset_id"];
+		$replayDuration = $beatmapJson[0]["total_length"];
 		//Encode to Base64 to avoid sql syntax error
 		$beatmapName = base64_encode(generateBtFileName($beatmapId,$apiKey));
 		$replayName = base64_encode($file_name);
@@ -165,7 +176,7 @@ if ($uploadOk == 0) {
 			//row created
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
-			//header("Location:index.php?error=3&sqlErr=".$conn->error);
+			header("Location:index.php?error=3&sqlErr=".$conn->error);
 			exit;
 		}
 		

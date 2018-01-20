@@ -1,13 +1,14 @@
 <?php
 // ******************** Variables **********************************
 //--Connect to osu API --
-$apiKey = "db27f0ffe486b0d734802a31bfc2deb9e8369c63";
+require_once 'secure/osu_api_key.php';
+$apiKey = $osuApiKey;
 
 
 //-- Connect to mysql request database --
-$servername = "localhost";
-$username = "root";
-$password = "";
+$servername = $mySQLserver;
+$username = $mySQLusername;
+$password = $mySQLpassword;
 
 // ******************** Connection **********************************
 // Create connection

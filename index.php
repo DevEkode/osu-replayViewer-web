@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="index.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head> 
 
 <body>
@@ -32,11 +32,26 @@
 		}
 	?>
 </form>
-	
-</body>
+
+<div id=buttonBlock>
+	<a href="view.php"> 
+		<img src="images/viewButton.png">
+	</a>
+	<a href=""> 
+		<img src="images/searchButton.png">
+	</a>
+	<a href=""> 
+		<img src="images/button.png">
+	</a>
+</div>
+
+
+
+
 
 <footer>
 	osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert
 	 | Website created by <a href="https://osu.ppy.sh/u/3481725">codevirtuel</a>
 </footer>
+</body>
 </html>

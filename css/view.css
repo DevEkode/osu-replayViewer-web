@@ -1,5 +1,26 @@
+body {
+    background-image: url("../images/background.png");
+}
+
+span{
+	display:block;
+	font-family:"Verdana";
+	font-size:20px;
+	text-align:center;
+	margin:auto;
+	margin-bottom:1%;
+}
+
 video{
 	display:block;
 	width:60%;
 	margin:auto;
+	border:5px;
+	border-color:gray;
+	border-style: solid;
+}
+
+section{
+	background-color: rgba(150, 150, 150, .5);
+	border-radius:50px;
 }

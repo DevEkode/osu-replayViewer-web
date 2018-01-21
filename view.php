@@ -22,10 +22,10 @@
 		$beatmapId = $row['beatmapId'];
 		$playerId = $row['userId'];
 		$replayUploadDate = $row['date'];
+		$OFN = base64_decode($row['OFN']);
 	}
 	
-	$videoPath = "replayList/".$replayId."/".$replayId.".flv";
-	echo $videoPath
+	$videoPath = "replayList/".$replayId."/".$replayId.".mp4";
 ?>
 
 <!-- page html -->
@@ -36,16 +36,20 @@
 
 	<body>
 		<span> 
-			Replay <?php echo $replayId ?>
+			<?php echo $OFN ?>
 		</span>
 	
 		<video poster="" controls>
-			<source src=<?php echo $videoPath ?> type='video/flv'>
+			<source src=<?php echo $videoPath ?> type='video/mp4'>
 			<!-- <source src="terracid.mp4"  type='video/mp4'> -->
 		</video>
 		
 		<section>
-			
+			<?php
+				echo "Beatmap ID : $beatmapId<br>";
+				echo "Player ID : $playerId<br>";
+				echo "Upload date : $replayUploadDate";
+			?>
 		</section>
 	</body>
 </html>

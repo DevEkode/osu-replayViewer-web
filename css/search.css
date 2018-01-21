@@ -1,0 +1,16 @@
+body {
+    background-image: url("../images/background.png");
+}
+
+#form{
+	display:block;
+	margin:auto;
+	margin-left:27%;
+	margin-right:27%;
+	background-color: rgba(150, 150, 150, .5);
+	padding:1% 1% 1% 1%;
+	text-align:center;
+	font-family:"Verdana";
+	font-size:20px;
+	border-radius:50px;
+}

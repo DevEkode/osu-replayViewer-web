@@ -6,8 +6,9 @@ $apiKey = $osuApiKey;
 
 
 //-- Connect to mysql request database --
-$servername = $mySQLserver;
-$username = $mySQLusername;
+$servername = "localhost";
+$username = "root";
+require_once 'secure/osu_api_key.php';
 $password = $mySQLpassword;
 
 // ******************** Connection **********************************

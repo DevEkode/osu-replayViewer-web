@@ -23,6 +23,8 @@
 		$playerId = $row['userId'];
 		$replayUploadDate = $row['date'];
 	}
+	
+	$videoPath = "replayList/".$replayId."/".$replayId;
 ?>
 
 <!-- page html -->
@@ -37,7 +39,7 @@
 		</span>
 	
 		<video poster="" controls>
-			<source src="terracid.flv" type='video/flv'>
+			<source src=<?php $videoPath ?> type='video/mp4'>
 			<!-- <source src="terracid.mp4"  type='video/mp4'> -->
 		</video>
 		

@@ -37,7 +37,7 @@
 	<a href="view.php"> 
 		<img src="images/viewButton.png">
 	</a>
-	<a href=""> 
+	<a href="search.php"> 
 		<img src="images/searchButton.png">
 	</a>
 	<a href=""> 

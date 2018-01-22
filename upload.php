@@ -8,7 +8,7 @@ $apiKey = $osuApiKey;
 //-- Connect to mysql request database --
 $servername = "localhost";
 $username = "root";
-require_once 'secure/osu_api_key.php';
+require_once 'secure/mysql_pass.php';
 $password = $mySQLpassword;
 
 // ******************** Connection **********************************
@@ -40,20 +40,6 @@ function getBeatmapMD5($fileName){
 	return $md5;
 }
 
-function getBeatmapId($md5,$api){
-	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$md5");
-	$json = json_decode($apiRequest, true);
-	$id = $json[0]["beatmap_id"];
-	return $id;
-}
-
-function getBeatmapSetId($md5,$api){
-	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$md5");
-	$json = json_decode($apiRequest, true);
-	$id = $json[0]["beatmapset_id"];
-	return $id;
-}
-
 function generateBtFileName($beatmapId,$api){
 	//Setid Artist - Title
 	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&b=$beatmapId");
@@ -64,19 +50,42 @@ function generateBtFileName($beatmapId,$api){
 	$BFN = $beatmapSetId." ".$artist." - ".$title.".osz";
 	
 	return $BFN;
+	return $json;
 }
 
-function getReplayDuration($md5,$api){
-	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$md5");
-	$json = json_decode($apiRequest, true);
-	$id = $json[0]["total_length"];
-	return $id;
-}
-
-function getBeatmap($md5,$api){
+function getBeatmapJSON($md5,$api){
 	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$md5");
 	$json = json_decode($apiRequest, true);
 	return $json;
+}
+
+function replayExist($replayName, $table, $conn){
+	$result = $conn->query("SELECT * FROM $table WHERE OFN='$replayName'");
+	echo "SELECT * FROM '$table' WHERE OFN='$replayName'";
+	
+	if($result->num_rows > 0){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+function closeUpload($conn){
+	$conn->close();
+	exit;
+}
+
+function getReplayId($OFN,$conn){
+	$result = $conn->query("SELECT * FROM replaylist WHERE OFN='$OFN'");
+	$id = "";
+	
+	if($result->num_rows > 0){
+		while($row = $result->fetch_assoc()){
+			$id = $row["replayId"];
+		}
+	}
+	return $id;
 }
 // ******************** CORE **********************************
 
@@ -103,6 +112,7 @@ if($imageFileType != "osr") {
     echo "Sorry, only osu replay files are allowed.";
     $uploadOk = 0;
 	header("Location:index.php?error=1");
+	closeUpload($conn);
 }
 
 //Check if request already exists
@@ -114,6 +124,7 @@ if($result->num_rows > 0){
 			echo 'file already requested';
 			$uploadOk = 0;
 			header("Location:index.php?error=2");
+			closeUpload($conn);
 		}
 	}
 }
@@ -126,6 +137,7 @@ if($result->num_rows > 0){
 			echo 'file has already been requested';
 			$uploadOk = 0;
 			header("Location:index.php?error=5");
+			closeUpload($conn);
 		}
 	}
 }
@@ -162,7 +174,7 @@ if ($uploadOk == 0) {
 		date_default_timezone_set('Europe/Paris');
 		$replayId = uniqid();
 		$beatmapMD5 = getBeatmapMD5($file_name);
-		$beatmapJson = getBeatmap($beatmapMD5,$apiKey);
+		$beatmapJson = getBeatmapJSON($beatmapMD5,$apiKey);
 		$beatmapId = $beatmapJson[0]["beatmap_id"];
 		$beatmapSetId = $beatmapJson[0]["beatmapset_id"];
 		$replayDuration = $beatmapJson[0]["total_length"];
@@ -173,13 +185,29 @@ if ($uploadOk == 0) {
 		while ($row = $result->fetch_assoc()) {
 			$playerId = $row['userId'];
 		}
+		
+		//Check if the replay already exist
+		if(replayExist($replayName,"requestlist",$conn)){
+			//replay is in wait list
+			header("Location:index.php?error=2");
+			closeUpload($conn);
+		}
+		if(replayExist($replayName,"replaylist",$conn)){
+			//replay has been already recorded
+			$replayId = getReplayId($replayName,$conn);
+			header("Location:index.php?error=5&id=$replayId");
+			closeUpload($conn);
+		}
+		
+		
+		//Send record
 		$sql = "INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId) VALUES ('$replayId','$beatmapId','$beatmapSetId','$replayName','$beatmapName','$replayDuration','$playerId')";
 		if ($conn->query($sql) === TRUE) {
 			//row created
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
 			header("Location:index.php?error=3&sqlErr=".$conn->error);
-			exit;
+			closeUpload($conn);
 		}
 		
 		//Deplacement du fichier en liste d'attente
@@ -189,9 +217,11 @@ if ($uploadOk == 0) {
 		//upload finised
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 		header("Location:index.php?error=0");
+		closeUpload($conn);
     } else {
         echo "Sorry, there was an error uploading your file.";
 		header("Location:index.php?error=4");
+		closeUpload($conn);
     }
 }
 //Errors :
@@ -203,7 +233,5 @@ if ($uploadOk == 0) {
 	4="Upload error"
 	5="File has been already processed"
 */
-$conn->close();
-exit;
 ?>
 

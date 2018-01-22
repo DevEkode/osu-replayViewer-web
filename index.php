@@ -22,13 +22,18 @@
 			2 => "File has already been requested",
 			3 => "Database connection error",
 			4 => "Upload error",
-			5 => "File has been already processed"
+			5 => "File has already been processed"
 		);
 
 		$error_id = isset($_GET['error']) ? (int)$_GET['error'] : 0;
 		if ($error_id != -1) {
 			echo '<br>';
 			echo '<span style="text-align:center" class=errorText>'.$errors[$error_id].'</span>';
+		}
+		$id = isset($_GET['id']) ? $_GET['id'] : 0;
+		if ($id != 0){
+			echo'<br>';
+			echo '<a href="view.php?id='.$id.'">Click here to watch the replay</a>';
 		}
 	?>
 </form>

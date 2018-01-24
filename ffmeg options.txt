@@ -1,1 +1,0 @@
-.\ffmpeg.exe -i C:\wamp64\www\osu-replayViewer-web\replayList\5a647e2d1ace0\5a647e2d1ace0.mp4 5a647e2d1ace0.mp4 -vcodec libx264 -vprofile high -preset slow -b:v 500k -maxrate 500k -bufsize 1000k -vf scale=-1:480 -threads 0 -pass 1 -an -f mp4

@@ -18,15 +18,6 @@
 			die("Connection failed: " . $conn->connect_error);
 			header("Location:index.php?error=3");
 			exit;
-	}
-		//Query
-		$result = $conn->query("SELECT * FROM replaylist WHERE userId=$playerId");
-		$i = 0;
-		if($result->num_rows > 0){
-			while($row = $result->fetch_assoc()){
-				//Affichage des blocks
-			}
-		
 		}
 	}     
 ?>
@@ -50,9 +41,31 @@
 			</form>
 		</section>
 		
-		<div id="replayBlock">
-			<img src="./images/osu_logo.png" align="middle"/>
-		</div>
+		<!-- Result boxes -->
+		<?php
+			//Query
+		if($playerId != 0){
+			$result = $conn->query("SELECT * FROM replaylist WHERE userId=$playerId");
+			if($result->num_rows > 0){
+				while($row = $result->fetch_assoc()){
+					$beatmapSetId = $row['beatmapSetId'];
+					$beatmapName = base64_decode($row['BFN']);
+					$beatmapName = str_replace(".osz", "", $beatmapName);
+					$replayId = $row['replayId'];
+					$url = "https://b.ppy.sh/thumb/$beatmapSetId"."l.jpg";
+					$replayUrl = "http://osu-replayviewer-web/view.php?id=$replayId";
+					echo "<a class='content' href=$replayUrl>";
+					echo 	'<div id="anim">';
+					echo 		"<img src=$url>";
+					echo 	'</div>';
+					echo	"<h3>$beatmapName</h3>";
+					echo	"<span></span>";
+					echo "</a>";
+				}
+			
+			}
+		}
+		?> 
 	</body>
 	
 	<footer>

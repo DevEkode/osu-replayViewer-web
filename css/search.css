@@ -15,23 +15,53 @@ body {
 	border-radius:50px;
 }
 
-#replayBlock {
-	height:10%;
-	width:60%;
+.content {
 	display:block;
+    width: 35%;
+	height:100px;
 	margin:auto;
-	margin-top:20px;
-	font-family:"Verdana";
-	font-size:20px;
+	margin-top:1%;
+    padding:1% 1% 1% 1%;
 	background-color: rgba(150, 150, 150, .5);
-	padding:1% 1% 1% 1%;
+	border-radius:50px;
+	font-family:"Verdana";
+	text-decoration: none;
+	color:black;
+}
+
+.content img {
+    margin-right: 3%;
+    float: left;
+	height:100px;
 	border-radius:50px;
 }
 
-#replayBlock img{
-	display: block;
-	height:200px;
-	margin:1% 1% 1% 1%;
+.content:hover{
+	background-color: rgba(150, 150, 150, .7);
+}
+
+#anim img {
+    -webkit-transition: all 1s ease; /* Safari and Chrome */
+    -moz-transition: all 1s ease; /* Firefox */
+    -o-transition: all 1s ease; /* IE 9 */
+    -ms-transition: all 1s ease; /* Opera */
+    transition: all 1s ease;
+    max-width: 100%;
+}
+.content:hover img {
+    -webkit-transform:scale(1.25); /* Safari and Chrome */
+    -moz-transform:scale(1.25); /* Firefox */
+    -ms-transform:scale(1.25); /* IE 9 */
+    -o-transform:scale(1.25); /* Opera */
+     transform:scale(1.25);
+}
+
+#anim {
+	margin-right: 3%;
+	overflow: hidden;
+	float: left;
+	height:100px;
+	border-radius:50px;
 }
 
 footer{

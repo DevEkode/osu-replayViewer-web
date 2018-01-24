@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  ven. 19 jan. 2018 à 13:40
+-- Généré le :  mer. 24 jan. 2018 à 00:31
 -- Version du serveur :  5.7.19
 -- Version de PHP :  5.6.31
 
@@ -53,8 +53,10 @@ DROP TABLE IF EXISTS `replaylist`;
 CREATE TABLE IF NOT EXISTS `replaylist` (
   `replayId` varchar(13) NOT NULL,
   `beatmapId` int(11) NOT NULL,
+  `beatmapSetId` int(11) NOT NULL,
   `userId` int(10) NOT NULL,
   `OFN` text NOT NULL,
+  `BFN` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `permanent` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;

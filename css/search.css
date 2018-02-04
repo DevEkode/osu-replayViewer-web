@@ -1,5 +1,6 @@
 body {
     background-image: url("../images/background.png");
+	padding-bottom:5%;
 }
 
 #form{
@@ -17,7 +18,7 @@ body {
 
 .content {
 	display:block;
-    width: 35%;
+    width: 55%;
 	height:100px;
 	margin:auto;
 	margin-top:1%;
@@ -37,6 +38,31 @@ body {
 }
 
 .content:hover{
+	background-color: rgba(150, 150, 150, .7);
+}
+
+.requestContent {
+	display:block;
+    width: 40%;
+	height:100px;
+	margin:auto;
+	margin-top:1%;
+    padding:1% 1% 1% 1%;
+	background-color: rgba(150, 150, 150, .5);
+	border-radius:50px;
+	font-family:"Verdana";
+	text-decoration: none;
+	color:black;
+}
+
+.requestContent img {
+    margin-right: 3%;
+    float: left;
+	height:100px;
+	border-radius:50px;
+}
+
+.requestContent:hover{
 	background-color: rgba(150, 150, 150, .7);
 }
 
@@ -67,6 +93,7 @@ body {
 footer{
 	font-family: "Verdana";
 	position:fixed;
+	height:3%;
 	width:100%;
 	text-align:center;
 	margin-left:-1%;
@@ -75,6 +102,7 @@ footer{
 	padding-bottom:1%;
     bottom: 0;
 	background-color: rgba(150, 150, 150, .5);
+	overflow:hidden;
 }
 
 

@@ -3,9 +3,20 @@
 
 <head>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="icon" type="image/png" href="images/icon.png" />
 </head> 
 
 <body>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113523918-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-113523918-1');
+</script>
 
 <div id="logo">
 	<img src="images/logo.png" />
@@ -13,16 +24,19 @@
 
 <form action="upload.php" method="post" enctype="multipart/form-data" id="uploadReplay">
     <h2>Select osu replay to upload (.osr): </h2>
+	<h4>Drag and drop or open the explorer </h4>
     <input type="file" name="fileToUpload" id="fileToUpload"> <br>
     <input type="submit" value="Upload Replay" name="submit">
 	<?php
 		$errors = array (
-			0 => "Upload successful",
+			0 => "",
 			1 => "File is not a osu replay",
 			2 => "File has already been requested",
 			3 => "Database connection error",
 			4 => "Upload error",
-			5 => "File has already been processed"
+			5 => "File has already been processed",
+			6 => "Upload successful",
+			7 => "You must have an osu account to upload"
 		);
 
 		$error_id = isset($_GET['error']) ? (int)$_GET['error'] : 0;
@@ -39,14 +53,14 @@
 </form>
 
 <div id=buttonBlock>
-	<a href="view.php"> 
+	<!--<a href="/view.php"> 
 		<img src="images/viewButton.png">
-	</a>
-	<a href="search.php"> 
+	</a> -->
+	<a href="/search.php"> 
 		<img src="images/searchButton.png">
 	</a>
-	<a href=""> 
-		<img src="images/button.png">
+	 <a href="https://github.com/codevirtuel/osu-replayViewer-web/issues"> 
+		<img src="images/reportButton.png">
 	</a>
 </div>
 

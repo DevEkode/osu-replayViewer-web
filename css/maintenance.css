@@ -1,0 +1,24 @@
+body {
+    background-image: url("../images/background.png");
+}
+
+p{
+	display:block;
+	font-family:"Verdana";
+	width:50%;
+	height:10%;
+	margin:auto;
+	padding:1% 1% 1% 1%;
+	background-color: rgba(150, 150, 150, .5);
+	text-align:center;
+	font-size:150%;
+	border-radius:50px;
+}
+
+p img{
+	margin-top:5%;
+	border-radius:50px;
+	border-color:black;
+	border-style: solid;
+    border-width: 5px;
+}

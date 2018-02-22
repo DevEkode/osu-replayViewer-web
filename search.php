@@ -3,6 +3,7 @@
 	//ini_set('display_errors', 1);
 	if(isset($_POST['SubmitButton'])){ //check if form was submitted
 		$playerId = $_POST['playerId']; //get input text
+		
 		//-- Connect to mysql request database --
 		$servername = "mysql.hostinger.fr";
 		$usernameMysql = "u611457272_code";
@@ -23,8 +24,9 @@
 		//--Connect to osu API --
 		require_once 'secure/osu_api_key.php';
 		$apiKey = $osuApiKey;
+		
 	}     
-	
+		
 	// ******************** Functions **********************************
 	function getBeatmapJSON($beatmapId,$api){
 		$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&b=$beatmapId");
@@ -39,6 +41,16 @@
 
 <html>
 	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113523918-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-113523918-1');
+		</script>
+		
 		<link rel="stylesheet" type="text/css" href="css/search.css">
 		<meta charset="utf-8" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -80,7 +92,7 @@
 			$json = json_decode($apiRequest, true);
 			return $json;
 		}
-		
+
 		//Query the playerId from osu api
 		if($_POST['choice'] == "username"){
 			$json = getUserJSON($playerId, $apiKey);
@@ -90,6 +102,8 @@
 			}
 			$playerId = $json[0]['user_id'];
 		}
+		//Avoid SQL Injection
+		$playerId = intval($playerId);
 		
 		$inReplay = true;
 		$inRequest = true;
@@ -133,8 +147,8 @@
 					$beatmapName = str_replace(".osz", "", $beatmapName);
 					$replayId = $row['replayId'];
 					$url = "https://b.ppy.sh/thumb/$beatmapSetId"."l.jpg";
-					$replayUrl = "http://osureplayviewer.xyz/view.php?id=$replayId";
-					echo "<a class='requestContent'>";
+					$replayUrl = "http://osureplayviewer.xyz/progress.php?id=$replayId";
+					echo "<a class='requestContent' href=$replayUrl>";
 					echo 	'<div id="anim">';
 					echo 		"<img src=$url>";
 					echo 	'</div>';
@@ -154,6 +168,7 @@
 			}
 		}
 		?> 
+
 		<footer>
 			osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert
 			| Website created by <a href="https://osu.ppy.sh/u/3481725">codevirtuel</a>

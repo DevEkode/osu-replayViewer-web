@@ -12,6 +12,8 @@ $username = "u611457272_code";
 require_once 'secure/mysql_pass.php';
 $password = $mySQLpassword;
 
+$disableUpload = false;
+
 // ******************** Connection **********************************
 // Create connection
 $conn = new mysqli($servername, $username, $password, "u611457272_osu");
@@ -31,14 +33,46 @@ if (!file_exists('./uploads')) {
 function getPlayerName($fileName){ //Return player name of the replay from the name of the file
 	$myfile = fopen("./uploads/".$fileName, "r") or die("Unable to open file!");
 	$replay_content = fread($myfile,filesize("./uploads/".$fileName));
-	$pName = explode(" ",$replay_content);
-	return substr($pName[1], 34, -1);
+	
+    $array = unpack("x/iversion/x/clength/A32md5/x/clength2/Auser", $replay_content);
+    $userLength = $array['length2'];
+    $array = unpack("x/iversion/x/clength/A32md5/x/clength2/A".$userLength."user", $replay_content);
+	return $array['user'];
+}
+
+function isDT($fileName){ //Return player name of the replay from the name of the file
+	$myfile = fopen("./uploads/".$fileName, "r") or die("Unable to open file!");
+	$replay_content = fread($myfile,filesize("./uploads/".$fileName));
+	
+    $array = unpack("x/iversion/x/clength/A32md5/x/clength2/Auser", $replay_content);
+    $userLength = $array['length2'];
+    $array = unpack("x/iversion/x/clength/A32md5/x/clength2/A".$userLength."user/x/clength3/A32md5Replay/sx300/sx100/sx50/sGekis/sKatus/sMiss/iScore/sMaxCombo/xperfectCombo/iMods", $replay_content);
+	
+	$binary = $array['Mods'];
+	$filter = 0b0000000000000000000001000000;
+	$result = $binary & $filter;
+	
+	if($result != 0){
+		return true;
+	}else{
+		return false;
+	}
 }
 
 function getPlayerId($username,$api){
 	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_user?k=$api&u=$username");
 	$json = json_decode($apiRequest, true);
 	return $json[0]['user_id'];
+}
+
+function playerBanned($username,$api){
+	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_user?k=$api&u=$username");
+	$json = json_decode($apiRequest, true);
+	if(empty($json)){
+		return true;
+	}else{
+		return false;
+	}
 }
 
 function getBeatmapMD5($fileName){
@@ -70,6 +104,10 @@ function generateBtFileName($beatmapId,$api){
 function getBeatmapJSON($md5,$api){
 	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$md5");
 	$json = json_decode($apiRequest, true);
+	if(empty($json)){
+		header("Location:index.php?error=12");
+		closeUpload($conn);
+	}
 	return $json;
 }
 
@@ -90,9 +128,9 @@ function closeUpload($conn){
 	exit;
 }
 
-function getReplayId($file_name,$conn){
+function getReplayId($file_name,$bdd,$conn){
 	$md5 = getFileMD5($file_name);
-	$result = $conn->query("SELECT * FROM replaylist WHERE md5='$md5'");
+	$result = $conn->query("SELECT * FROM $bdd WHERE md5='$md5'");
 	$id = "";
 	
 	if($result->num_rows > 0){
@@ -113,7 +151,22 @@ function getRank($replayId,$conn){
 	}
 }
 }
+function fakeReplay($beatmapId,$userId){
+	$bool = true;
+	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_scores?k=$api&b=$beatmapId&u=$userId");
+	$json = json_decode($apiRequest, true);
+	if(empty($json)){
+		$bool = false;
+	}
+	return $bool;
+}
+
+
 // ******************** CORE **********************************
+if($disableUpload){
+    header("Location:index.php?error=11");
+    closeUpload($conn);
+}
 
 //-- Upload check --
 $target_dir = "uploads/";
@@ -130,6 +183,8 @@ $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     } else {
         //not a osr
         $uploadOk = 0;
+	    header("Location:index.php?error=1");
+	    closeUpload($conn);
     }
 }*/
 
@@ -150,15 +205,25 @@ if ($uploadOk == 0) {
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
 		
+		//----- Check if the replay is a fake replay -----
+		$md5 = getBeatmapMD5($file_name);
+		$json = getBeatmapJSON($md5,$apiKey);
+		$beatId = $json[0]["beatmap_id"];
+		$playerId = getPlayerId(getPlayerName($file_name),$apiKey);
+		if(fakeReplay($beatId,$playerId)){
+			header("Location:index.php?error=1");
+			closeUpload($conn);
+		}
 		//----- Check if the replay already exist -----
 		if(replayExist($file_name,"requestlist",$conn)){
 			//replay is in wait list
-			header("Location:index.php?error=2");
+			$replayId = getReplayId($file_name,"requestlist",$conn);
+			header("Location:index.php?error=2&pid=$replayId");
 			closeUpload($conn);
 		}
 		if(replayExist($file_name,"replaylist",$conn)){
 			//replay has been already recorded
-			$replayId = getReplayId($file_name,$conn);
+			$replayId = getReplayId($file_name,"replaylist",$conn);
 			header("Location:index.php?error=5&id=$replayId");
 			closeUpload($conn);
 		}
@@ -171,6 +236,13 @@ if ($uploadOk == 0) {
 		
 		//Sql request
 		$playerName = getPlayerName($file_name);
+
+		//Check if the player is banned
+		if(playerBanned($playerName,$apiKey)){
+			header("Location:index.php?error=9");
+			closeUpload($conn);
+		}
+		
 		$result = $conn->query("SELECT userName FROM playerlist WHERE userName='$playerName'");
 		if($result->num_rows == 0){
 			//Player is not into database
@@ -192,9 +264,28 @@ if ($uploadOk == 0) {
 		$fileMD5 = getFileMD5($file_name);
 		$beatmapMD5 = getBeatmapMD5($file_name);
 		$beatmapJson = getBeatmapJSON($beatmapMD5,$apiKey);
+		
+		//Check if the beatmap exist
+		if(empty($beatmapJson)){
+			header("Location:index.php?error=10");
+			closeUpload($conn);
+		}
+		
 		$beatmapId = $beatmapJson[0]["beatmap_id"];
 		$beatmapSetId = $beatmapJson[0]["beatmapset_id"];
 		$replayDuration = $beatmapJson[0]["total_length"];
+		//Check if the replay is user 5min
+		if($replayDuration > 300){
+			header("Location:index.php?error=8");
+			closeUpload($conn);
+		}
+		
+		//Divide the time by 33% when DT mods is activated
+		if(isDT($file_name)){
+			
+			$replayDuration = $replayDuration - ($replayDuration * (33/100));
+		}
+		
 		//Encode to Base64 to avoid sql syntax error
 		$beatmapName = base64_encode(generateBtFileName($beatmapId,$apiKey));
 		$replayName = base64_encode($file_name);
@@ -220,7 +311,7 @@ if ($uploadOk == 0) {
 		
 		//upload finised
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-		header("Location:index.php?error=6");
+		header("Location:index.php?error=6&pid=$replayId");
 		closeUpload($conn);
     } else {
         echo "Sorry, there was an error uploading your file.";

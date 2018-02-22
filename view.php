@@ -36,6 +36,23 @@
 <!-- page html -->
 <html>
 	<head>
+			<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113523918-1"></script>
+		<script>
+		  window.dataLayer = window.dataLayer || [];
+		  function gtag(){dataLayer.push(arguments);}
+		  gtag('js', new Date());
+
+		  gtag('config', 'UA-113523918-1');
+		</script>
+		
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script>
+		  (adsbygoogle = window.adsbygoogle || []).push({
+			google_ad_client: "ca-pub-3999116091404317",
+			enable_page_level_ads: true
+		  });
+		</script>
 		<link rel="stylesheet" type="text/css" href="css/view.css">
 		<link rel="icon" type="image/png" href="images/icon.png" />
 	</head> 
@@ -59,6 +76,18 @@
 				echo "Upload date : $replayUploadDate";
 			?>
 		</section>
+		
+		<div id=buttonBlock>
+			<!-- <a href="/view.php?id="> 
+				<img src="images/rndButton.png">
+			</a> -->
+			<a href="/replayList/<?php echo "$replayId/$replayId.mp4"?>" title="Click here if the video is not available"> 
+				<img src="images/viewButton.png">
+			</a>
+			<!-- <a href="https://github.com/codevirtuel/osu-replayViewer-web/issues"> 
+				<img src="images/reportButton.png">
+			</a> -->
+		</div>
 	</body>
 	
 	<footer>

@@ -1,22 +1,84 @@
+<?php
+// ******************** Variables **********************************
+//--Connect to osu API --
+//require_once 'secure/osu_api_key.php';
+//$apiKey = $osuApiKey;
+
+
+//-- Connect to mysql request database --
+$servername = "mysql.hostinger.fr";
+$username = "u611457272_code";
+require_once 'secure/mysql_pass.php';
+$password = $mySQLpassword;
+
+// ******************** Connection **********************************
+// Create connection
+$conn = new mysqli($servername, $username, $password, "u611457272_osu");
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+	header("Location:index.php?error=3");
+	exit;
+}
+
+//************************ Functions **********************************
+function getReplayNumber($conn){
+	$result = $conn->query("SELECT COUNT(replayId) AS count FROM replaylist");
+	
+	if($result->num_rows > 0){
+		while($row = $result->fetch_assoc()){
+			$id = $row["count"];
+		}
+	}
+	return $id;
+}
+
+function getUserNumber($conn){
+	$result = $conn->query("SELECT COUNT(userId) AS count FROM playerlist");
+	
+	if($result->num_rows > 0){
+		while($row = $result->fetch_assoc()){
+			$id = $row["count"];
+		}
+	}
+	return $id;
+}
+
+function getRandomId($conn){
+	$replayNbr = getReplayNumber($conn);
+	$result = $conn->query("SELECT replayId FROM replaylist ORDER BY rand()");
+	
+	if($result->num_rows > 0){
+		while($row = $result->fetch_assoc()){
+			$id = $row["replayId"];
+		}
+	}
+	return $id;
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
 
 <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113523918-1"></script>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-3999116091404317",
+		enable_page_level_ads: true
+	  });
+	</script>
+	
+	<title>osu!replayViewer - A online osu replay viewer</title>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="icon" type="image/png" href="images/icon.png" />
 </head> 
 
 <body>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113523918-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-113523918-1');
-</script>
 
 <div id="logo">
 	<img src="images/logo.png" />
@@ -36,7 +98,12 @@
 			4 => "Upload error",
 			5 => "File has already been processed",
 			6 => "Upload successful",
-			7 => "You must have an osu account to upload"
+			7 => "You must have an osu account to upload",
+			8 => "Only beatmaps below 5 min are allowed",
+			9 => "The ban hammer was used for this player",
+			10 => "The beatmap does not exist or was deleted from osu",
+			11 => "Uploads are disabled, please come back later",
+			12 => "The beatmap doesnt exist or was deleted from osu"
 		);
 
 		$error_id = isset($_GET['error']) ? (int)$_GET['error'] : 0;
@@ -49,12 +116,17 @@
 			echo'<br>';
 			echo '<a href="view.php?id='.$id.'">Click here to watch the replay</a>';
 		}
+		$pid = isset($_GET['pid']) ? $_GET['pid'] : 0;
+		if ($pid != 0){
+			echo'<br>';
+			echo '<a href="progress.php?id='.$pid.'">Click here to observe the progress of your replay</a>';
+		}
 	?>
 </form>
 
 <div id=buttonBlock>
-	<!--<a href="/view.php"> 
-		<img src="images/viewButton.png">
+	<!-- <a href="/view.php?id="> 
+		<img src="images/rndButton.png">
 	</a> -->
 	<a href="/search.php"> 
 		<img src="images/searchButton.png">
@@ -64,9 +136,10 @@
 	</a>
 </div>
 
-
-
-
+<span>
+	<h2>Already <?php echo getReplayNumber($conn); ?> replays recorded !</h2>
+	<h2>For <?php echo getUserNumber($conn); ?> osu players registered</h2>
+<span>
 
 <footer>
 	osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert

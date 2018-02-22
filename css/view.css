@@ -33,6 +33,25 @@ section{
 	border-radius:50px;
 }
 
+#buttonBlock{
+	width:50%;
+	height:10%;
+	background-color: rgba(150, 150, 150, .5);
+	border-radius:50px;
+	margin:auto;
+	margin-top:2%;
+	margin-bottom:2%;
+	text-align:center;
+}
+
+#buttonBlock img{
+	display: block;
+	height:150px;
+	margin:2% 2% 1% 1%;
+	display:inline-block;
+}
+
+
 footer{
 	font-family: "Verdana";
 	position:fixed;
@@ -46,4 +65,5 @@ footer{
     bottom: 0;
 	background-color: rgba(150, 150, 150, .5);
 	overflow:hidden;
+	font-size:110%;
 }

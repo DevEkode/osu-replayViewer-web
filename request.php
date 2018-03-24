@@ -10,65 +10,25 @@ function getUserInterests($userId){
 		return "";
 	}
 }
-
-function checkAvailability($beatmapSetId){
-	$html = file_get_html('https://osu.ppy.sh/beatmapsets/'.$beatmapSetId);
-	$is_new_exist=false;
-	if($html->find('div#beatmapset-header__availability-info')){
-	$is_new_exist=true;
-	echo $is_new_exist;
-	}
-}
-
-checkAvailability(231675);
+	
 ?>
 
 <html>
 	<head>
-		<script>
-		function showUsername(str) {
-			if (str.length == 0) {
-				document.getElementById("txtHint").innerHTML = "";
-				return;
-			} else {
-				var xmlhttp = new XMLHttpRequest();
-				xmlhttp.onreadystatechange = function() {
-					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("txtHint").innerHTML = this.responseText;
-					}
-				};
-				xmlhttp.open("GET", "php/getUsername.php?q=" + str, true);
-				xmlhttp.send();
-			}
-		}
-
-		function checkPassword(str) {
-			if(str.length == 0){
-				document.getElementById("checkPass").innerHTML = "";
-			} else {
-				var pass = document.getElementById("cPassword").value;
-				console.log(pass);
-				document.getElementById("checkPass").innerHTML = "ehehe";
-				/*if(str != pass && str != ""){
-					document.getElementById("checkPass").innerHTML = "password doesn't match !";
-				}*/
-			}
-			
-		}
-		</script>
+		 <script src="js/request.js"></script> 
 	<head>
 
-	<body>
-		<form>
+	<body onload="start()">
+		<form id="form" onsubmit="submitted()">
 		Osu! player id: 
-		<input type="text" name="userId" onkeyup="showUsername(this.value)"> <span id="txtHint"></span><br>
+		<input type="text" name="userId" onkeyup="showUsername(this.value); update()"> <span id="txtHint"></span><br>
 		e-mail: 
-		<input type="text" name="email"><br>
+		<input type="text" name="email" id="email" onkeyup="showEmailValidity(); update()"><span id="emailHint"></span><br>
 		password: 
-		<input type="password" name="password"><br>
+		<input type="password" name="password" id="pass" onkeyup="update()"><br>
 		confirm password: 
-		<input type="password" name="cPassword" onkeyup="checkPassword(this.value)"> <span id="checkPass"></span><br>
-		<input type="submit" value="Submit">
+		<input type="password" name="cPassword" id="confPass" onkeyup="showCheckPass(); update()"> <span id="checkPass"></span><br>
+		<input type="submit" value="Submit" id="submitButton">
 		</form> 
 	</body>
 </html>

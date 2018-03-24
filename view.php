@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <!-- récupération d'info -->
 <?php
+	ini_set('display_errors', 1);
+	
 	require_once 'secure/mysql_pass.php';
 	$servername = "mysql.hostinger.fr";
     $username = "u611457272_code";
@@ -17,20 +19,98 @@
 	//get the replayId variable in the header
 	$replayId = $_GET['id'];
 	
-	//get all the needed info
-	$result = $conn->query("SELECT * FROM replaylist WHERE replayId='$replayId'");
-	while ($row = $result->fetch_assoc()) {
-		$beatmapId = $row['beatmapId'];
-		$playerId = $row['userId'];
-		$replayUploadDate = $row['date'];
-		$OFN = base64_decode($row['OFN']);
-		$BFN = base64_decode($row['BFN']);
-		$youtubeId = $row['youtubeId'];
+	//******************** functions ******************************
+	function replayExist($conn,$replayId){
+		$result = $conn->query("SELECT * FROM replaylist WHERE replayId='$replayId'");
+		if($result->num_rows > 0){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 	
-	$videoPath = "replayList/".$replayId."/".$replayId.".mp4";
+	function draw($replayId, $conn){
+		$showViewRaw = true;
+		//get all the needed info
+		$result = $conn->query("SELECT * FROM replaylist WHERE replayId='$replayId'");
+		while ($row = $result->fetch_assoc()) {
+			$beatmapId = $row['beatmapId'];
+			$beatmapSetId = $row['beatmapSetId'];
+			$playerId = $row['userId'];
+			$replayUploadDate = $row['date'];
+			$OFN = base64_decode($row['OFN']);
+			$BFN = base64_decode($row['BFN']);
+			$youtubeId = $row['youtubeId'];
+			$binaryMods = $row['binaryMods'];
+			$permanent = $row['permanent'];
+		}
 	
-	$youtubeURL = "https://www.youtube.com/embed/$youtubeId";
+		$videoPath = "replayList/".$replayId."/".$replayId.".mp4";
+		$youtubeURL = "https://www.youtube.com/embed/$youtubeId";
+		
+		//Title
+		$BFNv2 = str_replace(".osz",'', $BFN);
+		$BFNv2 = str_replace($beatmapSetId,'', $BFNv2);
+		
+		echo '<span>';
+		echo $BFNv2;
+		echo '</span>';
+		
+		//Video
+		if($youtubeId != NULL){
+			echo "<iframe width=\"1280\" height=\"720\" src=$youtubeURL frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
+		}else{
+			$showViewRaw = false;
+			echo '<video poster="" controls>';
+			echo "<source src=$videoPath  type='video/mp4'>";
+			echo '</video>';
+		}
+		
+		echo '<section>';
+				echo "Beatmap ID : $beatmapId<br>";
+				echo "Player ID : $playerId<br>";
+				echo "Upload date : $replayUploadDate <br>";
+				if($permanent == 0){
+					echo "Delete date : ".date('Y-m-d H:i:s', strtotime($replayUploadDate. ' + 30 days'));
+				}				
+		echo '</section>';
+		
+		drawMods($binaryMods);
+		
+		//info block
+		$url = "/replayList/".$replayId."/".$replayId.".mp4";
+		$oszUrl = "/replayList/".$replayId."/".rawurlencode($OFN);
+		echo '<div id=buttonBlock>';
+		if($showViewRaw){
+			echo 	"<a href=$url title=\"Click here if the video is not available\">";
+			echo		'<img src="images/viewButton.png">';
+			echo	'</a>';
+		}
+		$check = "./replayList/".$replayId."/".$OFN;
+		if(file_exists($check)){
+			echo 	"<a href=$oszUrl title=\"Click here to download the replay file\">";
+			echo		'<img src="images/download_osz.png">';
+			echo	'</a>';
+		}
+		
+		echo '</div>';
+	}
+	
+	function drawMods($bin){
+		$modsArray = array(1,2,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576,2097152,4194304,16777216,33554432,67108864,134217728,268435456);
+		$modsImage = array("NoFail","Easy","Hidden","HardRock","SuddenDeath","DoubleTime","Relax","HalfTime","Nightcore","Flashlight","Autoplay","SpunOut","Autopilot","Perfect","Key4","Key5","Key6","Key7","Key8","FadeIn","Random","Cinema","Key9","Coop","Key1","Key3","Key2");
+		
+		echo '<div id=modsBlock>';
+		for($i=0;$i<count($modsArray)-1;$i++){
+			$result = $modsArray[$i] & $bin;
+			if($result != 0){
+				$link = "images/mods/".$modsImage[$i].".png";
+				echo "<img src=$link>";
+			}
+		}
+		echo '</div>';
+	}
 ?>
 
 <!-- page html -->
@@ -58,36 +138,15 @@
 	</head> 
 
 	<body>
-		<span> 
-			<?php echo $BFN ?>
-		</span>
-	
-		<!-- <video poster="" controls>
-			<source src=<?php echo $videoPath ?> type='video/mp4'>
-		</video> -->
+		<?php
+			if(replayExist($conn,$replayId)){
+				draw($replayId,$conn);
+			}
+			else{
+				echo "This replay doesn't exist";
+			}
+		?>
 		
-		
-		<iframe width="1280" height="720" src=<?php echo $youtubeURL ?> frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-		
-		<section>
-			<?php
-				echo "Beatmap ID : $beatmapId<br>";
-				echo "Player ID : $playerId<br>";
-				echo "Upload date : $replayUploadDate";
-			?>
-		</section>
-		
-		<div id=buttonBlock>
-			<!-- <a href="/view.php?id="> 
-				<img src="images/rndButton.png">
-			</a> -->
-			<a href="/replayList/<?php echo "$replayId/$replayId.mp4"?>" title="Click here if the video is not available"> 
-				<img src="images/viewButton.png">
-			</a>
-			<!-- <a href="https://github.com/codevirtuel/osu-replayViewer-web/issues"> 
-				<img src="images/reportButton.png">
-			</a> -->
-		</div>
 	</body>
 	
 	<footer>

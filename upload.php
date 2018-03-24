@@ -59,6 +59,26 @@ function isDT($fileName){ //Return player name of the replay from the name of th
 	}
 }
 
+function getModsBinary($fileName){
+	$myfile = fopen("./uploads/".$fileName, "r") or die("Unable to open file!");
+	$replay_content = fread($myfile,filesize("./uploads/".$fileName));
+	
+	$array = unpack("x/iversion/x/clength/A32md5/x/clength2/Auser", $replay_content);
+    $userLength = $array['length2'];
+    $array = unpack("x/iversion/x/clength/A32md5/x/clength2/A".$userLength."user/x/clength3/A32md5Replay/sx300/sx100/sx50/sGekis/sKatus/sMiss/iScore/sMaxCombo/xperfectCombo/iMods", $replay_content);
+	
+	return $array['Mods'];
+}
+
+function getOsuMod($fileName){
+	$myfile = fopen("./uploads/".$fileName, "r") or die("Unable to open file!");
+	$replay_content = fread($myfile,filesize("./uploads/".$fileName));
+	
+	$array = unpack("C1mod", $replay_content);
+	
+	return $array['mod'];
+}
+
 function getPlayerId($username,$api){
 	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_user?k=$api&u=$username");
 	$json = json_decode($apiRequest, true);
@@ -174,6 +194,13 @@ $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $file_name = basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+//get persitance
+if($_POST["checkbox"] != NULL){
+	$persistance = 1;
+}else{
+	$persistance = 0;
+}
 // Check if image file is a actual replay osu file or fake
 /*if(isset($_POST["submit"])) {
     $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -264,6 +291,8 @@ if ($uploadOk == 0) {
 		$fileMD5 = getFileMD5($file_name);
 		$beatmapMD5 = getBeatmapMD5($file_name);
 		$beatmapJson = getBeatmapJSON($beatmapMD5,$apiKey);
+		$replayMod = getOsuMod($file_name); //Osu, Mania, CTB, Taiko
+		$binaryMods = getModsBinary($file_name);
 		
 		//Check if the beatmap exist
 		if(empty($beatmapJson)){
@@ -296,7 +325,7 @@ if ($uploadOk == 0) {
 		
 		
 		//----- Send record -----
-		$sql = "INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5) VALUES ('$replayId','$beatmapId','$beatmapSetId','$replayName','$beatmapName','$replayDuration','$playerId','$fileMD5')";
+		$sql = "INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES ('$replayId','$beatmapId','$beatmapSetId','$replayName','$beatmapName','$replayDuration','$playerId','$fileMD5','$replayMod','$binaryMods','$persistance')";
 		if ($conn->query($sql) === TRUE) {
 			//row created
 		} else {

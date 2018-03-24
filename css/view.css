@@ -9,12 +9,22 @@ span{
 	font-size:20px;
 	text-align:center;
 	margin:auto;
-	margin-bottom:1%;
+	margin-bottom:2%;
 }
 
 iframe{
 	display:block;
 	margin:auto;
+	width:90%;
+	border:5px;
+	border-color:gray;
+	border-style: solid;
+}
+
+video{
+	display:block;
+	margin:auto;
+	width:90%;
 	border:5px;
 	border-color:gray;
 	border-style: solid;
@@ -47,6 +57,24 @@ section{
 #buttonBlock img{
 	display: block;
 	height:150px;
+	margin:2% 2% 1% 1%;
+	display:inline-block;
+}
+
+#modsBlock{
+	width:50%;
+	height:10%;
+	background-color: rgba(150, 150, 150, .5);
+	border-radius:50px;
+	margin:auto;
+	margin-top:2%;
+	margin-bottom:2%;
+	text-align:center;
+}
+
+#modsBlock img{
+	display: block;
+	height:100px;
 	margin:2% 2% 1% 1%;
 	display:inline-block;
 }

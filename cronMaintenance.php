@@ -1,5 +1,7 @@
 <?php
 ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // ******************** Variables **********************************
 //--Connect to osu API --
 require_once 'secure/osu_api_key.php';
@@ -12,6 +14,9 @@ $username = "u611457272_code";
 require_once 'secure/mysql_pass.php';
 $password = $mySQLpassword;
 
+//Time limit in days
+$timeLimit = 30;
+
 // ******************** Connection **********************************
 // Create connection
 $conn = new mysqli($servername, $username, $password, "u611457272_osu");
@@ -23,75 +28,103 @@ if ($conn->connect_error) {
 	exit;
 }
 
-// ******************** Youtube API **********************************
-if (!file_exists('google-api-php-client/vendor/autoload.php')) {
-  throw new \Exception('please run "composer require google/apiclient:~2.0" in "' . __DIR__ .'"');
-}
-require_once __DIR__ . '/google-api-php-client/vendor/autoload.php';
-session_start();
-
-/*
- * Set $DEVELOPER_KEY to the "API key" value from the "Access" tab of the
- * Google Developers Console: https://console.developers.google.com/
- * Please ensure that you have enabled the YouTube Data API for your project.
- */
-define('CREDENTIALS_PATH', 'jsons/php-yt-oauth2.json');
-
-function getClient() {
-  $client = new Google_Client();
-  $client->setApplicationName('API Samples');
-  $client->setScopes('https://www.googleapis.com/auth/youtube.force-ssl');
-  // Set to name/location of your client_secrets.json file.
-  $client->setAuthConfig('client_secret.json');
-  $client->setAccessType('offline');
-
-  // Load previously authorized credentials from a file.
-  $credentialsPath = expandHomeDirectory(CREDENTIALS_PATH);
-  if (file_exists($credentialsPath)) {
-    $accessToken = json_decode(file_get_contents($credentialsPath), true);
-  } else {
-    // Request authorization from the user.
-    $authUrl = $client->createAuthUrl();
-    printf("Open the following link in your browser:\n%s\n", $authUrl);
-    print 'Enter verification code: ';
-    $authCode = trim(fgets(STDIN));
-
-    // Exchange authorization code for an access token.
-    $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
-
-    // Store the credentials to disk.
-    if(!file_exists(dirname($credentialsPath))) {
-      mkdir(dirname($credentialsPath), 0700, true);
-    }
-    file_put_contents($credentialsPath, json_encode($accessToken));
-    printf("Credentials saved to %s\n", $credentialsPath);
-  }
-  $client->setAccessToken($accessToken);
-
-  // Refresh the token if it's expired.
-  if ($client->isAccessTokenExpired()) {
-    $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
-    file_put_contents($credentialsPath, json_encode($client->getAccessToken()));
-  }
-  return $client;
+// ******************** Functions **********************************
+function getRemovableReplays($conn,$timeLimit){
+	$array = array();
+	
+	$result = $conn->query("SELECT * FROM replaylist WHERE date < DATE_SUB(now(), INTERVAL '$timeLimit' DAY) ");
+		while ($row = $result->fetch_assoc()) {
+			$permanent = $row['permanent'];
+			if($permanent == 0){
+				$replayId = $row['replayId'];
+				array_push($array,$replayId);
+			}
+		}
+	return $array;
 }
 
-
-/***** END BOILERPLATE CODE *****/
-
-// Sample php code for videos.delete
-
-function videosDelete($service, $id, $params) {
-    $params = array_filter($params);
-    $response = $service->videos->delete(
-        $id,
-        $params
-    );
-
-    print_r($response);
+function removeRow($conn,$replayId){
+	$sql = "DELETE FROM replaylist WHERE replayId='$replayId'";
+	if ($conn->query($sql) === TRUE) {
+		//echo "Record deleted successfully";
+	} else {
+		echo "Error deleting record: " . $conn->error;
+	}
 }
 
-$client = getClient();
-videosDelete($client,'hj5bJj1v3HQ', array('onBehalfOfContentOwner' => ''));
+function cleanRequestFolder($conn){
+	$array = array();
+	
+	$result = $conn->query("SELECT * FROM requestlist");
+		while ($row = $result->fetch_assoc()) {
+			$replayId = $row['replayId'];
+			array_push($array,$replayId);
+		}
+		
+	$folders = scandir("./requestList/");
+	foreach($folders as $folder){
+		if(!in_array($folder,$array) && $folder != "." && $folder != ".."){
+			removeFolder("./requestList/".$folder);
+		}
+	}
+}
+
+function cleanReplayFolder($conn){
+	$array = array();
+	
+	$result = $conn->query("SELECT * FROM replaylist");
+		while ($row = $result->fetch_assoc()) {
+			$replayId = $row['replayId'];
+			array_push($array,$replayId);
+		}
+	
+	$folders = scandir("./replayList/");
+	foreach($folders as $folder){
+		if(!in_array($folder,$array) && $folder != "." && $folder != ".."){
+			removeFolder("./replayList/".$folder);
+		}
+	}
+}
+
+function cleanFolder($dir){
+	//delete all folder files
+	$files = glob($dir."/*"); // get all file names
+	foreach($files as $file){ // iterate files
+		if(is_file($file)){
+			unlink($file); // delete file
+		}
+	}
+}
+
+function removeFolder($dir){
+	cleanFolder($dir);
+	//delete folder
+	rmdir($dir);
+}
+
+//**************** Maintenance *************************
+
+//Show some infos
+$ds = disk_total_space("/")*0.0000001;
+$df = disk_free_space("/")*0.0000001 ;
+$du = $ds-$df;
+//$ds = $ds*0.000001;
+echo "Disk total space : ".ceil($du)." Mb remaining on ".ceil($ds)." Mb total <br>";
+
+//clean upload folder
+echo "Cleaning upload folder... <br>";
+cleanFolder("./uploads");
+echo "Cleaning request folder...<br>";
+cleanRequestFolder($conn);
+
+cleanReplayFolder($conn);
+
+$array = getRemovableReplays($conn,$timeLimit);
+echo count($array)." replays can be removed";
+
+foreach($array as $replay){
+	removeFolder("./replayList/".$replay);
+	removeRow($conn,$replay);
+}
 
 ?>

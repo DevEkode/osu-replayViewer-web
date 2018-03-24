@@ -6,7 +6,7 @@
 
 
 //-- Connect to mysql request database --
-$servername = "mysql.hostinger.fr";
+$servername = "sql151.main-hosting.eu";
 $username = "u611457272_code";
 require_once 'secure/mysql_pass.php';
 $password = $mySQLpassword;
@@ -88,6 +88,8 @@ function getRandomId($conn){
     <h2>Select osu replay to upload (.osr): </h2>
 	<h4>Drag and drop or open the explorer </h4>
     <input type="file" name="fileToUpload" id="fileToUpload"> <br>
+	<input id="checkBox" type="checkbox" name="checkbox"> do not delete my replay after 30 days<br>
+	<font color="#ff0066"><h4>Warning! After 30 days your replay will be deleted from the website if you do not) check this box</h4></font>
     <input type="submit" value="Upload Replay" name="submit">
 	<?php
 		$errors = array (

@@ -10,25 +10,25 @@ function getUserInterests($userId){
 		return "";
 	}
 }
-	
+
 ?>
 
 <html>
 	<head>
-		 <script src="js/request.js"></script> 
+		 <script src="js/request.js"></script>
 	<head>
 
 	<body onload="start()">
 		<form id="form" onsubmit="submitted()">
-		Osu! player id: 
-		<input type="text" name="userId" onkeyup="showUsername(this.value); update()"> <span id="txtHint"></span><br>
-		e-mail: 
+		Osu! player id:
+		<input type="text" name="userId" id="userId" onkeyup="showUsername(this.value); update()"> <span id="txtHint"></span><br>
+		e-mail:
 		<input type="text" name="email" id="email" onkeyup="showEmailValidity(); update()"><span id="emailHint"></span><br>
-		password: 
+		password:
 		<input type="password" name="password" id="pass" onkeyup="update()"><br>
-		confirm password: 
+		confirm password:
 		<input type="password" name="cPassword" id="confPass" onkeyup="showCheckPass(); update()"> <span id="checkPass"></span><br>
 		<input type="submit" value="Submit" id="submitButton">
-		</form> 
+		</form>
 	</body>
 </html>

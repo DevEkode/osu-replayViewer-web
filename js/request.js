@@ -1,13 +1,25 @@
+//----------------------------- variables ----------------------------------
+var isIdOk = false;
+
 //----------------------------- functions ----------------------------------
 function showUsername(str) {
 			if (str.length == 0) {
 				document.getElementById("txtHint").innerHTML = "";
+				isIdOk = false;
+				update();
 				return;
 			} else {
 				var xmlhttp = new XMLHttpRequest();
 				xmlhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
 						document.getElementById("txtHint").innerHTML = this.responseText;
+						if(this.responseText == "this user doesn't exists" || this.responseText == ''){
+							isIdOk = false;
+							update();
+						}else{
+							isIdOk = true;
+							update();
+						}
 					}
 				};
 				xmlhttp.open("GET", "php/getUsername.php?q=" + str, true);
@@ -72,14 +84,12 @@ function start(){
 //----------------------------- At every update ---------------------------
 function update(){
 	//Check if the form is filled
-	if(checkPassword() && validateEmail()){
+	if(checkPassword() && validateEmail() && isIdOk){
 		show("submitButton");
 	} else { hide("submitButton"); }
 }
 
 //----------------------------- When the form is submitted ----------------
 function submitted(){
-	
+
 }
-
-

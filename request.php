@@ -1,5 +1,28 @@
 <?php
+// ******************** Variables **********************************
+//--Connect to osu API --
+//require_once 'secure/osu_api_key.php';
+//$apiKey = $osuApiKey;
 
+
+//-- Connect to mysql request database --
+$servername = "sql151.main-hosting.eu";
+$username = "u611457272_code";
+require_once 'secure/mysql_pass.php';
+$password = $mySQLpassword;
+
+// ******************** Connection **********************************
+// Create connection
+$conn = new mysqli($servername, $username, $password, "u611457272_osu");
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+	header("Location:index.php?error=3");
+	exit;
+}
+
+//------------------------------ functions ---------------------------
 function getUserInterests($userId){
 	$page = file_get_contents('https://osu.ppy.sh/users/'.$userId);
 	preg_match("/\"interests\":\".*\",\"occupation\"/", $page, $output_array);
@@ -11,6 +34,24 @@ function getUserInterests($userId){
 	}
 }
 
+function isFormSubmitted(){
+	if(isset($_GET["userId"]) && isset($_GET["email"]) && isset($_GET["password"]) && isset($_GET["cPassword"])){
+		return true;
+	}else {return false;}
+}
+
+
+//----------------------------- core ----------------------------------
+if(isFormSubmitted()){
+	//Check if the user is already registered
+
+	//Check if the email is already used
+
+	//create a unique id for account verification
+	$verfId = uniqid('verf_');
+
+	//create a new row in accounts
+}
 ?>
 
 <html>

@@ -2,6 +2,8 @@
 var isIdOk = false;
 
 //----------------------------- functions ----------------------------------
+
+//-- Username / osu id
 function showUsername(str) {
 			if (str.length == 0) {
 				document.getElementById("txtHint").innerHTML = "";
@@ -27,6 +29,7 @@ function showUsername(str) {
 			}
 		}
 
+//-- Password
 function checkPassword() {
 	var firstPass = document.getElementById("pass").value;
 	var confirmPass = document.getElementById("confPass").value;
@@ -47,6 +50,7 @@ function showCheckPass(){
 	}
 }
 
+//-- Hide and seek
 function hide(id){
 	node = document.getElementById(id);
 	if(node){
@@ -61,6 +65,7 @@ function show(id){
 	}
 }
 
+//-- Email
 function validateEmail() {
 	var email = document.getElementById("email").value;
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

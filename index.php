@@ -6,9 +6,9 @@
 
 
 //-- Connect to mysql request database --
-$servername = "sql151.main-hosting.eu";
-$username = "u611457272_code";
-require_once 'secure/mysql_pass.php';
+require 'secure/mysql_pass.php';
+$servername = $mySQLservername;
+$username = $mySQLusername;
 $password = $mySQLpassword;
 
 // ******************** Connection **********************************
@@ -22,10 +22,10 @@ if ($conn->connect_error) {
 	exit;
 }
 
-//************************ Functions **********************************
+//**************************** Fonctions *************************
 function getReplayNumber($conn){
 	$result = $conn->query("SELECT COUNT(replayId) AS count FROM replaylist");
-	
+
 	if($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
 			$id = $row["count"];
@@ -36,7 +36,7 @@ function getReplayNumber($conn){
 
 function getUserNumber($conn){
 	$result = $conn->query("SELECT COUNT(userId) AS count FROM playerlist");
-	
+
 	if($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
 			$id = $row["count"];
@@ -48,7 +48,7 @@ function getUserNumber($conn){
 function getRandomId($conn){
 	$replayNbr = getReplayNumber($conn);
 	$result = $conn->query("SELECT replayId FROM replaylist ORDER BY rand()");
-	
+
 	if($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
 			$id = $row["replayId"];
@@ -72,11 +72,11 @@ function getRandomId($conn){
 		enable_page_level_ads: true
 	  });
 	</script>
-	
+
 	<title>osu!replayViewer - A online osu replay viewer</title>
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<link rel="icon" type="image/png" href="images/icon.png" />
-</head> 
+</head>
 
 <body>
 
@@ -127,13 +127,13 @@ function getRandomId($conn){
 </form>
 
 <div id=buttonBlock>
-	<!-- <a href="/view.php?id="> 
+	<!-- <a href="/view.php?id=">
 		<img src="images/rndButton.png">
 	</a> -->
-	<a href="/search.php"> 
+	<a href="/search.php">
 		<img src="images/searchButton.png">
 	</a>
-	 <a href="https://github.com/codevirtuel/osu-replayViewer-web/issues"> 
+	 <a href="https://github.com/codevirtuel/osu-replayViewer-web/issues">
 		<img src="images/reportButton.png">
 	</a>
 </div>

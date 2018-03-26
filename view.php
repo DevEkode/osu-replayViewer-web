@@ -2,23 +2,22 @@
 <!-- récupération d'info -->
 <?php
 	ini_set('display_errors', 1);
-	
-	require_once 'secure/mysql_pass.php';
-	$servername = "mysql.hostinger.fr";
-    $username = "u611457272_code";
-    require_once 'secure/mysql_pass.php';
-    $password = $mySQLpassword;
-	
+
+	require 'secure/mysql_pass.php';
+	$servername = $mySQLservername;
+	$username = $mySQLusername;
+	$password = $mySQLpassword;
+
 	//connect to mysql database
 	$conn = new mysqli($servername, $username, $password, "u611457272_osu");
 	// Check connection
 	if ($conn->connect_error) {
 		die("Connection failed: " . $conn->connect_error);
 	}
-	
+
 	//get the replayId variable in the header
 	$replayId = $_GET['id'];
-	
+
 	//******************** functions ******************************
 	function replayExist($conn,$replayId){
 		$result = $conn->query("SELECT * FROM replaylist WHERE replayId='$replayId'");
@@ -29,7 +28,7 @@
 			return false;
 		}
 	}
-	
+
 	function draw($replayId, $conn){
 		$showViewRaw = true;
 		//get all the needed info
@@ -45,18 +44,18 @@
 			$binaryMods = $row['binaryMods'];
 			$permanent = $row['permanent'];
 		}
-	
+
 		$videoPath = "replayList/".$replayId."/".$replayId.".mp4";
 		$youtubeURL = "https://www.youtube.com/embed/$youtubeId";
-		
+
 		//Title
 		$BFNv2 = str_replace(".osz",'', $BFN);
 		$BFNv2 = str_replace($beatmapSetId,'', $BFNv2);
-		
+
 		echo '<span>';
 		echo $BFNv2;
 		echo '</span>';
-		
+
 		//Video
 		if($youtubeId != NULL){
 			echo "<iframe width=\"1280\" height=\"720\" src=$youtubeURL frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
@@ -66,18 +65,18 @@
 			echo "<source src=$videoPath  type='video/mp4'>";
 			echo '</video>';
 		}
-		
+
 		echo '<section>';
 				echo "Beatmap ID : $beatmapId<br>";
 				echo "Player ID : $playerId<br>";
 				echo "Upload date : $replayUploadDate <br>";
 				if($permanent == 0){
 					echo "Delete date : ".date('Y-m-d H:i:s', strtotime($replayUploadDate. ' + 30 days'));
-				}				
+				}
 		echo '</section>';
-		
+
 		drawMods($binaryMods);
-		
+
 		//info block
 		$url = "/replayList/".$replayId."/".$replayId.".mp4";
 		$oszUrl = "/replayList/".$replayId."/".rawurlencode($OFN);
@@ -93,14 +92,14 @@
 			echo		'<img src="images/download_osz.png">';
 			echo	'</a>';
 		}
-		
+
 		echo '</div>';
 	}
-	
+
 	function drawMods($bin){
 		$modsArray = array(1,2,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576,2097152,4194304,16777216,33554432,67108864,134217728,268435456);
 		$modsImage = array("NoFail","Easy","Hidden","HardRock","SuddenDeath","DoubleTime","Relax","HalfTime","Nightcore","Flashlight","Autoplay","SpunOut","Autopilot","Perfect","Key4","Key5","Key6","Key7","Key8","FadeIn","Random","Cinema","Key9","Coop","Key1","Key3","Key2");
-		
+
 		echo '<div id=modsBlock>';
 		for($i=0;$i<count($modsArray)-1;$i++){
 			$result = $modsArray[$i] & $bin;
@@ -125,7 +124,7 @@
 
 		  gtag('config', 'UA-113523918-1');
 		</script>
-		
+
 		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 		<script>
 		  (adsbygoogle = window.adsbygoogle || []).push({
@@ -135,7 +134,7 @@
 		</script>
 		<link rel="stylesheet" type="text/css" href="css/view.css">
 		<link rel="icon" type="image/png" href="images/icon.png" />
-	</head> 
+	</head>
 
 	<body>
 		<?php
@@ -146,9 +145,9 @@
 				echo "This replay doesn't exist";
 			}
 		?>
-		
+
 	</body>
-	
+
 	<footer>
 		osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert
 		| Website created by <a href="https://osu.ppy.sh/u/3481725">codevirtuel</a>

@@ -6,9 +6,9 @@
 
 
 //-- Connect to mysql request database --
-$servername = "sql151.main-hosting.eu";
-$username = "u611457272_code";
-require_once 'secure/mysql_pass.php';
+require 'secure/mysql_pass.php';
+$servername = $mySQLservername;
+$username = $mySQLusername;
 $password = $mySQLpassword;
 
 // ******************** Connection **********************************

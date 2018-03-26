@@ -9,9 +9,9 @@ $apiKey = $osuApiKey;
 
 
 //-- Connect to mysql request database --
-$servername = "mysql.hostinger.fr";
-$username = "u611457272_code";
-require_once 'secure/mysql_pass.php';
+require 'secure/mysql_pass.php';
+$servername = $mySQLservername;
+$username = $mySQLusername;
 $password = $mySQLpassword;
 
 //Time limit in days
@@ -31,7 +31,7 @@ if ($conn->connect_error) {
 // ******************** Functions **********************************
 function getRemovableReplays($conn,$timeLimit){
 	$array = array();
-	
+
 	$result = $conn->query("SELECT * FROM replaylist WHERE date < DATE_SUB(now(), INTERVAL '$timeLimit' DAY) ");
 		while ($row = $result->fetch_assoc()) {
 			$permanent = $row['permanent'];
@@ -54,13 +54,13 @@ function removeRow($conn,$replayId){
 
 function cleanRequestFolder($conn){
 	$array = array();
-	
+
 	$result = $conn->query("SELECT * FROM requestlist");
 		while ($row = $result->fetch_assoc()) {
 			$replayId = $row['replayId'];
 			array_push($array,$replayId);
 		}
-		
+
 	$folders = scandir("./requestList/");
 	foreach($folders as $folder){
 		if(!in_array($folder,$array) && $folder != "." && $folder != ".."){
@@ -71,13 +71,13 @@ function cleanRequestFolder($conn){
 
 function cleanReplayFolder($conn){
 	$array = array();
-	
+
 	$result = $conn->query("SELECT * FROM replaylist");
 		while ($row = $result->fetch_assoc()) {
 			$replayId = $row['replayId'];
 			array_push($array,$replayId);
 		}
-	
+
 	$folders = scandir("./replayList/");
 	foreach($folders as $folder){
 		if(!in_array($folder,$array) && $folder != "." && $folder != ".."){

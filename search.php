@@ -1,12 +1,12 @@
 ﻿<!DOCTYPE html>
 <?php
-	ini_set('display_errors', 1);
+	ini_set('display_errors', 0);
 	include 'php/osuApiFunctions.php';
 
 
 	//********************* Variables **********************************
 	global $orderUpStars;
-	$orderUpStars = true;
+	$orderUpStars = false;
 	$blockPerPages = 5;
 
 	//-- Connect to mysql request database --
@@ -34,8 +34,14 @@
 		$queryUserId = $conn->prepare("SELECT COUNT(*) AS nbr FROM replaylist WHERE userId=?");
 		$queryUserId->bind_param("i",$playerId);
 
-		$queryUserReplay = $conn->prepare("SELECT * FROM requestlist WHERE playerId=?");
+		$queryUserReplayReq = $conn->prepare("SELECT * FROM requestlist WHERE playerId=?");
+		$queryUserReplayReq->bind_param("i",$playerId);
+
+		$queryUserReplay = $conn->prepare("SELECT * FROM replaylist WHERE userId=?");
 		$queryUserReplay->bind_param("i",$playerId);
+
+		$queryUserReplayOrder = $conn->prepare("SELECT * FROM replaylist WHERE userId=? ORDER BY date DESC LIMIT ?, ?");
+		$queryUserReplayOrder->bind_param("iii",$playerId,$index,$blockPerPages);
 
 	// ******************** Functions **********************************
 	function getUserId($api,$username){
@@ -136,10 +142,10 @@
 
 		//Query
 		if($playerId != 0){
-			$queryUserReplay->execute();
-			$queryUserReplay->store_result();
-			if($queryUserReplay->num_rows > 0){
-				while($row = $queryUserReplay->fetch()){
+			$queryUserReplayReq->execute();
+			$result = $queryUserReplayReq->get_result();
+			if($result->num_rows > 0){
+				while($row = $result->fetch_assoc()){
 					$beatmapSetId = $row['beatmapSetId'];
 					$beatmapId = $row['beatmapId'];
 					$beatmapName = base64_decode($row['BFN']);
@@ -160,13 +166,18 @@
 			}else{
 				$inRequest = false;
 			}
-			$queryUserReplay->close();
+			$queryUserReplayReq->close();
 
 			if(orderUpStars == true){
 				$index = $currentPage * 5;
-				$result = $conn->query("SELECT * FROM replaylist WHERE userId=$playerId ORDER BY date DESC LIMIT $index, $blockPerPages");
+				$queryUserReplayOrder->execute();
+				//$result = $conn->query("SELECT * FROM replaylist WHERE userId=$playerId ORDER BY date DESC LIMIT $index, $blockPerPages");
+				$result = $queryUserReplayOrder->get_result();
 			}else{
-				$result = $conn->query("SELECT * FROM replaylist WHERE userId=$playerId");
+				$queryUserReplay->execute();
+				//$result = $conn->query("SELECT * FROM replaylist WHERE userId=$playerId");
+				$result = $queryUserReplay->get_result();
+				var_dump($result);
 			}
 			if($result->num_rows > 0){
 				while($row = $result->fetch_assoc()){

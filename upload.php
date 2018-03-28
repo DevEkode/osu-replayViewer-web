@@ -1,5 +1,6 @@
 <?php
 ini_set('display_errors', 1);
+include 'php/osuApiFunctions.php';
 // ******************** Variables **********************************
 //--Connect to osu API --
 require_once 'secure/osu_api_key.php';
@@ -80,14 +81,12 @@ function getOsuMod($fileName){
 }
 
 function getPlayerId($username,$api){
-	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_user?k=$api&u=$username");
-	$json = json_decode($apiRequest, true);
+	$json = getUserJSON($username,$api);
 	return $json[0]['user_id'];
 }
 
 function playerBanned($username,$api){
-	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_user?k=$api&u=$username");
-	$json = json_decode($apiRequest, true);
+  $json = getUserJSON($username,$api);
 	if(empty($json)){
 		return true;
 	}else{
@@ -110,24 +109,13 @@ function getFileMD5($fileName){
 
 function generateBtFileName($beatmapId,$api){
 	//Setid Artist - Title
-	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&b=$beatmapId");
-	$json = json_decode($apiRequest, true);
+  $json = getBeatmapJSON($beatmapId,$api);
 	$beatmapSetId = $json[0]["beatmapset_id"];
 	$artist = $json[0]["artist"];
 	$title = $json[0]["title"];
 	$BFN = $beatmapSetId." ".$artist." - ".$title.".osz";
 
 	return $BFN;
-	return $json;
-}
-
-function getBeatmapJSON($md5,$api){
-	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$md5");
-	$json = json_decode($apiRequest, true);
-	if(empty($json)){
-		header("Location:index.php?error=12");
-		closeUpload($conn);
-	}
 	return $json;
 }
 
@@ -171,10 +159,8 @@ function getRank($replayId,$conn){
 	}
 }
 }
-function fakeReplay($beatmapId,$userId){
-	$bool = true;
-	$apiRequest = file_get_contents("https://osu.ppy.sh/api/get_scores?k=$api&b=$beatmapId&u=$userId");
-	$json = json_decode($apiRequest, true);
+function fakeReplay($beatmapId,$userId,$api){
+	$json = getBeatmapJSON($beatmapId,$api);
 	if(empty($json)){
 		$bool = false;
 	}
@@ -235,9 +221,13 @@ if ($uploadOk == 0) {
 		//----- Check if the replay is a fake replay -----
 		$md5 = getBeatmapMD5($file_name);
 		$json = getBeatmapJSON($md5,$apiKey);
+    if(empty($json)){
+  		header("Location:index.php?error=12");
+  		closeUpload($conn);
+  	}
 		$beatId = $json[0]["beatmap_id"];
 		$playerId = getPlayerId(getPlayerName($file_name),$apiKey);
-		if(fakeReplay($beatId,$playerId)){
+		if(fakeReplay($beatId,$playerId,$apiKey)){
 			header("Location:index.php?error=1");
 			closeUpload($conn);
 		}
@@ -291,6 +281,10 @@ if ($uploadOk == 0) {
 		$fileMD5 = getFileMD5($file_name);
 		$beatmapMD5 = getBeatmapMD5($file_name);
 		$beatmapJson = getBeatmapJSON($beatmapMD5,$apiKey);
+    if(empty($beatmapJson)){
+  		header("Location:index.php?error=12");
+  		closeUpload($conn);
+  	}
 		$replayMod = getOsuMod($file_name); //Osu, Mania, CTB, Taiko
 		$binaryMods = getModsBinary($file_name);
 

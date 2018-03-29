@@ -220,7 +220,7 @@ if ($uploadOk == 0) {
 
 		//----- Check if the replay is a fake replay -----
 		$md5 = getBeatmapMD5($file_name);
-		$json = getBeatmapJSON($md5,$apiKey);
+		$json = getBeatmapJSONwMD5($md5,$apiKey);
     if(empty($json)){
   		header("Location:index.php?error=12");
   		closeUpload($conn);
@@ -280,7 +280,7 @@ if ($uploadOk == 0) {
 		$replayId = uniqid();
 		$fileMD5 = getFileMD5($file_name);
 		$beatmapMD5 = getBeatmapMD5($file_name);
-		$beatmapJson = getBeatmapJSON($beatmapMD5,$apiKey);
+		$beatmapJson = getBeatmapJSONwMD5($beatmapMD5,$apiKey);
     if(empty($beatmapJson)){
   		header("Location:index.php?error=12");
   		closeUpload($conn);

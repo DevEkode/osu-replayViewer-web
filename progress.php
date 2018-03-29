@@ -12,6 +12,7 @@
 
 
 	// Create connection
+	global $conn;
 	$conn = new mysqli($servername, $username, $password, "u611457272_osu");
 
 	// Check connection
@@ -41,8 +42,13 @@ $statutD = array (
 		);
 
 //*************************** Functions ********************************
-function getInfo($conn, $replayId, $column){
-	$result = $conn->query("SELECT * FROM requestlist WHERE replayId='$replayId'");
+function getInfo($conn,$replayId, $column){
+	$queryRequests = $conn->prepare("SELECT * FROM requestlist WHERE replayId=?");
+	$queryRequests->bind_param("s",$replayId);
+
+	$queryRequests->execute();
+	$result = $queryRequests->get_result();
+	$queryRequests->close();
 
 	if($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
@@ -52,8 +58,13 @@ function getInfo($conn, $replayId, $column){
 	return $id;
 }
 
-function getPlayerName($conn, $playerId){
-	$result = $conn->query("SELECT * FROM playerlist WHERE userId='$playerId'");
+function getPlayerName($conn,$playerId){
+	$queryPlayerName = $conn->prepare("SELECT * FROM playerlist WHERE userId=?");
+	$queryPlayerName->bind_param("i",$playerId);
+
+	$queryPlayerName->execute();
+	$result = $queryPlayerName->get_result();
+	$queryPlayerName->close();
 
 	if($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
@@ -63,8 +74,13 @@ function getPlayerName($conn, $playerId){
 	return $id;
 }
 
-function checkProcessFinished($replayId,$conn){
-	$result = $conn->query("SELECT * FROM replaylist WHERE replayId='$replayId'");
+function checkProcessFinished($conn,$replayId){
+	$queryReplays = $conn->prepare("SELECT * FROM replaylist WHERE replayId=?");
+	$queryReplays->bind_param("s",$replayId);
+
+	$queryReplays->execute();
+	$result = $queryReplays->get_result();
+	$queryReplays->close();
 
 	$bool = false;
 	if($result->num_rows > 0){
@@ -84,7 +100,7 @@ $username = getPlayerName($conn,$userId);
 $page = $_SERVER['PHP_SELF']."?id=".$replayId;
 $sec = "10";
 
-if(checkProcessFinished($replayId,$conn)){
+if(checkProcessFinished($conn,$replayId)){
 	header("Location: https://osureplayviewer.xyz/view.php?id=".$replayId);
 	$conn->close();
 	exit;

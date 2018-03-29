@@ -6,7 +6,7 @@
 
 	//********************* Variables **********************************
 	global $orderUpStars;
-	$orderUpStars = false;
+	$orderUpStars = true;
 	$blockPerPages = 5;
 
 	//-- Connect to mysql request database --

@@ -11,6 +11,17 @@
     return json_decode($result, true);
   }
 
+  function getBeatmapJSONwMD5($beatmapMD5,$api){ //Source : https://stackoverflow.com/questions/16700960/how-to-use-curl-to-get-json-data-and-decode-the-data
+    $url = "https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$beatmapMD5";
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_URL,$url);
+    $result=curl_exec($ch);
+    curl_close($ch);
+    return json_decode($result, true);
+  }
+
   function getUserJSON($username, $api){
 		$url = "https://osu.ppy.sh/api/get_user?k=$api&u=$username";
 		$ch = curl_init();

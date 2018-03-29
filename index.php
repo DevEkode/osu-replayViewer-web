@@ -22,6 +22,7 @@ if ($conn->connect_error) {
 	exit;
 }
 
+
 //**************************** Fonctions *************************
 function getReplayNumber($conn){
 	$result = $conn->query("SELECT COUNT(replayId) AS count FROM replaylist");

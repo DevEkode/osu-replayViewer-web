@@ -13,17 +13,14 @@ Easy to use website. Just upload your .osr, wait for processing and share it to 
 * Enjoy 
 
 ## In the future
-* Delete automatically replays after 30 days
 * Like and view counter
 * Report issue for a replay function
 * Show the queue position during processing
 * Deploy osu!replayClient. A recording client.
-* Show mods used
 * Show more stats into the view page
-* Profile for players to edit theirs replays
+* Profile for players to edit theirs replays 
 * Page to compare two replays (with graphs and stats)
 * Use mirror for beatmaps not available on the osu website
-
 
 ## Authors
 

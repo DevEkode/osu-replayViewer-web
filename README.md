@@ -22,6 +22,7 @@ Easy to use website. Just upload your .osr, wait for processing and share it to 
 * Show more stats into the view page
 * Profile for players to edit theirs replays
 * Page to compare two replays (with graphs and stats)
+* Use mirror for beatmaps not available on the osu website
 
 
 ## Authors

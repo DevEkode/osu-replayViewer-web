@@ -112,17 +112,39 @@ if(isFormSubmitted()){
   }
 	//create a unique id for account verification
 	$verfId = uniqid('verf_');
+  $verfIdEmail = uniqid('eVerf_');
 	//create a new row in accounts
-  $insertAccount = $conn->prepare("INSERT INTO accounts (userId, username, email, password, verificationId) VALUES (?, ?, ?, ?, ?)");
-  $insertAccount->bind_param("issss",$userId,$username,$email,$password,$verfId);
+  $insertAccount = $conn->prepare("INSERT INTO accounts (userId, username, email, password, verificationId, verfIdEmail) VALUES (?, ?, ?, ?, ?, ?)");
+  $insertAccount->bind_param("isssss",$userId,$username,$email,$password,$verfId,$verfIdEmail);
 
   $userId = $_GET['userId'];
   $username = $userJSON['0']['username'];
   $email = $_GET['email'];
   $password = password_hash($_GET['password'],PASSWORD_BCRYPT);
 
+  //Send e-mail
+  $link = "https://osureplayviewer.xyz/emailVerification?id=".$verfId;
+
+  $subject = "osu!replayViewer - email verification";
+  $message = "
+  <html>
+    <body>
+      <p>Hello ".$username." ! please click the link below to continue the verification process</p>
+
+      <a href=".$link."> ".$link." </a>
+    </body>
+
+  </html>
+  ";
+
+  $headers = "MIME-Version: 1.0" . "\r\n";
+  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+  mail($email,$subject,$message,$headers);
+
   if($insertAccount->execute()){ //Insert Not ok
-    header("Location:request.php?success=1");
+    header("Location:register.php?success=1");
+    $insertAccount->close();
     exit();
   }
 

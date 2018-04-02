@@ -222,7 +222,7 @@ if ($uploadOk == 0) {
 		$md5 = getBeatmapMD5($file_name);
 		$json = getBeatmapJSONwMD5($md5,$apiKey);
     if(empty($json)){
-  		header("Location:index.php?error=12");
+  		header("Location:index.php?error=10");
   		closeUpload($conn);
   	}
 		$beatId = $json[0]["beatmap_id"];
@@ -282,7 +282,7 @@ if ($uploadOk == 0) {
 		$beatmapMD5 = getBeatmapMD5($file_name);
 		$beatmapJson = getBeatmapJSONwMD5($beatmapMD5,$apiKey);
     if(empty($beatmapJson)){
-  		header("Location:index.php?error=12");
+  		header("Location:index.php?error=10");
   		closeUpload($conn);
   	}
 		$replayMod = getOsuMod($file_name); //Osu, Mania, CTB, Taiko
@@ -296,6 +296,11 @@ if ($uploadOk == 0) {
 
 		$beatmapId = $beatmapJson[0]["beatmap_id"];
 		$beatmapSetId = $beatmapJson[0]["beatmapset_id"];
+    if(!isBeatmapAvailable($beatmapSetId)){
+      header("Location:index.php?error=12");
+  		closeUpload($conn);
+    }
+
 		$replayDuration = $beatmapJson[0]["total_length"];
 		//Check if the replay is user 5min
 		if($replayDuration > 300){

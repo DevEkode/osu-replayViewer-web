@@ -51,4 +51,15 @@
 
 		return substr($string, 0, -1);
 	}
+
+  //Check if a beatmap is still downloable
+  function isBeatmapAvailable($beatmapSetId){
+    $page = file_get_contents('https://osu.ppy.sh/beatmapsets/'.$beatmapSetId);
+    preg_match("/download_disabled/", $page, $output_array);
+    if(empty($output_array)){
+      return true;
+    }else{
+      return false;
+    }
+  }
  ?>

@@ -106,7 +106,7 @@ function getRandomId($conn){
 			9 => "The ban hammer was used for this player",
 			10 => "The beatmap does not exist or was deleted from osu",
 			11 => "Uploads are disabled, please come back later",
-			12 => "The beatmap doesnt exist or was deleted from osu"
+			12 => "This beatmap is not available to download"
 		);
 
 		$error_id = isset($_GET['error']) ? (int)$_GET['error'] : 0;

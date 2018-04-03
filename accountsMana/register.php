@@ -123,24 +123,8 @@ if(isFormSubmitted()){
   $password = password_hash($_GET['password'],PASSWORD_BCRYPT);
 
   //Send e-mail
-  $link = "https://osureplayviewer.xyz/emailVerification?id=".$verfId;
-
-  $subject = "osu!replayViewer - email verification";
-  $message = "
-  <html>
-    <body>
-      <p>Hello ".$username." ! please click the link below to continue the verification process</p>
-
-      <a href=".$link."> ".$link." </a>
-    </body>
-
-  </html>
-  ";
-
-  $headers = "MIME-Version: 1.0" . "\r\n";
-  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-  mail($email,$subject,$message,$headers);
+  require_once 'php/verificationFunctions.php';
+  sendEmail($email,$username,$verfIdEmail);
 
   if($insertAccount->execute()){ //Insert Not ok
     header("Location:register.php?success=1");

@@ -84,6 +84,7 @@ function showEmailValidity(){
 function start(){
 	hide("submitButton");
 	document.getElementById("email").value = '';
+	document.getElementById("userId").value = '';
 }
 
 //----------------------------- At every update ---------------------------

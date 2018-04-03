@@ -1,5 +1,13 @@
 <?php
 // ******************** Variables **********************************
+$errors = array (
+  0 => "",
+  1 => "The reCaptcha is invalid, try again",
+  2 => "This player doesn't exists",
+  3 => "The user or the email is already used"
+);
+$error_id = isset($_GET['error']) ? (int)$_GET['error'] : 0;
+
 //--Connect to osu API --
 require 'php/osuApiFunctions.php';
 require_once 'secure/osu_api_key.php';
@@ -94,20 +102,20 @@ require_once 'secure/recaptcha.php';
 if(isFormSubmitted()){
   //Check the reCaptcha
   if(!verifyCaptcha($secretCaptcha,$_GET['g-recaptcha-response'])){
-    header("Location:request.php?error=1");
+    header("Location:register.php?error=1");
     exit();
   }
 
   //Check if the player exist in osu
   $userJSON = getUserJSON($_GET['userId'],$osuApiKey);
   if(empty($userJSON)){
-    header("Location:request.php?error=2");
+    header("Location:register.php?error=2");
     exit();
   }
 
 	//Check if the user is already registered //Check if the email is already used
   if(isAlreadyUsedInAccount($conn,'userId',$_GET['userId']) || isAlreadyUsedInAccount($conn,'email',$_GET['email'])){
-    header("Location:request.php?error=3");
+    header("Location:register.php?error=3");
     exit();
   }
 	//create a unique id for account verification
@@ -126,8 +134,8 @@ if(isFormSubmitted()){
   require_once 'php/verificationFunctions.php';
   sendEmail($email,$username,$verfIdEmail);
 
-  if($insertAccount->execute()){ //Insert Not ok
-    header("Location:register.php?success=1");
+  if($insertAccount->execute()){ //Insert ok
+    header("Location:userVerification?id=".$userId);
     $insertAccount->close();
     exit();
   }
@@ -139,21 +147,30 @@ if(isFormSubmitted()){
 <html>
 	<head>
 		 <script src="js/request.js"></script>
+     <link rel="stylesheet" type="text/css" href="css/register.css">
      <script src='https://www.google.com/recaptcha/api.js'></script>
 	<head>
 
 	<body onload="start()">
+
+    <h3> Please register this form to create an account </h3>
 		<form id="form" onsubmit="submitted()">
-		Osu! player id:
-		<input type="text" name="userId" id="userId" onkeyup="showUsername(this.value); update()"> <span id="txtHint"></span><br>
-		e-mail:
-		<input type="text" name="email" id="email" onkeyup="showEmailValidity(); update()"><span id="emailHint"></span><br>
-		password:
-		<input type="password" name="password" id="pass" onkeyup="update()"><br>
-		confirm password:
-		<input type="password" name="cPassword" id="confPass" onkeyup="showCheckPass(); update()"> <span id="checkPass"></span><br>
-    <div class="g-recaptcha" data-sitekey="6LcYyk8UAAAAAHmsgHYvmnCIr3I6hIlKv7VWANSo"></div>
-		<input type="submit" value="Submit" id="submitButton">
+		<label>Osu user id (osu!ID):</label>
+		<input type="text" name="userId" id="userId" onkeyup="showUsername(this.value); update()" autocomplete=off required> <span id="txtHint"></span><br>
+		<label>e-mail: </label>
+		<input type="text" name="email" id="email" onkeyup="showEmailValidity(); update()" required><span id="emailHint"></span><br>
+		<label>password: </label>
+		<input type="password" name="password" id="pass" onkeyup="update()" required><br>
+		<label>confirm password: </label>
+		<input type="password" name="cPassword" id="confPass" onkeyup="showCheckPass(); update()" required> <span id="checkPass"></span><br>
+    <div class="g-recaptcha" data-sitekey="6LcYyk8UAAAAAHmsgHYvmnCIr3I6hIlKv7VWANSo" id="recaptcha" required></div>
+
+    <?php
+      if ($error_id != -1 && $error_id != 0) {
+        echo "<p id=\"errorMsg\"> ".$errors[$error_id]." </p>";
+      }
+    ?>
+    <button type="submit" id="submitButton">Create account</button>
 		</form>
 	</body>
 </html>

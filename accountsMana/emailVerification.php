@@ -44,13 +44,14 @@ $queryInfos->close();
 if($result->num_rows > 0){
   while($row = $result->fetch_assoc()){
     $username = $row['username'];
+    $userId = $row['userId'];
   }
 }else{
   close($conn);
 }
 
-$queryInfos = $conn->prepare("UPDATE accounts SET verfIdEmail='' WHERE username=?");
-$queryInfos->bind_param("s",$username);
+$queryInfos = $conn->prepare("UPDATE accounts SET verfIdEmail='' WHERE userId=?");
+$queryInfos->bind_param("s",$userId);
 $queryInfos->execute();
 $queryInfos->close();
 

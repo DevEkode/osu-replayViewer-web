@@ -25,7 +25,7 @@ if ($conn->connect_error) {
 }
 
 if(isset($_GET['id'])){
-  $verfId = $_GET['id'];
+  $userId = $_GET['id'];
 }else{
   close($conn);
 }
@@ -47,8 +47,8 @@ function close($conn){
 }
 
 // ******************** Core **********************************
-$queryInfos = $conn->prepare("SELECT * FROM accounts WHERE verificationId=?");
-$queryInfos->bind_param("s",$verfId);
+$queryInfos = $conn->prepare("SELECT * FROM accounts WHERE userId=?");
+$queryInfos->bind_param("s",$userId);
 $queryInfos->execute();
 $result = $queryInfos->get_result();
 $queryInfos->close();
@@ -56,7 +56,7 @@ $queryInfos->close();
 if($result->num_rows > 0){
   while($row = $result->fetch_assoc()){
     $username = $row['username'];
-    $userId = $row['userId'];
+    $verfUserId = $row['verificationId'];
     $verfIdEmail = $row['verfIdEmail'];
     $email = ['email'];
   }
@@ -64,13 +64,55 @@ if($result->num_rows > 0){
   close($conn);
 }
 
+if(getUserInterests($userId) == $verfUserId && !empty($verfUserId)){
+  $updateInfo = $conn->prepare("UPDATE accounts SET verificationId='' WHERE userId=?");
+  $updateInfo->bind_param("i",$userId);
+  $updateInfo->execute();
+  $updateInfo->close();
+  $verfUserId = '';
+}
+
 //prepare Variables
 $profileUrl = "https://osu.ppy.sh/users/".$userId;
 
+//email verification statut
 if(empty($verfIdEmail)){
-  echo 'email verified';
+  $statutEmail = "Already verified";
 }else{
-  echo 'email verification needed';
+  $statutEmail = "Verification needed";
+}
+
+//user verification statut
+if(empty($verfUserId)){
+  $statutUser = "Already verified";
+}else{
+  $statutUser = "Verification needed";
 }
 
  ?>
+
+<html>
+  <title> osu!replayViewer - verification </title>
+
+  <body>
+    <h2> Step 1 : email verification </h2>
+    <span> Click on the link provided in the verification email </span> <br>
+    <span> Statut : <?php echo $statutEmail; ?></span>
+
+    <h2> Step 2 : user verification </h2>
+      <?php
+      if(!empty($verfUserId)){
+        echo "<span> Please copy this code :";
+        echo "<input type=\"text\" value=$verfUserId id=\"myInput\" readonly=\"readonly\">";
+        echo "<br>Into your interests field on your osu profile page.";
+        echo "<br>And click Refresh";
+        echo "<br>";
+      }else{
+        echo "<span> you can now delete this code from your interests field </span> <br>";
+      }
+      ?>
+      <span> Statut : <?php echo $statutUser; ?></span>
+    </span>
+
+  </body>
+</html>

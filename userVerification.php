@@ -12,7 +12,8 @@ $servername = $mySQLservername;
 $username = $mySQLusername;
 $password = $mySQLpassword;
 
-
+$imageOK = "images/ok.png";
+$imageNOK = "images/cross.png";
 // ******************** Connection **********************************
 // Create connection
 $conn = new mysqli($servername, $username, $password, "u611457272_osu");
@@ -72,6 +73,13 @@ if(getUserInterests($userId) == $verfUserId && !empty($verfUserId)){
   $verfUserId = '';
 }
 
+//Redirect to login in already verified
+if(empty($verfUserId) && empty($verfIdEmail)){
+  close($conn);
+  header("Location:login.php");
+  exit;
+}
+
 //prepare Variables
 $profileUrl = "https://osu.ppy.sh/users/".$userId;
 
@@ -92,13 +100,27 @@ if(empty($verfUserId)){
  ?>
 
 <html>
-  <title> osu!replayViewer - verification </title>
+  <head>
+    <title> osu!replayViewer - verification </title>
+    <link rel="stylesheet" type="text/css" href="css/userVerification.css">
+  </head>
 
   <body>
-    <h2> Step 1 : email verification </h2>
-    <span> Click on the link provided in the verification email </span> <br>
-    <span> Statut : <?php echo $statutEmail; ?></span>
+    <div class="block">
+      <h2> Step 1 : email verification</h2>
+      <?php
+      if(!empty($verfIdEmail)){
+        echo '<span> Click on the link provided in the verification email </span> <br>';
+        $imgUrl = $imageNOK;
+      }else{
+        $imgUrl = $imageOK;
+      }
+      ?>
+      <h3> Statut : <?php echo $statutEmail; ?></h3><br>
+      <img src=<?php echo $imgUrl ?>>
+    </div>
 
+    <div class="block">
     <h2> Step 2 : user verification </h2>
       <?php
       if(!empty($verfUserId)){
@@ -107,12 +129,15 @@ if(empty($verfUserId)){
         echo "<br>Into your interests field on your osu profile page.";
         echo "<br>And click Refresh";
         echo "<br>";
+        $imgUrl = $imageNOK;
       }else{
         echo "<span> you can now delete this code from your interests field </span> <br>";
+        $imgUrl = $imageOK;
       }
       ?>
-      <span> Statut : <?php echo $statutUser; ?></span>
-    </span>
+      <h3> Statut : <?php echo $statutUser; ?></h3><br>
+      <img src=<?php echo $imgUrl ?>>
+    </div>
 
   </body>
 </html>

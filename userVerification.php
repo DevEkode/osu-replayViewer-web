@@ -103,6 +103,7 @@ if(empty($verfUserId)){
   <head>
     <title> osu!replayViewer - verification </title>
     <link rel="stylesheet" type="text/css" href="css/userVerification.css">
+    <link rel="icon" type="image/png" href="images/icon.png" />
   </head>
 
   <body>

@@ -3,6 +3,16 @@ body {
 	padding-bottom:5%;
 }
 
+.login{
+  right : 10px;
+  height:70px;
+  position:fixed;
+}
+
+#login {
+  margin-right: 8%;
+}
+
 #logo{
 	margin: auto;
 }
@@ -93,4 +103,3 @@ footer{
 	background-color: rgba(150, 150, 150, .5);
 	font-size:110%;
 }
-

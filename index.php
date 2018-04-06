@@ -81,6 +81,9 @@ function getRandomId($conn){
 
 <body>
 
+<a href = "/register.php"><img src="images/signUp.png" class="login"></a>
+<a href="/login.php"><img src="images/login.png" class="login" id="login"></a>
+
 <div id="logo">
 	<img src="images/logo.png" />
 </div>

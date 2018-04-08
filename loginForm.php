@@ -77,5 +77,7 @@ if(!password_verify($userPassword,$passwordHash)){
 }
 
 //Everything is valid create a new session
-header("Location:login.php?success=1");
+session_start();
+$_SESSION["userId"] = $userId;
+header("Location:index.php");
  ?>

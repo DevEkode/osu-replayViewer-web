@@ -1,4 +1,5 @@
 <?php
+session_start();
 // ******************** Variables **********************************
 //--Connect to osu API --
 //require_once 'secure/osu_api_key.php';
@@ -81,8 +82,15 @@ function getRandomId($conn){
 
 <body>
 
-<a href = "/register.php"><img src="images/signUp.png" class="login"></a>
-<a href="/login.php"><img src="images/login.png" class="login" id="login"></a>
+<?php
+  if(empty($_SESSION)){
+    echo '<a href = "/register.php"><img src="images/signUp.png" class="login"></a>';
+    echo '<a href="/login.php"><img src="images/login.png" class="login" id="login"></a>';
+  }else{
+    echo '<a href = "/userProfile.php"><img src="images/profile.png" class="login"id="login"></a>';
+    echo '<a href = "/logout.php"><img src="images/logOut.png" class="login"></a>';
+  }
+?>
 
 <div id="logo">
 	<img src="images/logo.png" />
@@ -93,7 +101,7 @@ function getRandomId($conn){
 	<h4>Drag and drop or open the explorer </h4>
     <input type="file" name="fileToUpload" id="fileToUpload"> <br>
 	<input id="checkBox" type="checkbox" name="checkbox"> do not delete my replay after 30 days<br>
-	<font color="#ff0066"><h4>Warning! After 30 days your replay will be deleted from the website if you do not) check this box</h4></font>
+	<font color="#ff0066"><h4>Warning! After 30 days your replay will be deleted from the website if you do not check this box</h4></font>
     <input type="submit" value="Upload Replay" name="submit">
 	<?php
 		$errors = array (

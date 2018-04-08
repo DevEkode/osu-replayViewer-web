@@ -1,7 +1,7 @@
 # osu!replayViewer
 Easy to use website. Just upload your .osr, wait for processing and share it to your friends
 
-[Click here to visit the website](https://osureplayviewer.xyz/)
+[Click here to visit the website](https://osureplayviewer.xyz/) 
 
 ## Getting Started
 

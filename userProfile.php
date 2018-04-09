@@ -6,5 +6,5 @@ if(empty($_SESSION)) header("Location:index.php");
 $userId = $_SESSION["userId"];
 
 $osuProfileLink = "https://osu.ppy.sh/users/"+$userId;
-$profileImg = "";
+$profileImg = "images/defaultProfilePicture.png";
  ?>

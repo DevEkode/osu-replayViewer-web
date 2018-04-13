@@ -28,6 +28,18 @@ function getDBInfo($conn,$userId){
   return $username;
 }
 
+function getReplayInfo($conn,$userId){
+  $query = $conn->prepare("SELECT * FROM replaylist WHERE userId=?");
+  $query->bind_param("i",$userId);
+  $query->execute();
+  $result=$query->get_result();
+
+  while($row=$result->fetch_assoc()){
+    $username = $row['username']; //TODO create an array of replays
+  }
+  return $username;
+}
+
 //get the session info
 $isLogged = false;
 $username = "unknown";
@@ -70,6 +82,14 @@ $profileImg = "images/defaultProfilePicture.png";
 
     <block id="replayList" class="block">
       <h2> Replay library</h2>
+      <img src="http://via.placeholder.com/240x180">
+      <img src="http://via.placeholder.com/240x180">
+      <img src="http://via.placeholder.com/240x180">
+      <img src="http://via.placeholder.com/240x180">
+      <img src="http://via.placeholder.com/240x180">
+      <img src="http://via.placeholder.com/240x180">
+
+      <h3>Show more</h3>
     </block>
   </body>
 

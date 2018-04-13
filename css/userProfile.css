@@ -28,7 +28,7 @@ body {
 
 #osuImage img{
   border-radius:200px;
-  height : 10%;
+  height : 15%;
 }
 
 #headerContent {
@@ -58,5 +58,14 @@ body {
 
 #replayList {
   margin-top: 2%;
-  padding: 1% 2% 2% 2%;
+  padding: 1% 2% 1% 2%;
+  text-align: center;
+}
+
+#replayList img {
+  border: 5px solid white;
+}
+
+#replayList img:hover {
+  opacity: 0.5;
 }

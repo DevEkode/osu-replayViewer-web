@@ -85,9 +85,9 @@ function getRandomId($conn){
 <?php
   if(empty($_SESSION)){
     echo '<a href = "/register.php"><img src="images/signUp.png" class="login"></a>';
-    echo '<a href="/login.php"><img src="images/login.png" class="login" id="login"></a>';
+    echo '<a href="/login.php"><img src="images/login.png" class="login"></a>';
   }else{
-    echo '<a href = "/userProfile.php"><img src="images/profile.png" class="login"id="login"></a>';
+    echo '<a href = "/userProfile.php"><img src="images/profile.png" class="login"></a>';
     echo '<a href = "/logout.php"><img src="images/logOut.png" class="login"></a>';
   }
 ?>

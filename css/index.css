@@ -4,13 +4,11 @@ body {
 }
 
 .login{
-  right : 10px;
   height:70px;
-  position:fixed;
-}
-
-#login {
-  margin-right: 8%;
+  margin-right: 1%;
+  position: sticky;
+  right: 0;
+  top: 0;
 }
 
 #logo{

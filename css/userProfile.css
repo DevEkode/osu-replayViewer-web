@@ -62,16 +62,20 @@ body {
   text-align: center;
 }
 
-#replayList img {
+.replayImg {
   border: 5px solid white;
   height:180px;
   width:240px;
+}
+
+.replayImg:hover {
+  opacity: 0.5;
 }
 
 #replayList a {
   border: 5px solid transparent;
 }
 
-#replayList img:hover {
-  opacity: 0.5;
+.showMore {
+  margin-top: 2%;
 }

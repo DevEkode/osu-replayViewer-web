@@ -109,11 +109,11 @@ $userReplayList = getReplayInfo($conn,$userId);
         foreach ($userReplayList as $replayId) {
           $imageUrl = "https://b.ppy.sh/thumb/".getReplayBTid($conn,$replayId)."l.jpg";
           $replayUrl = "view.php?id=".$replayId;
-          echo "<a href=$replayUrl><img src=$imageUrl></a>";
+          echo "<a href=$replayUrl><img src=$imageUrl title=\"Ceci est un test\" class=\"replayImg\"></a>";
         }
       ?>
-
-      <h3><a href=<?php echo $searchPageLink; ?>> Show more</a></h3>
+      <br>
+      <a href=<?php echo $searchPageLink; ?>><img src="images/add.png" class="showMore"></a>
     </block>
   </body>
 

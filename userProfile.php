@@ -25,19 +25,40 @@ function getDBInfo($conn,$userId){
   while($row=$result->fetch_assoc()){
     $username = $row['username'];
   }
+  $query->close();
   return $username;
 }
 
 function getReplayInfo($conn,$userId){
+  $array = array();
+
   $query = $conn->prepare("SELECT * FROM replaylist WHERE userId=?");
   $query->bind_param("i",$userId);
   $query->execute();
   $result=$query->get_result();
 
   while($row=$result->fetch_assoc()){
-    $username = $row['username']; //TODO create an array of replays
+    $replayId = $row['replayId'];
+    if(count($array) < 8){
+      array_push($array,$replayId);
+    }
   }
-  return $username;
+  $query->close();
+  return $array;
+}
+
+function getReplayBTid($conn,$replayId){
+  $beatmapId = "";
+
+  $query = $conn->prepare("SELECT * FROM replaylist WHERE replayId=?");
+  $query->bind_param("s",$replayId);
+  $query->execute();
+  $result=$query->get_result();
+
+  while($row=$result->fetch_assoc()){
+    $beatmapId = $row['beatmapSetId'];
+  }
+  return $beatmapId;
 }
 
 //get the session info
@@ -59,7 +80,9 @@ if(empty($username)){
 }
 
 $osuProfileLink = "https://osu.ppy.sh/users/".$userId;
+$searchPageLink = "search.php?u=".$userId;
 $profileImg = "images/defaultProfilePicture.png";
+$userReplayList = getReplayInfo($conn,$userId);
  ?>
 
 <html>
@@ -82,14 +105,15 @@ $profileImg = "images/defaultProfilePicture.png";
 
     <block id="replayList" class="block">
       <h2> Replay library</h2>
-      <img src="http://via.placeholder.com/240x180">
-      <img src="http://via.placeholder.com/240x180">
-      <img src="http://via.placeholder.com/240x180">
-      <img src="http://via.placeholder.com/240x180">
-      <img src="http://via.placeholder.com/240x180">
-      <img src="http://via.placeholder.com/240x180">
+      <?php
+        foreach ($userReplayList as $replayId) {
+          $imageUrl = "https://b.ppy.sh/thumb/".getReplayBTid($conn,$replayId)."l.jpg";
+          $replayUrl = "view.php?id=".$replayId;
+          echo "<a href=$replayUrl><img src=$imageUrl></a>";
+        }
+      ?>
 
-      <h3>Show more</h3>
+      <h3><a href=<?php echo $searchPageLink; ?>> Show more</a></h3>
     </block>
   </body>
 

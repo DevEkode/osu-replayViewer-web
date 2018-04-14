@@ -18,11 +18,11 @@ body {
 
 .content {
 	display:block;
-    width: 80%;
+  width: 80%;
 	height:100px;
 	margin:auto;
 	margin-top:1%;
-    padding:1% 1% 1% 1%;
+  padding:1% 1% 1% 1%;
 	background-color: rgba(150, 150, 150, .5);
 	border-radius:50px;
 	font-family:"Verdana";
@@ -130,5 +130,3 @@ footer{
 	overflow:hidden;
 	font-size:110%;
 }
-
-

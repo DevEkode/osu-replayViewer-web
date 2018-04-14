@@ -14,6 +14,7 @@ $password = $mySQLpassword;
 
 $imageOK = "images/ok.png";
 $imageNOK = "images/cross.png";
+$timeToVerif = 1; //day
 // ******************** Connection **********************************
 // Create connection
 $conn = new mysqli($servername, $username, $password, "u611457272_osu");
@@ -59,11 +60,16 @@ if($result->num_rows > 0){
     $username = $row['username'];
     $verfUserId = $row['verificationId'];
     $verfIdEmail = $row['verfIdEmail'];
-    $email = ['email'];
+    $email = $row['email'];
+    $date = $row['date'];
   }
 }else{
   close($conn);
 }
+
+//get the maximum date
+$date2 = new DateTime($date);
+date_add($date2,date_interval_create_from_date_string("1 day"));
 
 if(getUserInterests($userId) == $verfUserId && !empty($verfUserId)){
   $updateInfo = $conn->prepare("UPDATE accounts SET verificationId='' WHERE userId=?");
@@ -106,7 +112,45 @@ if(empty($verfUserId)){
     <link rel="icon" type="image/png" href="images/icon.png" />
   </head>
 
+  <!-- Countdown script form w3school.com -->
+  <script>
+    // Set the date we're counting down to
+    var countDownDate = new Date(<?php echo "'".date_format($date2, 'Y-m-d H:i:s')."'";?>).getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function() {
+
+      // Get todays date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now an the count down date
+      var distance = countDownDate - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Display the result in the element with id="demo"
+      document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+      + minutes + "m " + seconds + "s ";
+
+      // If the count down is finished, write some text
+      if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("timer").innerHTML = "EXPIRED";
+      }
+      }, 1000);
+    </script>
+
   <body>
+    <div class="block">
+        <h2>Time left to finish the verification :</h2>
+        <span>after this time this account will be deleted</span>
+        <p id="timer"></p>
+    </div>
+
     <div class="block">
       <h2> Step 1 : email verification</h2>
       <?php

@@ -81,7 +81,7 @@ if(empty($username)){
 
 $osuProfileLink = "https://osu.ppy.sh/users/".$userId;
 $searchPageLink = "search.php?u=".$userId;
-$profileImg = "images/defaultProfilePicture.png";
+$profileImg = "https://a.ppy.sh/".$userId;
 $userReplayList = getReplayInfo($conn,$userId);
  ?>
 
@@ -94,7 +94,7 @@ $userReplayList = getReplayInfo($conn,$userId);
 
   <body>
     <block id="header" class="block">
-      <img src="images/defaultProfilePicture.png" id="userImage">
+      <img src=<?php echo $profileImg; ?> id="userImage">
       <div id="headerContent">
         <h1> <?php echo $username; ?> </h1>
         <h3> <?php echo $userId; ?> </h3>
@@ -109,7 +109,7 @@ $userReplayList = getReplayInfo($conn,$userId);
         foreach ($userReplayList as $replayId) {
           $imageUrl = "https://b.ppy.sh/thumb/".getReplayBTid($conn,$replayId)."l.jpg";
           $replayUrl = "view.php?id=".$replayId;
-          echo "<a href=$replayUrl><img src=$imageUrl title=\"Ceci est un test\" class=\"replayImg\"></a>";
+          echo "<a href=$replayUrl><img src=$imageUrl class=\"replayImg\"></a>";
         }
       ?>
       <br>

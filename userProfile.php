@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
 //***************** Functions **********************
 function getDBInfo($conn,$userId){
-  $query = $conn->prepare("SELECT * FROM accounts WHERE userId=?");
+  $query = $conn->prepare("SELECT * FROM accounts WHERE userId=? AND verificationId=\"\" AND verfIdEmail=\"\" ");
   $query->bind_param("i",$userId);
   $query->execute();
   $result=$query->get_result();

@@ -113,9 +113,13 @@
 		}
 
 		//Get the post information
-		$playerId = $_POST['playerId'];
-		if($_POST['choice'] == "username"){
-			$playerId = getUserId($apiKey,$playerId);
+		if(!isset($_GET['u'])){
+			$playerId = $_POST['playerId'];
+			if($_POST['choice'] == "username"){
+				$playerId = getUserId($apiKey,$playerId);
+			}
+		}else{
+			$playerId = $_GET['u'];
 		}
 
 		//Avoid SQL Injection
@@ -132,16 +136,40 @@
 
 		$pageNbr = ceil($recordsNbr / $blockPerPages); //nbr of pages in total
 
-		if(!isset($_GET['u']) && !isset($_GET["pn"]) && !isset($_GET['p'])){
+		if(!isset($_GET['u']) || !isset($_GET["pn"]) || !isset($_GET['p'])){
 			header("Location:search.php?error=0&u=$playerId&pn=$pageNbr&p=0");
 		}else{
 			$playerId = $_GET["u"];
 			$pageNbr = $_GET["pn"];
 			$currentPage = $_GET["p"];
 		}
-
 		//Query
 		if($playerId != 0){
+			//show corresponding profile page (if it exists)
+			if($currentPage==0){
+				$query = $conn->prepare("SELECT * FROM accounts WHERE userId=? AND verificationId=\"\" AND verfIdEmail=\"\" ");
+				$query->bind_param("i",$playerId);
+				$query->execute();
+				$result = $query->get_result();
+				if($result->num_rows > 0){
+					while($row = $result->fetch_assoc()){
+						$profileURL = "userProfile.php?id=".$row['userId'];
+						$userImgURL = "https://a.ppy.sh/".$row['userId'];
+						echo "<a class='requestContent' href=$profileURL>";
+						echo 	'<div id="anim">';
+						echo 		"<img src=$userImgURL>";
+						echo 	'</div>';
+						echo	"<h3>".$row['username']."</h3>";
+						echo 	"<h4>Click here to visit his profile</h4>";
+						echo	"<span></span>";
+						echo'</a>';
+					}
+				}
+				$query->close();
+			}
+
+
+			//show pending requests
 			$queryUserReplayReq->execute();
 			$result = $queryUserReplayReq->get_result();
 			if($result->num_rows > 0){

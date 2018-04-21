@@ -26,9 +26,17 @@ body {
   float: left;
 }
 
+#osuImage{
+  border-radius:200px;
+}
+
 #osuImage img{
   border-radius:200px;
   height : 15%;
+}
+
+#osuImage:hover{
+  opacity: 0.5;
 }
 
 #headerContent {

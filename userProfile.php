@@ -87,7 +87,7 @@ $userReplayList = getReplayInfo($conn,$userId);
 
 <html>
   <head>
-    <title>osu!replayViewer - unknown profile</title>
+    <title>osu!replayViewer - <?php echo $username; ?> profile</title>
     <link rel="stylesheet" type="text/css" href="css/userProfile.css">
     <link rel="icon" type="image/png" href="images/icon.png" />
   </head>
@@ -103,18 +103,22 @@ $userReplayList = getReplayInfo($conn,$userId);
         <a href=<?php echo $osuProfileLink ?> id="osuImage"><img src="images/osu_logo.png"></a>
     </block>
 
-    <block id="replayList" class="block">
-      <h2> Replay library</h2>
-      <?php
-        foreach ($userReplayList as $replayId) {
-          $imageUrl = "https://b.ppy.sh/thumb/".getReplayBTid($conn,$replayId)."l.jpg";
-          $replayUrl = "view.php?id=".$replayId;
-          echo "<a href=$replayUrl><img src=$imageUrl class=\"replayImg\"></a>";
-        }
-      ?>
-      <br>
-      <a href=<?php echo $searchPageLink; ?>><img src="images/add.png" class="showMore"></a>
-    </block>
+    <?php
+    if(!empty($userReplayList)){
+      echo '<block id="replayList" class="block">';
+      echo  '<h2> Replay library</h2>';
+            foreach ($userReplayList as $replayId) {
+              $imageUrl = "https://b.ppy.sh/thumb/".getReplayBTid($conn,$replayId)."l.jpg";
+              $replayUrl = "view.php?id=".$replayId;
+              echo "<a href=$replayUrl><img src=$imageUrl class=\"replayImg\"></a>";
+            }
+      echo '<br>';
+      if(count($userReplayList) >= 8){
+        echo  "<a href=$searchPageLink; ><img src=\"images/add.png\" class=\"showMore\"></a>";
+      }
+      echo '</block>';
+    }
+    ?>
   </body>
 
 

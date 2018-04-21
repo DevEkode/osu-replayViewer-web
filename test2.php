@@ -2,9 +2,6 @@
 ini_set('display_errors', 1);
 $replayId = $_GET['replay'];
 //Get the secret id to launch the script
-	require_once 'secure/uploadKey.php';
-	$checkPass = $uploadKey;
-	
 	//$key = $_GET['key']; //get input key
 	//if(strcmp($key, $checkPass) != 0){ //Verify the key
 		//echo "wrong secret key";
@@ -31,9 +28,9 @@ session_start();
  * Please ensure that you have enabled the YouTube Data API for your project.
  */
 $OAUTH2_CLIENT_ID = '60201360036-lrj57dunpoffmqs9m372nonvqerlio90.apps.googleusercontent.com';
-$OAUTH2_CLIENT_SECRET = '3kEysPvW6heyE-SnNsAYJYPE';
 $client = new Google_Client();
 $client->setClientId($OAUTH2_CLIENT_ID);
+require_once 'secure/uploadKey.php';
 $client->setClientSecret($OAUTH2_CLIENT_SECRET);
 $client->setScopes('https://www.googleapis.com/auth/youtube');
 $client->setAccessType('offline');
@@ -152,7 +149,7 @@ function insertYtId($ytId, $replayId){
 
 	// Create connection
 	$conn = new mysqli($servername, $username, $password, "u611457272_osu");
-	
+
 	//Send record
 		$sql = "UPDATE replaylist SET youtubeId='$ytId' WHERE replayId='$replayId'";
 		if ($conn->query($sql) === TRUE) {
@@ -171,7 +168,7 @@ insertYtId($status['id'],$replayId);
 <html>
 <head>
 <title>Video Uploaded</title>
-</head>	
+</head>
 <body>
   <?=$htmlBody?>
 </body>

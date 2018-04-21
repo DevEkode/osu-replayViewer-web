@@ -88,6 +88,10 @@ a {
     color: #FF66AA;
 }
 
+#ads{
+  margin-top: 2%;
+}
+
 footer{
 	font-family: "Verdana";
 	position:fixed;

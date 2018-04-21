@@ -37,7 +37,7 @@ function getReplayNumber($conn){
 }
 
 function getUserNumber($conn){
-	$result = $conn->query("SELECT COUNT(userId) AS count FROM playerlist");
+	$result = $conn->query("SELECT COUNT(userId) AS count FROM accounts");
 
 	if($result->num_rows > 0){
 		while($row = $result->fetch_assoc()){
@@ -138,6 +138,10 @@ function getRandomId($conn){
 	?>
 </form>
 
+<div align="center" id="ads">
+  <script data-cfasync="false" type="text/javascript" src="https://www.megdexchange.com/a/display.php?r=1978755"></script>
+</div>
+
 <div id=buttonBlock>
 	<!-- <a href="/view.php?id=">
 		<img src="images/rndButton.png">
@@ -153,7 +157,7 @@ function getRandomId($conn){
 <span>
 	<h2>Already <?php echo getReplayNumber($conn); ?> replays recorded !</h2>
 	<h2>For <?php echo getUserNumber($conn); ?> osu players registered</h2>
-<span>
+</span>
 <footer>
 	osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert
 	 | Website created by <a href="https://osu.ppy.sh/u/3481725">codevirtuel</a>

@@ -127,6 +127,7 @@
 
 		$inReplay = true;
 		$inRequest = true;
+		$inProfile = true;
 
 		//Calculation
 		$queryUserId->execute();
@@ -164,6 +165,8 @@
 						echo	"<span></span>";
 						echo'</a>';
 					}
+				}else{
+					$inProfile = false;
 				}
 				$query->close();
 			}
@@ -249,8 +252,8 @@
 			}else{
 				$inReplay = false;
 			}
-
-			if(!$inReplay && !$inRequest){
+			
+			if(!$inReplay && !$inRequest && !$inProfile){
 				header("Location:search.php?error=2");
 				exit;
 			}

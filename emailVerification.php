@@ -56,4 +56,5 @@ $queryInfos->execute();
 $queryInfos->close();
 
 echo 'Thanks '.$username." ! Your email has been validated";
+header("Location:userVerification.php?id=$userId");
  ?>

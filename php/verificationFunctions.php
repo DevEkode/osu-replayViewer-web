@@ -16,8 +16,13 @@ function sendEmail($email,$username,$verfId){
 
   $headers = "MIME-Version: 1.0" . "\r\n";
   $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+  $headers .= "X-Priority: 1 (Highest)\n";
+  $headers .= "X-MSMail-Priority: High\n";
+  $headers .= "Importance: High\n";
 
   $return = mail($email,$subject,$message,$headers);
+  var_dump($return);
   return $return;
 }
+sendEmail("codevirtuel@gmail.com","codevirtuel","123");
  ?>

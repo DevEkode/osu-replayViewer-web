@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- récupération d'info -->
 <?php
-	ini_set('display_errors', 1);
+	//ini_set('display_errors', 1);
 
 	require 'secure/mysql_pass.php';
 	$servername = $mySQLservername;
@@ -32,7 +32,10 @@
 	function draw($replayId, $conn){
 		$showViewRaw = true;
 		//get all the needed info
-		$result = $conn->query("SELECT * FROM replaylist WHERE replayId='$replayId'");
+		$query = $conn->prepare("SELECT * FROM replaylist WHERE replayId=?");
+		$query->bind_param("s",$replayId);
+		$query->execute();
+		$result = $query->get_result();
 		while ($row = $result->fetch_assoc()) {
 			$beatmapId = $row['beatmapId'];
 			$beatmapSetId = $row['beatmapSetId'];
@@ -44,6 +47,7 @@
 			$binaryMods = $row['binaryMods'];
 			$permanent = $row['permanent'];
 		}
+		$query->close();
 
 		$videoPath = "replayList/".$replayId."/".$replayId.".mp4";
 		$youtubeURL = "https://www.youtube.com/embed/$youtubeId";
@@ -74,6 +78,26 @@
 					echo "Delete date : ".date('Y-m-d H:i:s', strtotime($replayUploadDate. ' + 30 days'));
 				}
 		echo '</section>';
+
+		//User info block
+		$query = $conn->prepare("SELECT * FROM accounts WHERE userId=?");
+		$query->bind_param("i",$playerId);
+		$query->execute();
+		$result = $query->get_result();
+		if($result->num_rows > 0){
+			while($row=$result->fetch_assoc()){
+				$profileURL = "userProfile.php?id=".$row['userId'];
+				$userImgURL = "https://a.ppy.sh/".$row['userId'];
+				echo "<a href=$profileURL class=\"block\" id=\"profileBlock\">";
+				echo "<img src=$userImgURL>";
+				echo '<div>';
+				echo "<h3>".$row['username']."</h3>";
+				echo "<h4>Click here to visit his profile</h4>";
+				echo '</div>';
+				echo '</a>';
+			}
+		}
+		$query->close();
 
 		drawMods($binaryMods);
 
@@ -146,10 +170,11 @@
 			}
 		?>
 
+		<footer>
+			osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert
+			| Website created by <a href="https://osu.ppy.sh/u/3481725">codevirtuel</a>
+		</footer>
 	</body>
 
-	<footer>
-		osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert
-		| Website created by <a href="https://osu.ppy.sh/u/3481725">codevirtuel</a>
-	</footer>
+
 </html>

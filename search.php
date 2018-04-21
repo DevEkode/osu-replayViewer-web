@@ -183,7 +183,7 @@
 					$beatmapName = str_replace(".osz", "", $beatmapName);
 					$replayId = $row['replayId'];
 					$url = "https://b.ppy.sh/thumb/$beatmapSetId"."l.jpg";
-					$replayUrl = "http://osureplayviewer.xyz/progress.php?id=$replayId";
+					$replayUrl = "progress.php?id=$replayId";
 					echo "<a class='requestContent' href=$replayUrl>";
 					echo 	'<div id="anim">';
 					echo 		"<img src=$url>";
@@ -224,7 +224,7 @@
 					$diff = $json[0]['version'];
 					$replayId = $row['replayId'];
 					$url = "https://b.ppy.sh/thumb/$beatmapSetId"."l.jpg";
-					$replayUrl = "http://osureplayviewer.xyz/view.php?id=$replayId";
+					$replayUrl = "view.php?id=$replayId";
 
 					//play mod
 					switch($row['playMod']){
@@ -252,7 +252,7 @@
 			}else{
 				$inReplay = false;
 			}
-			
+
 			if(!$inReplay && !$inRequest && !$inProfile){
 				header("Location:search.php?error=2");
 				exit;

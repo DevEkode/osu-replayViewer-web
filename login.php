@@ -3,7 +3,8 @@
     0 => "",
     1 => "Your account need verification",
     2 => "The osu!id or the username is invalid, ",
-    3 => "The reCaptcha is invalid, please try again"
+    3 => "The reCaptcha is invalid, please try again",
+    4 => "Verification completed, you can now login"
   );
  ?>
 

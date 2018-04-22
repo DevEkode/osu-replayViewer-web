@@ -43,7 +43,7 @@ $queryInfos->close();
 
 if($result->num_rows > 0){
   while($row = $result->fetch_assoc()){
-    $username = $row['username'];
+    $usernameOsu = $row['username'];
     $userId = $row['userId'];
   }
 }else{
@@ -55,6 +55,7 @@ $queryInfos->bind_param("s",$userId);
 $queryInfos->execute();
 $queryInfos->close();
 
-echo 'Thanks '.$username." ! Your email has been validated";
+echo 'Thanks '.$usernameOsu." ! Your email has been validated";
+
 header("Location:userVerification.php?id=$userId");
  ?>

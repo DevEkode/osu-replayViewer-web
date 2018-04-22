@@ -19,10 +19,10 @@ function sendEmail($email,$username,$verfId){
   $headers .= "X-Priority: 1 (Highest)\n";
   $headers .= "X-MSMail-Priority: High\n";
   $headers .= "Importance: High\n";
+  $headers .= "from: codevirtuel <codevirtuel@osureplayviewer.xyz>\n";
 
   $return = mail($email,$subject,$message,$headers);
   var_dump($return);
   return $return;
 }
-sendEmail("codevirtuel@gmail.com","codevirtuel","123");
  ?>

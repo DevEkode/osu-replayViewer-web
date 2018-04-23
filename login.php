@@ -14,7 +14,7 @@
   <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
-<form action="loginForm.php">
+<form action="loginForm.php" method="post">
   <div class="imgcontainer">
    <img src="images/icon.png" alt="Avatar" class="avatar">
   </div>

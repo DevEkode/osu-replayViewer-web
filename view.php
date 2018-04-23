@@ -168,6 +168,7 @@
 				draw($replayId,$conn);
 			}
 			else{
+				header("Location:index.php");
 				echo "This replay doesn't exist";
 			}
 		?>

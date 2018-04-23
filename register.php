@@ -44,7 +44,7 @@ function getUserInterests($userId){
 }
 
 function isFormSubmitted(){
-	if(isset($_GET["userId"]) && isset($_GET["email"]) && isset($_GET["password"]) && isset($_GET["cPassword"])){
+	if(isset($_POST["userId"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["cPassword"])){
 		return true;
 	}else {return false;}
 }
@@ -101,20 +101,20 @@ function verifyCaptcha($secretCaptcha,$cResponse){
 require_once 'secure/recaptcha.php';
 if(isFormSubmitted()){
   //Check the reCaptcha
-  if(!verifyCaptcha($secretCaptcha,$_GET['g-recaptcha-response'])){
+  if(!verifyCaptcha($secretCaptcha,$_POST['g-recaptcha-response'])){
     header("Location:register.php?error=1");
     exit();
   }
 
   //Check if the player exist in osu
-  $userJSON = getUserJSON($_GET['userId'],$osuApiKey);
+  $userJSON = getUserJSON($_POST['userId'],$osuApiKey);
   if(empty($userJSON)){
     header("Location:register.php?error=2");
     exit();
   }
 
 	//Check if the user is already registered //Check if the email is already used
-  if(isAlreadyUsedInAccount($conn,'userId',$_GET['userId']) || isAlreadyUsedInAccount($conn,'email',$_GET['email'])){
+  if(isAlreadyUsedInAccount($conn,'userId',$_POST['userId']) || isAlreadyUsedInAccount($conn,'email',$_POST['email'])){
     header("Location:register.php?error=3");
     exit();
   }
@@ -125,10 +125,10 @@ if(isFormSubmitted()){
   $insertAccount = $conn->prepare("INSERT INTO accounts (userId, username, email, password, verificationId, verfIdEmail) VALUES (?, ?, ?, ?, ?, ?)");
   $insertAccount->bind_param("isssss",$userId,$username,$email,$password,$verfId,$verfIdEmail);
 
-  $userId = $_GET['userId'];
+  $userId = $_POST['userId'];
   $username = $userJSON['0']['username'];
-  $email = $_GET['email'];
-  $password = password_hash($_GET['password'],PASSWORD_BCRYPT);
+  $email = $_POST['email'];
+  $password = password_hash($_POST['password'],PASSWORD_BCRYPT);
 
   //Send e-mail
   require_once 'php/verificationFunctions.php';
@@ -154,7 +154,7 @@ if(isFormSubmitted()){
 	<body onload="start()">
 
     <h3> Please register this form to create an account </h3>
-		<form id="form" onsubmit="submitted()">
+		<form id="form" onsubmit="submitted()" method="post">
 		<label>Osu user id (osu!ID):</label>
 		<input type="text" name="userId" id="userId" onkeyup="showUsername(this.value); update()" autocomplete=off required> <span id="txtHint"></span><br>
 		<label>e-mail: </label>

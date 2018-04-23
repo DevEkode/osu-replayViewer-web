@@ -62,6 +62,7 @@ if($result->num_rows > 0){
     $verfIdEmail = $row['verfIdEmail'];
     $email = $row['email'];
     $date = $row['date'];
+    $canBeDeleted = $row['canBeDeleted'];
   }
 }else{
   close($conn);
@@ -81,6 +82,11 @@ if(getUserInterests($userId) == $verfUserId && !empty($verfUserId)){
 
 //Redirect to login in already verified
 if(empty($verfUserId) && empty($verfIdEmail)){
+  $query = $conn->prepare("UPDATE accounts SET canBeDeleted=0 WHERE userId=?");
+  $query->bind_param("i",$_GET['id']);
+  $query->execute();
+  $query->close();
+
   close($conn);
   if(!isset($_SESSION)){
     header("Location:login.php?error=4");
@@ -149,11 +155,15 @@ if(empty($verfUserId)){
     </script>
 
   <body>
-    <div class="block">
-        <h2>Time left to finish the verification :</h2>
-        <span>after this time this account will be deleted</span>
-        <p id="timer"></p>
-    </div>
+    <?php
+    if($canBeDeleted){
+      echo '<div class="block">';
+      echo    '<h2>Time left to finish the verification :</h2>';
+      echo    '<span>after this time this account will be deleted</span>';
+      echo    '<p id="timer"></p>';
+      echo '</div>';
+    }
+    ?>
 
     <div class="block">
       <h2> Step 1 : email verification</h2>

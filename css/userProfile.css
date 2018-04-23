@@ -39,6 +39,14 @@ body {
   opacity: 0.5;
 }
 
+#profileImage img{
+  height : 15%;
+}
+
+#profileImage:hover{
+  opacity: 0.5;
+}
+
 #headerContent {
   display: inline-block;
   padding-left:8%;

@@ -59,6 +59,8 @@
 
 <html>
 	<head>
+		<title>osu!replayViewer - Search page</title>
+	  <link rel="icon" type="image/png" href="images/icon.png" />
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113523918-1"></script>
 		<script>
@@ -73,7 +75,6 @@
 		<meta charset="utf-8" />
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link rel="icon" type="image/png" href="images/icon.png" />
 	</head>
 
 	<body>

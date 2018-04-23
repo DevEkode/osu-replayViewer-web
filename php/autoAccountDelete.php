@@ -26,8 +26,11 @@ function getRemovableAccounts($conn,$timeLimit){
   $query->execute();
   $result = $query->get_result();
     while ($row = $result->fetch_assoc()) {
-      $userId = $row['userId'];
-      array_push($array,$userId);
+      $userId = $row["userId"];
+      $canBeDeleted = $row["canBeDeleted"];
+      if($canBeDeleted){
+        array_push($array,$userId);
+      }
     }
   $query->close();
   return $array;

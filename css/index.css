@@ -59,6 +59,10 @@ body {
 	display:inline-block;
 }
 
+#buttonBlock img:hover{
+  opacity: 0.5;
+}
+
 #fileToUpload{
 	margin:auto;
 	width:90%;

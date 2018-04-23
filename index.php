@@ -146,11 +146,17 @@ function getRandomId($conn){
 	<!-- <a href="/view.php?id=">
 		<img src="images/rndButton.png">
 	</a> -->
+  <a href="https://discord.gg/pqvhvxx" target="_blank">
+		<img src="images/discord.png">
+	</a>
 	<a href="/search.php">
 		<img src="images/searchButton.png">
 	</a>
-	 <a href="https://github.com/codevirtuel/osu-replayViewer-web/issues">
+	 <a href="https://github.com/codevirtuel/osu-replayViewer-web/issues" target="_blank">
 		<img src="images/reportButton.png">
+	</a>
+  <a href="https://paypal.me/codevirtuel" target="_blank">
+		<img src="images/help.png">
 	</a>
 </div>
 

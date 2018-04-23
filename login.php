@@ -10,6 +10,8 @@
 
 <html>
 <head>
+  <title>osu!replayViewer - Login</title>
+  <link rel="icon" type="image/png" href="images/icon.png" />
   <link rel="stylesheet" type="text/css" href="css/login.css">
   <script src='https://www.google.com/recaptcha/api.js'></script>
 </head>

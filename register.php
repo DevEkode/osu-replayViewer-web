@@ -146,6 +146,8 @@ if(isFormSubmitted()){
 
 <html>
 	<head>
+    <title>osu!replayViewer - Register</title>
+    <link rel="icon" type="image/png" href="images/icon.png" />
 		 <script src="js/request.js"></script>
      <link rel="stylesheet" type="text/css" href="css/register.css">
      <script src='https://www.google.com/recaptcha/api.js'></script>

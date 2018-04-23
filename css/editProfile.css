@@ -1,0 +1,42 @@
+body {
+  background-image: url("../images/background.png");
+	padding-bottom:5%;
+  font-family: "verdana";
+}
+
+.block {
+  display: block;
+	margin:auto;
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: rgba(150, 150, 150, .5);
+  border-radius:50px;
+}
+
+.back{
+  height:70px;
+  margin-right: 1%;
+  position: sticky;
+  right: 0;
+  top: 0;
+}
+
+h1{
+  text-align: center;
+}
+
+#password{
+  text-align: center;
+  padding:1% 1% 1% 1%;
+}
+
+#email{
+  margin-top: 2%;
+  text-align: center;
+  padding:1% 1% 1% 1%;
+}
+
+/*#editBlocks{
+  display: inline-block;
+    vertical-align: middle;
+}*/

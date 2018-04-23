@@ -139,6 +139,8 @@
 <!-- page html -->
 <html>
 	<head>
+		<title>osu!replayViewer - View replay</title>
+	  <link rel="icon" type="image/png" href="images/icon.png" />
 			<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113523918-1"></script>
 		<script>

@@ -97,10 +97,15 @@ $userReplayList = getReplayInfo($conn,$userId);
       <img src=<?php echo $profileImg; ?> id="userImage">
       <div id="headerContent">
         <h1> <?php echo $username; ?> </h1>
-        <h3> <?php echo $userId; ?> </h3>
+        <h3> <?php echo "osu!ID : ".$userId; ?> </h3>
 
       </div>
         <a href=<?php echo $osuProfileLink ?> id="osuImage"><img src="images/osu_logo.png"></a>
+        <?php
+        if($isLogged){
+          echo '<a href="editProfile.php" id="profileImage"><img src="images/editProfile.png"></a>';
+        }
+        ?>
     </block>
 
     <?php

@@ -82,7 +82,11 @@ if(getUserInterests($userId) == $verfUserId && !empty($verfUserId)){
 //Redirect to login in already verified
 if(empty($verfUserId) && empty($verfIdEmail)){
   close($conn);
-  header("Location:login.php?error=4");
+  if(!isset($_SESSION)){
+    header("Location:login.php?error=4");
+  }else{
+    header("Location:index.php");
+  }
   exit;
 }
 

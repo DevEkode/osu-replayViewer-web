@@ -6,8 +6,8 @@ $servername = $mySQLservername;
 $username = $mySQLusername;
 $password = $mySQLpassword;
 
-$userId = $_GET['userId'];
-$userPassword = $_GET['psw'];
+$userId = $_POST['userId'];
+$userPassword = $_POST['psw'];
 // ******************** Connection **********************************
 // Create connection
 $conn = new mysqli($servername, $username, $password, "u611457272_osu");
@@ -47,7 +47,7 @@ $query->close();
 
 //check reCaptcha (avoid bot)
 require_once 'secure/recaptcha.php';
-if(!verifyCaptcha($secretCaptcha,$_GET['g-recaptcha-response'])){
+if(!verifyCaptcha($secretCaptcha,$_POST['g-recaptcha-response'])){
   header("Location:login.php?error=3");
   close($conn);
 }
@@ -62,6 +62,7 @@ while($row = $result->fetch_assoc()){
   $verfUserId = $row['verificationId'];
   $verfIdEmail = $row['verfIdEmail'];
   $passwordHash = $row['password'];
+  $userUsername = $row['username'];
 }
 //var_dump(empty($verfUserId) && empty($verfIdEmail));
 
@@ -79,5 +80,6 @@ if(!password_verify($userPassword,$passwordHash)){
 //Everything is valid create a new session
 session_start();
 $_SESSION["userId"] = $userId;
+$_SESSION["username"] = $userUsername;
 header("Location:index.php");
  ?>

@@ -64,16 +64,17 @@ while($row = $result->fetch_assoc()){
   $passwordHash = $row['password'];
   $userUsername = $row['username'];
 }
-//var_dump(empty($verfUserId) && empty($verfIdEmail));
-
-if((empty($verfUserId) && empty($verfIdEmail)) == false){
-  header("Location:login.php?error=1&userId=".$userId);
-  close($conn);
-}
 
 //Check password
 if(!password_verify($userPassword,$passwordHash)){
   header("Location:login.php?error=2");
+  close($conn);
+}
+
+//var_dump(empty($verfUserId) && empty($verfIdEmail));
+
+if((empty($verfUserId) && empty($verfIdEmail)) == false){
+  header("Location:login.php?error=1&userId=".$userId);
   close($conn);
 }
 

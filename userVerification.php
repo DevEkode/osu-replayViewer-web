@@ -116,12 +116,13 @@ if(empty($verfUserId)){
 
  ?>
 
+<!DOCTYPE html>
 <html>
   <head>
     <title> osu!replayViewer - verification </title>
     <link rel="stylesheet" type="text/css" href="css/userVerification.css">
     <link rel="icon" type="image/png" href="images/icon.png" />
-  </head>
+
 
   <!-- Countdown script form w3school.com -->
   <script>
@@ -154,6 +155,7 @@ if(empty($verfUserId)){
       }
       }, 1000);
     </script>
+  </head>
 
   <body>
     <?php
@@ -171,6 +173,10 @@ if(empty($verfUserId)){
       <?php
       if(!empty($verfIdEmail)){
         echo '<span> Click on the link provided in the verification email </span> <br>';
+        echo '<form action="php/sendVerificationEmail.php" method="get">';
+        echo  "<input type=\"hidden\" name=\"userId\" value=$userId>";
+        echo   '<input type="submit" value="Send another verification email">';
+        echo '</form>';
         $imgUrl = $imageNOK;
       }else{
         $imgUrl = $imageOK;
@@ -184,7 +190,7 @@ if(empty($verfUserId)){
     <h2> Step 2 : user verification </h2>
       <?php
       if(!empty($verfUserId)){
-        echo "<span> Please copy this code :";
+        echo "<span> Please copy this code : </span>";
         echo "<input type=\"text\" value=$verfUserId id=\"myInput\" readonly=\"readonly\">";
         echo "<br>Into your interests field on your osu profile page.";
         echo "<br>And click Refresh";
@@ -196,7 +202,7 @@ if(empty($verfUserId)){
       }
       ?>
       <h3> Statut : <?php echo $statutUser; ?></h3><br>
-      <img src=<?php echo $imgUrl ?>>
+      <img src=<?php echo $imgUrl ?> />
     </div>
 
   </body>

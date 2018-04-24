@@ -4,7 +4,8 @@
     1 => "Your account need verification",
     2 => "The osu!id, the username or the password is invalid, ",
     3 => "The reCaptcha is invalid, please try again",
-    4 => "Verification completed, you can now login"
+    4 => "Verification completed, you can now login",
+    5 => "Please enter a number into the osu!ID field"
   );
  ?>
 

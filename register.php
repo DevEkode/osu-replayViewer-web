@@ -107,14 +107,15 @@ if(isFormSubmitted()){
   }
 
   //Check if the player exist in osu
-  $userJSON = getUserJSON($_POST['userId'],$osuApiKey);
+  $userId = intval($_POST['userId']);
+  $userJSON = getUserJSON($userId,$osuApiKey);
   if(empty($userJSON)){
     header("Location:register.php?error=2");
     exit();
   }
 
 	//Check if the user is already registered //Check if the email is already used
-  if(isAlreadyUsedInAccount($conn,'userId',$_POST['userId']) || isAlreadyUsedInAccount($conn,'email',$_POST['email'])){
+  if(isAlreadyUsedInAccount($conn,'userId',$userId) || isAlreadyUsedInAccount($conn,'email',$_POST['email'])){
     header("Location:register.php?error=3");
     exit();
   }
@@ -125,7 +126,6 @@ if(isFormSubmitted()){
   $insertAccount = $conn->prepare("INSERT INTO accounts (userId, username, email, password, verificationId, verfIdEmail) VALUES (?, ?, ?, ?, ?, ?)");
   $insertAccount->bind_param("isssss",$userId,$username,$email,$password,$verfId,$verfIdEmail);
 
-  $userId = $_POST['userId'];
   $username = $userJSON['0']['username'];
   $email = $_POST['email'];
   $password = password_hash($_POST['password'],PASSWORD_BCRYPT);

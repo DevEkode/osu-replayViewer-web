@@ -160,7 +160,9 @@ if(isFormSubmitted()){
 		<label>Osu user id (osu!ID):</label>
 		<input type="text" name="userId" id="userId" onkeyup="showUsername(this.value); update()" autocomplete=off required> <span id="txtHint"></span><br>
 		<label>e-mail: </label>
-		<input type="text" name="email" id="email" onkeyup="showEmailValidity(); update()" required><span id="emailHint"></span><br>
+		<input type="email" name="email" id="email" onkeyup="showEmailValidity(); update()" required><span id="emailHint"></span><br>
+    <label>confirm email: </label>
+		<input type="email" name="cEmail" id="confEmail" onkeyup="showCheckEmail(); update()" required> <span id="checkEmail"></span><br>
 		<label>password: </label>
 		<input type="password" name="password" id="pass" onkeyup="update()" required><br>
 		<label>confirm password: </label>

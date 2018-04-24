@@ -66,6 +66,16 @@ function show(id){
 }
 
 //-- Email
+function checkEmail() {
+	var firstEmail = document.getElementById("email").value;
+	var confirmEmail = document.getElementById("confEmail").value;
+	if(firstEmail == confirmEmail && firstEmail != '' && confirmEmail != ''){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 function validateEmail() {
 	var email = document.getElementById("email").value;
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -80,6 +90,16 @@ function showEmailValidity(){
 	}
 }
 
+function showCheckEmail(){
+	var firstEmail = document.getElementById("email").value;
+	var confirmEmail = document.getElementById("confEmail").value;
+	if(firstEmail == confirmEmail && firstEmail != '' && confirmEmail != ''){
+		document.getElementById("checkEmail").innerHTML = "";
+	}else{
+		document.getElementById("checkEmail").innerHTML = "The email doesn't match";
+	}
+}
+
 //----------------------------- At start ----------------------------------
 function start(){
 	hide("submitButton");
@@ -90,7 +110,7 @@ function start(){
 //----------------------------- At every update ---------------------------
 function update(){
 	//Check if the form is filled
-	if(checkPassword() && validateEmail() && isIdOk){
+	if(checkPassword() && validateEmail() && checkEmail() && isIdOk){
 		show("submitButton");
 	} else { hide("submitButton"); }
 }

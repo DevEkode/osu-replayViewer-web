@@ -2,7 +2,7 @@
   $errors = array (
     0 => "",
     1 => "Your account need verification",
-    2 => "The osu!id or the username is invalid, ",
+    2 => "The osu!id, the username or the password is invalid, ",
     3 => "The reCaptcha is invalid, please try again",
     4 => "Verification completed, you can now login"
   );
@@ -58,7 +58,7 @@
 
   <div class="container" style="background-color:#f1f1f1">
    <!-- <button type="button" class="cancelbtn">Cancel</button> -->
-   <span class="psw">Forgot <a href="#">password?</a></span>
+   <span class="psw">Forgot <a href="forgotPassword.php">password?</a></span>
   </div>
 </form>
 </html>

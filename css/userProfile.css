@@ -12,6 +12,14 @@ body {
   border-radius:50px;
 }
 
+.back{
+  height:70px;
+  margin-right: 1%;
+  position: sticky;
+  right: 0;
+  top: 0;
+}
+
 #header{
   padding: 2% 10% 2% 10%;
   overflow:auto;

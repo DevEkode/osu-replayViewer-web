@@ -1,5 +1,8 @@
 <?php
-session_start();
+  session_start();
+  if(empty($_SESSION)){
+    header("Location:index.php");
+  }
 //Password edit error
   $pswErrorArray = array(
     0 => "Password successfully updated",

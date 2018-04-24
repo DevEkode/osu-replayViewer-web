@@ -93,6 +93,7 @@ $userReplayList = getReplayInfo($conn,$userId);
   </head>
 
   <body>
+    <a href="index.php"><img src="images/home.png" class="back"></a>
     <block id="header" class="block">
       <img src=<?php echo $profileImg; ?> id="userImage">
       <div id="headerContent">

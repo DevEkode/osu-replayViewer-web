@@ -1,4 +1,9 @@
 <?php
+  session_start();
+  if(!empty($_SESSION)){
+    header("Location:index.php");
+  }
+
   $errors = array (
     0 => "",
     1 => "Your account need verification",
@@ -7,6 +12,8 @@
     4 => "Verification completed, you can now login",
     5 => "Please enter a number into the osu!ID field"
   );
+
+
  ?>
 
 <html>

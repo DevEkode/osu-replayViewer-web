@@ -283,6 +283,10 @@
 		end:
 		?>
 
+		<div align="center" id="ads">
+		  <script data-cfasync="false" type="text/javascript" src="https://www.megdexchange.com/a/display.php?r=1978755"></script>
+		</div>
+
 		<footer>
 			osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert
 			| Website created by <a href="https://osu.ppy.sh/u/3481725">codevirtuel</a>

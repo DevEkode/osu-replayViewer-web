@@ -45,6 +45,11 @@ $query->execute();
 $result = $query->get_result();
 $query->close();
 
+if(strcmp(intval($userId),$userId) != 0){
+  header("Location:login.php?error=5");
+  close($conn);
+}
+
 //check reCaptcha (avoid bot)
 require_once 'secure/recaptcha.php';
 if(!verifyCaptcha($secretCaptcha,$_POST['g-recaptcha-response'])){

@@ -260,20 +260,8 @@ if ($uploadOk == 0) {
 			closeUpload($conn);
 		}
 
-		$result = $conn->query("SELECT userName FROM playerlist WHERE userName='$playerName'");
-		if($result->num_rows == 0){
-			//Player is not into database
-			//Create entry for player
-			$playerId = getPlayerId($playerName,$apiKey);
+		$playerId = getPlayerId($playerName,$apiKey);
 
-			//Send info to database
-			$sql = "INSERT INTO playerlist (userId,userName) VALUES ('$playerId','$playerName')";
-			if ($conn->query($sql) === TRUE) {
-				//row created
-			} else {
-				echo "Error: " . $sql . "<br>" . $conn->error;
-			}
-		}
 
 		//----- Create a request ticket -----
 		date_default_timezone_set('Europe/Paris');
@@ -317,10 +305,6 @@ if ($uploadOk == 0) {
 		//Encode to Base64 to avoid sql syntax error
 		$beatmapName = base64_encode(generateBtFileName($beatmapId,$apiKey));
 		$replayName = base64_encode($file_name);
-		$result = $conn->query("SELECT userId FROM playerlist WHERE userName='$playerName'");
-		while ($row = $result->fetch_assoc()) {
-			$playerId = $row['userId'];
-		}
 
 
 		//----- Send record -----

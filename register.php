@@ -135,7 +135,7 @@ if(isFormSubmitted()){
   sendEmail($email,$username,$verfIdEmail);
 
   if($insertAccount->execute()){ //Insert ok
-    header("Location:userVerification?id=".$userId);
+    header("Location:userVerification.php?id=".$userId);
     $insertAccount->close();
     exit();
   }

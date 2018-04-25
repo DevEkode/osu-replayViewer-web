@@ -89,10 +89,10 @@ if(empty($verfUserId) && empty($verfIdEmail)){
   $query->close();
 
   close($conn);
-  if(!isset($_SESSION)){
-    header("Location:login.php?error=4");
-  }else{
+  if(!empty($_SESSION["userId"])){
     header("Location:index.php");
+  }else{
+    header("Location:login.php?error=4");
   }
   exit;
 }
@@ -113,6 +113,8 @@ if(empty($verfUserId)){
 }else{
   $statutUser = "Verification needed";
 }
+
+
 
  ?>
 

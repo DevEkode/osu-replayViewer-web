@@ -1,4 +1,5 @@
 <?php
+//ini_set('display_errors', 1);
 //-- Connect to mysql request database --
 require 'secure/mysql_pass.php';
 $servername = $mySQLservername;
@@ -72,6 +73,8 @@ function exitPage(){
         if(strcmp($row['verfPassword'], $_GET['verf']) == 0){
           //Verfication id is OK
           $tempPasswordClear = uniqid();
+          require_once 'php/verificationFunctions.php';
+          sendTempPassword($row['email'],$tempPasswordClear);
           $tempPasswordHash = password_hash($tempPasswordClear,PASSWORD_BCRYPT);
 
           $updatePass = $conn->prepare("UPDATE accounts SET verfPassword=NULL, password=? WHERE userId=?");
@@ -119,6 +122,7 @@ function exitPage(){
       if(isset($_GET['id']) && isset($_GET['verf'])){
         echo '<br>';
         echo "<span> Your temporary password is ".$tempPasswordClear."</span>";
+        echo "<span> You I'll soon recieve an email with this temporary password</span>";
         echo "<span> Please update your password into your user account options </span>";
       }
      ?>

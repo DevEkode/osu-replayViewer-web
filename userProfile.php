@@ -65,12 +65,20 @@ function getReplayBTid($conn,$replayId){
 $isLogged = false;
 $username = "unknown";
 
-if(!empty($_SESSION)){
+//Detect the user page
+if(isset($_SESSION) && isset($_GET['id'])){
+  if(strcmp($_SESSION["userId"],$_GET['id']) == 0){
+    $isLogged=true;
+    $userId = $_SESSION["userId"];
+  }else{
+    $isLogged=false;
+    $userId = $_GET['id'];
+  }
+}
+
+if(isset($_SESSION) && !isset($_GET['id'])){
   $isLogged=true;
   $userId = $_SESSION["userId"];
-} else{
-  if(!isset($_GET['id'])) header("Location:index.php");
-  $userId=$_GET['id'];
 }
 
 //check if the player exist un DB

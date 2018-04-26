@@ -31,6 +31,9 @@
 
   <div class="container">
    <label for="uname"><b>osu!ID</b></label>
+   <div class="tooltip">Find my osu!ID
+     <img class="tooltiptext" src="images/tooltips/findOsuId.png">
+   </div>
    <input type="text" placeholder="Enter your osu user id" name="userId"required>
 
    <label for="psw"><b>Password</b></label>

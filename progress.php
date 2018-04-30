@@ -58,7 +58,7 @@ function getInfo($conn,$replayId, $column){
 	return $id;
 }
 
-function getPlayerName($conn,$playerId){
+/*function getPlayerName($conn,$playerId){
 	$queryPlayerName = $conn->prepare("SELECT * FROM playerlist WHERE userId=?");
 	$queryPlayerName->bind_param("i",$playerId);
 
@@ -72,7 +72,7 @@ function getPlayerName($conn,$playerId){
 		}
 	}
 	return $id;
-}
+}*/
 
 function checkProcessFinished($conn,$replayId){
 	$queryReplays = $conn->prepare("SELECT * FROM replaylist WHERE replayId=?");
@@ -95,7 +95,6 @@ $url = "https://b.ppy.sh/thumb/$beatmapSetId"."l.jpg";
 $BFN = base64_decode(getInfo($conn,$replayId,"BFN"));
 $BFN = str_replace(".osz", "", $BFN);
 $userId = getInfo($conn,$replayId,"playerId");
-$username = getPlayerName($conn,$userId);
 
 $page = $_SERVER['PHP_SELF']."?id=".$replayId;
 $sec = "10";
@@ -131,7 +130,7 @@ if(checkProcessFinished($conn,$replayId)){
 
 	<section id="text">
 		<img src=<?php echo $url ?>>
-		<h3> <?php echo $username?> </h3>
+
 
 		<h3><?php echo $BFN ?></h3>
 		<h3> <?php echo $statutP[$statut]*100/75 ?>% - Current state : <?php echo $statutD[$statut] ?> </h3>

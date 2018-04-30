@@ -164,6 +164,7 @@ function getRandomId($conn){
 	<h2>Already <?php echo getReplayNumber($conn); ?> replays recorded !</h2>
 	<h2>For <?php echo getUserNumber($conn); ?> osu players registered</h2>
 </span>
+
 <footer>
 	osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert
 	 | Website created by <a href="https://osu.ppy.sh/u/3481725">codevirtuel</a>

@@ -21,10 +21,11 @@ Easy to use website. Just upload your .osr, wait for processing and share it to 
 * Profile for players to edit theirs replays 
 * Page to compare two replays (with graphs and stats)
 * Use mirror for beatmaps not available on the osu website
+* Add option to upload the replay on another youtube channel
 
 ## Authors
 
-* **codevirtuel** - *Creator of osu!replayViewer* - [Github](https://github.com/codevirtuel)
+* **codevirtuel** - *Creator of osu!replayViewer* - [osu!profile](https://osu.ppy.sh/users/3481725) - [Github](https://github.com/codevirtuel)
 
 ## License
 

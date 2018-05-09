@@ -65,6 +65,11 @@ function getRandomId($conn){
 <html>
 
 <head>
+  <meta content="osu!replayViewer - osu replays sharing" property="og:title">
+  <meta content="Send your osu replay file and share with everyone easily" property="og:description">
+  <meta content="osu!replayViewer" property="og:site_name">
+  <meta content='images/icon.png' property='og:image'>
+
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113523918-1"></script>
 	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>

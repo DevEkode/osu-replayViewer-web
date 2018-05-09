@@ -1,3 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta content="osu!replayViewer - osu replays sharing" property="og:title">
+  <meta content="Send your osu replay file and share with everyone easily" property="og:description">
+  <meta content="osu!replayViewer" property="og:site_name">
+  <meta content='images/icon.png' property='og:image'>
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113523918-1"></script>
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-3999116091404317",
+		enable_page_level_ads: true
+	  });
+	</script>
+
+	<title>osu!replayViewer - A online osu replay viewer</title>
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="icon" type="image/png" href="images/icon.png" />
+</head>
+
 <?php
 session_start();
 // ******************** Variables **********************************
@@ -59,31 +83,6 @@ function getRandomId($conn){
 	return $id;
 }
 ?>
-
-
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta content="osu!replayViewer - osu replays sharing" property="og:title">
-  <meta content="Send your osu replay file and share with everyone easily" property="og:description">
-  <meta content="osu!replayViewer" property="og:site_name">
-  <meta content='images/icon.png' property='og:image'>
-
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113523918-1"></script>
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<script>
-	  (adsbygoogle = window.adsbygoogle || []).push({
-		google_ad_client: "ca-pub-3999116091404317",
-		enable_page_level_ads: true
-	  });
-	</script>
-
-	<title>osu!replayViewer - A online osu replay viewer</title>
-	<link rel="stylesheet" type="text/css" href="css/index.css">
-	<link rel="icon" type="image/png" href="images/icon.png" />
-</head>
 
 <body>
 

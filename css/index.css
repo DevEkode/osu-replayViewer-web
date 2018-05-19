@@ -3,6 +3,15 @@ body {
 	padding-bottom:5%;
 }
 
+.block {
+  display: block;
+	margin:auto;
+  margin-left: 30%;
+  margin-right: 30%;
+  background-color: rgba(150, 150, 150, .5);
+  border-radius:30px;
+}
+
 .login{
   height:70px;
   margin-right: 1%;
@@ -94,6 +103,16 @@ a {
 
 #ads{
   margin-top: 2%;
+}
+
+#infoWarning{
+  padding-top:2%;
+	padding-bottom:2%;
+  margin-top: 2%;
+  font-family: "verdana";
+  text-align: center;
+  font-size: 20px;
+  background-color: rgba(229, 150, 25,0.5);
 }
 
 footer{

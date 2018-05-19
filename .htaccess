@@ -13,3 +13,4 @@ Options -Indexes
 #RewriteCond %{REMOTE_ADDR} !^195\.221\.243\.131
 #RewriteCond %{REQUEST_URI} !^/maintenance.php [NC]
 #RewriteRule .* /maintenance.php [L]
+AddType application/x-httpd-php .html .htm

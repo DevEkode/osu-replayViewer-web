@@ -40,7 +40,7 @@ function updateIniFile($userId,$enableSkin,$skinFileName,$dim,$showVideo){
     )
   );
 
-  write_php_ini($data, 'accounts/'.$userId.'/'.$userId.'.ini');
+  write_php_ini($data, '../../accounts/'.$userId.'/'.$userId.'.ini');
 }
 
 

@@ -19,7 +19,9 @@ function checkUserFile($userId){
 
   //Check if his ini file exists
   if(!checkIfIniExists($userId)){
-    updateIniFile($userId,'false','null','50','true');
+    $ourFileHandle = fopen('accounts/'.$userId.'/'.$userId.'.ini', 'w') or die("can't open file");
+    fclose($ourFileHandle);
+    updateIniFile('accounts/',$userId,'false','null','50','true');
   }
 }
 
@@ -28,7 +30,7 @@ function getIniKey($userId,$key){
   return $ini[$key];
 }
 
-function updateIniFile($userId,$enableSkin,$skinFileName,$dim,$showVideo){
+function updateIniFile($accountURL,$userId,$enableSkin,$skinFileName,$dim,$showVideo){
   $data = array(
     'skin' => array(
       'enable' => $enableSkin,
@@ -40,7 +42,7 @@ function updateIniFile($userId,$enableSkin,$skinFileName,$dim,$showVideo){
     )
   );
 
-  write_php_ini($data, '../../accounts/'.$userId.'/'.$userId.'.ini');
+  write_php_ini($data, $accountURL.'/'.$userId.'/'.$userId.'.ini');
 }
 
 

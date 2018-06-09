@@ -7,7 +7,7 @@ function write_php_ini($array, $file)
         if(is_array($val))
         {
             $res[] = "[$key]";
-            foreach($val as $skey => $sval) $res[] = "$skey = ".(is_numeric($sval) ? $sval : '"'.$sval.'"');
+            foreach($val as $skey => $sval) $res[] = "$skey = ".(is_numeric($sval) ? $sval : $sval);
         }
         else $res[] = "$key = ".(is_numeric($val) ? $val : '"'.$val.'"');
     }

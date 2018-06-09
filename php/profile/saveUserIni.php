@@ -16,7 +16,7 @@ else $skin = "default";
 if(isset($_POST["dim"])) $dim = $_POST["dim"];
 else $dim = 50;
 
-updateIniFile($_SESSION["userId"],$customSkin,$skin,$dim,"true");
+updateIniFile('../../accounts/',$_SESSION["userId"],$customSkin,$skin,$dim,"true");
 
 header("Location:../../editProfile.php");
 exit();

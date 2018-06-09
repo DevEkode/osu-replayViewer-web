@@ -6,3 +6,5 @@ test2.php
 secure/recaptcha.php
 client_secret.json
 *.osr
+*.osk
+*.ini

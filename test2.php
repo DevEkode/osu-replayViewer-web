@@ -142,13 +142,13 @@ END;
 //----- Functions -----
 function insertYtId($ytId, $replayId){
 	//-- Connect to mysql request database --
-	$servername = "mysql.hostinger.fr";
-	$username = "u611457272_code";
 	require_once 'secure/mysql_pass.php';
+	$servername = $mySQLservername;
+	$username = $mySQLusername;
 	$password = $mySQLpassword;
 
 	// Create connection
-	$conn = new mysqli($servername, $username, $password, "u611457272_osu");
+	$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
 
 	//Send record
 		$sql = "UPDATE replaylist SET youtubeId='$ytId' WHERE replayId='$replayId'";

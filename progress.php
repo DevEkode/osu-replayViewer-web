@@ -13,7 +13,7 @@
 
 	// Create connection
 	global $conn;
-	$conn = new mysqli($servername, $username, $password, "u611457272_osu");
+	$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
 
 	// Check connection
 	if ($conn->connect_error) {
@@ -118,6 +118,14 @@ if(checkProcessFinished($conn,$replayId)){
 	  gtag('js', new Date());
 
 	  gtag('config', 'UA-113523918-1');
+	</script>
+	
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+	  (adsbygoogle = window.adsbygoogle || []).push({
+		google_ad_client: "ca-pub-3999116091404317",
+		enable_page_level_ads: true
+	  });
 	</script>
 
 	<title><?php echo $statutP[$statut]*100/75 ?>% - osu!replayViewer - A online osu replay viewer</title>

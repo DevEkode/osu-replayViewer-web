@@ -38,7 +38,7 @@ $password = $mySQLpassword;
 
 // ******************** Connection **********************************
 // Create connection
-$conn = new mysqli($servername, $username, $password, "u611457272_osu");
+$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
 
 // Check connection
 if ($conn->connect_error) {
@@ -100,13 +100,13 @@ function getRandomId($conn){
 	<img src="images/logo.png" />
 </div>
 
-<div class="block" id="infoWarning">
+<!-- <div class="block" id="infoWarning">
   Uploads are not available due to a web host issue. <br>
   Also some replays are stuck in processing step. <br>
   To follow the issue progress, join the discord. <br>
   <br>
   Sorry for the inconvenience
-</div>
+</div> -->
 
 <form action="upload.php" method="post" enctype="multipart/form-data" id="uploadReplay">
     <h2>Select osu replay to upload (.osr): </h2>

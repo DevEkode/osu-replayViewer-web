@@ -41,7 +41,7 @@
    <div class="g-recaptcha" data-sitekey="6LcYyk8UAAAAAHmsgHYvmnCIr3I6hIlKv7VWANSo"></div>
 
    <?php
-    $baseLink = "http://osu-replayviewer-web/";
+    $baseLink = "http://osureplayviewer.xyz/";
 
      $error_id = isset($_GET['error']) ? (int)$_GET['error'] : 0;
      if ($error_id != -1 && $error_id != 0) {

@@ -17,7 +17,7 @@ $disableUpload = false;
 
 // ******************** Connection **********************************
 // Create connection
-$conn = new mysqli($servername, $username, $password, "u611457272_osu");
+$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
 
 // Check connection
 if ($conn->connect_error) {
@@ -39,18 +39,6 @@ function getPlayerName($fileName){ //Return player name of the replay from the n
     $userLength = $array['length2'];
     $array = unpack("x/iversion/x/clength/A32md5/x/clength2/A".$userLength."user", $replay_content);
 	return $array['user'];
-}
-
-function showReplayData($fileName){
-  $myfile = fopen("./uploads/".$fileName, "r") or die("Unable to open file!");
-	$replay_content = fread($myfile,filesize("./uploads/".$fileName));
-
-  $array = unpack("x/iversion/x/clength/A32md5/x/clength2/Auser", $replay_content);
-  $userLength = $array['length2'];
-  $array = unpack("C1gamemode/iversion/x/clength/A32md5/x/clength2/A".$userLength."user/x/clength3/A32md5Replay/sx300/sx100/sx50/sGekis/sKatus/sMiss/iScore/sMaxCombo/C1perfectCombo/iMods/x/clength4", $replay_content);
-  $lifeBarLength = abs($array['length4']);
-  $array = unpack("x/iversion/x/clength/A32md5/x/clength2/A".$userLength."user/x/clength3/A32md5Replay/sx300/sx100/sx50/sGekis/sKatus/sMiss/iScore/sMaxCombo/C1perfectCombo/iMods/C1byte/clength4/A530lifebar/ltime", $replay_content);
-  var_dump($array);
 }
 
 function isDT($fileName){ //Return player name of the replay from the name of the file
@@ -229,9 +217,6 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-
-    showReplayData($file_name);
-    exit;
 
 		//----- Check if the replay is a fake replay -----
 		$md5 = getBeatmapMD5($file_name);

@@ -7,7 +7,7 @@ $servername = $mySQLservername;
 $username = $mySQLusername;
 $password = $mySQLpassword;
 
-$conn = new mysqli($servername, $username, $password, "u611457272_osu");
+$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

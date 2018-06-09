@@ -9,7 +9,7 @@ $password = $mySQLpassword;
 
 // ******************** Connection **********************************
 // Create connection
-$conn = new mysqli($servername, $username, $password, "u611457272_osu");
+$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
 
 // Check connection
 if ($conn->connect_error) {
@@ -35,7 +35,8 @@ if($result ->num_rows >0){
       header("Location:../index.php");
       exitPage();
     }else{
-      sendEmail($row['email'],$row['username'],$row['verfIdEmail']);
+      $return = sendEmail($row['email'],$row['username'],$row['verfIdEmail']);
+	  var_dump($return);
     }
   }
 }

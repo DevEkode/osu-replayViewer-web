@@ -4,3 +4,5 @@ secure/osu_api_key.php
 secure/uploadKey.php
 test2.php
 secure/recaptcha.php
+client_secret.json
+*.osr

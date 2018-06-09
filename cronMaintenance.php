@@ -19,7 +19,7 @@ $timeLimit = 30;
 
 // ******************** Connection **********************************
 // Create connection
-$conn = new mysqli($servername, $username, $password, "u611457272_osu");
+$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
 //$conn = new PDO('mysql:host=mysql.hostinger.fr;dbname=u611457272_osu','u611457272_code','123');
 
 // Check connection

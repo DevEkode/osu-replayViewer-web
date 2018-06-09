@@ -9,7 +9,7 @@
 
 		// ******************** Connection **********************************
 		// Create connection
-	    $conn = new mysqli($servername, $username, $password, "u611457272_osu");
+	    $conn = new mysqli($servername, $username, $password, $mySQLdatabase);
 
 		// Check connection
 		if ($conn->connect_error) {

@@ -1,177 +1,81 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-
 <head>
-  <meta content="osu!replayViewer - osu replays sharing" property="og:title">
-  <meta content="Send your osu replay file and share it with everyone easily" property="og:description">
-  <meta content="osu!replayViewer" property="og:site_name">
-  <meta content="https://osureplayviewer.xyz/images/icon.png" property='og:image'>
+    <title>Bienvenue sur votre espace web !</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href='//fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113523918-1"></script>
-	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-	<script>
-	  (adsbygoogle = window.adsbygoogle || []).push({
-		google_ad_client: "ca-pub-3999116091404317",
-		enable_page_level_ads: true
-	  });
-	</script>
+    <style>
+        html,body {
+            font-family: 'Abel', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FDFDFD;
+        }
 
-	<title>osu!replayViewer - A online osu replay viewer</title>
-	<link rel="stylesheet" type="text/css" href="css/index.css">
-	<link rel="icon" type="image/png" href="images/icon.png" />
+        header {
+            background: #3A3E45;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-top: 3px solid #27ADA6;
+            height: 45x;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0;
+            color: #FFF;
+            font-weight: lighter;
+        }
+        small {
+            font-size: 17px;
+        }
+
+        #main {
+            width: 800px;
+            margin: auto;
+        }
+        #main h1 {
+            text-align: center;
+            font-size: 3em;
+            color: #C4C4C4;
+        }
+
+        #left {
+            margin-top: 28px;
+            margin-left: 28px;
+            padding-right: 30px;
+            float:left;
+        }
+        #right {
+            padding-top: 13px;
+        }
+
+        p {
+            color: #444;
+        }
+    </style>
 </head>
-
-<?php
-session_start();
-// ******************** Variables **********************************
-//--Connect to osu API --
-//require_once 'secure/osu_api_key.php';
-//$apiKey = $osuApiKey;
-
-
-//-- Connect to mysql request database --
-require 'secure/mysql_pass.php';
-$servername = $mySQLservername;
-$username = $mySQLusername;
-$password = $mySQLpassword;
-
-// ******************** Connection **********************************
-// Create connection
-$conn = new mysqli($servername, $username, $password, "u611457272_osu");
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-	header("Location:index.php?error=3");
-	exit;
-}
-
-
-//**************************** Fonctions *************************
-function getReplayNumber($conn){
-	$result = $conn->query("SELECT COUNT(replayId) AS count FROM replaylist");
-
-	if($result->num_rows > 0){
-		while($row = $result->fetch_assoc()){
-			$id = $row["count"];
-		}
-	}
-	return $id;
-}
-
-function getUserNumber($conn){
-	$result = $conn->query("SELECT COUNT(userId) AS count FROM accounts");
-
-	if($result->num_rows > 0){
-		while($row = $result->fetch_assoc()){
-			$id = $row["count"];
-		}
-	}
-	return $id;
-}
-
-function getRandomId($conn){
-	$replayNbr = getReplayNumber($conn);
-	$result = $conn->query("SELECT replayId FROM replaylist ORDER BY rand()");
-
-	if($result->num_rows > 0){
-		while($row = $result->fetch_assoc()){
-			$id = $row["replayId"];
-		}
-	}
-	return $id;
-}
-?>
-
 <body>
+    <header>
+        <h1>PulseHeberg <small>node : web2.pulseheberg.net</small></h1>
+    </header>
 
-<?php
-  if(empty($_SESSION)){
-    echo '<a href = "/register.php"><img src="images/signUp.png" class="login"></a>';
-    echo '<a href="/login.php"><img src="images/login.png" class="login"></a>';
-  }else{
-    echo '<a href = "/userProfile.php"><img src="images/profile.png" class="login"></a>';
-    echo '<a href = "/logout.php"><img src="images/logOut.png" class="login"></a>';
-  }
-?>
+    <div id="main">
+        <h1>Bienvenue sur votre espace web !</h1>
 
-<div id="logo">
-	<img src="images/logo.png" />
-</div>
+        <div id="left">
+            <img src="data:image/png;base64,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"
+            alt="server" />
+        </div>
 
-<form action="upload.php" method="post" enctype="multipart/form-data" id="uploadReplay">
-    <h2>Select osu replay to upload (.osr): </h2>
-	<h4>Drag and drop or open the explorer </h4>
-    <input type="file" name="fileToUpload" id="fileToUpload"> <br>
-	<input id="checkBox" type="checkbox" name="checkbox"> do not delete my replay after 30 days<br>
-	<font color="#ff0066"><h4>Warning! After 30 days your replay will be deleted from the website if you do not check this box</h4></font>
-    <input type="submit" value="Upload Replay" name="submit">
-	<?php
-		$errors = array (
-			0 => "",
-			1 => "File is not a osu replay",
-			2 => "File has already been requested",
-			3 => "Database connection error",
-			4 => "Upload error",
-			5 => "File has already been processed",
-			6 => "Upload successful",
-			7 => "You must have an osu account to upload",
-			8 => "Only beatmaps below 5 min are allowed",
-			9 => "The ban hammer was used for this player",
-			10 => "The beatmap does not exist or was deleted from osu",
-			11 => "Uploads are disabled, please come back later",
-			12 => "This beatmap is not available to download"
-		);
-
-		$error_id = isset($_GET['error']) ? (int)$_GET['error'] : 0;
-		if ($error_id != -1) {
-			echo '<br>';
-			echo '<span style="text-align:center" class=errorText>'.$errors[$error_id].'</span>';
-		}
-		$id = isset($_GET['id']) ? $_GET['id'] : 0;
-		if ($id != 0){
-			echo'<br>';
-			echo '<a href="view.php?id='.$id.'">Click here to watch the replay</a>';
-		}
-		$pid = isset($_GET['pid']) ? $_GET['pid'] : 0;
-		if ($pid != 0){
-			echo'<br>';
-			echo '<a href="progress.php?id='.$pid.'">Click here to observe the progress of your replay</a>';
-		}
-	?>
-</form>
-
-<div align="center" id="ads">
-  <script data-cfasync="false" type="text/javascript" src="https://www.megdexchange.com/a/display.php?r=1978755"></script>
-</div>
-
-<div id=buttonBlock>
-	<!-- <a href="/view.php?id=">
-		<img src="images/rndButton.png">
-	</a> -->
-  <a href="https://discord.gg/pqvhvxx" target="_blank">
-		<img src="images/discord.png">
-	</a>
-	<a href="/search.php">
-		<img src="images/searchButton.png">
-	</a>
-	 <a href="https://github.com/codevirtuel/osu-replayViewer-web/issues" target="_blank">
-		<img src="images/reportButton.png">
-	</a>
-  <a href="https://paypal.me/codevirtuel" target="_blank">
-		<img src="images/help.png">
-	</a>
-</div>
-
-<span>
-	<h2>Already <?php echo getReplayNumber($conn); ?> replays recorded !</h2>
-	<h2>For <?php echo getUserNumber($conn); ?> osu players registered</h2>
-</span>
-
-<footer>
-	osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert
-	 | Website created by <a href="https://osu.ppy.sh/u/3481725">codevirtuel</a>
-</footer>
+        <div id="right">
+            <p>
+                Votre espace d'hébergement web est fonctionnel.<br />
+                Il ne vous reste plus qu'à envoyer vos fichiers via FTP avec les informations fournies sur votre PulsePanel.<br />
+                N'hésitez pas à contacter le support pour plus d'informations.
+            </p>
+        </div>
+    </div>
 </body>
 </html>

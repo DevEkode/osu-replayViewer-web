@@ -65,8 +65,12 @@ function getReplayBTid($conn,$replayId){
 $isLogged = false;
 $username = "unknown";
 
+if(isset($_GET['id'])){
+  $userId = $_GET['id'];
+}
+
 //Detect the user page
-if(isset($_SESSION) && isset($_GET['id'])){
+if(isset($_SESSION) && !empty($_SESSION) && isset($_GET['id'])){
   if(strcmp($_SESSION["userId"],$_GET['id']) == 0){
     $isLogged=true;
     $userId = $_SESSION["userId"];
@@ -76,7 +80,7 @@ if(isset($_SESSION) && isset($_GET['id'])){
   }
 }
 
-if(isset($_SESSION) && !isset($_GET['id'])){
+if(isset($_SESSION) && !empty($_SESSION) && !isset($_GET['id'])){
   $isLogged=true;
   $userId = $_SESSION["userId"];
 }

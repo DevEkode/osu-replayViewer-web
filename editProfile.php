@@ -21,6 +21,19 @@
     2 => "Database error"
   );
 
+  $skinUploadError = array(
+    0 => "Upload successfully finished",
+    1 => "This skin has already been uploaded",
+    2 => "Only .osz are allowed",
+    3 => "Sorry your skin could't be uploaded"
+  );
+
+  $skinRemoveError = array(
+    0 => "",
+    1 => "This skin doesn't exists",
+    2 => "Remove error"
+  );
+
   //Query user information
   checkUserFile($_SESSION["userId"]);
   $skins = listAllSkins($_SESSION["userId"]);
@@ -47,30 +60,91 @@
     <div class="block" id="replay">
       <h2> Edit replays config </h2>
 
-      <h3>- Custom skin and dim chooser -</h3>
-      <form>
+      <!-- UPLOAD SKIN -->
 
+      <div id="uploadSkinZone">
+        <h3>- Custom skin uploader -</h3>
+        <form action="php/profile/uploadSkin.php" method="post" enctype="multipart/form-data">
+          Select skin to upload (or drag and drop): <br>
+
+          <?php
+          if(isset($_GET['skinError'])){
+            echo "<span id=\"pswError\" style=\"color:red\">".$skinUploadError[$_GET['skinError']]."</span><br>";
+          }
+          ?>
+
+          <br>
+
+          <input type="file" name="fileToUpload" id="fileToUpload"> <br>
+          <input type="submit" value="Upload Skin" name="submit">
+        </form>
+      </div>
+
+      <!-- REMOVE SKIN -->
+
+      <div id="removeSkinZone">
+        <h3>- Custom skin remover -</h3>
+        <form action="php/profile/removeSkin.php" method="post" enctype="multipart/form-data">
+
+          <?php
+          if(isset($_GET['removeError'])){
+            echo "<span id=\"pswError\" style=\"color:red\">".$skinRemoveError[$_GET['removeError']]."</span><br><br>";
+          }
+          ?>
+
+          Choose your custom skin to remove : <br>
+              <?php
+              //Combobox with all skins uploaded
+              echo "<select id='skinsSelector2' name='skin'>";
+                foreach($skins as $skin)
+                {
+                  if($skin == $actualSkin){
+                    echo "<option value='".$skin."' selected>".$skin."</option>";
+                  }else{
+                    echo "<option value='".$skin."'>".$skin."</option>";
+                  }
+                }
+                echo "</select>";
+               ?>
+          <input type="submit" value="Remove this skin" name="submit">
+        </form>
+      </div>
+
+      <!-- REPLAY EDITION -->
+
+      <form action="php/profile/saveUserIni.php" method="post">
         <div id="skinZone">
-        <?php
-        //Check box to enable custom skin
-        if($customSkin == "true"){
-          echo '<input type="checkbox" name="customSkin" id="checkBox" oninput="updateCustomSkin()" checked> Enable custom skin <br>';
-        }else{
-          echo '<input type="checkbox" name="customSkin" oninput="updateCustomSkin()" id="checkBox"> Enable custom skin <br>';
-        }
+          <h3>- Custom skin and dim chooser -</h3>
 
-        ?>
-        <br>
-        Choose your custom skin : <br>
-            <?php
-            //Combobox with all skins uploaded
-            echo "<select id='skinsSelector' name='skin'>";
-              foreach($skins as $skin)
-              {
+        <?php
+          if(empty($skins)){
+            echo "<h2 style=\"color:red\"> You have to upload at least one skin to use this functionnality</h2>";
+          }else{
+            //Check box to enable custom skin
+            echo 'Enable custom skin: <br>';
+            echo '<span style="font-size:13px"> By default the osu!replayViewer skin is used</span><br>';
+            if($customSkin == "true"){
+              echo '<input type="checkbox" name="customSkin" id="checkBox" oninput="updateCustomSkin()" checked>';
+            }else{
+              echo '<input type="checkbox" name="customSkin" oninput="updateCustomSkin()" id="checkBox">';
+            }
+            echo '<br><br>';
+
+          echo "Choose your custom skin : <br>";
+
+          //Combobox with all skins uploaded
+          echo "<select id='skinsSelector' name='skin'>";
+            foreach($skins as $skin)
+            {
+              if($skin == $actualSkin){
+                echo "<option value='".$skin."' selected>".$skin."</option>";
+              }else{
                 echo "<option value='".$skin."'>".$skin."</option>";
               }
-              echo "</select>";
-             ?>
+            }
+            echo "</select>";
+          }
+        ?>
         </div>
 
         <div id="dimZone">
@@ -88,17 +162,6 @@
       </form>
 
       <br>
-
-      <div id="uploadSkinZone">
-        <h3>- Custom skin uploader -</h3>
-        <form action="php/profile/uploadSkin.php" method="post" enctype="multipart/form-data">
-          Select skin to upload (or drag and drop): <br>
-          <br>
-
-          <input type="file" name="fileToUpload" id="fileToUpload"> <br>
-          <input type="submit" value="Upload Skin" name="submit">
-        </form>
-      </div>
     </div>
 
 

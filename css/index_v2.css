@@ -75,4 +75,17 @@ i {
   font-size: 3vw;
   color: white;
   text-shadow: 3px 3px gray;
+  margin-bottom: 3%;
+}
+
+#etapes{
+  text-align:center;
+}
+
+#etapes img{
+  border-radius:200px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: white;
+  width:20vw;
 }

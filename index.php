@@ -108,6 +108,13 @@ function getRandomId($conn){
   Sorry for the inconvenience
 </div> -->
 
+<!-- <div class="block" id="infoWarning">
+  The main (and only) developer of osu!replayViewer is on vacation. <br>
+  If the service goes down, expect more recovery time. <br>
+  <br>
+  Try to talk to discord members if you have problems :).
+</div> -->
+
 <form action="upload.php" method="post" enctype="multipart/form-data" id="uploadReplay">
     <h2>Select osu replay to upload (.osr): </h2>
 	<h4>Drag and drop or open the explorer </h4>
@@ -125,7 +132,7 @@ function getRandomId($conn){
 			5 => "File has already been processed",
 			6 => "Upload successful",
 			7 => "You must have an osu account to upload",
-			8 => "Only beatmaps below 5 min are allowed",
+			8 => "Only beatmaps below 10 min are allowed",
 			9 => "The ban hammer was used for this player",
 			10 => "The beatmap does not exist or was deleted from osu",
 			11 => "Uploads are disabled, please come back later",

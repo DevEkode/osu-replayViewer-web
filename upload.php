@@ -290,16 +290,16 @@ if ($uploadOk == 0) {
     }
 
 		$replayDuration = $beatmapJson[0]["total_length"];
-		//Check if the replay is user 5min
-		if($replayDuration > 300){
-			header("Location:index.php?error=8");
-			closeUpload($conn);
-		}
 
 		//Divide the time by 33% when DT mods is activated
 		if(isDT($file_name)){
-
 			$replayDuration = $replayDuration - ($replayDuration * (33/100));
+		}
+		
+		//Check if the replay is 10min max
+		if($replayDuration > 600){
+			header("Location:index.php?error=8");
+			closeUpload($conn);
 		}
 
 		//Encode to Base64 to avoid sql syntax error

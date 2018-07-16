@@ -5,6 +5,7 @@ secure/uploadKey.php
 test2.php
 secure/recaptcha.php
 client_secret.json
+client/
 *.osr
 *.osk
 *.ini

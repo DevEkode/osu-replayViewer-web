@@ -23,3 +23,10 @@ Options -Indexes
  mod_gzip_item_exclude mime ^image/.*
  mod_gzip_item_include handler ^cgi-script$
  </ifModule>
+ 
+#RewriteEngine On
+#RewriteBase /
+#RewriteCond %{REMOTE_ADDR} !^176\.167\.22\.175
+#RewriteCond %{REQUEST_URI} !^/maintenance\.php$
+#RewriteCond %{REQUEST_FILENAME} !\.(gif|png|jpg|jpeg|jfif|bmp|css|js)$ [NC]
+#RewriteRule ^(.*)$ http://osureplayviewer.xyz/maintenance.php [R=307,L]

@@ -39,8 +39,10 @@
 		$modsName = array("NF","EZ","HD","HR","SD","DT","RL","HT","NC","FL","AT","SO","AP","PF","4K","5K","6K","7K","8K","FI","RD","CM","9K","COOP","1K","3K","2K");
 		$string = "";
 		if($bin != 0){
-			$string = "Mods : ";
-		}
+			$string = "";
+		}else{
+      $string = "None";
+    }
 
 		for($i=0;$i<count($modsArray)-1;$i++){
 			$result = $modsArray[$i] & $bin;
@@ -62,4 +64,27 @@
       return false;
     }
   }
+
+  function getReplayContent($filedir){
+  	$myfile = fopen($filedir, "r") or die("Unable to open file!");
+  	$replay_content = fread($myfile,filesize($filedir));
+
+  	$array = unpack("C1gamemode/iversion/x/clength/A32md5/x/clength2/Auser", $replay_content);
+      $userLength = $array['length2'];
+      $array = unpack("C1gamemode/iversion/x/clength/A32md5/x/clength2/A".$userLength."user/x/clength3/A32md5Replay/sx300/sx100/sx50/sGekis/sKatus/sMiss/iScore/sMaxCombo/C1perfectCombo/iMods", $replay_content);
+
+  	return $array;
+  }
+
+  function isDT($binary){ //Return player name of the replay from the name of the file
+  	$filter = 0b0000000000000000000001000000;
+  	$result = $binary & $filter;
+
+  	if($result != 0){
+  		return true;
+  	}else{
+  		return false;
+  	}
+  }
+
  ?>

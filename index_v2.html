@@ -75,7 +75,7 @@
 
       <!-- Modal content -->
       <div class="modal-content">
-        <h2 class="align_center">- Replay infos -</h2>
+        <h2 class="modal_title">Informations about your replay</h2>
 
         <div id="replay_box">
           <div>
@@ -91,20 +91,47 @@
           </div>
         </div>
 
+        <h2 class="modal_title" >Checklist : </h2>
         <div id="check_list">
-          <h2 class="align_center">Checklist : </h2>
+          <div class="modal_item" id="replayS">
+            <img src="images/index/modal1.png"/>
+            <span class="modal_caption">Replay structure</span>
+          </div>
 
-          <img src="images/ok.png"> <span>Beatmap exists</span> </img> <br>
-          <img src="images/ok.png"> <span>Player has an account on osu! website</span> </img> <br>
-          <img src="images/ok.png"> <span>Replay duration is under 10 min</span> </img> <br>
-          <img src="images/ok.png"> <span>Replay does not already exists in database</span> </img> <br>
-          <img src="images/ok.png"> <span>Replay is not already in queue</span> </img>
+          <div class="modal_item" id="beatmapA">
+            <img src="images/index/modal2.png"/>
+            <span class="modal_caption">Beatmap availability</span>
+          </div>
+
+          <div class="modal_item" id="playerA">
+            <img src="images/index/modal3.png"/>
+            <span class="modal_caption">Player osu account</span>
+          </div>
+
+          <div class="modal_item" id="replayD">
+            <img src="images/index/modal4.png"/>
+            <span class="modal_caption">Replay duration</span>
+          </div>
+
+          <div class="modal_item" id="replayDup">
+            <img src="images/index/modal5.png"/>
+            <span class="modal_caption">Replay is not a duplicate</span>
+          </div>
+
+          <div class="modal_item" id="replayW">
+            <img src="images/index/modal6.png"/>
+            <span class="modal_caption">Replay is not in <br>waiting list</span>
+          </div>
+
         </div>
 
         <div id="replay_start">
-          <form>
-            <input id="checkBox" type="checkbox" name="checkbox"> do not delete my replay after 30 days<br>
+          <form class="align_center">
+            <input id="checkBox" type="checkbox" name="checkbox"> <span> do not delete my replay after 30 days</span><br>
+            <input type="submit" value="Start processing">
           </form>
+
+          <button onclick="closeModal()">Cancel</button>
         </div>
       </div>
 

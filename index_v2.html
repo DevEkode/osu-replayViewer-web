@@ -9,6 +9,7 @@
     <title>osu!replayViewer - A online osu replay viewer</title>
     <link rel="stylesheet" type="text/css" href="css/index_v2.css">
     <link rel="icon" type="image/png" href="images/icon.png" />
+    <script type="text/javascript" src="js/index/upload.js"></script>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
@@ -23,7 +24,7 @@
           <i class="material-icons">question_answer</i> FAQ</a>
       </div>
 
-      <a href="#news" id="logo">
+      <a href="#" id="logo">
         <img src="images/icon.png" />
       </a>
 
@@ -41,10 +42,74 @@
     <h2 id="slogan"> Share your osu! performance to everyone !</h2>
 
     <div id="etapes">
-      <img src="images/etape1.png"/>
-      <img src="images/etape2.png"/>
-      <img src="images/etape3.png"/>
+      <div class="item">
+        <img src="images/etape1.png"/>
+        <span class="caption">1. Upload your replay</span>
+      </div>
+
+      <div class="item">
+        <img src="images/etape2.png"/>
+        <span class="caption">2. Wait processing time</span>
+      </div>
+
+      <div class="item">
+        <img src="images/etape3.png"/>
+        <span class="caption">3. Share it !</span>
+      </div>
     </div>
+
+    <form action="#upload_title" class="align_center">
+      <input type="submit" value="Begin !" class="button" />
+    </form>
+
+    <!-- Upload -->
+    <h2 id="upload_title">Select your osu replay to upload (.osr)</h2>
+    <h2 id="upload_subtitle">Drag and drop or open the explorer</h2>
+
+    <form action="upload.php" method="post" enctype="multipart/form-data" id="upload_box" class="align_center">
+        <input type="file" name="fileToUpload" id="fileToUpload" oninput="onChange()">
+    </form>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <h2 class="align_center">- Replay infos -</h2>
+
+        <div id="replay_box">
+          <div>
+            <img src="images/preview.jpg"/>
+          </div>
+
+          <div id="replay_text">
+            <span id="beatmap">Beatmap : </span> <br>
+            <span id="diff">Difficulty : </span>
+            <span id="player">Player : </span>
+            <span id="mods">Mods : </span>
+            <span id="time">Duration : </span>
+          </div>
+        </div>
+
+        <div id="check_list">
+          <h2 class="align_center">Checklist : </h2>
+
+          <img src="images/ok.png"> <span>Beatmap exists</span> </img> <br>
+          <img src="images/ok.png"> <span>Player has an account on osu! website</span> </img> <br>
+          <img src="images/ok.png"> <span>Replay duration is under 10 min</span> </img> <br>
+          <img src="images/ok.png"> <span>Replay does not already exists in database</span> </img> <br>
+          <img src="images/ok.png"> <span>Replay is not already in queue</span> </img>
+        </div>
+
+        <div id="replay_start">
+          <form>
+            <input id="checkBox" type="checkbox" name="checkbox"> do not delete my replay after 30 days<br>
+          </form>
+        </div>
+      </div>
+
+    </div>
+
     <br>
     <br>
     <br>

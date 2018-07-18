@@ -5,7 +5,7 @@
 
 body {
   background-image: url("../images/background.png");
-	padding-bottom:5%;
+	/*padding-bottom:5%;*/
   padding-top: 20vh;
   font-family: "Verdana";
 }
@@ -129,6 +129,10 @@ i {
 }
 
 /*Upload*/
+#upload_section{
+  margin-bottom: 10%;
+}
+
 #upload_title{
   text-align:center;
   font-size: 2vw;
@@ -154,6 +158,10 @@ i {
   padding-top: 6%;
   padding-bottom:6%;
   text-align: center;
+}
+
+#upload_box{
+  margin-bottom: 5%;
 }
 
 /* Modal */
@@ -277,10 +285,6 @@ i {
   font-style: oblique;
 }
 
-#replay_start{
-
-}
-
 input[type="submit"]{
   margin-top: 1%;
   background-color: #FF66AA;
@@ -328,4 +332,46 @@ input[type="submit"]:disabled{
   text-shadow: 3px 3px #FFB2D4;
   margin-bottom: 3%;
   font-size: 2vw;
+}
+
+/* FOOTER */
+footer{
+  background-image: url("../images/background2.png");
+  border-top: solid #FF66AA 10px;
+  padding-bottom: 3%;
+}
+
+footer h3{
+  margin-top: 2%;
+  color: lightgray;
+}
+
+footer img{
+  height: 15vh;
+}
+
+footer a{
+   text-decoration: none;
+}
+
+footer a:hover{
+  opacity: 0.6;
+}
+
+.footer_img{
+  text-align: center;
+}
+
+#created{
+  color: lightgray;
+  text-align: right;
+  font-size: 90%;
+  margin-right: 2%;
+}
+
+#created img{
+ vertical-align:middle;
+ height: 15%;
+ border-radius: 100%;
+ border: solid white 2px;
 }

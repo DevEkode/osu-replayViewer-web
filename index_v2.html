@@ -9,10 +9,11 @@ session_start();
     <meta content="osu!replayViewer - osu replays sharing" property="og:title">
     <meta content="Send your osu replay file and share with everyone easily" property="og:description">
     <meta content="osu!replayViewer" property="og:site_name">
-    <meta content='images/icon.png' property='og:image'>
+    <meta content="http://osureplayviewer.xyz/images/icon.png" property='og:image'>
 
     <title>osu!replayViewer - A online osu replay viewer</title>
     <link rel="stylesheet" type="text/css" href="css/index_v2.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <link rel="icon" type="image/png" href="images/icon.png" />
     <script type="text/javascript" src="js/index/upload.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -42,30 +43,32 @@ session_start();
           </div>
 
           <div id="replay_text">
-            <span id="beatmap">Beatmap :
+            <span id="beatmap"><span class="info_text">Beatmap :</span>
               <?php
                 echo $_SESSION['beatmapName'];
               ?>
             </span>
 
-            <span id="diff">Difficulty :
+            <span id="diff"><span class="info_text">Difficulty :</span>
               <?php
                 echo $_SESSION['difficulty'];
               ?>
             </span>
-            <span id="player">Player :
+            <span id="player"><span class="info_text">Player :</span>
               <?php
                 echo $_SESSION['playername'];
               ?>
             </span>
-            <span id="mods">Mods :
+            <span id="mods"><span class="info_text">Mods :</span>
               <?php
                 echo $_SESSION['mods'];
               ?>
             </span>
-            <span id="time">Duration :
+            <span id="time"><span class="info_text">Duration :</span>
               <?php
-                echo $_SESSION['duration'].' s';
+              $mins = floor($_SESSION['duration'] / 60 % 60);
+              $secs = floor($_SESSION['duration'] % 60);
+                echo $mins.'min '.$secs;
               ?>
             </span>
           </div>
@@ -84,7 +87,13 @@ session_start();
           </div>
 
           <div class="modal_item" >
-            <img src="images/index/modal3.png" id="playerA"/>
+            <?php
+            if($_SESSION['replay_playerId'] != null){
+              echo "<img src='"."https://a.ppy.sh/".$_SESSION['replay_playerId']."' id=\"playerA\"/>";
+            }else{
+              echo '<img src="images/index/modal3.png" id="playerA"/>';
+            }
+            ?>
             <span class="modal_caption">The player has an <br>osu account</span>
           </div>
 
@@ -147,7 +156,7 @@ session_start();
     <!-- Top navigation bar -->
     <div class="top-nav">
       <div class="floatleft">
-        <a href="#news" class="nav-link">
+        <a href="search.php" class="nav-link">
           <i class="material-icons">search</i> Search</a>
         <a href="#news" class="nav-link">
           <i class="material-icons">question_answer</i> FAQ</a>

@@ -79,12 +79,34 @@
 		</script>
 
 		<link rel="stylesheet" type="text/css" href="css/search.css">
+		<link rel="stylesheet" type="text/css" href="css/navbar.css">
 		<meta charset="utf-8" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 
 	<body>
+		<!-- Top navigation bar -->
+    <div class="top-nav">
+      <div class="floatleft">
+        <a href="search.php" class="nav-link active">
+          <i class="material-icons">search</i> Search</a>
+        <a href="#news" class="nav-link">
+          <i class="material-icons">question_answer</i> FAQ</a>
+      </div>
+
+      <a href="#" id="logo">
+        <img src="images/icon.png" />
+      </a>
+
+      <div class="floatright">
+        <a href="#news" class="nav-link">
+          <i class="material-icons">how_to_reg</i> Register</a>
+        <a href="#news" class="nav-link">
+          <i class="material-icons">vpn_key</i> Login</a>
+      </div>
+    </div>
 
 		<section id="form">
 			Enter the osu player name or id :
@@ -289,10 +311,6 @@
 
 		end:
 		?>
-
-		<div align="center" id="ads">
-		  <script data-cfasync="false" type="text/javascript" src="https://www.megdexchange.com/a/display.php?r=1978755"></script>
-		</div>
 
 		<footer>
 			osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert

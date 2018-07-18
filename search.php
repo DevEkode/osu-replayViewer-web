@@ -80,7 +80,7 @@
           <i class="material-icons">question_answer</i> FAQ</a>
       </div>
 
-      <a href="#" id="logo">
+      <a href="index.html" id="logo">
         <img src="images/icon.png" />
       </a>
 
@@ -236,6 +236,9 @@
         </a>
         <a href="https://github.com/codevirtuel/osu-replayViewer-web" target="_blank">
           <img src="images/index/github_logo.png"/>
+        </a>
+				<a href="https://paypal.me/codevirtuel" target="_blank">
+          <img src="images/index/paypal_me.png"/>
         </a>
       </div>
 

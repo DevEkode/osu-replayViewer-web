@@ -14,6 +14,7 @@ unset($_SESSION['difficulty']);
 unset($_SESSION['playername']);
 unset($_SESSION['duration']);
 unset($_SESSION['mods']);
+unset($_SESSION['replay_playerId']);
 
 function clear(){
   unset($_SESSION['file_name']);
@@ -29,5 +30,6 @@ function clear(){
   unset($_SESSION['playername']);
   unset($_SESSION['duration']);
   unset($_SESSION['mods']);
+  unset($_SESSION['replay_playerId']);
 }
  ?>

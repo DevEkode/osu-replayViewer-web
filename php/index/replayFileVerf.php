@@ -94,8 +94,10 @@ $_SESSION['beatmapSetId'] = $beatmapJSON[0]['beatmapset_id'];
 $_SESSION['difficulty'] = $beatmapJSON[0]['version'];
 if(isset($userJSON)){
   $_SESSION['playername'] = $userJSON[0]['username'];
+  $_SESSION['replay_playerId'] = $userJSON[0]['user_id'];
 }else{
   $_SESSION['playername'] = 'unknown';
+  $_SESSION['replay_playerId'] = null;
 }
 
 if(isset($replayDuration)){

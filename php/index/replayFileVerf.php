@@ -107,7 +107,7 @@ if(isset($replayDuration)){
 if(isset($replay_content)){
   $_SESSION['mods'] = drawMods($replay_content['Mods']);
 }else{
-  $_SESSION['mods'] = 'None';
+  $_SESSION['mods'] = 'none';
 }
 
 

@@ -41,7 +41,7 @@
 		if($bin != 0){
 			$string = "";
 		}else{
-      $string = "None";
+      $string = "none";
     }
 
 		for($i=0;$i<count($modsArray)-1;$i++){
@@ -51,7 +51,11 @@
 			}
 		}
 
-		return substr($string, 0, -1);
+    if(strcmp($string,'none') == 0){
+      return $string;
+    }else{
+      return substr($string, 0, -1);
+    }
 	}
 
   //Check if a beatmap is still downloable

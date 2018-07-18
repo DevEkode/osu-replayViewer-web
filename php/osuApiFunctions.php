@@ -87,4 +87,25 @@
   	}
   }
 
+  function generateBtFileNamewAPI($beatmapId,$api){
+  	//Setid Artist - Title
+    $json = getBeatmapJSON($beatmapId,$api);
+  	$beatmapSetId = $json[0]["beatmapset_id"];
+  	$artist = $json[0]["artist"];
+  	$title = $json[0]["title"];
+  	$BFN = $beatmapSetId." ".$artist." - ".$title.".osz";
+
+  	return $BFN;
+  }
+
+  function generateBtFileNamewJSON($beatmapJSON){
+  	//Setid Artist - Title
+  	$beatmapSetId = $beatmapJSON[0]["beatmapset_id"];
+  	$artist = $beatmapJSON[0]["artist"];
+  	$title = $beatmapJSON[0]["title"];
+  	$BFN = $beatmapSetId." ".$artist." - ".$title.".osz";
+
+  	return $BFN;
+  }
+
  ?>

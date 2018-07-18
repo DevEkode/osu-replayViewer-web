@@ -1,0 +1,44 @@
+/* FOOTER */
+footer{
+  background-image: url("../images/background2.png");
+  border-top: solid #FF66AA 10px;
+  padding-bottom: 2%;
+   bottom:0;
+  width:100%;
+}
+
+footer h3{
+  margin-top: 2%;
+  color: lightgray;
+}
+
+footer img{
+  height: 15vh;
+}
+
+footer a{
+   text-decoration: none;
+}
+
+footer a:hover{
+  opacity: 0.6;
+}
+
+.footer_img{
+  margin-top: 2%;
+  text-align: center;
+}
+
+#created{
+  color: lightgray;
+  text-align: right;
+  font-size: 90%;
+  margin-right: 2%;
+}
+
+#created img{
+ vertical-align:middle;
+ height: 100px;
+ border-radius: 100%;
+ border: solid white 2px;
+}

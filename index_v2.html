@@ -2,7 +2,7 @@
 session_start();
 
 ?>
-
+<!DOCTYPE html>
 <html>
   <head>
     <!-- Discord metadata -->
@@ -17,6 +17,8 @@ session_start();
     <script type="text/javascript" src="js/index/upload.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Cookie bar -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
   </head>
 
   <body>
@@ -78,17 +80,17 @@ session_start();
 
           <div class="modal_item" >
             <img src="images/index/modal2.png" id="beatmapA"/>
-            <span class="modal_caption">Beatmap availability</span>
+            <span class="modal_caption">Beatmap is available</span>
           </div>
 
           <div class="modal_item" >
             <img src="images/index/modal3.png" id="playerA"/>
-            <span class="modal_caption">Player osu account</span>
+            <span class="modal_caption">The player has an <br>osu account</span>
           </div>
 
           <div class="modal_item" >
             <img src="images/index/modal4.png" id="replayD"/>
-            <span class="modal_caption">Replay duration</span>
+            <span class="modal_caption">Replay is under 10min</span>
           </div>
 
           <div class="modal_item" >
@@ -200,7 +202,7 @@ session_start();
     </form>
 
     <footer>
-      <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert<h3>
+      <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
       <div class="footer_img">
         <a href="https://discord.gg/pqvhvxx" title="join us on discord!" target="_blank">
           <img src="images/index/discord_logo.png"/>
@@ -217,7 +219,6 @@ session_start();
         <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank"><img src="images/codevirtuel.jpg"/></a></span>
       </div>
     </footer>
-
   </body>
 
 </html>

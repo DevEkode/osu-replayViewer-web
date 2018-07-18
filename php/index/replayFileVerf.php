@@ -90,6 +90,7 @@ $_SESSION['replayBelow10'] = $replayBelow10;
 $_SESSION['replayNotDuplicate'] = $replayNotDuplicate;
 $_SESSION['replayNotWaiting'] = $replayNotWaiting;
 $_SESSION['beatmapName'] = $beatmapJSON[0]['title'];
+$_SESSION['beatmapSetId'] = $beatmapJSON[0]['beatmapset_id'];
 $_SESSION['difficulty'] = $beatmapJSON[0]['version'];
 if(isset($userJSON)){
   $_SESSION['playername'] = $userJSON[0]['username'];

@@ -27,3 +27,13 @@ function disableProcessing(){
   document.getElementById("start_processing").disabled = true;
   document.getElementById("checkBox").disabled = true;
 }
+
+function clearSession(){
+  $.ajax({
+     url: '../../php/index/clearSession.php',
+     dataType: 'json',
+     success: function(data){
+          //data returned from php
+     }
+  });
+}

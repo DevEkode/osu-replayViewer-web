@@ -1,130 +1,45 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    background-image: url("../images/background.png");
-	padding-bottom:5%;
+  background-image: url("../images/background.png");
+  padding-top: 20vh;
+  font-family: "Verdana";
 }
 
-.block {
-  display: block;
-	margin:auto;
-  margin-left: 10%;
-  margin-right: 10%;
-  background-color: rgba(150, 150, 150, .5);
-  border-radius:50px;
+/* Video */
+#title{
+  text-align: center;
+  color:#FF66AA;
+   text-shadow: 3px 3px white;
+   margin-bottom: 3%;
 }
 
-#profileBlock {
-  margin-left: 20%;
-  margin-right: 20%;
-  margin-top: 2%;
-  padding: 1% 1% 1% 3%;
-  color:black;
-  font-family: "verdana";
+.align_center{
   text-align: center;
 }
 
-#profileBlock img{
-  border-radius:200px;
-  border-style: solid;
-  border-color: white;
+.video{
+  width: 64.5vw;
+  height:75vh;
+  margin-left: 1%;
+  display:inline-block;
+  float: left;
 }
 
-#profileBlock:hover{
-  background-color: rgba(150, 150, 150, .7);
+.right_content{
+  background-color: rgba(150, 150, 150, .5);
+  border-radius: 50px;
+  text-align: center;
+  display: inline-block;
+  height:73vh;
+  width:31vw;
+  margin-left: 1%;
+  padding-top: 2vh;
 }
 
-span{
-	display:block;
-	font-family:"Verdana";
-	font-size:20px;
-	text-align:center;
-	margin:auto;
-	margin-bottom:2%;
-  margin-top:2%;
-  font-size: 200%;
-  color: black;
-  text-shadow: 2px 2px 0px rgba(150, 150, 150, 1);
-}
-
-iframe{
-	display:block;
-	margin:auto;
-	width:90%;
-	border:5px;
-	border-color:gray;
-	border-style: solid;
-}
-
-video{
-	display:block;
-	margin:auto;
-	width:90%;
-	border:5px;
-	border-color:gray;
-	border-style: solid;
-}
-
-section{
-	display:block;
-	font-family:"Verdana";
-	text-align:center;
-	margin:auto;
-	margin-left:20%;
-	margin-right:20%;
-	margin-top:20px;
-	padding:1% 1% 1% 1%;
-	background-color: rgba(150, 150, 150, .5);
-	border-radius:50px;
-}
-
-#buttonBlock{
-	width:50%;
-	height:10%;
-	background-color: rgba(150, 150, 150, .5);
-	border-radius:50px;
-	margin:auto;
-	margin-top:2%;
-	margin-bottom:2%;
-	text-align:center;
-}
-
-#buttonBlock img{
-	display: block;
-	height:150px;
-	margin:2% 2% 1% 1%;
-	display:inline-block;
-}
-
-#modsBlock{
-	width:50%;
-	height:10%;
-	background-color: rgba(150, 150, 150, .5);
-	border-radius:50px;
-	margin:auto;
-	margin-top:1%;
-	margin-bottom:2%;
-	text-align:center;
-}
-
-#modsBlock img{
-	display: block;
-	height:100px;
-	margin:2% 2% 1% 1%;
-	display:inline-block;
-}
-
-
-footer{
-	font-family: "Verdana";
-	position:fixed;
-	height:3%;
-	width:100%;
-	text-align:center;
-	margin-left:-1%;
-	padding-right:1%;
-	padding-top:1%;
-	padding-bottom:1%;
-    bottom: 0;
-	background-color: rgba(150, 150, 150, .5);
-	overflow:hidden;
-	font-size:110%;
+.right_content span{
+  font-size: 110%;
 }

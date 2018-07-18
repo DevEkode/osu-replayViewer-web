@@ -113,6 +113,6 @@ if(isset($replay_content)){
 }
 
 
-header("Location:../../index_v2.html");
+header("Location:../../index.html");
 
 ?>

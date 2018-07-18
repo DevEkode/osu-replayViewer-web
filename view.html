@@ -1,0 +1,98 @@
+<?php
+  require 'php/view/functions.php';
+  $replayDATA = getReplayArray($_GET['id']);
+?>
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <!-- Discord metadata -->
+    <meta content="osu!replayViewer - osu replays sharing" property="og:title">
+    <meta content="Share your osu! performance to everyone !" property="og:description">
+    <meta content="osu!replayViewer" property="og:site_name">
+    <meta content="http://osureplayviewer.xyz/images/icon.png" property='og:image'>
+
+    <title>osu!replayViewer - View replay</title>
+    <link rel="icon" type="image/png" href="images/icon.png" />
+
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/view.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Cookie bar -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
+  </head>
+
+  <body>
+    <!-- navigation bar -->
+    <div class="top-nav">
+      <div class="floatleft">
+        <a href="search.php" class="nav-link">
+          <i class="material-icons">search</i> Search</a>
+        <a href="#news" class="nav-link">
+          <i class="material-icons">question_answer</i> FAQ</a>
+      </div>
+
+      <a href="#" id="logo">
+        <img src="images/icon.png" />
+      </a>
+
+      <div class="floatright">
+        <a href="#news" class="nav-link">
+          <i class="material-icons">how_to_reg</i> Register</a>
+        <a href="#news" class="nav-link">
+          <i class="material-icons">vpn_key</i> Login</a>
+      </div>
+    </div>
+
+    <!-- Video -->
+    <h1 id="title"><?php
+      $BFN = base64_decode($replayDATA['BFN']);
+      $BFN = str_replace(".osz",'', $BFN);
+      $BFN = str_replace($replayDATA['beatmapSetId'],'', $BFN);
+      echo $BFN;
+    ?></h1>
+
+    <div class="first_block">
+      <iframe class="video" src=<?php echo '"'.generateYoutubeLink($replayDATA['youtubeId']).'"'?> frameborder="1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+      <!-- Right content block -->
+      <div class="right_content">
+        <img src=<?php echo '"'.'https://b.ppy.sh/thumb/'.$replayDATA['beatmapSetId']."l.jpg".'"'; ?> />
+        <br>
+        <span>Played by :</span>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+      <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
+      <div class="footer_img">
+        <a href="https://discord.gg/pqvhvxx" title="join us on discord!" target="_blank">
+          <img src="images/index/discord_logo.png"/>
+        </a>
+        <a href="https://osu.ppy.sh/community/forums/topics/697883" target="_blank">
+          <img src="images/index/osu forums.png"/>
+        </a>
+        <a href="https://github.com/codevirtuel/osu-replayViewer-web" target="_blank">
+          <img src="images/index/github_logo.png"/>
+        </a>
+        <a href="https://paypal.me/codevirtuel" target="_blank">
+          <img src="images/index/paypal_me.png"/>
+        </a>
+      </div>
+
+      <div id="created">
+        <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank"><img src="images/codevirtuel.jpg"/></a></span>
+      </div>
+    </footer>
+  </body>
+
+</html>

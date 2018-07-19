@@ -40,7 +40,7 @@ function drawReplay($replayId,$beatmapName,$beatmapSetId,$artist,$diff,$gamemode
   }
 
   $url = "https://b.ppy.sh/thumb/$beatmapSetId"."l.jpg";
-  $replayUrl = "view.php?id=$replayId";
+  $replayUrl = "view.html?id=$replayId";
 
   echo "<a class='content' href=$replayUrl>";
   echo 	'<div id="anim">';

@@ -102,11 +102,36 @@ $userReplayList = getReplayInfo($conn,$userId);
   <head>
     <title>osu!replayViewer - <?php echo $username; ?> profile</title>
     <link rel="stylesheet" type="text/css" href="css/userProfile.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Cookie bar -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
     <link rel="icon" type="image/png" href="images/icon.png" />
   </head>
 
   <body>
-    <a href="index.php"><img src="images/home.png" class="back"></a>
+    <!-- Top navigation bar -->
+    <div class="top-nav">
+      <div class="floatleft">
+        <a href="search.php" class="nav-link">
+          <i class="material-icons">search</i> Search</a>
+        <a href="#news" class="nav-link">
+          <i class="material-icons">question_answer</i> FAQ</a>
+      </div>
+
+      <a href="index.html" id="logo">
+        <img src="images/icon.png" />
+      </a>
+
+      <div class="floatright">
+        <a href="#news" class="nav-link">
+          <i class="material-icons">how_to_reg</i> Register</a>
+        <a href="#news" class="nav-link">
+          <i class="material-icons">vpn_key</i> Login</a>
+      </div>
+    </div>
+
     <block id="header" class="block">
       <img src=<?php echo $profileImg; ?> id="userImage">
       <div id="headerContent">
@@ -138,6 +163,33 @@ $userReplayList = getReplayInfo($conn,$userId);
       echo '</block>';
     }
     ?>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <footer>
+      <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
+      <div class="footer_img">
+        <a href="https://discord.gg/pqvhvxx" title="join us on discord!" target="_blank">
+          <img src="images/index/discord_logo.png"/>
+        </a>
+        <a href="https://osu.ppy.sh/community/forums/topics/697883" target="_blank">
+          <img src="images/index/osu forums.png"/>
+        </a>
+        <a href="https://github.com/codevirtuel/osu-replayViewer-web" target="_blank">
+          <img src="images/index/github_logo.png"/>
+        </a>
+        <a href="https://paypal.me/codevirtuel" target="_blank">
+          <img src="images/index/paypal_me.png"/>
+        </a>
+      </div>
+
+      <div id="created">
+        <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank"><img src="images/codevirtuel.jpg"/></a></span>
+      </div>
+    </footer>
   </body>
 
 

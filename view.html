@@ -1,6 +1,10 @@
 <?php
   require 'php/view/functions.php';
+  require 'php/osuApiFunctions.php';
+  require 'secure/osu_api_key.php';
+
   $replayDATA = getReplayArray($_GET['id']);
+  $userJSON = getUserJSON($replayDATA['userId'],$osuApiKey);
 ?>
 
 <!DOCTYPE html>
@@ -59,18 +63,33 @@
 
       <!-- Right content block -->
       <div class="right_content">
-        <img src=<?php echo '"'.'https://b.ppy.sh/thumb/'.$replayDATA['beatmapSetId']."l.jpg".'"'; ?> />
+        <span id="beatmapName"><?php
+          $BFN = base64_decode($replayDATA['BFN']);
+          $BFN = str_replace(".osz",'', $BFN);
+          $BFN = str_replace($replayDATA['beatmapSetId'],'', $BFN);
+          echo $BFN;
+        ?></span>
+        <img id="beatmap_image" src=<?php echo '"'.'https://b.ppy.sh/thumb/'.$replayDATA['beatmapSetId']."l.jpg".'"'; ?> />
         <br>
-        <span>Played by :</span>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
+        <span id="played">Played by : <?php echo $userJSON[0]['username']; ?></span>
+
+        <?php generateAccountBlock($replayDATA['userId']); ?>
+
+        <div id="download_section">
+          <a href="#"><img src="images/view/video_source.png"/></a>
+          <a href="#"><img src="images/view/download_replay.png"/></a>
+          <a href="#"><img src="images/view/download_skin.png"/></a>
+        </div>
       </div>
     </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <!-- Footer -->
     <footer>
       <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>

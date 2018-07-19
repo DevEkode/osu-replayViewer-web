@@ -4,6 +4,7 @@
 }
 
 body {
+  margin:0;
   background-image: url("../images/background.png");
   padding-top: 20vh;
   font-family: "Verdana";
@@ -35,7 +36,7 @@ body {
   text-align: center;
 }
 
-.video{
+.videoYt{
   width: 64.5vw;
   height:75vh;
   margin-left: 1%;

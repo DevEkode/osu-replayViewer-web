@@ -51,7 +51,7 @@ function userHasAaccount($userId){
   $query->close();
 }
 
-function generateAccountBlock($userId){
+function generateAccountBlock($userId,$username){
   $profileImg = generateUserImageLink($userId);
   $profileURL = "https://osu.ppy.sh/u/".$userId;
   $replayProfileURL = "userProfile.php?id=".$userId;
@@ -63,7 +63,25 @@ function generateAccountBlock($userId){
   if(userHasAaccount($userId)){
     echo "<a href=$replayProfileURL class=\"account_image\"><img src=\"images/icon.png\"></a>";
   }
+  echo '</div>';
+}
 
+function drawMod($bin){
+  $modsArray = array(1,2,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576,2097152,4194304,16777216,33554432,67108864,134217728,268435456);
+  $modsImage = array("NoFail","Easy","Hidden","HardRock","SuddenDeath","DoubleTime","Relax","HalfTime","Nightcore","Flashlight","Autoplay","SpunOut","Autopilot","Perfect","Key4","Key5","Key6","Key7","Key8","FadeIn","Random","Cinema","Key9","Coop","Key1","Key3","Key2");
+
+  echo '<div id=modsBlock>';
+  for($i=0;$i<count($modsArray)-1;$i++){
+    $result = $modsArray[$i] & $bin;
+    if($result != 0){
+      $link = "images/mods/".$modsImage[$i].".png";
+      echo "<img src=$link>";
+    }
+  }
+
+  if($bin == 0){
+    echo '<img src="images/mods/None.png">';
+  }
   echo '</div>';
 }
 

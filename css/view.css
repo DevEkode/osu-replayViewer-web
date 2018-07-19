@@ -32,14 +32,71 @@ body {
 .right_content{
   background-color: rgba(150, 150, 150, .5);
   border-radius: 50px;
-  text-align: center;
-  display: inline-block;
+  align-items: center;
+  display:inline-flex;
+  flex-direction: column;
   height:73vh;
   width:31vw;
   margin-left: 1%;
   padding-top: 2vh;
 }
 
-.right_content span{
-  font-size: 110%;
+#beatmap_image{
+  height:30%;
+  border: 3px solid #555;
+}
+
+#played{
+  font-size: 120%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+}
+
+#beatmapName{
+  font-size: 130%;
+  margin-bottom: 2%;
+  color: #FF66AA;
+}
+
+/* accounts */
+#account_block{
+  text-align: center;
+  width: 100%;
+  margin-bottom: 2%;
+}
+
+#profile_image{
+  height: 20vh;
+  border-radius: 500px;
+  vertical-align: middle;
+  border: 5px solid white;
+  margin-right: 2%;
+}
+
+.account_image{
+  border-radius: 100px;
+  margin-right: 2%;
+}
+
+.account_image:hover{
+  opacity: 0.6;
+}
+
+.account_image img{
+  border-radius: 100px;
+  height: 10vh;
+  vertical-align: middle;
+}
+
+/* Source - replay and skin */
+#download_section{
+  background-color: lightgray;
+  border-radius: 10px;
+}
+
+#download_section a:hover{
+  opacity: 0.6;
+}
+#download_section img{
+  height: 13vh;
 }

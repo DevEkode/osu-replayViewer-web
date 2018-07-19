@@ -31,6 +31,42 @@ function generateYoutubeLink($youtubeId){
   return $URL;
 }
 
+function generateUserImageLink($userId){
+  $userImgURL = "https://a.ppy.sh/".$userId;
+  return $userImgURL;
+}
+
+function userHasAaccount($userId){
+  global $conn;
+
+  $query = $conn->prepare("SELECT * FROM accounts WHERE userId=?");
+  $query->bind_param("i",$userId);
+  $query->execute();
+  $result = $query->get_result();
+  if($result->num_rows > 0){
+    return true;
+  }else{
+    return false;
+  }
+  $query->close();
+}
+
+function generateAccountBlock($userId){
+  $profileImg = generateUserImageLink($userId);
+  $profileURL = "https://osu.ppy.sh/u/".$userId;
+  $replayProfileURL = "userProfile.php?id=".$userId;
+
+  echo '<div id="account_block">';
+  echo "  <img id=\"profile_image\" src=$profileImg />";
+  echo "<a href=$profileURL class=\"account_image\"><img src=\"images/osu_logo.png\"></a>";
+
+  if(userHasAaccount($userId)){
+    echo "<a href=$replayProfileURL class=\"account_image\"><img src=\"images/icon.png\"></a>";
+  }
+
+  echo '</div>';
+}
+
 
 
  ?>

@@ -128,7 +128,7 @@ input[type="submit"]{
 	margin-right: 3%;
 	overflow: hidden;
 	float: left;
-	height:100px;
+	height:15vh;
 	border-radius:50px;
 }
 

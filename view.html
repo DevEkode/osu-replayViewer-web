@@ -4,7 +4,27 @@
   require 'secure/osu_api_key.php';
 
   $replayDATA = getReplayArray($_GET['id']);
+
+  //Check if the replay exist
+  if(empty($replayDATA)){
+    header("Location:index.html");
+  }
+
   $userJSON = getUserJSON($replayDATA['userId'],$osuApiKey);
+
+  $urlRaw = "/replayList/".$_GET['id']."/".$_GET['id'].".mp4";
+  if(file_exists($urlRaw)){
+    $showRaw = true;
+  }else{
+    $showRaw = false;
+  }
+
+  $osrUrl = "/replayList/".$_GET['id']."/".rawurlencode($replayDATA['OFN']);
+  if(file_exists($osrUrl)){
+    $showOsr = true;
+  }else{
+    $showOsr = false;
+  }
 ?>
 
 <!DOCTYPE html>
@@ -57,28 +77,42 @@
       $BFN = str_replace($replayDATA['beatmapSetId'],'', $BFN);
       echo $BFN;
     ?></h1>
+    <h1 id="subtitle"><?php echo $userJSON[0]['username']; ?></h1>
 
     <div class="first_block">
-      <iframe class="video" src=<?php echo '"'.generateYoutubeLink($replayDATA['youtubeId']).'"'?> frameborder="1" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+      <?php
+        if(empty($replayDATA['youtubeId'])){
+          echo '<video class="video" poster="" controls>';
+    			echo "<source src=$urlRaw  type='video/mp4'>";
+    			echo '</video>';
+        }else{
+          echo "<iframe class=\"video\" src=".generateYoutubeLink($replayDATA['youtubeId'])." frameborder=\"1\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
+        }
+      ?>
       <!-- Right content block -->
       <div class="right_content">
-        <span id="beatmapName"><?php
-          $BFN = base64_decode($replayDATA['BFN']);
-          $BFN = str_replace(".osz",'', $BFN);
-          $BFN = str_replace($replayDATA['beatmapSetId'],'', $BFN);
-          echo $BFN;
-        ?></span>
-        <img id="beatmap_image" src=<?php echo '"'.'https://b.ppy.sh/thumb/'.$replayDATA['beatmapSetId']."l.jpg".'"'; ?> />
+        <span id="section_title">Visit <?php echo $userJSON[0]['username']; ?> profiles</span>
+        <!-- <img id="beatmap_image" src=<?php echo '"'.'https://b.ppy.sh/thumb/'.$replayDATA['beatmapSetId']."l.jpg".'"'; ?> /> -->
         <br>
-        <span id="played">Played by : <?php echo $userJSON[0]['username']; ?></span>
 
-        <?php generateAccountBlock($replayDATA['userId']); ?>
+        <?php generateAccountBlock($replayDATA['userId'],$userJSON[0]['username']); ?>
 
+        <span id="section_title">Mods</span>
+        <?php drawMod($replayDATA['binaryMods']);   ?>
+
+        <span id="section_title">Downloads</span>
         <div id="download_section">
-          <a href="#"><img src="images/view/video_source.png"/></a>
-          <a href="#"><img src="images/view/download_replay.png"/></a>
-          <a href="#"><img src="images/view/download_skin.png"/></a>
+          <?php
+            if($showRaw){
+              echo "<a href=$urlRaw><img src=\"images/view/video_source.png\"/></a>";
+            }
+
+            if($showOsr){
+              echo "<a href=$osrUrl><img src=\"images/view/download_replay.png\"/></a>";
+            }
+          ?>
+          <!-- <a href="#"><img src="images/view/download_skin.png"/> -->
         </div>
       </div>
     </div>

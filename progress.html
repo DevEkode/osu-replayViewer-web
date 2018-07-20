@@ -1,0 +1,105 @@
+<?php
+  include 'php/progress/functions.php';
+?>
+
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>osu!replayViewer - </title>
+
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/progress.css">
+    <link rel="stylesheet" type="text/css" href="css/loader.css">
+    <link rel="icon" type="image/png" href="images/icon.png" />
+    <script type="text/javascript" src="js/index/upload.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script src="js/loader.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Cookie bar -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
+  </head>
+
+  <body>
+    <div class="loader"></div>
+    <!-- Top navigation bar -->
+    <div class="top-nav">
+      <div class="floatleft">
+        <a href="search.php" class="nav-link">
+          <i class="material-icons">search</i> Search</a>
+        <a href="#news" class="nav-link">
+          <i class="material-icons">question_answer</i> FAQ</a>
+      </div>
+
+      <a href="index.html" id="logo">
+        <img src="images/icon.png" />
+      </a>
+
+      <div class="floatright">
+        <a href="#news" class="nav-link">
+          <i class="material-icons">how_to_reg</i> Register</a>
+        <a href="#news" class="nav-link">
+          <i class="material-icons">vpn_key</i> Login</a>
+      </div>
+    </div>
+
+    <!-- Real content -->
+    <h1 id="title">View progress page</h1>
+
+    <div id="beatmap_section">
+      <img src="images/preview.jpg" id="beatmapImg"/>
+      <div id="text_section">
+        <h2>This is a beatmap name</h2>
+        <span>Player :</span>
+        <span>Mods :</span>
+      </div>
+    </div>
+
+    <div id="progressBar_section">
+      <div id="underline"></div>
+      <div id="line"></div>
+      <span>100%</span>
+    </div>
+
+    <div id="list_section">
+      <h3>State list</h3>
+      <div><img src="images/progress/green.png"> <span>Waiting his turn<span><br></div>
+      <div><img src="images/progress/orange.png"> <span>Setting up recorder<span><br></div>
+      <div><img src="images/progress/red.png"> <span>Recording<span><br></div>
+      <div><img src="images/progress/red.png"> <span>Encoding<span><br></div>
+      <div><img src="images/progress/red.png"> <span>Uploading to the website<span><br></div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- Footer -->
+    <footer>
+      <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
+      <div class="footer_img">
+        <a href="https://discord.gg/pqvhvxx" title="join us on discord!" target="_blank">
+          <img src="images/index/discord_logo.png"/>
+        </a>
+        <a href="https://osu.ppy.sh/community/forums/topics/697883" target="_blank">
+          <img src="images/index/osu forums.png"/>
+        </a>
+        <a href="https://github.com/codevirtuel/osu-replayViewer-web" target="_blank">
+          <img src="images/index/github_logo.png"/>
+        </a>
+        <a href="https://paypal.me/codevirtuel" target="_blank">
+          <img src="images/index/paypal_me.png"/>
+        </a>
+      </div>
+
+      <div id="created">
+        <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank"><img src="images/codevirtuel.jpg"/></a></span>
+      </div>
+    </footer>
+  </body>
+
+
+</html>

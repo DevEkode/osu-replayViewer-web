@@ -30,12 +30,34 @@ body {
   background-color: lightgray;
 }
 
+#span_timer{
+  margin-top: 1%;
+  margin-bottom: 1%;
+  text-decoration: underline;
+}
+
+#timer{
+  font-size: 1.2vw;
+}
+
+#duration{
+  font-size: 1.3vw;
+}
+
 #beatmapImg{
   height:100%;
   float: left;
+  border-radius: 50px;
+}
+
+#playerImg{
+  height:100%;
+  float: right;
+  border-radius: 50px;
 }
 
 #text_section{
+  padding-right: 5%;
   align-items: center;
   display:flex;
   flex-direction: column;

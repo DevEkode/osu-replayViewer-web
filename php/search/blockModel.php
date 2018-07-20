@@ -13,10 +13,10 @@ function drawProfile($userId,$username){
   echo'</a>';
 }
 
-function drawRequest($replayId,$beatmapName){
+function drawRequest($replayId,$beatmapName,$beatmapSetId){
   $beatmapName = str_replace(".osz", "", $beatmapName);
   $url = "https://b.ppy.sh/thumb/$beatmapSetId"."l.jpg";
-  $replayUrl = "progress.php?id=$replayId";
+  $replayUrl = "progress.html?id=$replayId";
   echo "<a class='requestContent' href=$replayUrl>";
   echo 	'<div id="anim">';
   echo 		"<img src=$url>";

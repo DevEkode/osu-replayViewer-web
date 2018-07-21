@@ -48,15 +48,15 @@
     $query->bind_param("si",$newPasswordHash,$_SESSION["userId"]);
     if($query->execute()){
       $query->close();
-      header("Location:../../editProfile.php?pswError=0");
+      header("Location:../../editProfile.php?pswError=0#password");
       closeConn();
     }else{
-      header("Location:../../editProfile.php?pswError=2");
+      header("Location:../../editProfile.php?pswError=2#password");
       closeConn();
     }
 
   }else{
-    header("Location:../../editProfile.php?pswError=1");
+    header("Location:../../editProfile.php?pswError=1#password");
     closeConn();
   }
  ?>

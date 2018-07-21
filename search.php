@@ -1,5 +1,5 @@
-﻿<!DOCTYPE html>
 <?php
+	session_start();
 	ini_set('display_errors', 0);
 	include 'php/osuApiFunctions.php';
 	include 'php/search/blockModel.php';
@@ -56,7 +56,7 @@
 ?>
 
 <!-- ********************** HTML ********************************** -->
-
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>osu!replayViewer - Search page</title>
@@ -88,12 +88,24 @@
         <img src="images/icon.png" />
       </a>
 
-      <div class="floatright">
-        <a href="#news" class="nav-link">
-          <i class="material-icons">how_to_reg</i> Register</a>
-        <a href="#news" class="nav-link">
-          <i class="material-icons">vpn_key</i> Login</a>
-      </div>
+			<?php
+        if(isset($_SESSION['userId']) && isset($_SESSION['username'])){
+          $userUrl = "userProfile.php?id=".$_SESSION['userId'];
+          echo '<div class="floatright">';
+          echo  "<a href=$userUrl class=\"nav-link\">";
+          echo    '<i class="material-icons">how_to_reg</i> Profile</a>';
+          echo  '<a href="logout.php" class="nav-link">';
+          echo    '<i class="material-icons">vpn_key</i> Logout</a>';
+          echo '</div>';
+        }else{
+          echo '<div class="floatright">';
+          echo  '<a href="register.php" class="nav-link">';
+          echo    '<i class="material-icons">how_to_reg</i> Register</a>';
+          echo  '<a href="login.php" class="nav-link">';
+          echo    '<i class="material-icons">vpn_key</i> Login</a>';
+          echo '</div>';
+        }
+      ?>
     </div>
 
 		<h1 id="title">Search page</h1>

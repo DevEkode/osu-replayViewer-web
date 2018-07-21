@@ -5,7 +5,9 @@
   header('Refresh: 30');
 
   $replayDATA = getRequestArray($_GET['id']);
-
+  if(empty($replayDATA)){
+    header("Location:index.html");
+  }
 
   //Get beatmap name
   $beatmapName = base64_decode($replayDATA['BFN']);

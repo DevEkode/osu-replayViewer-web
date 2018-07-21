@@ -16,7 +16,7 @@ $conn = new mysqli($servername, $username, $password, $mySQLdatabase);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-	header("Location:index.php?error=3");
+	header("Location:index.html?error=3");
 	exit;
 }
 //Variables
@@ -84,7 +84,7 @@ function exitPage(){
 
         }else{
           //verification id is NOK
-          header("Location:index.php");
+          header("Location:index.html");
           exitPage();
         }
       }
@@ -99,17 +99,59 @@ function exitPage(){
 <html>
   <head>
     <title>osu!replayViewer - Reset password</title>
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/loader.css">
     <link rel="icon" type="image/png" href="images/icon.png" />
+    <script type="text/javascript" src="js/index/upload.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script src="js/loader.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Cookie bar -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
     <link rel="stylesheet" type="text/css" href="css/forgotPassword.css">
   </head>
 
   <body>
-  <a href="login.php"><img src="images/back.png" class="back"></a>
+  <div class="loader"></div>
+  <!-- Top navigation bar -->
+  <div class="top-nav">
+    <div class="floatleft">
+      <a href="search.php" class="nav-link">
+        <i class="material-icons">search</i> Search</a>
+      <a href="#news" class="nav-link">
+        <i class="material-icons">question_answer</i> FAQ</a>
+    </div>
 
-  <h1>Forgot password</h1>
+    <a href="index.html" id="logo">
+      <img src="images/icon.png" />
+    </a>
+
+    <?php
+      if(isset($_SESSION['userId']) && isset($_SESSION['username'])){
+        $userUrl = "userProfile.php?id=".$_SESSION['userId'];
+        echo '<div class="floatright">';
+        echo  "<a href=$userUrl class=\"nav-link\">";
+        echo    '<i class="material-icons">how_to_reg</i> Profile</a>';
+        echo  '<a href="logout.php" class="nav-link">';
+        echo    '<i class="material-icons">vpn_key</i> Logout</a>';
+        echo '</div>';
+      }else{
+        echo '<div class="floatright">';
+        echo  '<a href="register.php" class="nav-link">';
+        echo    '<i class="material-icons">how_to_reg</i> Register</a>';
+        echo  '<a href="login.php" class="nav-link">';
+        echo    '<i class="material-icons">vpn_key</i> Login</a>';
+        echo '</div>';
+      }
+    ?>
+  </div>
+
+  <h1 id="title"> Forgot password </h1>
 
   <div class="block" id="block">
-  <h2>Enter your account email to recover your password</h2>
+  <h2>Enter your email account to recover your password</h2>
   <form method="post">
     <input type="email" name="email">
     <input type="submit"><br>
@@ -128,5 +170,27 @@ function exitPage(){
      ?>
   </form>
   </div>
+
+  <footer>
+    <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
+    <div class="footer_img">
+      <a href="https://discord.gg/pqvhvxx" title="join us on discord!" target="_blank">
+        <img src="images/index/discord_logo.png"/>
+      </a>
+      <a href="https://osu.ppy.sh/community/forums/topics/697883" target="_blank">
+        <img src="images/index/osu forums.png"/>
+      </a>
+      <a href="https://github.com/codevirtuel/osu-replayViewer-web" target="_blank">
+        <img src="images/index/github_logo.png"/>
+      </a>
+      <a href="https://paypal.me/codevirtuel" target="_blank">
+        <img src="images/index/paypal_me.png"/>
+      </a>
+    </div>
+
+    <div id="created">
+      <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank"><img src="images/codevirtuel.jpg"/></a></span>
+    </div>
+  </footer>
 </body>
 </html>

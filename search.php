@@ -173,6 +173,9 @@
 				while($row = $result->fetch_assoc()){
 					$beatmapName = base64_decode($row['BFN']);
 					$beatmapName = str_replace(".osz", "", $beatmapName);
+					$tab = explode(" ",$beatmapName);
+					unset($tab[0]);
+					$beatmapName = implode(" ",$tab);
 					drawRequest($row['replayId'],$beatmapName,$row['beatmapSetId']);
 				}
 

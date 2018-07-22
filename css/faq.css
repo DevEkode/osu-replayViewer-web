@@ -5,11 +5,44 @@
 
 body {
   background-image: url("../images/background.png");
-	/*padding-bottom:5%;*/
   padding-top: 20vh;
   font-family: "Verdana";
 }
 
 .align_center{
   text-align: center;
+}
+
+#title{
+  text-align:center;
+  color:#FF66AA;
+  text-shadow: 3px 3px white;
+  margin-bottom: 3%;
+}
+
+/*text*/
+.question{
+  margin-left: 4%;
+  margin-bottom: 2%;
+}
+
+.question_title{
+  margin-bottom: 2%;
+  color:#FF66AA;
+  text-shadow: 1px 1px gray;
+  font-size: 1.5vw;
+}
+
+.question_text{
+  text-align: justify;
+  font-size: 1vw;
+}
+
+.mail{
+  text-align: center;
+  background-color: lightgray;
+  padding:2%;
+  margin-left: 20%;
+  margin-right: 20%;
+  border-radius: 100px;;
 }

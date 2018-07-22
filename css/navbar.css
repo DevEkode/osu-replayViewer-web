@@ -8,7 +8,7 @@
   display:flex;
   overflow:visible;
   height:10vh;
-  width:100vw;
+  width:100%;
   justify-content: center;
   align-items:center;
   background-color: #FF66AA;
@@ -17,6 +17,9 @@
 
 .nav-link{
   padding: 14px 16px;
+  display:inline-block;
+  width:9vw;
+  text-align: center;
   color: white;
   text-decoration: none;
   font-size: 3vh;

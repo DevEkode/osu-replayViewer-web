@@ -21,8 +21,8 @@ function drawRequest($replayId,$beatmapName,$beatmapSetId){
   echo 	'<div id="anim">';
   echo 		"<img src=$url>";
   echo 	'</div>';
-  echo	"<h3>$beatmapName</h3>";
-  echo 	"<h4>Currently in processing queue</h4>";
+  echo	"<h3 id=\"beatmap_name\">$beatmapName</h3>";
+  echo 	"<h4 id=\"block_content\">Currently in processing queue</h4>";
   echo	"<span></span>";
   echo "</a>";
 }

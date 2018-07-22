@@ -168,7 +168,7 @@ if(isFormSubmitted()){
       <div class="floatleft">
         <a href="search.php" class="nav-link">
           <i class="material-icons">search</i> Search</a>
-        <a href="#news" class="nav-link">
+        <a href="faq.html" class="nav-link">
           <i class="material-icons">question_answer</i> FAQ</a>
       </div>
 

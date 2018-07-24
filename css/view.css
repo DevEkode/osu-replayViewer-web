@@ -28,8 +28,9 @@ body {
 #section_title{
   font-size: 130%;
   margin-bottom: 2%;
-  color: #FF66AA;
-  text-shadow: 1px 1px gray;
+  color: black;
+  text-shadow: 1px 1px white;
+  font-size: 1.5vw;
 }
 
 .align_center{
@@ -37,8 +38,8 @@ body {
 }
 
 .videoYt{
-  width: 64.5vw;
-  height:75vh;
+  width: 64vw;
+  height:70vh;
   margin-left: 1%;
   display:inline-block;
   float: left;
@@ -50,7 +51,7 @@ body {
   align-items: center;
   display:inline-flex;
   flex-direction: column;
-  height:78vh;
+  height:68vh;
   width:31vw;
   margin-left: 1%;
   padding-top: 2vh;
@@ -110,12 +111,15 @@ body {
   margin-bottom: 2%;
   padding-top: 1%;
   text-align: center;
+  width:25vw;
 }
 
 /* Source - replay and skin */
 #download_section{
   background-color: lightgray;
   border-radius: 10px;
+  width: 25vw;
+  text-align: center;
 }
 
 #download_section a:hover{
@@ -123,4 +127,8 @@ body {
 }
 #download_section img{
   height: 13vh;
+}
+
+.disabled{
+  opacity: 0.5;
 }

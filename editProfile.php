@@ -72,7 +72,7 @@
           <i class="material-icons">question_answer</i> FAQ</a>
       </div>
 
-      <a href="#" id="logo">
+      <a href="index.html" id="logo">
         <img src="images/icon.png" />
       </a>
 

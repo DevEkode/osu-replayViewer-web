@@ -1,5 +1,6 @@
 <?php
 session_start();
+require 'secure/uploadKey.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -123,6 +124,7 @@ session_start();
             <input id="checkBox" type="checkbox" name="checkbox"> <span> do not delete my replay after 30 days</span><br>
             <input id="filename" name="filename" type="hidden" value=<?php echo '"'.$_SESSION['filename'].'"' ?>>
             <input id="duration" name="duration" type="hidden" value=<?php echo '"'.$_SESSION['duration'].'"' ?>>
+            <input id="duration" name="keyHash" type="hidden" value=<?php echo '"'.password_hash($upload_replay_key,PASSWORD_DEFAULT).'"' ?>>
             <input type="submit" value="Start processing" id="start_processing" onclick="clearSession()">
           </form>
 

@@ -127,10 +127,14 @@
           <?php
             if($showRaw){
               echo "<a href=$urlRaw><img src=\"images/view/video_source.png\"/></a>";
+            }else{
+              echo "<img src=\"images/view/video_source.png\" class=\"disabled\"/>";
             }
 
             if($showOsr){
               echo "<a href=$osrUrl><img src=\"images/view/download_replay.png\"/></a>";
+            }else{
+              echo "<img src=\"images/view/download_replay.png\" class=\"disabled\"/>";
             }
           ?>
           <!-- <a href="#"><img src="images/view/download_skin.png"/> -->

@@ -6,7 +6,7 @@
 
   $replayDATA = getRequestArray($_GET['id']);
   if(empty($replayDATA)){
-    header("Location:index.html");
+    header("Location:view.html?id=".$_GET['id']);
   }
 
   //Get beatmap name

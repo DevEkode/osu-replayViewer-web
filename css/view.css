@@ -132,3 +132,29 @@ body {
 .disabled{
   opacity: 0.5;
 }
+
+/* Second block */
+.second_block{
+  background-color: lightgray;
+  border-radius: 10px;
+
+  margin-top: 2%;
+  margin-left: 1%;
+  width: 64vw;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#share_section {
+  display: inline-block;
+}
+#share_section a:hover{
+  opacity: 0.5;
+}
+
+#share_section img{
+  height: 10vh;
+  border-radius: 20%;
+}

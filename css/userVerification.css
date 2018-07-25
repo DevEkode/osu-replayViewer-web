@@ -1,8 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-image: url("../images/background.png");
-	padding-bottom:5%;
-  text-align: center;
+	/*padding-bottom:5%;*/
+  padding-top: 20vh;
   font-family: "Verdana";
+  text-align: center;
 }
 
 .block{

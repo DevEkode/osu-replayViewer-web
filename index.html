@@ -1,81 +1,254 @@
-<!DOCTYPE HTML>
+<?php
+session_start();
+require 'secure/uploadKey.php';
+?>
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Bienvenue sur votre espace web !</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href='//fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+  <head>
+    <!-- Discord metadata -->
+    <meta content="osu!replayViewer - osu! replays sharing" property="og:title">
+    <meta content="Share your osu! performance to everyone !" property="og:description">
+    <meta content="osu!replayViewer" property="og:site_name">
+    <meta content="http://osureplayviewer.xyz/images/icon.png" property='og:image'>
 
-    <style>
-        html,body {
-            font-family: 'Abel', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #FDFDFD;
-        }
+    <title>osu!replayViewer - A online osu replay viewer</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/navbar.css">
+    <link rel="stylesheet" type="text/css" href="css/footer.css">
+    <link rel="stylesheet" type="text/css" href="css/loader.css">
+    <link rel="icon" type="image/png" href="images/icon.png" />
+    <script type="text/javascript" src="js/index/upload.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script src="js/loader.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- Cookie bar -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
+  </head>
 
-        header {
-            background: #3A3E45;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-top: 3px solid #27ADA6;
-            height: 45x;
-        }
+  <body>
+    <div class="loader"></div>
+    <!-- Modal -->
+    <div id="myModal" class="modal">
 
-        h1 {
-            margin: 0;
-            padding: 0;
-            color: #FFF;
-            font-weight: lighter;
-        }
-        small {
-            font-size: 17px;
-        }
+      <!-- Modal content -->
+      <div class="modal-content">
+        <h2 class="modal_title">Informations about your replay</h2>
 
-        #main {
-            width: 800px;
-            margin: auto;
-        }
-        #main h1 {
-            text-align: center;
-            font-size: 3em;
-            color: #C4C4C4;
-        }
+        <div id="replay_box">
+          <div>
+            <?php
+              if(isset($_SESSION['beatmapSetId'])){
+                $url = "https://b.ppy.sh/thumb/".$_SESSION['beatmapSetId']."l.jpg";
+                echo "<img src='".$url."'/>";
+              }else{
+                echo '<img src="images/preview.jpg"/>';
+              }
+            ?>
+          </div>
 
-        #left {
-            margin-top: 28px;
-            margin-left: 28px;
-            padding-right: 30px;
-            float:left;
-        }
-        #right {
-            padding-top: 13px;
-        }
+          <div id="replay_text">
+            <span id="beatmap"><span class="info_text">Beatmap :</span>
+              <?php
+                echo $_SESSION['beatmapName'];
+              ?>
+            </span>
 
-        p {
-            color: #444;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>PulseHeberg <small>node : web2.pulseheberg.net</small></h1>
-    </header>
-
-    <div id="main">
-        <h1>Bienvenue sur votre espace web !</h1>
-
-        <div id="left">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAGt0lEQVR4XuVbXWwUVRQ+5+5uC4mUxoCIURNbE4mUpbszUlCUKsGfIJYoxBiNiWAEEx9EedBgFCMPPoD6YkSTYkzUlyoBFf+CQiIQsXt3Nts24sNWBUKpJAotStnZnWNO3cVtOzM7f7uu2fvUdM/vd+/ce8655yJUb2Bra+vspqamuYg4l4iuCoVCc1l9Pp8fQsRTRDQ0MjIylMlkzgAAVcM0rKASoSjKzQCwGgDuBYBWAAg71JcDgAwAfAYAe6SURwDAcMjriixQADo7O6edO3fuTgDoQsRViDjblTUWxER0hog+BYC9M2fO/PrgwYNjQchlGYEAsHbt2lAmk1mPiFsBYHxZV3AMEdHW1tbW7p6enrxfPb4BUFW1i4heBYB5fo1xyX8MEZ9LJBJ7XfJNIPcMQDQaXRyJRLYDwC1+DAiA97Cu65vT6fT3XmR5AqC9vf3pUCjEzoe8KK0ATz6fz29OpVJvuJXtCoD58+c3TJ8+fScRPeZWUTXoEfHdCxcubBwYGMg61ecYgLa2tjmRSGS3EIKPtpodhmEc0XX9/v7+/mEnRjoCQFGUBQCwDwCucSK0BmhOAMBKKWVfOVvKAsAz39jY2Ps/cr7o84mLFy/eVG4l2ALA33xDQ8OBWl/2VrPMn0M2m73dbk+wBUBV1V21uuGVW9rF33ljTCQS66zoLQEoHHWvO1VUy3T5fH6T1RFpCkAhyDlUQ+e8X3zzuq4vNQuWTAFQFIWd/68jPL9OT+Y/LKVcOvmfUwAoxPZ7gtZeC/IQcfXk3GECAJzVDQ4O9v8HiY1TfH42DCODiIsR8TKnTCV0x1paWtpKs8gJAMTj8ScQ8W0PgqvBcuDkyZOrhoeH/+zo6Lg6l8vtAoAVbhUT0YZkMvnOpVOi+AcXM0ZHRwerkM+7tZnpRwBggZTyeAkzKoryJADsAIBpLoQOzZgxo6VYVLm0AmKx2H1CCF+5tQsjXJEahrFe0zSe8SkjFos9I4RgEBwPwzC6NE37hBlKAegWQlgGDI6lB0+4T0rJNUXTEY1Gl0cikf1u1BqGsUvTtPWlAIh4PH46qBqeG2PK0P4OAG1SyiErOkVR3gKAjW50co0xmUxeyYXW8RWgKAqfj9+5EVIl2oellB/azP4d4XB4PyKWTepMZNwqpTxUBICrO89WySlHagzD+FjTtDVWxB0dHU25XI7T3WsdCZxKtENKubkIwDEAuMGjoMDZiOg3ImrTNI0vSExHLBbzu2f9JKWcxwDwccIlJKeXFoE7PFkgET2QTCZ323z3KwuXJn5syUkpG/i66orm5mZH5SM/2pzyEtEHyWTyESv6JUuWXJ7NZjla9X3/cPbs2TkYi8UWCiFSTg2sJB0RndJ1va2vr+8Pm9nnTfGhIOwwDKMd4/H43Yj4RRAC/cpAxJWJROJzKzmqqq4hoh6/eor8RHQPr4B1QojuoIT6kNMtpXzcir/wqQ4AwCwfOiawcoSJqqpuIaJtQQn1KOd4OBxecPToUY75TYeiKJyid3mUb8qGiC8ECgAR/SqEeJ6IThuG8ZIQYlk5g4mIcrncinQ6/Y3N0n+UiN4rJ8vt7+MABPUJsPOGYXSmUqlf2BDOLkdGRvYg4l12hiHim4lE4ikrGk59dV3vQ8Rmtw6Wox//BILYBCc7X1TsAARugohKKf+yWfpfAQD3HAQ+ipug72NQ1/Xl6XT6WzMLrUAgIgMRl3E8brP0NxDRzsA9LwgcPwb9BkLsiK7rs+zObgsQxmNxK+ei0eh14XA47bH05Qiz8UAooFD4FSnli3ZaS0Egoh+bmpriNq0uQlXVA0R0myNPvBH9Ewozr6IovpMhu8uH0j1hdHT0IyHEy729vXzfaDpUVd1ERK9588sx16VkiAEIJB12AkI58xRF4VYbzWWdr5xYs98npMOBFUT8gFAoy3NL3CIvHrnk+bcgAgCBlsS8glCtqHRKSYyRC6DAMGEC3ILAWSki/oCIDS5n0jW5WVGUAQi8LO4UBO5DaGxsZOcXuvbGA4NpWbxSFyNOQGhvb98WCoW2ePDFC4v5xQhLqtTVmB0IqqouIiLe+KrScmd5NcYAVPJy1AyEwqrjI69aXab2l6MMQoWvx3eMjY1tHxgYON3Z2Rk+f/78+0T0oJd17IWn7PV4UWglGySIKEtEXyLijYh4vRdHPPI4a5Bg4XXfIsMg1HWTVHGJ1XWbHINQ942SDEJdt8qWnAr12yxdBKGu2+WLINT1g4nS4KNun8yUglDXj6ZKgajbZ3OlINT1w8lSIOr26axFdlZ/j6fLpKk1+Xz+b388ksZtAFCDAAAAAElFTkSuQmCC"
-            alt="server" />
+            <span id="diff"><span class="info_text">Difficulty :</span>
+              <?php
+                echo $_SESSION['difficulty'];
+              ?>
+            </span>
+            <span id="player"><span class="info_text">Player :</span>
+              <?php
+                echo $_SESSION['playername'];
+              ?>
+            </span>
+            <span id="mods"><span class="info_text">Mods :</span>
+              <?php
+                echo $_SESSION['mods'];
+              ?>
+            </span>
+            <span id="time"><span class="info_text">Duration :</span>
+              <?php
+              $mins = floor($_SESSION['duration'] / 60 % 60);
+              $secs = floor($_SESSION['duration'] % 60);
+                echo $mins.'min '.$secs;
+              ?>
+            </span>
+          </div>
         </div>
 
-        <div id="right">
-            <p>
-                Votre espace d'hébergement web est fonctionnel.<br />
-                Il ne vous reste plus qu'à envoyer vos fichiers via FTP avec les informations fournies sur votre PulsePanel.<br />
-                N'hésitez pas à contacter le support pour plus d'informations.
-            </p>
+        <h2 class="modal_title" >Checklist : </h2>
+        <div id="check_list">
+          <div class="modal_item" >
+            <img src="images/index/modal1.png" id="replayS"/>
+            <span class="modal_caption">Replay structure</span>
+          </div>
+
+          <div class="modal_item" >
+            <img src="images/index/modal2.png" id="beatmapA"/>
+            <span class="modal_caption">Beatmap is available</span>
+          </div>
+
+          <div class="modal_item" >
+            <?php
+            if($_SESSION['replay_playerId'] != null){
+              echo "<img src='"."https://a.ppy.sh/".$_SESSION['replay_playerId']."' id=\"playerA\"/>";
+            }else{
+              echo '<img src="images/index/modal3.png" id="playerA"/>';
+            }
+            ?>
+            <span class="modal_caption">The player has an <br>osu account</span>
+          </div>
+
+          <div class="modal_item" >
+            <img src="images/index/modal4.png" id="replayD"/>
+            <span class="modal_caption">Replay is under 10min</span>
+          </div>
+
+          <div class="modal_item" >
+            <img src="images/index/modal5.png" id="replayDup"/>
+            <span class="modal_caption">Replay is not a duplicate</span>
+          </div>
+
+          <div class="modal_item" >
+            <img src="images/index/modal6.png" id="replayW"/>
+            <span class="modal_caption">Replay is not in <br>waiting list</span>
+          </div>
+
         </div>
+
+        <div id="replay_start">
+          <form class="align_center" method="post" enctype="multipart/form-data" action="php/index/upload.php">
+            <input id="checkBox" type="checkbox" name="checkbox"> <span> do not delete my replay after 30 days</span><br>
+            <input id="filename" name="filename" type="hidden" value=<?php echo '"'.$_SESSION['filename'].'"' ?>>
+            <input id="duration" name="duration" type="hidden" value=<?php echo '"'.$_SESSION['duration'].'"' ?>>
+            <input id="duration" name="keyHash" type="hidden" value=<?php echo '"'.password_hash($upload_replay_key,PASSWORD_DEFAULT).'"' ?>>
+            <input type="submit" value="Start processing" id="start_processing" onclick="clearSession()">
+          </form>
+
+          <button onclick="closeModal(); clearSession();">Cancel</button>
+        </div>
+      </div>
+
     </div>
-</body>
+
+    <!-- Activate modal view when session is full -->
+    <?php
+      if(isset($_SESSION['replayStructure'])){
+        echo '<script type="text/javascript">',
+             'openModal();',
+             '</script>';
+
+        $string = '';
+        if(!$_SESSION['replayStructure']){$string .= "setItemFalse('replayS'); ";}
+        if(!$_SESSION['beatmapAvailable']){$string .= "setItemFalse('beatmapA'); ";}
+        if(!$_SESSION['playerOsuAccount']){$string .= "setItemFalse('playerA'); ";}
+        if(!$_SESSION['replayBelow10']){$string .= "setItemFalse('replayD'); ";}
+        if(!$_SESSION['replayNotDuplicate']){$string .= "setItemFalse('replayDup'); ";}
+        if(!$_SESSION['replayNotWaiting']){$string .= "setItemFalse('replayW'); ";}
+
+        echo "<script type=\"text/javascript\">".$string."</script>";
+
+        if(!$_SESSION['replayStructure'] || !$_SESSION['beatmapAvailable'] || !$_SESSION['playerOsuAccount'] || !$_SESSION['replayBelow10'] || !$_SESSION['replayNotDuplicate'] || !$_SESSION['replayNotWaiting']){
+          echo '<script type="text/javascript">',
+               'disableProcessing();',
+               '</script>';
+        }
+      }
+    ?>
+
+    <!-- Top navigation bar -->
+    <div class="top-nav">
+      <div class="floatleft">
+        <a href="search.php" class="nav-link">
+          <i class="material-icons">search</i> Search</a>
+        <a href="faq.html" class="nav-link">
+          <i class="material-icons">question_answer</i> FAQ</a>
+      </div>
+
+      <a href="#" id="logo">
+        <img src="images/icon.png" />
+      </a>
+
+      <?php
+        if(isset($_SESSION['userId']) && isset($_SESSION['username'])){
+          $userUrl = "userProfile.php?id=".$_SESSION['userId'];
+          echo '<div class="floatright">';
+          echo  "<a href=$userUrl class=\"nav-link\">";
+          echo    '<i class="material-icons">how_to_reg</i> Profile</a>';
+          echo  '<a href="logout.php" class="nav-link">';
+          echo    '<i class="material-icons">vpn_key</i> Logout</a>';
+          echo '</div>';
+        }else{
+          echo '<div class="floatright">';
+          echo  '<a href="register.php" class="nav-link">';
+          echo    '<i class="material-icons">how_to_reg</i> Register</a>';
+          echo  '<a href="login.php" class="nav-link">';
+          echo    '<i class="material-icons">vpn_key</i> Login</a>';
+          echo '</div>';
+        }
+      ?>
+    </div>
+
+    <!-- presentation -->
+    <h1 id="title"> osu!replayViewer </h1>
+
+    <h2 id="slogan"> Share your osu! performance to everyone !</h2>
+
+    <div id="etapes">
+      <div class="item">
+        <img src="images/etape1.png"/>
+        <span class="caption">1. Upload your replay</span>
+      </div>
+
+      <div class="item">
+        <img src="images/etape2.png"/>
+        <span class="caption">2. Wait processing time</span>
+      </div>
+
+      <div class="item">
+        <img src="images/etape3.png"/>
+        <span class="caption">3. Share it !</span>
+      </div>
+    </div>
+
+    <form action="#upload_section" class="align_center">
+      <input type="submit" value="Begin !" class="button" />
+    </form>
+
+    <!-- Upload -->
+    <section id="upload_section"> </section>
+
+    <h2 id="upload_title">Select your osu replay to upload (.osr)</h2>
+    <h2 id="upload_subtitle">Drag and drop or open the explorer</h2>
+
+    <form action="php/index/replayFileVerf.php" method="post" enctype="multipart/form-data" id="upload_box" class="align_center">
+        <input type="file" name="fileToUpload" id="fileToUpload" oninput="submitForm()">
+    </form>
+
+    <footer>
+      <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
+      <div class="footer_img">
+        <a href="https://discord.gg/pqvhvxx" title="join us on discord!" target="_blank">
+          <img src="images/index/discord_logo.png"/>
+        </a>
+        <a href="https://osu.ppy.sh/community/forums/topics/697883" target="_blank">
+          <img src="images/index/osu forums.png"/>
+        </a>
+        <a href="https://github.com/codevirtuel/osu-replayViewer-web" target="_blank">
+          <img src="images/index/github_logo.png"/>
+        </a>
+        <a href="https://paypal.me/codevirtuel" target="_blank">
+          <img src="images/index/paypal_me.png"/>
+        </a>
+      </div>
+
+      <div id="created">
+        <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank"><img src="images/codevirtuel.jpg"/></a></span>
+      </div>
+    </footer>
+  </body>
+
 </html>

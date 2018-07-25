@@ -1,130 +1,304 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    background-image: url("../images/background.png");
-	padding-bottom:5%;
+  background-image: url("../images/background.png");
+	/*padding-bottom:5%;*/
+  padding-top: 20vh;
+  font-family: "Verdana";
 }
 
-.block {
+i {
+  height: 3vh;
+  color: white;
+  text-align:center;
+}
+
+/* Presentation */
+#title{
+  text-align: center;
+  color:#FF66AA;
+   text-shadow: 3px 3px white;
+   margin-bottom: 3%;
+}
+
+#slogan{
+  text-align:center;
+  font-size: 3vw;
+  color: #CC5288;
+  text-shadow: 3px 3px white;
+  margin-bottom: 3%;
+}
+
+#etapes{
+  text-align:center;
+  margin-bottom: 2%;
+}
+
+.align_center{
+  text-align:center;
+}
+
+.item{
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+  width: 25vw;
+}
+
+.item img{
+  border-radius:200px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: white;
+  width:20vw;
+  margin-bottom: 1%;
+}
+
+.caption {
   display: block;
-	margin:auto;
-  margin-left: 30%;
-  margin-right: 30%;
-  background-color: rgba(150, 150, 150, .5);
-  border-radius:30px;
+  font-size: 1.5vw;
+  font-style: oblique;
 }
 
-.login{
-  height:70px;
-  margin-right: 1%;
-  position: sticky;
-  right: 0;
-  top: 0;
+.button{
+    background-color: #FF66AA;
+    border-color: white;
+    border-radius:10%;
+    color: white;
+    padding: 1% 3%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2vw;
+    margin-bottom: 5%;
 }
 
-#logo{
-	margin: auto;
+.button:hover{
+  background-color: #7F3355;
 }
 
-#logo img{
-	display: block;
-	margin:auto;
-	background-color: rgba(150, 150, 150, .5);
-	border-radius:50px;
-	padding:1% 1% 1% 1%;
+/*Upload*/
+#upload_section{
+  margin-bottom: 10%;
 }
 
-#uploadReplay{
-	display:block;
-	margin-top:2%;
-	margin-left:30%;
-	margin-right:30%;
-	padding-top:2%;
-	padding-bottom:1%;
-	text-align:center;
-	background-color: rgba(150, 150, 150, .5);
-	border-radius:50px;
-	font-family:"Verdana";
+#upload_title{
+  text-align:center;
+  font-size: 2vw;
+  color: #FF66AA;
+  text-shadow: 3px 3px white;
+  margin-bottom: 1%;
 }
 
-.errorText{
-	color:black;
-	font-family: "Verdana";
-}
-
-#buttonBlock{
-	width:50%;
-	height:10%;
-	background-color: rgba(150, 150, 150, .5);
-	border-radius:50px;
-	margin:auto;
-	margin-top:2%;
-	margin-bottom:2%;
-	text-align:center;
-}
-
-#buttonBlock img{
-	display: block;
-	height:150px;
-	margin:2% 2% 1% 1%;
-	display:inline-block;
-}
-
-#buttonBlock img:hover{
-  opacity: 0.5;
+#upload_subtitle{
+  text-align:center;
+  font-size: 1.5vw;
+  color: #FF66AA;
+  text-shadow: 3px 3px white;
+  margin-bottom: 2%;
 }
 
 #fileToUpload{
-	margin:auto;
+  margin:auto;
 	width:90%;
-	display: block;
-	padding-bottom:10%;
-	padding-top:10%;
-	border-radius:20px;
-	border-color:black;
-	border-style: dotted;
-	text-align:center;
-}
-
-span{
-	display: block;
-	text-align:center;
-	margin-bottom:2%;
-	height:15%;
-	font-family:"Verdana";
-}
-
-input[type=submit] {
-    width: 20em;  height: 3em;
-	font-family:"Verdana";
-}
-
-a {
-    color: #FF66AA;
-}
-
-#ads{
-  margin-top: 2%;
-}
-
-#infoWarning{
-  padding-top:2%;
-	padding-bottom:2%;
-  margin-top: 2%;
-  font-family: "verdana";
+  display: block;
+  border-radius:20px;
+  border: 3px dashed #555;
+  padding-top: 6%;
+  padding-bottom:6%;
   text-align: center;
-  font-size: 20px;
-  background-color: rgba(229, 150, 25,0.5);
 }
 
-footer{
-	font-family: "Verdana";
-	position:fixed;
-	width:100%;
-	text-align:center;
-	margin-left:-1%;
-	padding-right:1%;
-	padding-top:1%;
-	padding-bottom:1%;
-    bottom: 0;
-	background-color: rgba(150, 150, 150, .5);
-	font-size:110%;
+#upload_box{
+  margin-bottom: 5%;
+}
+
+/* Modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    overflow-y: auto;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    border-radius: 100px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    margin-top: 20vh;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#replay_box{
+  display: block;
+  width:90%;
+  height: auto;
+  margin:auto;
+  margin-bottom: 2%;
+  margin-top: 2%;
+}
+
+#replay_box img{
+  width: 20%;
+  margin-right: 1%;
+  float:left;
+}
+
+#replay_text{
+  border: 2px solid black;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10px;
+  grid-auto-rows: minmax(20%, auto);
+}
+
+#replay_text span{
+  font-size: 1.5vw;
+}
+
+.info_text{
+  color: #CC5288;
+  font-weight: bold;
+}
+
+
+/* grid */
+#beatmap{
+  grid-column: 1 / 3;
+  grid-row: 1;
+}
+#diff{
+  grid-column: 1;
+  grid-row: 2;
+}
+#player{
+  grid-column: 1;
+  grid-row: 3;
+}
+#mods{
+  grid-column: 1;
+  grid-row: 4;
+}
+#time{
+  grid-column: 2;
+  grid-row: 4;
+}
+
+/* replay start*/
+
+#check_list{
+  display:grid;
+  grid-template-columns:  auto auto auto;
+  grid-gap: 10px;
+  margin: auto;
+  margin-bottom: 2%;
+}
+
+.modal_item{
+  vertical-align: top;
+  display: inline-block;
+  text-align: center;
+}
+
+.modal_item img{
+  height: 20vh;
+  border-radius:200px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: lightgreen;
+  margin-bottom: 1%;
+}
+
+.modal_caption{
+  display: block;
+  font-size: 1vw;
+  font-style: oblique;
+}
+
+input[type="submit"]{
+  margin-top: 1%;
+  background-color: #FF66AA;
+  border-color: white;
+  border-radius:10%;
+  color: white;
+  padding: 1% 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2vw;
+  margin-bottom: 1%;
+}
+
+input[type="submit"]:hover:enabled{
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+input[type="submit"]:disabled{
+  opacity: 0.5;
+}
+
+#checkBox{
+  height: 25px;
+  width: 25px;
+  vertical-align: middle;
+}
+
+#replay_start span{
+  font-size: 1.5vw;
+}
+
+#replay_start button{
+  background-color: red;
+  border-color: white;
+  border-radius:10%;
+  color: white;
+  padding: 1% 3%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1vw;
+  margin-left: 5%;
+}
+
+#replay_start button:hover{
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.modal_title{
+  text-align: center;
+  color:#FF66AA;
+  text-shadow: 3px 3px #FFB2D4;
+  margin-bottom: 3%;
+  font-size: 2vw;
 }

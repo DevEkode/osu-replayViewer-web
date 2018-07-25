@@ -8,7 +8,7 @@
 
   //Check if the replay exist
   if(empty($replayDATA)){
-    header("Location:index.html");
+    header("Location:index.php");
   }
 
   $userJSON = getUserJSON($replayDATA['userId'],$osuApiKey);
@@ -33,12 +33,12 @@
   $BFN = str_replace(".osz",'', $BFN);
   $BFN = str_replace($replayDATA['beatmapSetId'],'', $BFN);
 
-  $twitterText = 'Come and see my osu! performace on '.$BFN.' - http://osureplayviewer.xyz/view.html?id='.$_GET['id'];
+  $twitterText = 'Come and see my osu! performace on '.$BFN.' - http://osureplayviewer.xyz/view.php?id='.$_GET['id'];
   $twitterURL = '"'."https://twitter.com/intent/tweet?text=".$twitterText.'"';
 
-  $facebookURL = '"'."https://www.facebook.com/plugins/share_button.php?href=".urlencode('http://osureplayviewer.xyz/view.html?id='.$_GET['id'])."&layout=button&size=large&mobile_iframe=true&width=91&height=28&appId".'"';
+  $facebookURL = '"'."https://www.facebook.com/plugins/share_button.php?href=".urlencode('http://osureplayviewer.xyz/view.php?id='.$_GET['id'])."&layout=button&size=large&mobile_iframe=true&width=91&height=28&appId".'"';
 
-  $redditURL = '"'."http://www.reddit.com/submit?url=".urlencode('http://osureplayviewer.xyz/view.html?id='.$_GET['id']).'"';
+  $redditURL = '"'."http://www.reddit.com/submit?url=".urlencode('http://osureplayviewer.xyz/view.php?id='.$_GET['id']).'"';
 ?>
 
 <!DOCTYPE html>
@@ -74,11 +74,11 @@
       <div class="floatleft">
         <a href="search.php" class="nav-link">
           <i class="material-icons">search</i> Search</a>
-        <a href="faq.html" class="nav-link">
+        <a href="faq.php" class="nav-link">
           <i class="material-icons">question_answer</i> FAQ</a>
       </div>
 
-      <a href="index.html" id="logo">
+      <a href="index.php" id="logo">
         <img src="images/icon.png" />
       </a>
 

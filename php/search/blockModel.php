@@ -16,7 +16,7 @@ function drawProfile($userId,$username){
 function drawRequest($replayId,$beatmapName,$beatmapSetId){
   $beatmapName = str_replace(".osz", "", $beatmapName);
   $url = "https://b.ppy.sh/thumb/$beatmapSetId"."l.jpg";
-  $replayUrl = "progress.html?id=$replayId";
+  $replayUrl = "progress.php?id=$replayId";
   echo "<a class='requestContent' href=$replayUrl>";
   echo 	'<div id="anim">';
   echo 		"<img src=$url>";
@@ -40,7 +40,7 @@ function drawReplay($replayId,$beatmapName,$beatmapSetId,$artist,$diff,$gamemode
   }
 
   $url = "https://b.ppy.sh/thumb/$beatmapSetId"."l.jpg";
-  $replayUrl = "view.html?id=$replayId";
+  $replayUrl = "view.php?id=$replayId";
 
   echo "<a class='content' href=$replayUrl>";
   echo 	'<div id="anim">';

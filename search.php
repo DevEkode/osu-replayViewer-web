@@ -80,11 +80,11 @@
       <div class="floatleft">
         <a href="search.php" class="nav-link active">
           <i class="material-icons">search</i> Search</a>
-        <a href="faq.html" class="nav-link">
+        <a href="faq.php" class="nav-link">
           <i class="material-icons">question_answer</i> FAQ</a>
       </div>
 
-      <a href="index.html" id="logo">
+      <a href="index.php" id="logo">
         <img src="images/icon.png" />
       </a>
 

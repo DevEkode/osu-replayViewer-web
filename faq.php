@@ -31,7 +31,7 @@
           <i class="material-icons">question_answer</i> FAQ</a>
       </div>
 
-      <a href="index.html" id="logo">
+      <a href="index.php" id="logo">
         <img src="images/icon.png" />
       </a>
 

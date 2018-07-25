@@ -25,7 +25,8 @@
     0 => "Upload successfully finished",
     1 => "This skin has already been uploaded",
     2 => "Only .osz are allowed",
-    3 => "Sorry your skin could't be uploaded"
+    3 => "Sorry your skin could't be uploaded",
+    4 => "Your skin file name cannot contain special characters"
   );
 
   $skinRemoveError = array(

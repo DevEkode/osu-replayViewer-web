@@ -49,8 +49,7 @@
     <meta content="osu!replayViewer - osu! replays sharing" property="og:title">
     <meta content=<?php echo '"'."View ".$userJSON[0]['username']." replay".'"'; ?> property="og:description">
     <meta content="osu!replayViewer" property="og:site_name">
-    <meta content="http://osureplayviewer.xyz/images/icon.png" property='og:image'>
-    <meta property="og:video" content=<?php echo '"'.$videoURL.'"'; ?>>
+    <meta content=<?php echo '"'.'https://b.ppy.sh/thumb/'.$replayDATA['beatmapSetId']."l.jpg".'"'; ?> property='og:image'>
 
     <title>osu!replayViewer - View <?php echo $userJSON[0]['username']; ?> replay</title>
     <link rel="icon" type="image/png" href="images/icon.png" />

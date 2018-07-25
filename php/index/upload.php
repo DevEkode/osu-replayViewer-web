@@ -63,7 +63,7 @@ rename('../../uploads/'.$_POST['filename'],'../../requestList/'.$replayId.'/'.$_
 
 $conn->close();
 clear();
-header("Location:../../progress.html?id=".$replayId);
+header("Location:../../progress.php?id=".$replayId);
 exit;
 
 

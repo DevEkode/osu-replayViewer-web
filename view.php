@@ -109,7 +109,7 @@
 
       <?php
         if(empty($replayDATA['youtubeId'])){
-          echo '<video class="video" poster="" controls>';
+          echo '<video class="videoYt" poster="" controls>';
     			echo "<source src=$urlRaw  type='video/mp4'>";
     			echo '</video>';
         }else{

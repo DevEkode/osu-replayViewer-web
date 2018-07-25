@@ -13,7 +13,7 @@
 
   $userJSON = getUserJSON($replayDATA['userId'],$osuApiKey);
 
-  $urlRaw = "/replayList/".$_GET['id']."/".$_GET['id'].".mp4";
+  $urlRaw = "./replayList/".$_GET['id']."/".$_GET['id'].".mp4";
   if(file_exists($urlRaw)){
     $showRaw = true;
     $videoURL = $urlRaw;
@@ -22,7 +22,7 @@
     $videoURL = "http://www.youtube.com/v/".generateYoutubeLink($replayDATA['youtubeId']);
   }
 
-  $osrUrl = "/replayList/".$_GET['id']."/".rawurlencode($replayDATA['OFN']);
+  $osrUrl = "./replayList/".$_GET['id']."/".rawurlencode(base64_decode($replayDATA['OFN']));
   if(file_exists($osrUrl)){
     $showOsr = true;
   }else{

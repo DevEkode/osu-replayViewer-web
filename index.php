@@ -224,7 +224,7 @@ require 'secure/uploadKey.php';
     <h2 id="upload_title">Select your osu replay to upload (.osr)</h2>
     <h2 id="upload_subtitle">Drag and drop or open the explorer</h2>
 
-    <form action="php/index/replayFileVerf.php" method="post" enctype="multipart/form-data" id="upload_box" class="align_center">
+    <form action="php/index/replayFileVerf.php" method="post" enctype="multipart/form-data" id="upload_box">
         <input type="file" name="fileToUpload" id="fileToUpload" oninput="submitForm()">
     </form>
 

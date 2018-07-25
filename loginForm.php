@@ -87,5 +87,5 @@ if((empty($verfUserId) && empty($verfIdEmail)) == false){
 session_start();
 $_SESSION["userId"] = $userId;
 $_SESSION["username"] = $userUsername;
-header("Location:index.php");
+header("Location:index.html");
  ?>

@@ -1,6 +1,7 @@
 <?php
 ini_set('display_errors', 1);
 include 'php/osuApiFunctions.php';
+require 'secure/uploadKey.php';
 // ******************** Variables **********************************
 //--Connect to osu API --
 require_once 'secure/osu_api_key.php';
@@ -22,7 +23,7 @@ $conn = new mysqli($servername, $username, $password, $mySQLdatabase);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-	header("Location:index.php?error=3");
+	header("Location:index.html?error=3");
 	exit;
 }
 
@@ -169,8 +170,14 @@ function fakeReplay($beatmapId,$userId,$api){
 
 
 // ******************** CORE **********************************
+//**** security key check ****
+if(!password_verify($upload_replay_key,$_POST['keyHash'])){
+  header("Location:index.html?error=13");
+  closeUpload($conn);
+}
+
 if($disableUpload){
-    header("Location:index.php?error=11");
+    header("Location:index.html?error=11");
     closeUpload($conn);
 }
 
@@ -196,7 +203,7 @@ if($_POST["checkbox"] != NULL){
     } else {
         //not a osr
         $uploadOk = 0;
-	    header("Location:index.php?error=1");
+	    header("Location:index.html?error=1");
 	    closeUpload($conn);
     }
 }*/
@@ -205,7 +212,7 @@ if($_POST["checkbox"] != NULL){
 if($imageFileType != "osr") {
     echo "Sorry, only osu replay files are allowed.";
     $uploadOk = 0;
-	header("Location:index.php?error=1");
+	header("Location:index.html?error=1");
 	closeUpload($conn);
 }
 
@@ -213,7 +220,7 @@ if($imageFileType != "osr") {
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
-	header("Location:index.php?error=4");
+	header("Location:index.html?error=4");
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -222,32 +229,32 @@ if ($uploadOk == 0) {
 		$md5 = getBeatmapMD5($file_name);
 		$json = getBeatmapJSONwMD5($md5,$apiKey);
     if(empty($json)){
-  		header("Location:index.php?error=10");
+  		header("Location:index.html?error=10");
   		closeUpload($conn);
   	}
 		$beatId = $json[0]["beatmap_id"];
 		$playerId = getPlayerId(getPlayerName($file_name),$apiKey);
 		if(fakeReplay($beatId,$playerId,$apiKey)){
-			header("Location:index.php?error=1");
+			header("Location:index.html?error=1");
 			closeUpload($conn);
 		}
 		//----- Check if the replay already exist -----
 		if(replayExist($file_name,"requestlist",$conn)){
 			//replay is in wait list
 			$replayId = getReplayId($file_name,"requestlist",$conn);
-			header("Location:index.php?error=2&pid=$replayId");
+			header("Location:index.html?error=2&pid=$replayId");
 			closeUpload($conn);
 		}
 		if(replayExist($file_name,"replaylist",$conn)){
 			//replay has been already recorded
 			$replayId = getReplayId($file_name,"replaylist",$conn);
-			header("Location:index.php?error=5&id=$replayId");
+			header("Location:index.html?error=5&id=$replayId");
 			closeUpload($conn);
 		}
 
 		//----- Check if player already exist in player database and osu database -----
 		if(getPlayerId(getPlayerName($file_name),$apiKey) == 0){
-			header("Location:index.php?error=7");
+			header("Location:index.html?error=7");
 			closeUpload($conn);
 		}
 
@@ -256,7 +263,7 @@ if ($uploadOk == 0) {
 
 		//Check if the player is banned
 		if(playerBanned($playerName,$apiKey)){
-			header("Location:index.php?error=9");
+			header("Location:index.html?error=9");
 			closeUpload($conn);
 		}
 
@@ -270,7 +277,7 @@ if ($uploadOk == 0) {
 		$beatmapMD5 = getBeatmapMD5($file_name);
 		$beatmapJson = getBeatmapJSONwMD5($beatmapMD5,$apiKey);
     if(empty($beatmapJson)){
-  		header("Location:index.php?error=10");
+  		header("Location:index.html?error=10");
   		closeUpload($conn);
   	}
 		$replayMod = getOsuMod($file_name); //Osu, Mania, CTB, Taiko
@@ -278,14 +285,14 @@ if ($uploadOk == 0) {
 
 		//Check if the beatmap exist
 		if(empty($beatmapJson)){
-			header("Location:index.php?error=10");
+			header("Location:index.html?error=10");
 			closeUpload($conn);
 		}
 
 		$beatmapId = $beatmapJson[0]["beatmap_id"];
 		$beatmapSetId = $beatmapJson[0]["beatmapset_id"];
     if(!isBeatmapAvailable($beatmapSetId)){
-      header("Location:index.php?error=12");
+      header("Location:index.html?error=12");
   		closeUpload($conn);
     }
 
@@ -295,10 +302,10 @@ if ($uploadOk == 0) {
 		if(isDT($file_name)){
 			$replayDuration = $replayDuration - ($replayDuration * (33/100));
 		}
-		
+
 		//Check if the replay is 10min max
 		if($replayDuration > 600){
-			header("Location:index.php?error=8");
+			header("Location:index.html?error=8");
 			closeUpload($conn);
 		}
 
@@ -313,7 +320,7 @@ if ($uploadOk == 0) {
 			//row created
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;
-			header("Location:index.php?error=3&sqlErr=".$conn->error);
+			header("Location:index.html?error=3&sqlErr=".$conn->error);
 			closeUpload($conn);
 		}
 
@@ -323,11 +330,11 @@ if ($uploadOk == 0) {
 
 		//upload finised
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-		header("Location:index.php?error=6&pid=$replayId");
+		header("Location:index.html?error=6&pid=$replayId");
 		closeUpload($conn);
     } else {
         echo "Sorry, there was an error uploading your file.";
-		header("Location:index.php?error=4");
+		header("Location:index.html?error=4");
 		closeUpload($conn);
     }
 }

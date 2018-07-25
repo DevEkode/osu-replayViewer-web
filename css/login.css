@@ -1,11 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
-    background-image: url("../images/background.png");
-	padding-bottom:5%;
+  background-image: url("../images/background.png");
+	/*padding-bottom:5%;*/
+  padding-top: 20vh;
+  font-family: "Verdana";
+}
+
+.align_center{
+  text-align: center;
+}
+
+#title{
+  text-align: center;
+  color:#FF66AA;
+   text-shadow: 3px 3px white;
+   margin-bottom: 3%;
 }
 
 /* Bordered form */
 form {
    border: 3px solid #f1f1f1;
+   width:50vw;
+   margin:auto;
 }
 
 b{

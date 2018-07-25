@@ -1,6 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
     background-image: url("../images/background.png");
-	padding-bottom:5%;
+	padding-top: 20vh;
+  font-family: "Verdana";
+}
+
+/* Others */
+
+.align_center{
+  text-align: center;
+}
+
+/* Presentation */
+#title{
+  text-align: center;
+  color:#FF66AA;
+  text-shadow: 3px 3px white;
+  margin-bottom: 2%;
 }
 
 #form{
@@ -8,7 +28,6 @@ body {
 	margin:auto;
 	margin-left:27%;
 	margin-right:27%;
-	background-color: rgba(150, 150, 150, .5);
 	padding:1% 1% 1% 1%;
 	text-align:center;
 	font-family:"Verdana";
@@ -16,10 +35,23 @@ body {
 	border-radius:50px;
 }
 
+input[type="text"]{
+  vertical-align: middle;
+  width:20vw;
+  height:5vh;
+  text-align:center;
+  font-size: 110%;
+}
+
+input[type="submit"]{
+  height: 6vh;
+  width: 6vw;
+}
+
 .content {
 	display:block;
-  width: 80%;
-	height:100px;
+  width: 80vw;
+	height:15vh;
 	margin:auto;
 	margin-top:1%;
   padding:1% 1% 1% 1%;
@@ -33,7 +65,7 @@ body {
 .content img {
     margin-right: 3%;
     float: left;
-	height:100px;
+	height:15vh;
 	border-radius:50px;
 }
 
@@ -48,7 +80,7 @@ body {
 .requestContent {
 	display:block;
     width: 60%;
-	height:100px;
+	height:15vh;
 	margin:auto;
 	margin-top:1%;
     padding:1% 1% 1% 1%;
@@ -62,7 +94,7 @@ body {
 .requestContent img {
     margin-right: 3%;
     float: left;
-	height:100px;
+	height:15vh;
 	border-radius:50px;
 }
 
@@ -98,7 +130,7 @@ body {
 	margin-right: 3%;
 	overflow: hidden;
 	float: left;
-	height:100px;
+	height:15vh;
 	border-radius:50px;
 }
 
@@ -115,18 +147,22 @@ body {
 	margin-top:2%;
 }
 
-footer{
-	font-family: "Verdana";
-	position:fixed;
-	height:3%;
-	width:100%;
-	text-align:center;
-	margin-left:-1%;
-	padding-right:1%;
-	padding-top:1%;
-	padding-bottom:1%;
-    bottom: 0;
-	background-color: rgba(150, 150, 150, .5);
-	overflow:hidden;
-	font-size:110%;
+#placeholder{
+  margin-bottom: 10%;
+}
+
+#beatmap_name{
+  font-weight: bold;
+  font-size: 1.5vw;
+  color:black;
+  text-shadow: 1px 1px lightgray;
+  margin-bottom: 1%;
+}
+
+#block_content{
+  font-size: 1vw;
+}
+
+#score{
+  float:right;
 }

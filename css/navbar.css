@@ -1,0 +1,56 @@
+/*Top navigation bar*/
+
+.top-nav{
+  z-index: 1;
+  font-family: "Verdana";
+  position:fixed;
+  top:0;
+  display:flex;
+  overflow:visible;
+  height:10vh;
+  width:100%;
+  justify-content: center;
+  align-items:center;
+  background-color: #FF66AA;
+  border-bottom:solid white 10px;
+}
+
+.nav-link{
+  padding: 14px 16px;
+  display:inline-block;
+  width:9vw;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  font-size: 3vh;
+  border-radius:100px;
+  align-items:center;
+}
+
+.top-nav a:hover {
+  background-color: #FFB2D4;
+}
+
+#logo:hover {
+  opacity: 0.9;
+}
+
+#logo img{
+  width: 20vh;
+}
+
+#logo{
+  margin-top: 5%;
+  border-radius:100px;
+}
+
+.floatleft {
+    float:left;
+}
+.floatright {
+    float:right;
+}
+
+.active{
+  background-color: #FFB2D4;
+}

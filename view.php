@@ -22,9 +22,10 @@
     $videoURL = "http://www.youtube.com/v/".generateYoutubeLink($replayDATA['youtubeId']);
   }
 
-  $osrUrl = "./replayList/".$_GET['id']."/".rawurlencode(base64_decode($replayDATA['OFN']));
+  $osrUrl = "./replayList/".$_GET['id']."/".base64_decode($replayDATA['OFN']);
   if(file_exists($osrUrl)){
     $showOsr = true;
+    $osuUrl2 = "./replayList/".$_GET['id']."/".rawurlencode(base64_decode($replayDATA['OFN']));
   }else{
     $showOsr = false;
   }
@@ -137,7 +138,7 @@
             }
 
             if($showOsr){
-              echo "<a href=$osrUrl><img src=\"images/view/download_replay.png\"/></a>";
+              echo "<a href=$osuUrl2><img src=\"images/view/download_replay.png\"/></a>";
             }else{
               echo "<img src=\"images/view/download_replay.png\" class=\"disabled\"/>";
             }

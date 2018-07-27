@@ -4,11 +4,21 @@
   require 'php/osuApiFunctions.php';
   require 'secure/osu_api_key.php';
 
+  //get replay data
   $replayDATA = getReplayArray($_GET['id']);
 
   //Check if the replay exist
   if(empty($replayDATA)){
     header("Location:index.php");
+  }
+
+  //Check if the user is logged
+  if(isset($_SESSION['userId']) && isset($_SESSION['username'])){
+    if(strcmp($_SESSION['userId'],$replayDATA['userId']) == 0){
+      $isLogged = true;
+    }
+  }else{
+    $isLogged = false;
   }
 
   $userJSON = getUserJSON($replayDATA['userId'],$osuApiKey);
@@ -63,12 +73,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script src="js/loader.js"></script>
+    <script src="js/view/modal.js"></script>
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
   </head>
 
   <body>
     <div class="loader"></div>
+    <!-- Modal -->
+    <div class="modal" id="delete_modal">
+      <div class="modal-content">
+        <h2>Do you really want to delete this replay ?</h2>
+        <h4>The replay link will no longer work after this</h4>
+        <form action="php/view/deleteReplay.php" method="post">
+          <input type="submit" id="button_yes" value="Yes please !"/>
+          <input type="hidden" name="replayId" value=<?php echo '"'.$replayDATA['replayId'].'"' ?>/>
+        </form>
+        <button id="button_no" onclick="closeModalDelete()">No stop !</button>
+      </div>
+    </div>
+
+    <div class="modal" id="rerecord_modal">
+      <div class="modal-content">
+        <h2>Do you really want to re-record this replay ?</h2>
+        <h4>This will send the replay to the processing waiting line</h4>
+        <form action="php/view/re_record_replay.php" method="post">
+          <input type="submit" id="button_yes" value="Yes please !"/>
+          <input type="hidden" name="replayId" value=<?php echo '"'.$replayDATA['replayId'].'"' ?>/>
+        </form>
+        <button id="button_no" onclick="closeModalRerecord()">No stop !</button>
+      </div>
+    </div>
     <!-- navigation bar -->
     <div class="top-nav">
       <div class="floatleft">
@@ -161,6 +196,31 @@
 
         <iframe src=<?php echo $facebookURL; ?> width="91" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
       </div>
+    </div>
+
+    <?php
+    echo'<div class="third_block">
+      <span id="section_title">Manage the replay</span>
+      <div id="manage_section">
+        <a onclick="openModalRerecord()"><img src="images/view/rerecord_replay.png"/></a>
+        <a onclick="openModalDelete()"><img src="images/view/delete_replay.png"/></a>
+      </div>
+    </div>';
+    ?>
+
+    <div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
     </div>
 
     <br>

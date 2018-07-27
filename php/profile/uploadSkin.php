@@ -36,7 +36,7 @@ if($imageFileType != "osk") {
 }
 
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 50000) {
+if ($_FILES["fileToUpload"]["size"] > 50*1048576) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
     error(5);

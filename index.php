@@ -69,6 +69,9 @@ require 'secure/uploadKey.php';
                 echo $_SESSION['mods'];
               ?>
             </span>
+            <span id="skin"><span class="info_text">Skin :</span>
+              <?php echo $_SESSION['skinName']; ?>
+            </span>
             <span id="time"><span class="info_text">Duration :</span>
               <?php
               $mins = floor($_SESSION['duration'] / 60 % 60);

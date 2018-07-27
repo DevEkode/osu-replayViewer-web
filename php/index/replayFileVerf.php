@@ -3,6 +3,7 @@ session_start();
 require '../osuApiFunctions.php';
 require_once '../../secure/osu_api_key.php';
 require '../../secure/mysql_pass.php';
+require '../websiteFunctions.php';
 
 // Create connection
 $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
@@ -36,9 +37,28 @@ function replayExist($filedir, $table, $conn){
 	}
 }
 
+function userFileExists($userId){
+  $user_URL = "../../accounts/".$userId;
+  return is_dir($user_URL);
+}
+
+function checkIfIniExists($userId){
+  $ini_URL = "../../accounts/".$userId.'/'.$userId.'.ini';
+  return file_exists($ini_URL);
+}
+
+function getIniKey($userId,$key){
+  $ini = parse_ini_file('../../accounts/'.$userId.'/'.$userId.'.ini');
+  return $ini[$key];
+}
+
 //----- CORE ------
 
 $target_dir = "../../uploads/";
+if(!file_exists($target_dir)){
+  mkdir($target_dir);
+}
+
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $file_name = basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
@@ -78,11 +98,19 @@ if($replayStructure){
   if(!replayExist("../../uploads/".$file_name,"replaylist",$conn)) {$replayNotDuplicate = true;}
   //Check if the replay is not already in queue
   if(!replayExist("../../uploads/".$file_name,"requestlist",$conn)) {$replayNotWaiting = true;}
+
+  //Check the skin used
+  if(userHasAaccount($userJSON[0]['user_id']) && userFileExists($userJSON[0]['user_id']) && checkIfIniExists($userJSON[0]['user_id'])){
+    $skinName = getIniKey($userJSON[0]['user_id'],"fileName");
+  }else{
+    $skinName = "osu!replayViewer skin";
+  }
 }
 //Send all the Informations
 
 
 $_SESSION['filename'] = $file_name;
+$_SESSION['skinName'] = $skinName;
 $_SESSION['replayStructure'] = $replayStructure;
 $_SESSION['beatmapAvailable'] = $beatmapAvailable;
 $_SESSION['playerOsuAccount'] = $playerOsuAccount;

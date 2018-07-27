@@ -31,6 +31,7 @@ if(isset($_POST['checkbox']) && $_POST["checkbox"] != NULL){
 
 //beatmap Informations
 $beatmapJSON = getBeatmapJSONwMD5($replayJSON['md5'],$osuApiKey);
+
 $beatmapId = $beatmapJSON[0]['beatmap_id'];
 $beatmapSetId = $beatmapJSON[0]['beatmapset_id'];
 $beatmapName = base64_encode(generateBtFileNamewJSON($beatmapJSON));

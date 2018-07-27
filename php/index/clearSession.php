@@ -1,7 +1,9 @@
 <?php
 session_start();
 //unset session
-unset($_SESSION['file_name']);
+unset($_SESSION['filename']);
+unset($_SESSION['skinName']);
+unset($_SESSION['replay_playerId']);
 unset($_SESSION['replayStructure']);
 unset($_SESSION['beatmapAvailable']);
 unset($_SESSION['playerOsuAccount']);
@@ -14,10 +16,11 @@ unset($_SESSION['difficulty']);
 unset($_SESSION['playername']);
 unset($_SESSION['duration']);
 unset($_SESSION['mods']);
-unset($_SESSION['replay_playerId']);
 
 function clear(){
-  unset($_SESSION['file_name']);
+  unset($_SESSION['filename']);
+  unset($_SESSION['skinName']);
+  unset($_SESSION['replay_playerId']);
   unset($_SESSION['replayStructure']);
   unset($_SESSION['beatmapAvailable']);
   unset($_SESSION['playerOsuAccount']);
@@ -30,6 +33,5 @@ function clear(){
   unset($_SESSION['playername']);
   unset($_SESSION['duration']);
   unset($_SESSION['mods']);
-  unset($_SESSION['replay_playerId']);
 }
  ?>

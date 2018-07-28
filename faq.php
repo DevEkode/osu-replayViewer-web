@@ -66,7 +66,7 @@
         - their duration (maximum 10min).<br>
         - time to download the beatmap and skin (if configured).<br>
 
-        During your tour, expect to wait about 15 minutes.
+        After leaving waiting list, expect to wait about 15 minutes.
       </span>
     </div>
 

@@ -213,7 +213,7 @@
       <h2> Change password </h2>
 
       <form action="php/profile/changePassword.php" method="post">
-        Actual password : <br>
+        Current password : <br>
         <input type="password" name="oldPassword" required /><br>
         New password : <br>
         <input type="password" name="newPassword" id="pass" required /><br>

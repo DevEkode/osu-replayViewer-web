@@ -32,10 +32,13 @@ function clearSession(){
   var file = '<%= Session["filename"] %>';
   console.log(file);
   $.ajax({
-     url: '../../php/index/clearSession.php',
+     url: './php/index/clearSession.php',
      dataType: 'json',
+     async:false,
      success: function(data){
           //data returned from php
      }
   });
 }
+
+window.onunload = window.onbeforeunload = (function(){clearSession();})

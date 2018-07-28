@@ -23,8 +23,10 @@ $replayBelow10 = false;
 $replayNotDuplicate = false;
 $replayNotWaiting = false;
 
-//---- Functions -----
+$skinName = 'null';
+$beatmapJSON = null;
 
+//---- Functions -----
 function replayExist($filedir, $table, $conn){
 	$md5 = md5_file($filedir);
 	$result = $conn->query("SELECT * FROM $table WHERE md5='$md5'");
@@ -64,17 +66,16 @@ $file_name = basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
-if($imageFileType == "osr") {
-    $replayStructure = true;
+if(validateReplayStructure($_FILES["fileToUpload"]["tmp_name"],$osuApiKey) && $imageFileType == "osr"){
+  $replayStructure = true;
 }
 
 if($replayStructure){
   //upload file
-  var_dump(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file));
+  move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
 
   //check replay structure
   $replay_content = getReplayContent("../../uploads/".$file_name);
-  var_dump($replay_content);
 
   if(in_array($replay_content['gamemode'], array(0,1,2,3), true )) {$replayStructure = true;}
 
@@ -139,7 +140,6 @@ if(isset($replay_content)){
 }else{
   $_SESSION['mods'] = 'none';
 }
-
 
 header("Location:../../index.php");
 

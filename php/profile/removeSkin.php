@@ -10,6 +10,21 @@ function error($error_code){
   exit();
 }
 
+function getIniKey2($userId,$key){
+  $ini = parse_ini_file('../../accounts/'.$userId.'/'.$userId.'.ini');
+  return $ini[$key];
+}
+
+function listAllSkins2($userId){
+  $skins = array();
+  $path = realpath('../../accounts/'.$userId);
+  foreach (glob($path.'/*.osk') as $filename) {
+    $tab = explode("/",$filename);
+    array_push($skins,$tab[1]);
+  }
+  return $skins;
+}
+
   $userURL = "../../accounts/".$_SESSION["userId"]."/";
   $skinToRemove = $_POST["skin"];
 
@@ -19,9 +34,24 @@ function error($error_code){
   }
 
   //update ini file
-  $customSkin = getIniKey($_SESSION["userId"],'enable');
-  $skin = "default";
-  $dim = getIniKey($_SESSION["userId"],'dim');
+  $skins = listAllSkins2($_SESSION["userId"]);
+
+  //Remove skin from array
+  if (($key = array_search($skinToRemove, $skins)) !== false) {
+    unset($skins[$key]);
+  }
+
+  if(count($skins) <= 0){
+    $customSkin = 0;
+    $skin = "default";
+  }else{
+    $customSkin = getIniKey2($_SESSION["userId"],"enable");
+    $array = array_rand($skins,1);
+    $skin = $skins[$array];
+  }
+
+
+  $dim = getIniKey2($_SESSION["userId"],"dim");
   updateIniFile('../../accounts/',$_SESSION["userId"],$customSkin,$skin,$dim,"true");
 
   //Delete the file

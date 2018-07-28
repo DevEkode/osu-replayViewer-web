@@ -85,10 +85,86 @@
   	$replay_content = fread($myfile,filesize($filedir));
 
   	$array = unpack("C1gamemode/iversion/x/clength/A32md5/x/clength2/Auser", $replay_content);
-      $userLength = $array['length2'];
-      $array = unpack("C1gamemode/iversion/x/clength/A32md5/x/clength2/A".$userLength."user/x/clength3/A32md5Replay/sx300/sx100/sx50/sGekis/sKatus/sMiss/iScore/sMaxCombo/C1perfectCombo/iMods", $replay_content);
+    $userLength = $array['length2'];
+    $array = unpack("C1gamemode/iversion/x/clength/A32md5/x/clength2/A".$userLength."user/x/clength3/A32md5Replay/sx300/sx100/sx50/sGekis/sKatus/sMiss/iScore/sMaxCombo/C1perfectCombo/iMods/x/clength4", $replay_content);
 
   	return $array;
+  }
+
+  function isValidMd5($md5 ='')
+  {
+    return preg_match('/^[a-f0-9]{32}$/', $md5);
+  }
+
+  function validateReplayStructure($filedir,$api){
+    $replayDATA = getReplayContent($filedir);
+    $valide = true;
+
+    //Check gamemode
+    if(!in_array($replayDATA['gamemode'], array(0,1,2,3), true)){
+      echo 'Gamemode not valid <br>';
+      $valide = false;
+    }
+
+    //Check version
+    if(strlen($replayDATA['version']) != 8){
+      echo 'Version not valid <br>';
+      $valide = false;
+    }
+
+    //Check md5
+    if(!isValidMd5($replayDATA['md5'])){
+      echo 'Beatmap md5 not valid <br>';
+      $valide = false;
+      $beatmapJSON = null;
+    }else{
+      $beatmapJSON = getBeatmapJSONwMD5($replayDATA['md5'],$api);
+    }
+
+    //Check username
+    /*$userJSON = getUserJSON($replayDATA['user'],$api);
+    if(empty($userJSON)){
+      echo 'Username not valid <br>';
+      $valide = false;
+    }*/
+
+    //Check replay md5
+    if(!isValidMd5($replayDATA['md5Replay'])){
+      echo 'Replay md5 not valid <br>';
+      $valide = false;
+    }
+
+    //Check beatmap info
+    if(empty($beatmapJSON)){
+      echo 'Beatmap json not valid <br>';
+      $valide = false;
+    }else{
+      //Check Max combo and miss
+      if($replayDATA['gamemode'] == 0){
+        if($replayDATA['Miss'] > $beatmapJSON[0]['max_combo']){
+          echo 'Miss count not valid <br>';
+          $valide = false;
+        }
+        if($replayDATA['MaxCombo'] > $beatmapJSON[0]['max_combo']){
+          echo 'MaxCombo not valid <br>';
+          $valide = false;
+        }
+      }
+    }
+
+    //Check perfectCombo
+    if(!in_array($replayDATA['perfectCombo'],array(0,1),true)){
+      echo 'Perfect combo not valid <br>';
+      $valide = false;
+    }
+
+    //Check mods
+    if($replayDATA['Mods'] > 268435456){
+      echo 'Mods not valid <br>';
+      $valide = false;
+    }
+
+    return $valide;
   }
 
   function isDT($binary){ //Return player name of the replay from the name of the file

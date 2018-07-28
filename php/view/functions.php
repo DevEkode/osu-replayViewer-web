@@ -1,16 +1,5 @@
 <?php
-//mySQL
-require 'secure/mysql_pass.php';
-//connect to mysql database
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-
-
-function getReplayArray($replayId){
-  global $conn;
+function getReplayArray($replayId,$conn){
   $return = array();
 
   $query = $conn->prepare("SELECT * FROM replaylist WHERE replayId=?");
@@ -36,9 +25,7 @@ function generateUserImageLink($userId){
   return $userImgURL;
 }
 
-function userHasAaccount($userId){
-  global $conn;
-
+function userHasAaccount($userId,$conn){
   $query = $conn->prepare("SELECT * FROM accounts WHERE userId=?");
   $query->bind_param("i",$userId);
   $query->execute();
@@ -51,7 +38,7 @@ function userHasAaccount($userId){
   $query->close();
 }
 
-function generateAccountBlock($userId,$username){
+function generateAccountBlock($userId,$username,$conn){
   $profileImg = generateUserImageLink($userId);
   $profileURL = "https://osu.ppy.sh/u/".$userId;
   $replayProfileURL = "userProfile.php?id=".$userId;
@@ -60,7 +47,7 @@ function generateAccountBlock($userId,$username){
   echo "  <img id=\"profile_image\" src=$profileImg />";
   echo "<a href=$profileURL class=\"account_image\"><img src=\"images/osu_logo.png\"></a>";
 
-  if(userHasAaccount($userId)){
+  if(userHasAaccount($userId,$conn)){
     echo "<a href=$replayProfileURL class=\"account_image\"><img src=\"images/icon.png\"></a>";
   }
   echo '</div>';

@@ -1,7 +1,9 @@
 <?php
+session_start();
 require '../../secure/mysql_pass.php';
 require '../osuApiFunctions.php';
 require '../../secure/osu_api_key.php';
+require 'functions.php';
 
 $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
 
@@ -13,6 +15,13 @@ if ($conn->connect_error) {
 }
 
 if(!isset($_POST['replayId'])){
+  header('Location:../../index.php');
+}
+
+
+//Check if the correct user delete the replay
+$replayJSON = getReplayArray($_POST['replayId'],$conn);
+if(strcmp($_SESSION['userId'],$replayJSON['userId']) != 0){
   header('Location:../../index.php');
 }
 
@@ -33,30 +42,13 @@ function removeFolder($dir){
 	rmdir($dir);
 }
 
-function getReplayArray($replayId){
-  global $conn;
-  $return = array();
-
-  $query = $conn->prepare("SELECT * FROM replaylist WHERE replayId=?");
-  $query->bind_param("s",$replayId);
-  $query->execute();
-  $result = $query->get_result();
-  if($result->num_rows > 0){
-    while($row = $result->fetch_assoc()){
-      $return = $row;
-    }
-  }
-  $query->close();
-  return $return;
-}
-
 //--Recreate the folder in requestList
 $folder_dir = "../../requestList/".$_POST['replayId'];
 if(!file_exists($folder_dir)){
   mkdir($folder_dir);
 }
 
-$replayDATA = getReplayArray($_POST['replayId']);
+$replayDATA = getReplayArray($_POST['replayId'],$conn);
 $replay_dir = "../../replayList/".$_POST['replayId']."/".base64_decode($replayDATA['OFN']);
 
 $replayJSON = getReplayContent($replay_dir);
@@ -75,8 +67,9 @@ rename($old_dir,$new_dir);
 
 //--Create the row in requestlist table
 $query = $conn->prepare("INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
-$query->bind_param("siissiisiiis",$replayDATA['replayId'],$replayDATA['beatmapId'],$replayDATA['beatmapSetId'],$replayDATA['OFN'],$replayDATA['BFN'],$replayDuration,$replayDATA['userId'],$replayDATA['md5'],$replayDATA['playMod'],$replayDATA['binaryMods'],$replayDATA['permanent']);
+$query->bind_param("siissiisiii",$replayDATA['replayId'],$replayDATA['beatmapId'],$replayDATA['beatmapSetId'],$replayDATA['OFN'],$replayDATA['BFN'],$replayDuration,$replayDATA['userId'],$replayDATA['md5'],$replayDATA['playMod'],$replayDATA['binaryMods'],$replayDATA['permanent']);
 $query->execute();
+var_dump($query);
 $query->close();
 
 //--Delete the row in replaylist table

@@ -101,7 +101,7 @@ if($replayStructure){
   if(!replayExist("../../uploads/".$file_name,"requestlist",$conn)) {$replayNotWaiting = true;}
 
   //Check the skin used
-  if(userHasAaccount($userJSON[0]['user_id']) && userFileExists($userJSON[0]['user_id']) && checkIfIniExists($userJSON[0]['user_id'])){
+  if(userHasAaccount($userJSON[0]['user_id'],$conn) && userFileExists($userJSON[0]['user_id']) && checkIfIniExists($userJSON[0]['user_id'])){
     $skinName = getIniKey($userJSON[0]['user_id'],"fileName");
   }else{
     $skinName = "osu!replayViewer skin";

@@ -1,5 +1,7 @@
 <?php
+session_start();
 require '../../secure/mysql_pass.php';
+require 'functions.php';
 
 $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
 
@@ -11,6 +13,12 @@ if ($conn->connect_error) {
 }
 
 if(!isset($_POST['replayId'])){
+  header('Location:../../index.php');
+}
+
+//Check if the correct user delete the replay
+$replayJSON = getReplayArray($_POST['replayId'],$conn);
+if(strcmp($_SESSION['userId'],$replayJSON['userId']) != 0){
   header('Location:../../index.php');
 }
 

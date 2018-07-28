@@ -55,4 +55,14 @@ function listAllSkins($userId){
   return $skins;
 }
 
+/*Check skin content*/
+function isSkinValid($folder_dir){
+  $valide = true;
+  //Check ini file
+  if(!file_exists($folder_dir."/skin.ini")){
+    $valide = false;
+  }
+  return $valide;
+}
+
  ?>

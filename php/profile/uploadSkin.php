@@ -4,16 +4,43 @@ if(empty($_SESSION)){
   header("Location:index.php");
 }
 
-function error($error_code){
-  header("Location:../../editProfile.php?skinError=".$error_code);
-  exit();
+function cleanFolder($dir){
+	//delete all folder files
+	$files = glob($dir."/*"); // get all file names
+	foreach($files as $file){ // iterate files
+		if(is_file($file)){
+			unlink($file); // delete file
+		}
+	}
 }
 
-var_dump($_FILES);
+function removeFolder($dir){
+	cleanFolder($dir);
+	//delete folder
+	rmdir($dir);
+}
+
+require 'replaySettings.php';
+
 $target_dir = "../../accounts/".$_SESSION["userId"]."/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+function error($error_code){
+  global $target_dir;
+  global $target_file;
+  if(file_exists($target_dir."export")){
+    removeFolder($target_dir."export");
+  }
+
+  if(file_exists($target_file)){
+    unlink($target_file);
+  }
+
+  header("Location:../../editProfile.php?skinError=".$error_code);
+  exit();
+}
 
 if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', basename($_FILES["fileToUpload"]["name"])))
 {
@@ -49,6 +76,21 @@ if ($uploadOk == 0) {
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        //Check if the file is a zip archive
+        $zip = new ZipArchive();
+        $zip->open($target_file);
+        if($zip->extractTo($target_dir."export")){
+          echo 'extract Ok';
+          if(!isSkinValid($target_dir."export")){
+            $uploadOk = 0;
+            error(2);
+          }
+        }else{
+          echo 'extract Fail';
+          $uploadOk = 0;
+          error(2);
+        }
+
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         error(0);
     } else {

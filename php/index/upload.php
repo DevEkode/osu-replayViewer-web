@@ -1,5 +1,4 @@
 <?php
-var_dump($_POST);
 include '../osuApiFunctions.php';
 include 'clearSession.php';
 require_once '../../secure/osu_api_key.php';

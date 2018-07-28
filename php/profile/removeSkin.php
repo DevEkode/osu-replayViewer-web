@@ -17,10 +17,11 @@ function getIniKey2($userId,$key){
 
 function listAllSkins2($userId){
   $skins = array();
-  $path = realpath('../../accounts/'.$userId);
+  $path = __DIR__.'/../../accounts/'.$userId;
   foreach (glob($path.'/*.osk') as $filename) {
+    var_dump($filename);
     $tab = explode("/",$filename);
-    array_push($skins,$tab[1]);
+    array_push($skins,$tab[11]);
   }
   return $skins;
 }

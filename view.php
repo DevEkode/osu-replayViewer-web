@@ -3,9 +3,18 @@
   require 'php/view/functions.php';
   require 'php/osuApiFunctions.php';
   require 'secure/osu_api_key.php';
+  require 'secure/mysql_pass.php';
+  $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+
+  // Check connection
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+    header("Location:index.php?error=3");
+    exit;
+  }
 
   //get replay data
-  $replayDATA = getReplayArray($_GET['id']);
+  $replayDATA = getReplayArray($_GET['id'],$conn);
 
   //Check if the replay exist
   if(empty($replayDATA)){
@@ -158,7 +167,7 @@
         <!-- <img id="beatmap_image" src=<?php echo '"'.'https://b.ppy.sh/thumb/'.$replayDATA['beatmapSetId']."l.jpg".'"'; ?> /> -->
         <br>
 
-        <?php generateAccountBlock($replayDATA['userId'],$userJSON[0]['username']); ?>
+        <?php generateAccountBlock($replayDATA['userId'],$userJSON[0]['username'],$conn); ?>
 
         <span id="section_title">Mods</span>
         <?php drawMod($replayDATA['binaryMods']);   ?>

@@ -208,13 +208,17 @@
     </div>
 
     <?php
-    echo'<div class="third_block">
-      <span id="section_title">Manage the replay</span>
-      <div id="manage_section">
-        <a onclick="openModalRerecord()"><img src="images/view/rerecord_replay.png"/></a>
-        <a onclick="openModalDelete()"><img src="images/view/delete_replay.png"/></a>
-      </div>
-    </div>';
+    if(isset($_SESSION['userId'])){
+      if(strcmp($_SESSION['userId'],$userJSON[0]['user_id']) == 0){
+        echo'<div class="third_block">
+          <span id="section_title">Manage the replay</span>
+          <div id="manage_section">
+            <a onclick="openModalRerecord()"><img src="images/view/rerecord_replay.png"/></a>
+            <a onclick="openModalDelete()"><img src="images/view/delete_replay.png"/></a>
+          </div>
+        </div>';
+      }
+    }
     ?>
 
     <div>

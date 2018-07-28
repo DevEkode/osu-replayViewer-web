@@ -1,4 +1,5 @@
 <?php
+session_start();
   include 'php/progress/functions.php';
 
   //Refresh every 30s

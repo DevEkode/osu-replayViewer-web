@@ -34,9 +34,10 @@ function error($error_code){
     removeFolder($target_dir."export");
   }
 
+  /*
   if(file_exists($target_file)){
     unlink($target_file);
-  }
+  }*/
 
   header("Location:../../editProfile.php?skinError=".$error_code);
   exit();

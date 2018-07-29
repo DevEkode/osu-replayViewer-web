@@ -34,46 +34,47 @@ function error($error_code){
     removeFolder($target_dir."export");
   }
 
-  /*
-  if(file_exists($target_file)){
+  if(file_exists($target_file) && strcmp($error_code,'0') != 0){
     unlink($target_file);
-  }*/
+  }
 
-  header("Location:../../editProfile.php?skinError=".$error_code);
+  $var = "Location:../../editProfile.php?skinError=".$error_code;
+  header($var);
   exit();
 }
 
 if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', basename($_FILES["fileToUpload"]["name"])))
 {
   $uploadOk = 0;
-  error(4);
+  error('4');
 }
 
 // Check if file already exists
+
 if (file_exists($target_file)) {
     echo "Sorry, file already exists.";
     $uploadOk = 0;
-    error(1);
+    error('1');
 }
 
 // Allow certain file formats
 if($imageFileType != "osk") {
     echo "Sorry, only OSK files are allowed.";
     $uploadOk = 0;
-    error(2);
+    error('2');
 }
 
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 50*1048576) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
-    error(5);
+    error('5');
 }
 
 // -- Upload file --
 if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
-    error(3);
+    error('3');
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -84,19 +85,19 @@ if ($uploadOk == 0) {
           echo 'extract Ok';
           if(!isSkinValid($target_dir."export")){
             $uploadOk = 0;
-            error(2);
+            error('2');
           }
         }else{
           echo 'extract Fail';
           $uploadOk = 0;
-          error(2);
+          error('2');
         }
 
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-        error(0);
+        error('0');
     } else {
         echo "Sorry, there was an error uploading your file.";
-        error(3);
+        error('3');
     }
 }
  ?>

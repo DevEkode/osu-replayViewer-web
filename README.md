@@ -15,10 +15,7 @@ Easy to use website. Just upload your .osr, wait for processing and share it to 
 ## In the future
 * Like and view counter
 * Report issue for a replay function
-* Show the queue position during processing
 * Deploy osu!replayClient. A recording client.
-* Show more stats into the view page
-* Profile for players to edit theirs replays
 * Page to compare two replays (with graphs and stats)
 * Use mirror for beatmaps not available on the osu website
 * Add option to upload the replay on another youtube channel

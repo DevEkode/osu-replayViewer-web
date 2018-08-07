@@ -1,5 +1,17 @@
 <?php
 ini_set('display_errors', 1);
+require '../../secure/mysql_pass.php';
+require 'php/osuApiFunctions.php';
+// Create connection
+$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+	header("Location:index.php?error=3");
+	exit;
+}
+
 $replayId = $_GET['replay'];
 //Get the secret id to launch the script
 	//$key = $_GET['key']; //get input key
@@ -54,7 +66,7 @@ if (isset($_SESSION[$tokenSessionKey])) {
   $client->setAccessToken($_SESSION[$tokenSessionKey]);
 }
 // Check to ensure that the access token was successfully acquired.
-if ($client->getAccessToken()) {
+if ($client->getAccessToken() && isset($_GET['replay'])) {
   $htmlBody = '';
   try{
     // REPLACE this value with the path to the file you are uploading.
@@ -64,8 +76,36 @@ if ($client->getAccessToken()) {
     // This example sets the video's title, description, keyword tags, and
     // video category.
     $snippet = new Google_Service_YouTube_VideoSnippet();
-    $snippet->setTitle("$replayId");
-    $snippet->setDescription("$replayId");
+
+    //Title : name of the beatmap[difficulty] - user
+    $query = $conn->prepare("SELECT * FROM replaylist WHERE replayId=?");
+    $query->bind_param('s',$replayId);
+    $query->execute();
+    $result = $query->get_result();
+    $query->close();
+
+    if($result->num_rows > 0){
+      while($row = $result->fetch_assoc()){
+        $beatmapId = $row['beatmapId'];
+        $userId = $row['userId'];
+      }
+    }
+
+    $userJSON = getUserJSON($userId,$osuApiKey);
+    $beatmapJSON = getBeatmapJSON($beatmapId,$osuApiKey);
+    $title = $beatmapJSON[0]['title'].'['.$beatmapJSON[0]['version'].'] - '.$userJSON[0]['username'];
+    $snippet->setTitle("$title");
+    //Description :
+    //  Beatmap : beatmap name - difficulty
+    //  Artist : artist name
+    //  Played by : username
+    $desc = "
+    Beatmap : ".$beatmapJSON[0]['title']."PHP_EOL
+    Artist  : ".$beatmapJSON[0]['artist']."PHP_EOL
+    Creator : ".$beatmapJSON[0]['creator']."PHP_EOL
+    Played by : ".$userJSON[0]['username'];
+
+    $snippet->setDescription("$desc");
     // Numeric video category. See
     // https://developers.google.com/youtube/v3/docs/videoCategories/list
     $snippet->setCategoryId("20");

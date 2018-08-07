@@ -2,6 +2,7 @@
 secure/mysql_pass.php
 secure/osu_api_key.php
 secure/uploadKey.php
+secure/encoding.php
 test2.php
 secure/recaptcha.php
 client_secret.json
@@ -14,3 +15,4 @@ googlef02d221e2c7a486e.html
 .htaccess
 googlef02d221e2c7a486e.html
 .htaccess
+

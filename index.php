@@ -22,11 +22,13 @@ require 'secure/uploadKey.php';
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script src="js/loader.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <script src="js/index/askUsername.js"></script>
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
   </head>
 
-  <body>
+  <body onload="start()">
     <script type="text/javascript" src="js/index/upload.js"></script>
     <div class="loader"></div>
     <!-- Modal -->
@@ -138,20 +140,58 @@ require 'secure/uploadKey.php';
 
     </div>
 
+    <div id="askUsername_modal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <h2 class="modal_title">Information needed !</h2>
+        <h3 class="modal_par">The username for this replay doesn't exists</h3>
+        <h3 class="modal_par">Please enter the username to which the replay will be assigned</h3>
+
+        <form class="align_center" method="post" enctype="multipart/form-data" action="php/index/newUsername.php">
+          <input type="text" name="newUsername" id="newUsername" onkeyup="showUsername(this.value)">
+
+          <?php
+            $newArray = array_diff_key($_SESSION,array_flip(array('username','userId')));
+            $arraySerial = serialize($newArray);
+            $array64 = base64_encode($arraySerial);
+           ?>
+
+          <h3 id="txtHint" class="align_center"></h3>
+
+          <input type="hidden" name="session" value=<?php echo "'".$array64."'" ?>>
+          <input type="submit" value="Continue" id="continue_btn">
+        </form>
+
+        <div id="replay_start">
+          <button onclick="closeModalUsername(); clearSession();">Cancel</button>
+        </div>
+      </div>
+
+    </div>
+
     <!-- Activate modal view when session is full -->
     <?php
       if(isset($_SESSION['replayStructure'])){
-        echo '<script type="text/javascript">',
-             'openModal();',
-             '</script>';
 
         $string = '';
         if(!$_SESSION['replayStructure']){$string .= "setItemFalse('replayS'); ";}
         if(!$_SESSION['beatmapAvailable']){$string .= "setItemFalse('beatmapA'); ";}
-        if(!$_SESSION['playerOsuAccount']){$string .= "setItemFalse('playerA'); ";}
+        if(!$_SESSION['playerOsuAccount']){$string .= "setItemFalse('playerA'); "; }
         if(!$_SESSION['replayBelow10']){$string .= "setItemFalse('replayD'); ";}
         if(!$_SESSION['replayNotDuplicate']){$string .= "setItemFalse('replayDup'); ";}
         if(!$_SESSION['replayNotWaiting']){$string .= "setItemFalse('replayW'); ";}
+
+        if($_SESSION['playerOsuAccount']){
+          echo '<script type="text/javascript">',
+               'openModal();',
+               '</script>';
+        }else{
+          echo '<script type="text/javascript">',
+               'openModalUsername();',
+               '</script>';
+        }
+
 
         echo "<script type=\"text/javascript\">".$string."</script>";
 

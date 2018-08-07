@@ -144,7 +144,10 @@ if(empty($verfUserId)){
     var x = setInterval(function() {
 
       // Get todays date and time
-      var now = new Date().getTime();
+      var d = new Date();
+      var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+
+      var now = new Date(utc + (3600000*2));
 
       // Find the distance between now an the count down date
       var distance = countDownDate - now;

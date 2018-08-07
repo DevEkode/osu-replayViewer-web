@@ -2,6 +2,9 @@
 session_start();
 error_reporting(0);
 
+require 'secure/osu_api_key.php';
+require 'php/osuApiFunctions.php';
+
 //-------- Connect to mysql request database ---------
 require 'secure/mysql_pass.php';
 $servername = $mySQLservername;
@@ -70,6 +73,9 @@ if(isset($_GET['id'])){
   $userId = $_GET['id'];
 }
 
+//Get the user JSONS
+$userJSON = getUserJSON($userId,$osuApiKey);
+
 //Detect the user page
 if(isset($_SESSION) && !empty($_SESSION) && isset($_GET['id'])){
   if(strcmp($_SESSION["userId"],$_GET['id']) == 0){
@@ -87,7 +93,7 @@ if(isset($_SESSION) && !empty($_SESSION) && !isset($_GET['id'])){
 }
 
 //check if the player exist un DB
-$username=getDBInfo($conn,$userId);
+$username=$userJSON[0]['username'];
 if(empty($username)){
   header("Location:index.php");
 }

@@ -191,6 +191,21 @@ i {
   font-weight: bold;
 }
 
+.modal_par{
+  text-align: center;
+}
+
+#askUsername_modal form{
+  text-align: center;
+}
+
+#askUsername_modal input[type='text']{
+  font-size: 1.2vw;
+  text-align: center;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
 
 /* grid */
 #beatmap{

@@ -11,6 +11,16 @@ function closeModal(){
   modal.style.display = "none";
 }
 
+function openModalUsername(){
+  modal = document.getElementById("askUsername_modal");
+  modal.style.display = "block";
+}
+
+function closeModalUsername(){
+  modal = document.getElementById("askUsername_modal");
+  modal.style.display = "none";
+}
+
 function submitForm(){
   document.getElementById("upload_box").submit();
 }

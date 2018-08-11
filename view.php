@@ -53,7 +53,7 @@
   $BFN = str_replace(".osz",'', $BFN);
   $BFN = str_replace($replayDATA['beatmapSetId'],'', $BFN);
 
-  $twitterText = 'Come and see my osu! performace on '.$BFN.' - http://osureplayviewer.xyz/view.php?id='.$_GET['id'];
+  $twitterText = 'Come and see my osu! performance on '.$BFN.' - http://osureplayviewer.xyz/view.php?id='.$_GET['id'];
   $twitterURL = '"'."https://twitter.com/intent/tweet?text=".$twitterText.'"';
 
   $facebookURL = '"'."https://www.facebook.com/plugins/share_button.php?href=".urlencode('http://osureplayviewer.xyz/view.php?id='.$_GET['id'])."&layout=button&size=large&mobile_iframe=true&width=91&height=28&appId".'"';

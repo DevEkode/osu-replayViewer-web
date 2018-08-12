@@ -94,17 +94,18 @@ if ($client->getAccessToken() && isset($_GET['replay'])) {
 
     $userJSON = getUserJSON($userId,$osuApiKey);
     $beatmapJSON = getBeatmapJSON($beatmapId,$osuApiKey);
-    $title = $beatmapJSON[0]['title'].'['.$beatmapJSON[0]['version'].'] - '.$userJSON[0]['username'];
+    $title = $beatmapJSON[0]['title'].' ['.$beatmapJSON[0]['version'].'] - '.$userJSON[0]['username'];
     $snippet->setTitle("$title");
     //Description :
     //  Beatmap : beatmap name - difficulty
     //  Artist : artist name
     //  Played by : username
-    $desc = "
-    Beatmap : ".$beatmapJSON[0]['title']."PHP_EOL
-    Artist  : ".$beatmapJSON[0]['artist']."PHP_EOL
-    Creator : ".$beatmapJSON[0]['creator']."PHP_EOL
-    Played by : ".$userJSON[0]['username'];
+    $beatmapURL = "https://osu.ppy.sh/beatmapsets/".$beatmapJSON[0]['beatmapset_id'];
+
+$desc = "Beatmap : ".$beatmapJSON[0]['title']." (".$beatmapURL.")"."
+Artist  : ".$beatmapJSON[0]['artist']."
+Creator : ".$beatmapJSON[0]['creator']."
+Played by : ".$userJSON[0]['username'];
 
     $snippet->setDescription("$desc");
     // Numeric video category. See

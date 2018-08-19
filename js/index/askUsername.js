@@ -14,15 +14,24 @@ function showUsername(str) {
 						if(this.responseText == "this user doesn't exists" || this.responseText == ''){
 							isIdOk = false;
 							update();
+							return isIdOk;
 						}else{
 							isIdOk = true;
 							update();
+							return isIdOk;
 						}
 					}
 				};
 				xmlhttp.open("GET", "php/getUsername.php?q=" + str, true);
 				xmlhttp.send();
 			}
+}
+
+function validate(){
+	var retour = showUsername(document.getElementById("newUsername").value);
+	console.log('test :'+document.getElementById("newUsername").value);
+	console.log('test :'+retour);
+	return retour;
 }
 
 function update(){

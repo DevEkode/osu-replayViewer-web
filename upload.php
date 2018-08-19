@@ -233,7 +233,8 @@ if ($uploadOk == 0) {
   		closeUpload($conn);
   	}
 		$beatId = $json[0]["beatmap_id"];
-		$playerId = getPlayerId(getPlayerName($file_name),$apiKey);
+    $playerId = $_SESSION['replay_playerId'];
+		//$playerId = getPlayerId(getPlayerName($file_name),$apiKey);
 		if(fakeReplay($beatId,$playerId,$apiKey)){
 			header("Location:index.php?error=1");
 			closeUpload($conn);
@@ -272,9 +273,6 @@ if ($uploadOk == 0) {
 			header("Location:index.php?error=9");
 			closeUpload($conn);
 		}
-
-		$playerId = getPlayerId($playerName,$apiKey);
-
 
 		//----- Create a request ticket -----
 		date_default_timezone_set('Europe/Paris');

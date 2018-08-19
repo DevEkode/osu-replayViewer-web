@@ -1,6 +1,7 @@
 <?php
+session_start();
+var_dump($_SESSION);
 include '../osuApiFunctions.php';
-include 'clearSession.php';
 require_once '../../secure/osu_api_key.php';
 require '../../secure/mysql_pass.php';
 
@@ -44,7 +45,7 @@ $binaryMods = $replayJSON['Mods'];
 
 //player Informations
 $playerJSON = getUserJSON($replayJSON['user'],$osuApiKey);
-$playerId = $playerJSON[0]['user_id'];
+$playerId = $_SESSION['replay_playerId'];
 
 //---- Send the Informations into the database ----
 $sql = "INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES ('$replayId','$beatmapId','$beatmapSetId','$replayName','$beatmapName','$replayDuration','$playerId','$fileMD5','$replayMod','$binaryMods','$persistance')";
@@ -62,7 +63,8 @@ mkdir('../../requestList/'.$replayId, 0777, true);
 rename('../../uploads/'.$_POST['filename'],'../../requestList/'.$replayId.'/'.$_POST['filename']);
 
 $conn->close();
-clear();
+include 'clearSession.php';
+//clear();
 header("Location:../../progress.php?id=".$replayId);
 exit;
 

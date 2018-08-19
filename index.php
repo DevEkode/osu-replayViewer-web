@@ -32,7 +32,7 @@ require 'secure/uploadKey.php';
     <script type="text/javascript" src="js/index/upload.js"></script>
     <div class="loader"></div>
     <!-- Modal -->
-    <div id="myModal" class="modal">
+    <div id="myModal" class="modal" onmouseover="disableClear()">
 
       <!-- Modal content -->
       <div class="modal-content">
@@ -130,10 +130,10 @@ require 'secure/uploadKey.php';
           if($_SESSION['replayStructure'] && $_SESSION['beatmapAvailable'] && $_SESSION['playerOsuAccount'] && $_SESSION['replayBelow10'] && $_SESSION['replayNotDuplicate'] && $_SESSION['replayNotWaiting']){
           echo '<form class="align_center" method="post" enctype="multipart/form-data" action="php/index/upload.php">';
           echo '<input id="checkBox" type="checkbox" name="checkbox"> <span> do not delete my replay after 30 days</span><br>';
-          echo '<input id="filename" name="filename" type="hidden" value=$_SESSION[\'filename\']>';
-          echo '<input id="duration" name="duration" type="hidden" value=$_SESSION[\'duration\']>';
-          echo '<input id="duration" name="keyHash" type="hidden" value=password_hash($upload_replay_key,PASSWORD_DEFAULT)>';
-          echo '<input type="submit" value="Start processing" id="start_processing" onclick="clearSession()">';
+          echo '<input id="filename" name="filename" type="hidden" value='.'"'.$_SESSION['filename'].'"'.'>';
+          echo '<input id="duration" name="duration" type="hidden" value='.'"'.$_SESSION['duration'].'"'.'>';
+          echo '<input id="duration" name="keyHash" type="hidden" value='.'"'.password_hash($upload_replay_key,PASSWORD_DEFAULT).'"'.'>';
+          echo '<input type="submit" value="Start processing" id="start_processing">';
           echo '</form>';
           }
           ?>
@@ -152,7 +152,7 @@ require 'secure/uploadKey.php';
         <h3 class="modal_par">The username for this replay doesn't exists</h3>
         <h3 class="modal_par">Please enter the username to which the replay will be assigned</h3>
 
-        <form class="align_center" method="post" enctype="multipart/form-data" action="php/index/newUsername.php">
+        <form name="newUsernameForm" onSubmit="return false" class="align_center" method="post" enctype="multipart/form-data" action="php/index/newUsername.php">
           <input type="text" name="newUsername" id="newUsername" onkeyup="showUsername(this.value)">
 
           <?php
@@ -164,7 +164,7 @@ require 'secure/uploadKey.php';
           <h3 id="txtHint" class="align_center"></h3>
 
           <input type="hidden" name="session" value=<?php echo "'".$array64."'" ?>>
-          <input type="submit" value="Continue" id="continue_btn">
+          <input type="submit" value="Continue" id="continue_btn" onclick="document.newUsernameForm.submit()">
         </form>
 
         <div id="replay_start">
@@ -186,13 +186,19 @@ require 'secure/uploadKey.php';
         if(!$_SESSION['replayNotDuplicate']){$string .= "setItemFalse('replayDup'); ";}
         if(!$_SESSION['replayNotWaiting']){$string .= "setItemFalse('replayW'); ";}
 
-        if($_SESSION['playerOsuAccount']){
+        /*if($_SESSION['playerOsuAccount']){
           echo '<script type="text/javascript">',
                'openModal();',
                '</script>';
         }else{
           echo '<script type="text/javascript">',
                'openModalUsername();',
+               '</script>';
+        }*/
+
+        if($_SESSION['replayStructure']){
+          echo '<script type="text/javascript">',
+               'openModal();',
                '</script>';
         }
 

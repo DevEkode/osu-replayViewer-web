@@ -1,5 +1,6 @@
 //modal
 var modal;
+var clear = 'true';
 
 function openModal(){
   modal = document.getElementById("myModal");
@@ -33,6 +34,10 @@ function setItemFalse(item){
   document.getElementById(item).style["border-color"] = "red";
 }
 
+function notValidate(){
+  return false;
+}
+
 function disableProcessing(){
   document.getElementById("start_processing").disabled = true;
   document.getElementById("checkBox").disabled = true;
@@ -51,4 +56,13 @@ function clearSession(){
   });
 }
 
-window.onunload = window.onbeforeunload = (function(){clearSession();})
+function disableClear(){
+  clear = 'false';
+}
+
+window.onunload = window.onbeforeunload = (function(){
+  console.log(clear);
+  if(clear === 'true'){
+    clearSession();
+  }
+})

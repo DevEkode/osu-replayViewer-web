@@ -261,6 +261,12 @@ if ($uploadOk == 0) {
 		//Sql request
 		$playerName = getPlayerName($file_name);
 
+    $userJSON = getUserJSON($playerName,$osuApiKey);
+    if(empty($userJSON)){
+      header("Location:index.php?error=9");
+			closeUpload($conn);
+    }
+
 		//Check if the player is banned
 		if(playerBanned($playerName,$apiKey)){
 			header("Location:index.php?error=9");

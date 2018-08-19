@@ -126,13 +126,17 @@ require 'secure/uploadKey.php';
         </div>
 
         <div id="replay_start">
-          <form class="align_center" method="post" enctype="multipart/form-data" action="php/index/upload.php">
-            <input id="checkBox" type="checkbox" name="checkbox"> <span> do not delete my replay after 30 days</span><br>
-            <input id="filename" name="filename" type="hidden" value=<?php echo '"'.$_SESSION['filename'].'"' ?>>
-            <input id="duration" name="duration" type="hidden" value=<?php echo '"'.$_SESSION['duration'].'"' ?>>
-            <input id="duration" name="keyHash" type="hidden" value=<?php echo '"'.password_hash($upload_replay_key,PASSWORD_DEFAULT).'"' ?>>
-            <input type="submit" value="Start processing" id="start_processing" onclick="clearSession()">
-          </form>
+          <?php
+          if($_SESSION['replayStructure'] && $_SESSION['beatmapAvailable'] && $_SESSION['playerOsuAccount'] && $_SESSION['replayBelow10'] && $_SESSION['replayNotDuplicate'] && $_SESSION['replayNotWaiting']){
+          echo '<form class="align_center" method="post" enctype="multipart/form-data" action="php/index/upload.php">';
+          echo '<input id="checkBox" type="checkbox" name="checkbox"> <span> do not delete my replay after 30 days</span><br>';
+          echo '<input id="filename" name="filename" type="hidden" value=$_SESSION[\'filename\']>';
+          echo '<input id="duration" name="duration" type="hidden" value=$_SESSION[\'duration\']>';
+          echo '<input id="duration" name="keyHash" type="hidden" value=password_hash($upload_replay_key,PASSWORD_DEFAULT)>';
+          echo '<input type="submit" value="Start processing" id="start_processing" onclick="clearSession()">';
+          echo '</form>';
+          }
+          ?>
 
           <button onclick="closeModal(); clearSession();">Cancel</button>
         </div>
@@ -197,7 +201,6 @@ require 'secure/uploadKey.php';
 
         if(!$_SESSION['replayStructure'] || !$_SESSION['beatmapAvailable'] || !$_SESSION['playerOsuAccount'] || !$_SESSION['replayBelow10'] || !$_SESSION['replayNotDuplicate'] || !$_SESSION['replayNotWaiting']){
           echo '<script type="text/javascript">',
-               'disableProcessing();',
                '</script>';
         }
       }

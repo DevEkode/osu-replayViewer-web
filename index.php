@@ -23,12 +23,12 @@ require 'secure/uploadKey.php';
     <script src="js/loader.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <script src="js/index/askUsername.js"></script>
+    <script src="js/index/validateUsername.js"></script>
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
   </head>
 
-  <body onload="start()">
+  <body>
     <script type="text/javascript" src="js/index/upload.js"></script>
     <div class="loader"></div>
     <!-- Modal -->
@@ -152,8 +152,9 @@ require 'secure/uploadKey.php';
         <h3 class="modal_par">The username for this replay doesn't exists</h3>
         <h3 class="modal_par">Please enter the username to which the replay will be assigned</h3>
 
-        <form name="newUsernameForm" onSubmit="return false" class="align_center" method="post" enctype="multipart/form-data" action="php/index/newUsername.php">
-          <input type="text" name="newUsername" id="newUsername" onkeyup="showUsername(this.value)">
+        <form onsubmit="return validateName()" class="align_center" method="post" enctype="multipart/form-data" action="php/index/newUsername.php">
+          <img src="https://a.ppy.sh/1" id="userImage"/>
+          <input type="text" name="newUsername" id="newUsername" onkeyup="updatePicture()" required><br>
 
           <?php
             $newArray = array_diff_key($_SESSION,array_flip(array('username','userId')));
@@ -161,10 +162,8 @@ require 'secure/uploadKey.php';
             $array64 = base64_encode($arraySerial);
            ?>
 
-          <h3 id="txtHint" class="align_center"></h3>
-
           <input type="hidden" name="session" value=<?php echo "'".$array64."'" ?>>
-          <input type="submit" value="Continue" id="continue_btn" onclick="document.newUsernameForm.submit()">
+          <input type="submit" value="Continue" id="continue_btn">
         </form>
 
         <div id="replay_start">
@@ -186,19 +185,13 @@ require 'secure/uploadKey.php';
         if(!$_SESSION['replayNotDuplicate']){$string .= "setItemFalse('replayDup'); ";}
         if(!$_SESSION['replayNotWaiting']){$string .= "setItemFalse('replayW'); ";}
 
-        /*if($_SESSION['playerOsuAccount']){
+        if($_SESSION['playerOsuAccount']){
           echo '<script type="text/javascript">',
                'openModal();',
                '</script>';
         }else{
           echo '<script type="text/javascript">',
                'openModalUsername();',
-               '</script>';
-        }*/
-
-        if($_SESSION['replayStructure']){
-          echo '<script type="text/javascript">',
-               'openModal();',
                '</script>';
         }
 

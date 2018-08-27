@@ -38,6 +38,7 @@
   if(file_exists($urlRaw)){
     $showRaw = true;
     $videoURL = $urlRaw;
+    $metaUrl = "https://osureplayviewer.xyz/replayList/".$_GET['id']."/".$_GET['id'].".mp4";
   }else{
     $showRaw = false;
     $videoURL = "http://www.youtube.com/v/".generateYoutubeLink($replayDATA['youtubeId']);
@@ -73,6 +74,12 @@
     <meta content="osu!replayViewer" property="og:site_name">
     <meta content=<?php echo '"'.'https://b.ppy.sh/thumb/'.$replayDATA['beatmapSetId']."l.jpg".'"'; ?> property='og:image'>
 
+    <?php
+      if($showRaw){
+        echo '<meta content='.'"'.$metaUrl.'"'.' property="og:video">';
+        echo "\n";
+      }
+    ?>
     <title>osu!replayViewer - View <?php echo $userJSON[0]['username']; ?> replay</title>
     <link rel="icon" type="image/png" href="images/icon.png" />
 

@@ -1,16 +1,22 @@
 <?php
 session_start();
 require 'secure/uploadKey.php';
-include 'php/analytics.php';
+$name='index';
+include('php/analytics.php');
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <!-- Discord metadata -->
-    <meta content="osu!replayViewer - osu! replays sharing" property="og:title">
+    <meta content="osu!replayViewer" property="og:title">
     <meta content="Share your osu! performance to everyone !" property="og:description">
     <meta content="osu!replayViewer" property="og:site_name">
     <meta content="http://osureplayviewer.xyz/images/icon.png" property='og:image'>
+
+    <!-- Google / Search Engine Tags -->
+    <meta itemprop="name" content="osu!replayViewer">
+    <meta itemprop="description" content="Share your osu! performance to everyone !">
+    <meta itemprop="image" content="http://osureplayviewer.xyz/images/icon.png">
 
     <title>osu!replayViewer - A online osu replay viewer</title>
     <link rel="stylesheet" type="text/css" href="css/index.css">

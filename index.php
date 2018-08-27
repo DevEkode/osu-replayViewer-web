@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'secure/uploadKey.php';
+include 'php/analytics.php';
 ?>
 <!DOCTYPE html>
 <html>

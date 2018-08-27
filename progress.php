@@ -1,5 +1,6 @@
 <?php
 session_start();
+//include 'php/analytics.php';
   include 'php/progress/functions.php';
 
   //Refresh every 30s

@@ -1,5 +1,6 @@
 <?php
   session_start();
+  include 'php/analytics.php';
   require 'php/view/functions.php';
   require 'php/osuApiFunctions.php';
   require 'secure/osu_api_key.php';

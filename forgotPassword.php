@@ -1,4 +1,5 @@
 <?php
+include 'php/analytics.php';
 //ini_set('display_errors', 1);
 //-- Connect to mysql request database --
 require 'secure/mysql_pass.php';

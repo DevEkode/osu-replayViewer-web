@@ -15,6 +15,7 @@
 
   //get replay data
   $replayDATA = getReplayArray($_GET['id'],$conn);
+  $beatmapURL = "https://osu.ppy.sh/beatmapsets/".$replayDATA['beatmapSetId'];
 
   //Check if the replay exist
   if(empty($replayDATA)){
@@ -174,6 +175,7 @@
 
         <span id="section_title">Downloads</span>
         <div id="download_section">
+          <a href=<?php echo $beatmapURL; ?> target="_blank"><img src="images/view/download_beatmap.png"/></a>
           <?php
             if($showRaw){
               echo "<a href=$urlRaw><img src=\"images/view/video_source.png\"/></a>";

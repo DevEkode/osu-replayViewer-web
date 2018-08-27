@@ -153,8 +153,11 @@ require 'secure/uploadKey.php';
         <h3 class="modal_par">Please enter the username to which the replay will be assigned</h3>
 
         <form onsubmit="return validateName()" class="align_center" method="post" enctype="multipart/form-data" action="php/index/newUsername.php">
-          <img src="https://a.ppy.sh/1" id="userImage"/>
-          <input type="text" name="newUsername" id="newUsername" onkeyup="updatePicture()" required><br>
+          <div id="userBox">
+            <img src="https://a.ppy.sh/1" id="userImage"/>
+            <input type="text" name="newUsername" id="newUsername" onchange="updatePicture()" placeholder="username or osu!ID" required>
+            <button type="button" onclick="updatePicture()" id="newUserButton"><i class="material-icons">refresh</i></button>
+          </div>
 
           <?php
             $newArray = array_diff_key($_SESSION,array_flip(array('username','userId')));

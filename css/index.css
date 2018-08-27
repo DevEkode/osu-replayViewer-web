@@ -202,8 +202,28 @@ i {
 #askUsername_modal input[type='text']{
   font-size: 1.2vw;
   text-align: center;
+}
+
+#userBox{
   margin-top: 2%;
   margin-bottom: 2%;
+}
+
+#userImage{
+  width:10%;
+  vertical-align:middle;
+  border-radius: 20%;
+  border: 2px solid lightgray;
+}
+
+#newUserButton{
+  padding: 0.5% 0.5%;
+  background-color: #FF66AA;
+  border-radius: 20%;
+}
+
+input[type="text"]:invalid{
+  border: 2px solid red;
 }
 
 

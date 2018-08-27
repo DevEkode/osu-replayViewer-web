@@ -45,7 +45,7 @@ $binaryMods = $replayJSON['Mods'];
 
 //player Informations
 $playerJSON = getUserJSON($replayJSON['user'],$osuApiKey);
-$playerId = $_SESSION['replay_playerId'];
+$playerId = $_POST['userId'];
 
 //---- Send the Informations into the database ----
 $sql = "INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES ('$replayId','$beatmapId','$beatmapSetId','$replayName','$beatmapName','$replayDuration','$playerId','$fileMD5','$replayMod','$binaryMods','$persistance')";

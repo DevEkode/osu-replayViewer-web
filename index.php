@@ -133,6 +133,7 @@ require 'secure/uploadKey.php';
           echo '<input id="filename" name="filename" type="hidden" value='.'"'.$_SESSION['filename'].'"'.'>';
           echo '<input id="duration" name="duration" type="hidden" value='.'"'.$_SESSION['duration'].'"'.'>';
           echo '<input id="duration" name="keyHash" type="hidden" value='.'"'.password_hash($upload_replay_key,PASSWORD_DEFAULT).'"'.'>';
+          echo '<input name="userId" type="hidden" value='.'"'.$_SESSION['replay_playerId'].'"'.'>';
           echo '<input type="submit" value="Start processing" id="start_processing">';
           echo '</form>';
           }

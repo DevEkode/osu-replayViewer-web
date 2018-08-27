@@ -1,4 +1,5 @@
 <?php
+include 'php/analytics.php';
 // ******************** Variables **********************************
 $errors = array (
   0 => "",

@@ -1,4 +1,5 @@
 <?php
+include 'php/analytics.php';
 // ******************** Variables **********************************
 //-- Connect to mysql request database --
 require 'secure/mysql_pass.php';

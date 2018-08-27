@@ -1,5 +1,7 @@
 <?php
   session_start();
+  include 'php/analytics.php';
+
   if(empty($_SESSION['userId'])){
     header("Location:index.php");
   }

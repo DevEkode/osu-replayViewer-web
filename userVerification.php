@@ -1,5 +1,6 @@
 <?php
 session_start();
+include 'php/analytics.php';
 // ******************** Variables **********************************
 //--Connect to osu API --
 require 'php/osuApiFunctions.php';

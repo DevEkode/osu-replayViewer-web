@@ -5,6 +5,7 @@
   require 'php/osuApiFunctions.php';
   require 'secure/osu_api_key.php';
   require 'secure/mysql_pass.php';
+  require 'secure/admins.php';
   $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
 
   // Check connection
@@ -219,7 +220,7 @@
 
     <?php
     if(isset($_SESSION['userId'])){
-      if(strcmp($_SESSION['userId'],$userJSON[0]['user_id']) == 0){
+      if(strcmp($_SESSION['userId'],$userJSON[0]['user_id']) == 0 || isAdmin($_SESSION['userId'])){
         echo'<div class="third_block">
           <span id="section_title">Manage the replay</span>
           <div id="manage_section">

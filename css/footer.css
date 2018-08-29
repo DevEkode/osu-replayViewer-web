@@ -2,8 +2,8 @@
 footer{
   background-image: url("../images/background2.png");
   border-top: solid #FF66AA 10px;
-  padding-bottom: 2%;
-   bottom:0;
+  padding-bottom: 5%;
+  bottom:0;
   width:100%;
 }
 
@@ -47,5 +47,11 @@ footer a:hover{
 @media only screen and (max-width: 1080px) and (orientation: portrait){
   footer img{
     height: 10vh;
+  }
+  footer h3{
+    font-size: 3vw;
+  }
+  #created{
+    font-size: 2vw;
   }
 }

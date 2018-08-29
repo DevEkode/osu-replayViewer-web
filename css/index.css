@@ -343,3 +343,29 @@ input[type="submit"]:disabled{
   margin-bottom: 3%;
   font-size: 2vw;
 }
+
+/* Mobiles */
+@media only screen and (max-width: 1080px) and (orientation: portrait){
+  #title{
+    font-size: 5vw;
+  }
+
+  form[action="#upload_section"]{
+    display: none;
+  }
+
+  .item img{
+    width:25vw;
+  }
+
+  .caption{
+    font-size: 3vw;
+  }
+
+  #upload_title{
+    font-size: 4vw;
+  }
+  #upload_subtitle{
+    font-size: 3vw;
+  }
+}

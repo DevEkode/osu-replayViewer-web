@@ -69,6 +69,32 @@
     }
 	}
 
+  function getModsArray(){
+    $modsArray = array(1,2,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576,2097152,4194304,16777216,33554432,67108864,134217728,268435456);
+		$modsName = array("NF","EZ","HD","HR","SD","DT","RL","HT","NC","FL","AT","SO","AP","PF","4K","5K","6K","7K","8K","FI","RD","CM","9K","COOP","1K","3K","2K");
+		$resultArray = array();
+		if($bin != 0){
+			$resultArray = array();
+		}
+
+		for($i=0;$i<count($modsArray)-1;$i++){
+			$result = $modsArray[$i] & $bin;
+			if($result != 0){
+        array_push($resultArray,$modsName[$i]);
+			}
+		}
+    return $resultArray;
+
+  }
+
+  //TODO 
+
+  function calculateStars($baseStars,$modsBin,$playMod){
+    $array = getModsArray($modsBin);
+    //EZ
+
+  }
+
   //Check if a beatmap is still downloable
   function isBeatmapAvailable($beatmapSetId){
     $page = file_get_contents('https://osu.ppy.sh/beatmapsets/'.$beatmapSetId);

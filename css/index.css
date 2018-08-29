@@ -103,18 +103,19 @@ i {
 
 #fileToUpload{
   margin:auto;
-  padding-left: 30%;
-  padding-right: 30%;
   display: block;
   border-radius:20px;
   border: 3px dashed #555;
   padding-top: 6%;
   padding-bottom:6%;
   text-align: center;
+  width:70vw;
 }
 
 #upload_box{
   margin-bottom: 5%;
+  margin-left: 2vw;
+  margin-right: 2vw;
 }
 
 /* Modal */

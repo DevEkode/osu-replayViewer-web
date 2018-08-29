@@ -250,9 +250,9 @@ include('php/analytics.php');
     </div>
 
     <!-- presentation -->
-    <h1 id="title"> osu!replayViewer </h1>
+    <h1 id="title">osu!replayViewer</h1>
 
-    <h2 id="slogan"> Share your osu! performance to everyone !</h2>
+    <h2 id="slogan">Share your osu! performance to everyone !</h2>
 
     <div id="etapes">
       <div class="item">

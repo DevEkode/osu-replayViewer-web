@@ -18,7 +18,7 @@
 .nav-link{
   padding: 14px 16px;
   display:inline-block;
-  width:9vw;
+  width:auto;
   text-align: center;
   color: white;
   text-decoration: none;
@@ -41,7 +41,7 @@
 
 #logo{
   margin-top: 5%;
-  border-radius:100px;
+  border-radius:50%;
 }
 
 .floatleft {
@@ -53,4 +53,35 @@
 
 .active{
   background-color: #FFB2D4;
+}
+
+/* Mobiles */
+@media only screen and (max-width: 1080px) and (orientation: portrait){
+  [class*="floatright"] {
+        float:left;
+  }
+  [class*="top-nav"] {
+        align-items: center;
+  }
+  [class*="nav-link"] {
+        font-size: 0;
+        padding-left:2vw;
+        padding-right:2vw;
+        padding-top: 1vh;
+        padding-bottom: 1vh;
+  }
+  [class*="nav-link"] i{
+        font-size:8vw;
+  }
+  #logo{
+    margin-top: 10%;
+    margin-left: 2vw;
+    margin-right: 2vw;
+  }
+}
+
+@media only screen and (max-width: 768px) and (orientation: landscape){
+  [class*="top-nav"] {
+        height:15vh;
+  }
 }

@@ -38,7 +38,14 @@ footer a:hover{
 
 #created img{
  vertical-align:middle;
- height: 100px;
+ height: 10vh;
  border-radius: 100%;
  border: solid white 2px;
+}
+
+/* Mobiles */
+@media only screen and (max-width: 1080px) and (orientation: portrait){
+  footer img{
+    height: 10vh;
+  }
 }

@@ -1,5 +1,7 @@
 <?php
 include 'php/analytics.php';
+require 'secure/osu_api_key.php';
+require 'php/osuApiFunctions.php';
 // ******************** Variables **********************************
 //-- Connect to mysql request database --
 require 'secure/mysql_pass.php';
@@ -40,6 +42,9 @@ function verifyCaptcha($secretCaptcha,$cResponse){
   return $json['success'];
 }
 // ******************** Core **********************************
+$userJSON = getUserJSON($userId,$osuApiKey);
+$userId = $userJSON[0]['user_id'];
+
 $query = $conn->prepare("SELECT * FROM accounts WHERE userId=?");
 $query->bind_param("i",$userId);
 $query->execute();

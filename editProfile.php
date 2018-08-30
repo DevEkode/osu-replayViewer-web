@@ -60,6 +60,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script src="js/loader.js"></script>
+    <script src="js/profile/uploadSkin.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
@@ -109,7 +110,7 @@
 
       <div id="uploadSkinZone">
         <h3>- Custom skin uploader -</h3>
-        <form action="php/profile/uploadSkin.php" method="post" enctype="multipart/form-data">
+        <form action="php/profile/uploadSkin.php" method="post" enctype="multipart/form-data" id="submit_skin">
           Select skin to upload (or drag and drop): <br>
 
           <?php
@@ -121,7 +122,7 @@
           <br>
 
           <input type="file" name="fileToUpload" id="fileToUpload"> <br>
-          <input type="submit" value="Upload Skin" name="submit">
+        
         </form>
       </div>
 

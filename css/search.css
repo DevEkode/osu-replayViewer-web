@@ -7,6 +7,8 @@ body {
     background-image: url("../images/background.png");
 	padding-top: 20vh;
   font-family: "Verdana";
+  height:100%;
+  position: relative;
 }
 
 /* Others */
@@ -165,4 +167,24 @@ input[type="submit"]{
 
 #score{
   float:right;
+}
+
+/* Mobiles */
+@media only screen and (max-width: 1080px) and (orientation: portrait){
+  /* Search bar */
+  input[type="text"]{
+    width:30vw;
+    height:5vh;
+  }
+
+  input[type="submit"]{
+    height: 5vh;
+    width: 15vw;
+    font-size: 2vw;
+  }
+
+  #form{
+  	margin-left:0%;
+  	margin-right:0%;
+  }
 }

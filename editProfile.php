@@ -29,7 +29,7 @@
     2 => "Only .osk are allowed",
     3 => "Sorry your skin could't be uploaded",
     4 => "Your skin file name cannot contain special characters",
-    5 => "Your skin file size is more that 50MB"
+    5 => "Your skin file size is more that 50Mo"
   );
 
   $skinRemoveError = array(
@@ -122,7 +122,7 @@
           <br>
 
           <input type="file" name="fileToUpload" id="fileToUpload"> <br>
-        
+
         </form>
       </div>
 

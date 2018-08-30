@@ -11,6 +11,9 @@ function cleanFolder($dir){
 		if(is_file($file)){
 			unlink($file); // delete file
 		}
+    if(is_dir($file)){
+      removeFolder($file);
+    }
 	}
 }
 
@@ -22,7 +25,7 @@ function removeFolder($dir){
 
 require 'replaySettings.php';
 
-$target_dir = "../../accounts/".$_SESSION["userId"]."/";
+$target_dir = "../../accounts/".$_SESSION["userId"]."/uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
@@ -50,8 +53,8 @@ if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', basename($_FILES["fileToUploa
 }
 
 // Check if file already exists
-
-if (file_exists($target_file)) {
+$account_folder = "../../accounts/".$_SESSION["userId"]."/".basename($_FILES["fileToUpload"]["name"]);
+if (file_exists($account_folder)) {
     echo "Sorry, file already exists.";
     $uploadOk = 0;
     error('1');
@@ -92,8 +95,13 @@ if ($uploadOk == 0) {
           $uploadOk = 0;
           error('2');
         }
+        $zip->close();
 
         echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        //Move the uploaded file
+        $new_target = "../../accounts/".$_SESSION["userId"]."/".basename($_FILES["fileToUpload"]["name"]);
+        rename($target_file,$new_target);
+        removeFolder($target_dir."export");
         error('0');
     } else {
         echo "Sorry, there was an error uploading your file.";

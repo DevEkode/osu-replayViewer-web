@@ -1,5 +1,5 @@
 function checkFileSize(file) {
-var max =  50000000; // 50MB
+var max =  52428800; // 50Mo
 
 if (file.size > max) {
     var pathname = window.location.pathname;

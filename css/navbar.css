@@ -1,5 +1,4 @@
 /*Top navigation bar*/
-
 .top-nav{
   z-index: 1;
   font-family: "Verdana";
@@ -80,7 +79,7 @@
   }
 }
 
-@media only screen and (max-width: 768px) and (orientation: landscape){
+@media only screen and (max-width: 1080px) and (orientation: landscape){
   [class*="top-nav"] {
         height:15vh;
   }

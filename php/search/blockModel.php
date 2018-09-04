@@ -8,7 +8,7 @@ function drawProfile($userId,$username){
   echo 		"<img src=$userImgURL>";
   echo 	'</div>';
   echo	"<h3 id=\"beatmap_name\">".$username."</h3>";
-  echo 	"<h4>Click here to visit his profile</h4>";
+  echo 	"<h4 id=\"profileDesc\">Click here to visit his profile</h4>";
   echo	"<span></span>";
   echo'</a>';
 }

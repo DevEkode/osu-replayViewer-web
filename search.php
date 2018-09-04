@@ -232,7 +232,7 @@
 				echo	"<a href=$url title=\"Previous page\"><img class=\"img-valign\" src=\"images/arrow_button_left.png\" alt=\"\"/></a>";
 			}
 
-			echo	"<span> $index / $pageNbr </span>";
+			echo	"<span id=\"pageNumbers\"> $index / $pageNbr </span>";
 
 			if($currentPage != $pageNbr-1){
 				$next = $currentPage+1;

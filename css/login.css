@@ -151,3 +151,16 @@ span.psw {
    visibility: visible;
    opacity: 1;
 }
+
+@media only screen and (max-width: 1080px) and (orientation: portrait){
+
+  form {
+     margin:auto;
+     width:80vw;
+  }
+
+  .g-recaptcha{
+    transform:scale(0.77);
+    transform-origin:0 0;
+  }
+}

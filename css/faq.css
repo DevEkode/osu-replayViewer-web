@@ -23,19 +23,20 @@ body {
 /*text*/
 .question{
   margin-left: 4%;
-  margin-bottom: 2%;
+  margin-right: 4%;
+  margin-bottom: 4%;
 }
 
 .question_title{
   margin-bottom: 2%;
   color:#FF66AA;
   text-shadow: 1px 1px gray;
-  font-size: 1.5vw;
+  font-size: 130%;
 }
 
 .question_text{
   text-align: justify;
-  font-size: 1vw;
+  font-size: 110%;
 }
 
 .mail{
@@ -45,4 +46,12 @@ body {
   margin-left: 20%;
   margin-right: 20%;
   border-radius: 100px;
+}
+
+@media only screen and (max-width: 1080px) and (orientation: portrait){
+  .mail{
+    margin-left: 4%;
+    margin-right: 4%;
+    font-size: 100%;
+  }
 }

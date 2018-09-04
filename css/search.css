@@ -174,7 +174,9 @@ input[type="submit"]{
   /* Search bar */
   input[type="text"]{
     width:30vw;
+    padding-left: 20px;
     height:5vh;
+    font-size: 3vw;
   }
 
   input[type="submit"]{
@@ -186,5 +188,43 @@ input[type="submit"]{
   #form{
   	margin-left:0%;
   	margin-right:0%;
+  }
+
+  /*Result box */
+  .content img {
+  	height:10vh;
+  }
+
+  .content {
+  	height:10vh;
+  }
+
+  #anim {
+  	height:10vh;
+  }
+
+  /*Request boxes*/
+  .requestContent {
+  	height:10vh;
+  }
+
+  .requestContent img {
+  	height:10vh;
+  }
+
+  #block_content{
+    font-size: 2vw;
+  }
+
+  #beatmap_name{
+    font-size: 2.5vw;
+  }
+
+  #profileDesc{
+    font-size: 2vw;
+  }
+
+  #pageNumbers{
+    font-size: 7vw;
   }
 }

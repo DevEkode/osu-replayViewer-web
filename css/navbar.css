@@ -17,7 +17,7 @@
 .nav-link{
   padding: 14px 16px;
   display:inline-block;
-  width:10vw;
+  width:15vw;
   text-align: center;
   color: white;
   text-decoration: none;
@@ -55,7 +55,7 @@
 }
 
 /* Mobiles */
-@media only screen and (max-width: 1080px) and (orientation: portrait){
+@media only screen and (max-width: 840px) and (orientation: portrait){
   [class*="floatright"] {
         float:left;
   }
@@ -68,9 +68,10 @@
         padding-right:2vw;
         padding-top: 1vh;
         padding-bottom: 1vh;
+        width:10vw;
   }
   [class*="nav-link"] i{
-        font-size:8vw;
+      font-size: 7vw;
   }
   #logo{
     margin-top: 10%;

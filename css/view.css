@@ -99,16 +99,24 @@ body {
   float: left;
 }
 
+.player_container{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
 .right_content{
   background-color: rgba(150, 150, 150, .5);
   border-radius: 50px;
   align-items: center;
-  display:inline-flex;
+  display:flex;
   flex-direction: column;
-  height:68vh;
+  height:auto;
   width:31vw;
-  margin-left: 1%;
   padding-top: 2vh;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding-bottom: 2%;
 }
 
 #beatmap_image{
@@ -191,16 +199,15 @@ body {
 .second_block{
   background-color: lightgray;
   border-radius: 10px;
-
   margin-top: 2%;
   margin-left: 1%;
+  margin: auto;
   width: 62vw;
   height:15vh;
   padding: 1%;
   display: flex;
   flex-direction: column;
   text-align: center;
-  float:left;
 }
 
 #share_section {
@@ -239,4 +246,56 @@ body {
 }
 #manage_section img{
   height: 10vh;
+}
+
+/*Mobiles*/
+@media only screen and (orientation: portrait){
+  /* Titles */
+  #title{
+    font-size: 5vw;
+  }
+
+  #subtitle{
+    font-size: 4vw;
+  }
+
+  /*First block*/
+  .right_content{
+    width:auto;
+    height:auto;
+    margin-left: 5%;
+    margin-right:5%;
+  }
+  #section_title{
+    font-size: 4vw;
+  }
+  #account_block{
+    width:auto;
+    object-fit: contain;
+  }
+
+  /*Downloads*/
+  #download_section{
+    background-color: lightgray;
+    border-radius: 10px;
+    width:auto;
+    margin-left: 5%;
+    margin-right:5%;
+    text-align: center;
+    margin-bottom: 2%;
+  }
+  #download_section img{
+    height: 13vh;
+  }
+
+  /* mods */
+  #modsBlock{
+    width:auto;
+    margin-left: 5%;
+    margin-right:5%;
+  }
+  #modsBlock img{
+    height: 5vh;
+  }
+
 }

@@ -1,6 +1,6 @@
 /*Top navigation bar*/
 .top-nav{
-  z-index: 1;
+  z-index: 1000;
   font-family: "Verdana";
   position:fixed;
   top:0;

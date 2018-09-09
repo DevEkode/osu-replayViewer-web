@@ -69,7 +69,7 @@
     ?>
   </div>
 
-<h1 id="title"> Login </h1>
+<h1 id="title">Login</h1>
 <form action="loginForm.php" method="post">
 
   <div class="container">
@@ -116,16 +116,9 @@
   </div>
 </form>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
+<div class="spacer">
+  <br>
+</div>
 
 <footer>
   <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>

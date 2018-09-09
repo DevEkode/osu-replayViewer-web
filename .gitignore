@@ -7,6 +7,8 @@ test2.php
 secure/recaptcha.php
 client_secret.json
 client/
+replayList/
+requestList/
 *.osr
 *.osk
 *.ini

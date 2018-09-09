@@ -18,6 +18,7 @@ body {
 }
 
 form {
+  margin-top: 3%;
    margin-left: 20%;
    margin-right: 20%;
 }
@@ -117,4 +118,30 @@ p{
 .tooltip:hover .tooltiptext {
    visibility: visible;
    opacity: 1;
+}
+
+/* Mobile */
+@media only screen and (orientation: portrait){
+  h3{
+    font-size: 4vw;
+  }
+
+  form{
+    margin-top: 2%;
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+
+  label{
+      font-size: 4vw;
+  }
+
+  #title{
+    font-size: 5vw;
+  }
+
+  input[type=text], input[type=password], input[type=email] {
+    margin:auto;
+    font-size: 4vw;
+  }
 }

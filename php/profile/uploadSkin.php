@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if(empty($_SESSION)){
   header("Location:index.php");
 }
@@ -24,6 +25,10 @@ function removeFolder($dir){
 }
 
 require 'replaySettings.php';
+
+if(!file_exists($target_dir)){
+  mkdir($target_dir);
+}
 
 $target_dir = "../../accounts/".$_SESSION["userId"]."/uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);

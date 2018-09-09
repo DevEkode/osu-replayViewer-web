@@ -226,15 +226,16 @@ body {
   background-color: lightgray;
   border-radius: 10px;
   height:auto;
-  width:31vw;
+  width:auto;
+  margin: auto;
+  margin-left: 5%;
+  margin-right:5%;
   margin-top: 2%;
-  margin-right: 2%;
   display: flex;
   flex-direction: column;
   text-align: center;
   vertical-align: middle;
   padding-top: 1%;
-  margin: auto;
 }
 
 #manage_section{
@@ -300,6 +301,10 @@ body {
   .player_container{
     margin-left: 1%;
     margin-right: 1%;
+  }
+
+  #manage_section img{
+    height: 10vh;
   }
 
 }

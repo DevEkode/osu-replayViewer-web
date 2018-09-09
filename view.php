@@ -168,7 +168,7 @@
       <div class="player_container">
       <?php
         if(empty($replayDATA['youtubeId'])){
-          echo '<video id="player" poster="" data-plyr-config=\'{ enabled: true, publisherId: \'122432164390505\' }\'controls crossorigin playsinline>';
+          echo '<video id="player" poster="" data-plyr-config="{ enabled: true, publisherId: \'122432164390505\'}" controls crossorigin playsinline>';
     			echo "<source src=$urlRaw  type='video/mp4'>";
     			echo '</video>';
         }else{
@@ -211,21 +211,6 @@
       </div>
     </div>
 
-    <div class="second_block">
-      <span id="section_title">Share</span>
-      <div id="share_section">
-        <a class="twitter-share-button" target="_blank"
-        href=<?php echo $twitterURL; ?>>
-        <img src="images/twitter_icon.png"/></a>
-
-        <a class="reddit-share-button" target="_blank"
-        href=<?php echo $redditURL; ?>>
-        <img src="images/reddit_icon.png"/></a>
-
-        <iframe src=<?php echo $facebookURL; ?> width="91" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
-      </div>
-    </div>
-
     <?php
     if(isset($_SESSION['userId'])){
       if(strcmp($_SESSION['userId'],$userJSON[0]['user_id']) == 0 || isAdmin($_SESSION['userId'])){
@@ -240,27 +225,22 @@
     }
     ?>
 
-    <div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-    </div>
+    <br>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <div class="second_block">
+      <span id="section_title">Share</span>
+      <div id="share_section">
+        <a class="twitter-share-button" target="_blank"
+        href=<?php echo $twitterURL; ?>>
+        <img src="images/twitter_icon.png"/></a>
+
+        <a class="reddit-share-button" target="_blank"
+        href=<?php echo $redditURL; ?>>
+        <img src="images/reddit_icon.png"/></a>
+
+        <iframe src=<?php echo $facebookURL; ?> width="91" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+      </div>
+    </div>
 
     <!-- Footer -->
     <footer>

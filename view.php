@@ -168,12 +168,12 @@
       <div class="player_container">
       <?php
         if(empty($replayDATA['youtubeId'])){
-          echo '<video id="player" poster="" controls crossorigin playsinline>';
+          echo '<video id="player" poster="" data-plyr-config=\'{ enabled: true, publisherId: \'122432164390505\' }\'controls crossorigin playsinline>';
     			echo "<source src=$urlRaw  type='video/mp4'>";
     			echo '</video>';
         }else{
           //echo "<iframe class=\"videoYt\" src=".generateYoutubeLink($replayDATA['youtubeId'])." frameborder=\"1\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
-          echo '<div class="plyr__video-embed" id="player">';
+          echo '<div class="plyr__video-embed" data-plyr-config=\'{ enabled: true, publisherId: \'122432164390505\' } id="player">';
           echo  "<iframe src=".generateYoutubeLink($replayDATA['youtubeId'])." allowfullscreen allow=\"autoplay\"></iframe>";
           echo '</div>';
         }

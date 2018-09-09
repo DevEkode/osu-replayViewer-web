@@ -55,7 +55,7 @@
 }
 
 /* Mobiles */
-@media only screen and (max-width: 840px) and (orientation: portrait){
+@media only screen and (max-width: 1080px) and (orientation: portrait){
   [class*="floatright"] {
         float:left;
   }

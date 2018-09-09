@@ -234,9 +234,9 @@ include('php/analytics.php');
           $userUrl = "userProfile.php?id=".$_SESSION['userId'];
           echo '<div class="floatright">';
           echo  "<a href=$userUrl class=\"nav-link\">";
-          echo    '<i class="material-icons">how_to_reg</i> Profile</a>';
+          echo    '<i class="material-icons">account_circle</i> Profile</a>';
           echo  '<a href="logout.php" class="nav-link">';
-          echo    '<i class="material-icons">vpn_key</i> Logout</a>';
+          echo    '<i class="material-icons">cloud_off</i> Logout</a>';
           echo '</div>';
         }else{
           echo '<div class="floatright">';
@@ -285,6 +285,7 @@ include('php/analytics.php');
         <input type="file" name="fileToUpload" id="fileToUpload" oninput="submitForm()">
     </form>
 
+
     <footer>
       <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
       <div class="footer_img">
@@ -306,6 +307,6 @@ include('php/analytics.php');
         <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank"><img src="images/codevirtuel.jpg"/></a></span>
       </div>
     </footer>
-  </body>
+</body>
 
 </html>

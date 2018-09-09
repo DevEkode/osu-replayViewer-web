@@ -10,6 +10,13 @@ body {
   font-family: "Verdana";
 }
 
+#title{
+  text-align:center;
+  color:#FF66AA;
+  text-shadow: 3px 3px white;
+  margin-bottom: 3%;
+}
+
 form {
    margin-left: 20%;
    margin-right: 20%;

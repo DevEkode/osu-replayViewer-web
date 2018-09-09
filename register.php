@@ -197,6 +197,8 @@ if(isFormSubmitted()){
       ?>
     </div>
 
+    <h1 id="title">Register</h1>
+
     <h3> Please register this form to create an account </h3>
 		<form id="form" onsubmit="submitted()" method="post">
 		<label>Osu user id (osu!ID):</label>

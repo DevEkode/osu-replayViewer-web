@@ -86,9 +86,9 @@
           $userUrl = "userProfile.php?id=".$_SESSION['userId'];
           echo '<div class="floatright">';
           echo  "<a href=$userUrl class=\"nav-link\">";
-          echo    '<i class="material-icons">how_to_reg</i> Profile</a>';
+          echo    '<i class="material-icons">account_circle</i> Profile</a>';
           echo  '<a href="logout.php" class="nav-link">';
-          echo    '<i class="material-icons">vpn_key</i> Logout</a>';
+          echo    '<i class="material-icons">cloud_off</i> Logout</a>';
           echo '</div>';
         }else{
           echo '<div class="floatright">';

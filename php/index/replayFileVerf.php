@@ -1,5 +1,7 @@
 <?php
 session_start();
+$disableUpload = true;
+
 require '../osuApiFunctions.php';
 require_once '../../secure/osu_api_key.php';
 require '../../secure/mysql_pass.php';
@@ -55,6 +57,11 @@ function getIniKey($userId,$key){
 }
 
 //----- CORE ------
+if($disableUpload){
+  header("Location:../../index.php");
+  exit;
+}
+
 
 $target_dir = "../../uploads/";
 if(!file_exists($target_dir)){

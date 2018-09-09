@@ -224,6 +224,10 @@ if(isFormSubmitted()){
     <button type="submit" id="submitButton">Create account</button>
 		</form>
 
+    <div class="spacer">
+      <br>
+    </div>
+
     <footer>
       <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
       <div class="footer_img">

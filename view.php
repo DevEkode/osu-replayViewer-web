@@ -93,6 +93,10 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script src="js/loader.js"></script>
     <script src="js/view/modal.js"></script>
+
+    <script src="https://cdn.plyr.io/3.2.4/plyr.js"></script>
+    <script src="js/plyr.js "></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.plyr.io/3.2.4/plyr.css">
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
   </head>
@@ -161,16 +165,20 @@
     <h1 id="subtitle"><?php echo $userJSON[0]['username']; ?></h1>
 
     <div class="first_block">
-
+      <div class="player_container">
       <?php
         if(empty($replayDATA['youtubeId'])){
-          echo '<video class="videoYt" poster="" controls>';
+          echo '<video id="player" poster="" controls crossorigin playsinline>';
     			echo "<source src=$urlRaw  type='video/mp4'>";
     			echo '</video>';
         }else{
-          echo "<iframe class=\"videoYt\" src=".generateYoutubeLink($replayDATA['youtubeId'])." frameborder=\"1\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
+          //echo "<iframe class=\"videoYt\" src=".generateYoutubeLink($replayDATA['youtubeId'])." frameborder=\"1\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
+          echo '<div class="plyr__video-embed" id="player">';
+          echo  "<iframe src=".generateYoutubeLink($replayDATA['youtubeId'])." allowfullscreen allow=\"autoplay\"></iframe>";
+          echo '</div>';
         }
       ?>
+      </div>
       <!-- Right content block -->
       <div class="right_content">
         <span id="section_title">Visit <?php echo $userJSON[0]['username']; ?> profiles</span>

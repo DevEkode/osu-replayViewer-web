@@ -4,7 +4,7 @@ session_start();
   include 'php/progress/functions.php';
 
   //Refresh every 30s
-  header('Refresh: 30');
+  //header('Refresh: 30');
 
   $replayDATA = getRequestArray($_GET['id']);
   if(empty($replayDATA)){
@@ -85,6 +85,27 @@ session_start();
           document.getElementById("timer").innerHTML = "less that 1sec";
         }
       }, 1000);
+    </script>
+
+    <!-- Update page -->
+    <script>
+      $(document).ready(function(){
+           setInterval(checkUpdate, 10000);
+       });
+
+      function checkUpdate(){
+        $.ajax({
+            type: "POST",
+            url: "../../php/progress/checkUpdate.php",
+            data: {replayId:<?php echo '"'.$_GET['id'].'"'?>},
+            success: function(response){
+                //Check if the status has been updated
+                if(response != <?php echo $replayDATA['currentStatut']?>){
+                  window.location.reload();
+                }
+            }
+        });
+      }
     </script>
 
   </head>

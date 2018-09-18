@@ -40,7 +40,7 @@ body {
   border-radius:200px;
   border-style: solid;
   border-color: white;
-  height:30%;
+  height:25vh;
   float: left;
 }
 
@@ -49,8 +49,9 @@ body {
 }
 
 #osuImage img{
-  border-radius:200px;
-  height : 15%;
+  height : 13vh;
+  padding-left:8%;
+  padding-top: 2%;
 }
 
 #osuImage:hover{
@@ -58,7 +59,7 @@ body {
 }
 
 #profileImage img{
-  height : 15%;
+  height : 13vh;
 }
 
 #profileImage:hover{
@@ -70,7 +71,7 @@ body {
   padding-left:8%;
   padding-right: 15%;
   font-family: "Verdana";
-  font-size: 150%;
+  font-size: 3.5vh;
   color:black;
 }
 
@@ -112,4 +113,34 @@ body {
 
 .showMore {
   margin-top: 2%;
+}
+
+/* Mobiles */
+@media only screen and (max-width: 1080px) and (orientation: portrait){
+  /*First block*/
+  #userImage{
+    height:30vw;
+    float:none;
+  }
+  #header{
+    padding: 2% 5% 2% 5%;
+    text-align: center;
+  }
+  #headerContent{
+    font-size: 4.5vw;
+    padding-bottom: 2%;
+  }
+  #osuImage img{
+    height : 15vw;
+    padding-left:0%;
+  }
+  #profileImage img{
+    height : 15vw;
+  }
+
+  /*Replay library*/
+  #replayList h2{
+    font-size: 5vw;
+    padding-bottom: 2%;
+  }
 }

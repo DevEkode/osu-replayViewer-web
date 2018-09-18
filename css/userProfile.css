@@ -88,7 +88,8 @@ body {
 #replayList h2{
   text-align: center;
   font-family: "Verdana";
-  font-size: 200%;
+  font-size: 2vw;
+  padding-bottom: 2%;
 }
 
 #replayList {
@@ -128,7 +129,6 @@ body {
   }
   #headerContent{
     font-size: 4.5vw;
-    padding-bottom: 2%;
   }
   #osuImage img{
     height : 15vw;

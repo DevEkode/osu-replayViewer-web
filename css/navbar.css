@@ -6,7 +6,7 @@
   top:0;
   display:flex;
   overflow:visible;
-  height:10vh;
+  height:6rem;
   width:100%;
   justify-content: center;
   align-items:center;
@@ -61,6 +61,7 @@
   }
   [class*="top-nav"] {
         align-items: center;
+        height:15vw;
   }
   [class*="nav-link"] {
         font-size: 0;
@@ -83,5 +84,17 @@
 @media only screen and (max-width: 1080px) and (orientation: landscape){
   [class*="top-nav"] {
         height:15vh;
+  }
+}
+
+@media only screen and (max-height:200px){
+  .top-nav{
+    display: none;
+  }
+}
+
+@media only screen and (max-width:200px){
+  .top-nav{
+    display: none;
   }
 }

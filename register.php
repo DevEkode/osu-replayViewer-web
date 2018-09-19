@@ -205,7 +205,7 @@ if(isFormSubmitted()){
     <div class="tooltip">Find my osu!ID
       <img class="tooltiptext" src="images/tooltips/findOsuId.png">
     </div>
-		<input type="text" name="userId" id="userId" onkeyup="showUsername(this.value); update()" autocomplete=off required> <span id="txtHint"></span><br>
+		<input type="number" name="userId" id="userId" onkeyup="showUsername(this.value); update()" autocomplete=off required> <span id="txtHint"></span><br>
 		<label>e-mail: </label>
 		<input type="email" name="email" id="email" onkeyup="showEmailValidity(); update()" required><span id="emailHint"></span><br>
     <label>confirm email: </label>

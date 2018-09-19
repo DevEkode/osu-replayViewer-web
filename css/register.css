@@ -23,7 +23,7 @@ form {
    margin-right: 20%;
 }
 
-input[type=text], input[type=password], input[type=email] {
+input[type=number], input[type=password], input[type=email] {
    width: 100%;
    padding: 12px 20px;
    margin: 8px 0;
@@ -140,7 +140,7 @@ p{
     font-size: 5vw;
   }
 
-  input[type=text], input[type=password], input[type=email] {
+  input[type=number], input[type=password], input[type=email] {
     margin:auto;
     font-size: 4vw;
   }

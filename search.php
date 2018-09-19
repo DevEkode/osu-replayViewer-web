@@ -113,7 +113,7 @@
 
 		<section id="form">
 			<form action="php/search/queryReplays.php" method="post">
-				<input type="text" name="playerId" placeholder="Enter osu! player name or ID"/>
+				<input type="search" name="playerId" placeholder="Enter osu! player name or ID"/>
 				<input type="submit" name="SubmitButton"/>
 			</form>
 			<?php

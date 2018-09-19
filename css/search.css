@@ -37,7 +37,7 @@ body {
 	border-radius:50px;
 }
 
-input[type="text"]{
+input[type="search"]{
   vertical-align: middle;
   width:20vw;
   height:5vh;

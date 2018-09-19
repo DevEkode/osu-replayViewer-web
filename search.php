@@ -112,7 +112,7 @@
 		<h1 id="title">Search page</h1>
 
 		<section id="form">
-			<form action="php/search/queryReplays.php" method="post">
+			<form action="php/search/queryReplays.php" method="get">
 				<input type="search" name="playerId" placeholder="Enter osu! player name or ID"/>
 				<input type="submit" name="SubmitButton"/>
 			</form>

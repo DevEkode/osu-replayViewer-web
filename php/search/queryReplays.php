@@ -17,11 +17,11 @@ if ($conn->connect_error) {
 //-- Get all the Informations --
 
 //check if the text is a number
-if(is_numeric($_POST['playerId'])){
-  $playerId = $_POST['playerId'];
+if(is_numeric($_GET['playerId'])){
+  $playerId = $_GET['playerId'];
 }else{
   //convert to a numeric
-  $userJSON = getUserJSON($_POST['playerId'],$osuApiKey);
+  $userJSON = getUserJSON($_GET['playerId'],$osuApiKey);
   if(empty($userJSON)){
     $conn->close();
     header("Location:../../search?error=1");

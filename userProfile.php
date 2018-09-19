@@ -100,7 +100,7 @@ if(empty($username)){
 }
 
 $osuProfileLink = "https://osu.ppy.sh/users/".$userId;
-$searchPageLink = "search.php?u=".$userId;
+$searchPageLink = "php/search/queryReplays.php?playerId=".$userId;
 $profileImg = "https://a.ppy.sh/".$userId;
 $userReplayList = getReplayInfo($conn,$userId);
  ?>
@@ -178,7 +178,7 @@ $userReplayList = getReplayInfo($conn,$userId);
             }
       echo '<br>';
       if(count($userReplayList) >= 8){
-        echo  "<a href=$searchPageLink; ><img src=\"images/add.png\" class=\"showMore\"></a>";
+        echo  "<a href=$searchPageLink><img src=\"images/add.png\" class=\"showMore\"></a>";
       }
       echo '</block>';
     }

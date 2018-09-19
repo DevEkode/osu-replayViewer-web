@@ -154,7 +154,7 @@ function exitPage(){
   <div class="block" id="block">
   <h2>Enter your email account to recover your password</h2>
   <form method="post">
-    <input type="email" name="email">
+    <input type="email" name="email" required><br>
     <input type="submit"><br>
     <?php
       if(isset($_GET['error'])){

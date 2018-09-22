@@ -12,6 +12,7 @@ include('php/analytics.php');
     <meta content="Share your osu! performance to everyone !" property="og:description">
     <meta content="osu!replayViewer" property="og:site_name">
     <meta content="http://osureplayviewer.xyz/images/icon.png" property='og:image'>
+    <meta charset="UTF-8">
 
     <!-- Google / Search Engine Tags -->
     <meta itemprop="name" content="osu!replayViewer">
@@ -281,10 +282,21 @@ include('php/analytics.php');
     <h2 id="upload_title">Select your osu replay to upload (.osr)</h2>
     <h2 id="upload_subtitle">Drag and drop or open the explorer</h2>
 
-    <form action="php/index/replayFileVerf.php" method="post" enctype="multipart/form-data" id="upload_box">
-        <input type="file" name="fileToUpload" id="fileToUpload" oninput="submitForm()">
-    </form>
-
+    <!-- Upload box -->
+    <?php
+    require_once 'php/disableUploads.php';
+    if(!$disableUploads){
+      echo '<form action="php/index/replayFileVerf.php" method="post" enctype="multipart/form-data" id="upload_box">';
+      echo    '<input type="file" name="fileToUpload" id="fileToUpload" oninput="submitForm()">';
+      echo '</form>';
+    }else{
+      echo '<div id="upload_box">';
+      echo  '<h2 id=\'fileToUpload\'>🚧 Uploads are disabled for now, try again later 🚧<br>';
+      echo    '<span style="font-size:10px;font-style: oblique;">We\'re sorry for that btw</span>';
+      echo  '</h2>';
+      echo '</div>';
+    }
+    ?>
 
     <footer>
       <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>

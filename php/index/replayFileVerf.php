@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once '../disableUploads.php';
 $disableUpload = true;
 
 require '../osuApiFunctions.php';

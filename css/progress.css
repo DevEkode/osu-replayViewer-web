@@ -74,28 +74,30 @@ body {
 
 #progressBar_section{
   border-radius: 50px;
-  height:10vh;
+  height:auto;
   margin:0% 4%;
   border: 5px solid #FFB2D4;
   background-color: lightgray;
   padding: 1%;
+  padding-top: 2%;
   text-align: center;
   font-size: 2vw;
 }
 
 #underline{
-  height:1.2%;
-  width: 89%;
-  margin-right: 8%;
+  height:0.7em;
+  width:89%;
+  margin-right:4%;
   border:5px solid black;
   position: absolute;
   border-radius: 100px;
 }
 
 #line{
+  border:5px solid #ffb2d4;
   z-index: 100;
   border-radius: 100px;
-  height:30%;
+  height:0.7em;
   width:100%;
   background-size: 56.57px 56.57px;
   background-image: linear-gradient(45deg, #ff66aa 25%, #ffb2d4 25%, #ffb2d4 50%, #ff66aa 50%, #ff66aa 75%, #ffb2d4 75%, #ffb2d4 100%);
@@ -120,7 +122,7 @@ body {
 }
 
 #list_section span{
-  font-size: 1.2vw;
+  font-size: 1.5vw;
   font-weight: bold;
   vertical-align: middle;
 }
@@ -134,4 +136,39 @@ body {
   color:black;
   text-shadow: 2px 2px gray;
   font-size: 2vw;
+}
+
+/*Mobiles */
+@media only screen and (orientation: portrait){
+  #title{
+    font-size: 5vw;
+  }
+  #text_section span{
+    font-size: 2.2vw;
+  }
+  #timer{
+    font-size: 2.2vw;
+  }
+
+
+  #beatmap_section{
+    height:10vh;
+  }
+  #text_section h2{
+    font-size: 2vw;
+    margin-bottom: 2%;
+  }
+  #duration{
+    font-size: 2.3vw;
+  }
+
+  #progressBar_section span{
+    font-size: 3vw;
+  }
+  #list_section h3{
+    font-size: 3.5vw;
+  }
+  #list_section span{
+    font-size: 3vw;
+  }
 }

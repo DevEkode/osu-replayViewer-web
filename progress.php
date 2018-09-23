@@ -175,11 +175,10 @@ session_start();
       <h3>State list</h3>
       <?php drawStates($replayDATA['currentStatut'],getClassement($_GET['id'])) ?>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    
+    <div class="spacer">
+			<br>
+		</div>
 
     <!-- Footer -->
     <footer>

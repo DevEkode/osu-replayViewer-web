@@ -1,6 +1,6 @@
 //modal
 var modal;
-var clear = 'true';
+var clear = 'false';
 
 function openModal(){
   modal = document.getElementById("myModal");

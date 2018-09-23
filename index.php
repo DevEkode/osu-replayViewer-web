@@ -188,7 +188,6 @@ include('php/analytics.php');
     <!-- Activate modal view when session is full -->
     <?php
       if(isset($_SESSION['replayStructure'])){
-
         $string = '';
         if(!$_SESSION['replayStructure']){$string .= "setItemFalse('replayS'); ";}
         if(!$_SESSION['beatmapAvailable']){$string .= "setItemFalse('beatmapA'); ";}

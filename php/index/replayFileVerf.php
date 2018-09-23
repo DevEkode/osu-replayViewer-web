@@ -1,6 +1,6 @@
 <?php
+session_start();
 require_once '../disableUploads.php';
-$disableUpload = true;
 
 require '../osuApiFunctions.php';
 require_once '../../secure/osu_api_key.php';
@@ -57,8 +57,8 @@ function getIniKey($userId,$key){
 }
 
 //----- CORE ------
-if($disableUpload){
-  header("Location:../../index.php");
+if($disableUploads){
+  //header("Location:../../index.php");
   exit;
 }
 
@@ -148,6 +148,7 @@ if(isset($replay_content)){
   $_SESSION['mods'] = 'none';
 }
 
+var_dump($_SESSION);
 header("Location:../../index.php");
 
 ?>

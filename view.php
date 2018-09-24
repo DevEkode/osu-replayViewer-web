@@ -168,13 +168,13 @@
       <div class="player_container">
       <?php
         if(empty($replayDATA['youtubeId'])){
-          echo '<video id="player" poster="" data-plyr-config="{ enabled: true, publisherId: \'122432164390505\'}" controls crossorigin playsinline>';
+          echo '<video id="player" controls crossorigin playsinline>';
     			echo "<source src=$urlRaw  type='video/mp4'>";
     			echo '</video>';
         }else{
           //echo "<iframe class=\"videoYt\" src=".generateYoutubeLink($replayDATA['youtubeId'])." frameborder=\"1\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
-          echo '<div class="plyr__video-embed" data-plyr-config=\'{ enabled: true, publisherId: \'122432164390505\' } id="player">';
-          echo  "<iframe src=".generateYoutubeLink($replayDATA['youtubeId'])." allowfullscreen allow=\"autoplay\"></iframe>";
+          echo '<div class="plyr__video-embed" id="player">';
+          echo  "<iframe src=".'"'.generateYoutubeLink($replayDATA['youtubeId']).'"'." frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
           echo '</div>';
         }
       ?>
@@ -190,7 +190,7 @@
         <span id="section_title">Mods</span>
         <?php drawMod($replayDATA['binaryMods']);   ?>
 
-        <span id="section_title">Downloads</span>
+        <span id="section_title">Downloads / Links</span>
         <div id="download_section">
           <a href=<?php echo $beatmapURL; ?> target="_blank"><img src="images/view/download_beatmap.png"/></a>
           <?php
@@ -204,6 +204,12 @@
               echo "<a href=$osuUrl2><img src=\"images/view/download_replay.png\"/></a>";
             }else{
               echo "<img src=\"images/view/download_replay.png\" class=\"disabled\"/>";
+            }
+
+            if(!empty($replayDATA['youtubeId'])){
+              echo "<a href=$videoURL><img src=\"images/view/youtube_logo.png\"/></a>";
+            }else{
+              echo "<img src=\"images/view/youtube_logo.png\" class=\"disabled\"/>";
             }
           ?>
           <!-- <a href="#"><img src="images/view/download_skin.png"/> -->

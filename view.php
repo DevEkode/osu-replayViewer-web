@@ -42,7 +42,7 @@
     $metaUrl = "https://osureplayviewer.xyz/replayList/".$_GET['id']."/".$_GET['id'].".mp4";
   }else{
     $showRaw = false;
-    $videoURL = "http://www.youtube.com/v/".generateYoutubeLink($replayDATA['youtubeId']);
+    $videoURL = "https://www.youtube.com/watch?v=".$replayDATA['youtubeId'];
   }
 
   $osrUrl = "./replayList/".$_GET['id']."/".base64_decode($replayDATA['OFN']);
@@ -195,19 +195,19 @@
           <a href=<?php echo $beatmapURL; ?> target="_blank"><img src="images/view/download_beatmap.png"/></a>
           <?php
             if($showRaw){
-              echo "<a href=$urlRaw><img src=\"images/view/video_source.png\"/></a>";
+              echo "<a href=$urlRaw target=\"_blank\"><img src=\"images/view/video_source.png\"/></a>";
             }else{
               echo "<img src=\"images/view/video_source.png\" class=\"disabled\"/>";
             }
 
             if($showOsr){
-              echo "<a href=$osuUrl2><img src=\"images/view/download_replay.png\"/></a>";
+              echo "<a href=$osuUrl2 target=\"_blank\"><img src=\"images/view/download_replay.png\"/></a>";
             }else{
               echo "<img src=\"images/view/download_replay.png\" class=\"disabled\"/>";
             }
 
             if(!empty($replayDATA['youtubeId'])){
-              echo "<a href=$videoURL><img src=\"images/view/youtube_logo.png\"/></a>";
+              echo "<a href=$videoURL target=\"_blank\"><img src=\"images/view/youtube_logo.png\"/></a>";
             }else{
               echo "<img src=\"images/view/youtube_logo.png\" class=\"disabled\"/>";
             }

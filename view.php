@@ -207,7 +207,8 @@
             }
 
             if(!empty($replayDATA['youtubeId'])){
-              echo "<a href=$videoURL target=\"_blank\"><img src=\"images/view/youtube_logo.png\"/></a>";
+              $ytLink = "https://www.youtube.com/watch?v=".$replayDATA['youtubeId'];
+              echo "<a href=".$ytLink." target=\"_blank\"><img src=\"images/view/youtube_logo.png\"/></a>";
             }else{
               echo "<img src=\"images/view/youtube_logo.png\" class=\"disabled\"/>";
             }

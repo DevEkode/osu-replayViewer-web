@@ -6,6 +6,8 @@
   require 'secure/osu_api_key.php';
   require 'secure/mysql_pass.php';
   require 'secure/admins.php';
+
+  $owa->setPageTitle('View page');
   $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
 
   // Check connection

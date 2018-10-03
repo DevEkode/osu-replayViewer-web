@@ -63,11 +63,21 @@ if (isset($_GET['code'])) {
   $_SESSION[$tokenSessionKey] = $client->getAccessToken();
   header('Location: ' . $redirect);
 }
+$client->setAccessToken($OAUTH_CLIENT_TOKEN);
 if (isset($_SESSION[$tokenSessionKey])) {
   $client->setAccessToken($_SESSION[$tokenSessionKey]);
+  //var_dump($_SESSION[$tokenSessionKey]);
 }
 // Check to ensure that the access token was successfully acquired.
-if ($client->getAccessToken() && isset($_GET['replay'])) {
+if(!isset($_GET['replay'])){
+  $htmlBody = <<<END
+  <h3>I don't know what replay to upload</h3>
+  <p>
+    You need to set the replayId parameter.
+  <p>
+END;
+}
+else if ($client->getAccessToken()) {
   $htmlBody = '';
   try{
     // REPLACE this value with the path to the file you are uploading.
@@ -101,11 +111,14 @@ if ($client->getAccessToken() && isset($_GET['replay'])) {
     //  Artist : artist name
     //  Played by : username
     $beatmapURL = "https://osu.ppy.sh/beatmapsets/".$beatmapJSON[0]['beatmapset_id'];
+    $replayURL = "https://osureplayviewer.xyz/view.php?id=".$_GET['replay'];
 
-$desc = "Beatmap : ".$beatmapJSON[0]['title']." (".$beatmapURL.")"."
+$desc = "Powered by osu!replayViewer (".$replayURL.")"."
+Beatmap : ".$beatmapJSON[0]['title']." (".$beatmapURL.")"."
 Artist  : ".$beatmapJSON[0]['artist']."
 Creator : ".$beatmapJSON[0]['creator']."
-Played by : ".$userJSON[0]['username'];
+Played by : ".$userJSON[0]['username']."
+ReplayId : ".$_GET['replay'];
 
     $snippet->setDescription("$desc");
     // Numeric video category. See
@@ -161,7 +174,7 @@ Played by : ".$userJSON[0]['username'];
         htmlspecialchars($e->getMessage()));
   }
   $_SESSION[$tokenSessionKey] = $client->getAccessToken();
-} elseif ($OAUTH2_CLIENT_ID == ' 60201360036-lrj57dunpoffmqs9m372nonvqerlio90.apps.googleusercontent.com ') {
+} elseif ($OAUTH2_CLIENT_ID == null) {
   $htmlBody = <<<END
   <h3>Client Credentials Required</h3>
   <p>

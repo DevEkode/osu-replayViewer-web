@@ -26,14 +26,14 @@ function removeFolder($dir){
 
 require 'replaySettings.php';
 
-if(!file_exists($target_dir)){
-  mkdir($target_dir);
-}
-
 $target_dir = "../../accounts/".$_SESSION["userId"]."/uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+
+if(!file_exists($target_dir)){
+  mkdir($target_dir);
+}
 
 function error($error_code){
   global $target_dir;
@@ -110,7 +110,8 @@ if ($uploadOk == 0) {
         error('0');
     } else {
         echo "Sorry, there was an error uploading your file.";
-        error('3');
+        exit;
+        //error('3');
     }
 }
  ?>

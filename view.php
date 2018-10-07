@@ -6,6 +6,8 @@
   require 'secure/osu_api_key.php';
   require 'secure/mysql_pass.php';
   require 'secure/admins.php';
+
+  $owa->setPageTitle('View page');
   $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
 
   // Check connection
@@ -42,7 +44,7 @@
     $metaUrl = "https://osureplayviewer.xyz/replayList/".$_GET['id']."/".$_GET['id'].".mp4";
   }else{
     $showRaw = false;
-    $videoURL = "http://www.youtube.com/v/".generateYoutubeLink($replayDATA['youtubeId']);
+    $videoURL = "https://www.youtube.com/watch?v=".$replayDATA['youtubeId'];
   }
 
   $osrUrl = "./replayList/".$_GET['id']."/".base64_decode($replayDATA['OFN']);
@@ -168,13 +170,13 @@
       <div class="player_container">
       <?php
         if(empty($replayDATA['youtubeId'])){
-          echo '<video id="player" poster="" data-plyr-config="{ enabled: true, publisherId: \'122432164390505\'}" controls crossorigin playsinline>';
+          echo '<video id="player" controls crossorigin playsinline>';
     			echo "<source src=$urlRaw  type='video/mp4'>";
     			echo '</video>';
         }else{
           //echo "<iframe class=\"videoYt\" src=".generateYoutubeLink($replayDATA['youtubeId'])." frameborder=\"1\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
-          echo '<div class="plyr__video-embed" data-plyr-config=\'{ enabled: true, publisherId: \'122432164390505\' } id="player">';
-          echo  "<iframe src=".generateYoutubeLink($replayDATA['youtubeId'])." allowfullscreen allow=\"autoplay\"></iframe>";
+          echo '<div class="plyr__video-embed" id="player">';
+          echo  "<iframe src=".'"'.generateYoutubeLink($replayDATA['youtubeId']).'"'." frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
           echo '</div>';
         }
       ?>
@@ -190,20 +192,27 @@
         <span id="section_title">Mods</span>
         <?php drawMod($replayDATA['binaryMods']);   ?>
 
-        <span id="section_title">Downloads</span>
+        <span id="section_title">Downloads / Links</span>
         <div id="download_section">
           <a href=<?php echo $beatmapURL; ?> target="_blank"><img src="images/view/download_beatmap.png"/></a>
           <?php
             if($showRaw){
-              echo "<a href=$urlRaw><img src=\"images/view/video_source.png\"/></a>";
+              echo "<a href=$urlRaw target=\"_blank\"><img src=\"images/view/video_source.png\"/></a>";
             }else{
               echo "<img src=\"images/view/video_source.png\" class=\"disabled\"/>";
             }
 
             if($showOsr){
-              echo "<a href=$osuUrl2><img src=\"images/view/download_replay.png\"/></a>";
+              echo "<a href=$osuUrl2 target=\"_blank\"><img src=\"images/view/download_replay.png\"/></a>";
             }else{
               echo "<img src=\"images/view/download_replay.png\" class=\"disabled\"/>";
+            }
+
+            if(!empty($replayDATA['youtubeId'])){
+              $ytLink = "https://www.youtube.com/watch?v=".$replayDATA['youtubeId'];
+              echo "<a href=".$ytLink." target=\"_blank\"><img src=\"images/view/youtube_logo.png\"/></a>";
+            }else{
+              echo "<img src=\"images/view/youtube_logo.png\" class=\"disabled\"/>";
             }
           ?>
           <!-- <a href="#"><img src="images/view/download_skin.png"/> -->

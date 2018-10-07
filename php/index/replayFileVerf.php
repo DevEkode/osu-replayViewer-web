@@ -57,8 +57,8 @@ function getIniKey($userId,$key){
 }
 
 //----- CORE ------
-if($disableUploads){
-  //header("Location:../../index.php");
+if($disableUploads || !isset($_FILES['fileToUpload'])){
+  header("Location:../../index.php");
   exit;
 }
 

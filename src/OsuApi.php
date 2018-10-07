@@ -1,8 +1,12 @@
 <?php
+require __DIR__ . "/../secure/osu_api_key.php";
+
+class OsuApi {
 
   //------- GET JSONS ---------
-  function getBeatmapJSON($beatmapId,$api){ //Source : https://stackoverflow.com/questions/16700960/how-to-use-curl-to-get-json-data-and-decode-the-data
-    $url = "https://osu.ppy.sh/api/get_beatmaps?k=$api&b=$beatmapId";
+  public static function getBeatmapJSON($beatmapId){ //Source : https://stackoverflow.com/questions/16700960/how-to-use-curl-to-get-json-data-and-decode-the-data
+    $apiKey = getKey();
+    $url = "https://osu.ppy.sh/api/get_beatmaps?k=$apiKey&b=$beatmapId";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -12,8 +16,9 @@
     return json_decode($result, true);
   }
 
-  function getBeatmapJSONwMD5($beatmapMD5,$api){ //Source : https://stackoverflow.com/questions/16700960/how-to-use-curl-to-get-json-data-and-decode-the-data
-    $url = "https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$beatmapMD5";
+  public static function getBeatmapJSONwMD5($beatmapMD5){ //Source : https://stackoverflow.com/questions/16700960/how-to-use-curl-to-get-json-data-and-decode-the-data
+    $apiKey = getKey();
+    $url = "https://osu.ppy.sh/api/get_beatmaps?k=$apiKey&h=$beatmapMD5";
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -23,8 +28,9 @@
     return json_decode($result, true);
   }
 
-  function getUserJSON($username, $api){
-		$url = "https://osu.ppy.sh/api/get_user?k=$api&u=$username";
+  public static function getUserJSON($username){
+    $apiKey = getKey();
+		$url = "https://osu.ppy.sh/api/get_user?k=$apiKey&u=$username";
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -34,8 +40,9 @@
 		return json_decode($result, true);
 	}
 
-  function getReplayJSON($beatmapId,$user,$gamemode,$mods,$api){
-    $url = "https://osu.ppy.sh/api/get_scores?k=$api&b=$beatmapId&u=$user&m=$gamemode&mods=$mods";
+  public static function getReplayJSON($beatmapId,$user,$gamemode,$mods){
+    $apiKey = getKey();
+    $url = "https://osu.ppy.sh/api/get_scores?k=$apiKey&b=$beatmapId&u=$user&m=$gamemode&mods=$mods";
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -46,7 +53,7 @@
   }
 
   //Return mods name from the binary (divided by ' ')
-  function drawMods($bin){
+  public static function drawMods($bin){
 		$modsArray = array(1,2,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576,2097152,4194304,16777216,33554432,67108864,134217728,268435456);
 		$modsName = array("NF","EZ","HD","HR","SD","DT","RL","HT","NC","FL","AT","SO","AP","PF","4K","5K","6K","7K","8K","FI","RD","CM","9K","COOP","1K","3K","2K");
 		$string = "";
@@ -70,7 +77,7 @@
     }
 	}
 
-  function getModsArray(){
+  public function getModsArray(){
     $modsArray = array(1,2,8,16,32,64,128,256,512,1024,2048,4096,8192,16384,32768,65536,131072,262144,524288,1048576,2097152,4194304,16777216,33554432,67108864,134217728,268435456);
 		$modsName = array("NF","EZ","HD","HR","SD","DT","RL","HT","NC","FL","AT","SO","AP","PF","4K","5K","6K","7K","8K","FI","RD","CM","9K","COOP","1K","3K","2K");
 		$resultArray = array();
@@ -90,14 +97,14 @@
 
   //TODO
 
-  function calculateStars($baseStars,$modsBin,$playMod){
+  public function calculateStars($baseStars,$modsBin,$playMod){
     $array = getModsArray($modsBin);
     //EZ
 
   }
 
   //Check if a beatmap is still downloable
-  function isBeatmapAvailable($beatmapSetId){
+  public static function isBeatmapAvailable($beatmapSetId){
     $page = file_get_contents('https://osu.ppy.sh/beatmapsets/'.$beatmapSetId);
     preg_match("/download_disabled/", $page, $output_array);
     if(empty($output_array)){
@@ -107,7 +114,7 @@
     }
   }
 
-  function getReplayContent($filedir){
+  public static function getReplayContent($filedir){
   	$myfile = fopen($filedir, "r") or die("Unable to open file!");
   	$replay_content = fread($myfile,filesize($filedir));
 
@@ -118,13 +125,13 @@
   	return $array;
   }
 
-  function isValidMd5($md5 ='')
+  public static function isValidMd5($md5 ='')
   {
     return preg_match('/^[a-f0-9]{32}$/', $md5);
   }
 
-  function validateReplayStructure($filedir,$api){
-    $replayDATA = getReplayContent($filedir);
+  public static function validateReplayStructure($filedir){
+    $replayDATA = OsuApi::getReplayContent($filedir);
     $valide = true;
 
     //Check gamemode
@@ -140,12 +147,12 @@
     }
 
     //Check md5
-    if(!isValidMd5($replayDATA['md5'])){
+    if(!OsuApi::isValidMd5($replayDATA['md5'])){
       echo 'Beatmap md5 not valid <br>';
       $valide = false;
       $beatmapJSON = null;
     }else{
-      $beatmapJSON = getBeatmapJSONwMD5($replayDATA['md5'],$api);
+      $beatmapJSON = OsuApi::getBeatmapJSONwMD5($replayDATA['md5']);
     }
 
     //Check username
@@ -156,7 +163,7 @@
     }*/
 
     //Check replay md5
-    if(!isValidMd5($replayDATA['md5Replay'])){
+    if(!OsuApi::isValidMd5($replayDATA['md5Replay'])){
       echo 'Replay md5 not valid <br>';
       $valide = false;
     }
@@ -194,7 +201,7 @@
     return $valide;
   }
 
-  function isDT($binary){ //Return player name of the replay from the name of the file
+  public static function isDT($binary){ //Return player name of the replay from the name of the file
   	$filter = 0b0000000000000000000001000000;
   	$result = $binary & $filter;
 
@@ -205,9 +212,9 @@
   	}
   }
 
-  function generateBtFileNamewAPI($beatmapId,$api){
+  public static function generateBtFileNamewAPI($beatmapId){
   	//Setid Artist - Title
-    $json = getBeatmapJSON($beatmapId,$api);
+    $json = OsuApi::getBeatmapJSON($beatmapId);
   	$beatmapSetId = $json[0]["beatmapset_id"];
   	$artist = $json[0]["artist"];
   	$title = $json[0]["title"];
@@ -216,7 +223,7 @@
   	return $BFN;
   }
 
-  function generateBtFileNamewJSON($beatmapJSON){
+  public static function generateBtFileNamewJSON($beatmapJSON){
   	//Setid Artist - Title
   	$beatmapSetId = $beatmapJSON[0]["beatmapset_id"];
   	$artist = $beatmapJSON[0]["artist"];
@@ -225,6 +232,7 @@
 
   	return $BFN;
   }
+}
 
 
  ?>

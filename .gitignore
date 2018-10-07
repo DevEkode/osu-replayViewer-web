@@ -9,6 +9,7 @@ client_secret.json
 client/
 replayList/
 requestList/
+vendor
 *.osr
 *.osk
 *.ini

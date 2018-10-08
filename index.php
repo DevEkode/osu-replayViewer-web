@@ -137,7 +137,8 @@ include('php/analytics.php');
           <?php
           if($_SESSION['replayStructure'] && $_SESSION['beatmapAvailable'] && $_SESSION['playerOsuAccount'] && $_SESSION['replayBelow10'] && $_SESSION['replayNotDuplicate'] && $_SESSION['replayNotWaiting']){
           echo '<form class="align_center" method="post" enctype="multipart/form-data" action="php/index/upload.php">';
-          echo '<input id="checkBox" type="checkbox" name="checkbox"> <span> do not delete my replay after 30 days</span><br>';
+          echo '<input id="checkBox" type="checkbox" name="checkbox"> <span id="checkboxText"> do not delete my replay after 30 days</span><br>';
+          echo '<input id="checkBox" type="checkbox" name="checkboxTU"> <span id="checkboxText"> I accept the <a href="legal/TU.php?TU=replay" target="_blank">terms of uses</a></span><br>';
           echo '<input id="filename" name="filename" type="hidden" value='.'"'.$_SESSION['filename'].'"'.'>';
           echo '<input id="duration" name="duration" type="hidden" value='.'"'.$_SESSION['duration'].'"'.'>';
           echo '<input id="duration" name="keyHash" type="hidden" value='.'"'.password_hash($upload_replay_key,PASSWORD_DEFAULT).'"'.'>';

@@ -1,6 +1,6 @@
 //modal
 var modal;
-var clear = 'false';
+var clear = 'true';
 
 function openModal(){
   modal = document.getElementById("myModal");
@@ -57,7 +57,7 @@ function clearSession(){
 }
 
 function disableClear(){
-  clear = 'false';
+  //clear = 'false';
 }
 
 window.onunload = window.onbeforeunload = (function(){

@@ -227,6 +227,14 @@ input[type="text"]:invalid{
   border: 2px solid red;
 }
 
+input[type=checkbox]{
+   transform: scale(2);
+}
+
+#checkboxText{
+  padding-left: 1%;
+}
+
 
 /* grid */
 #beatmap{

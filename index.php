@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'secure/uploadKey.php';
+require 'php/errors.php';
 $name='index';
 include('php/analytics.php');
 ?>
@@ -24,6 +25,7 @@ include('php/analytics.php');
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
     <link rel="stylesheet" type="text/css" href="css/loader.css">
+
     <link rel="icon" type="image/png" href="images/icon.png" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -37,6 +39,7 @@ include('php/analytics.php');
   </head>
 
   <body>
+    <?php showError(); ?>
     <script type="text/javascript" src="js/index/upload.js"></script>
     <div class="loader"></div>
     <!-- Modal -->

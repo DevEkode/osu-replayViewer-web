@@ -10,14 +10,14 @@ $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatab
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-	header("Location:../../index.php?error=3");
+	header("Location:../../index.php?error=1");
 	exit;
 }
 
 //---- get all the Informations ----
 //Cancel if the TU is not accepted
 if(!isset($_POST['checkboxTU']) && $_POST['checkboxTU'] != "true"){
-  header("Location:../../index.php");
+  header("Location:../../index.php?error=8");
   exit;
 }
 
@@ -61,12 +61,17 @@ if ($conn->query($sql) === TRUE) {
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
   $conn->close();
+  header("Location:../../index.php?error=5");
   exit;
 }
 
 //Deplacement du fichier en liste d'attente
-mkdir('../../requestList/'.$replayId, 0777, true);
-rename('../../uploads/'.$_POST['filename'],'../../requestList/'.$replayId.'/'.$_POST['filename']);
+if(!mkdir('../../requestList/'.$replayId, 0777, true)){
+  header("Location:../../index.php?error=6");
+}
+if(!rename('../../uploads/'.$_POST['filename'],'../../requestList/'.$replayId.'/'.$_POST['filename'])){
+  header("Location:../../index.php?error=7");
+}
 
 $conn->close();
 include 'clearSession.php';

@@ -13,7 +13,7 @@ $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatab
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-	header("Location:index.php?error=3");
+	header("Location:../../index.php?error=1");
 	exit;
 }
 
@@ -84,10 +84,18 @@ if($replayStructure){
   //check replay structure
   $replay_content = getReplayContent("../../uploads/".$file_name);
 
+  if(empty($replay_content)) {
+    header("Location:../../index.php?error=2");
+  }
+
   if(in_array($replay_content['gamemode'], array(0,1,2,3), true )) {$replayStructure = true;}
 
   //check beatmap existance
   $beatmapJSON = getBeatmapJSONwMD5($replay_content['md5'],$osuApiKey);
+
+  if(empty($beatmapJSON)){
+    header("Location:../../index.php?error=3");
+  }
 
   if(isBeatmapAvailable($beatmapJSON[0]['beatmapset_id'])) {$beatmapAvailable = true;}
 

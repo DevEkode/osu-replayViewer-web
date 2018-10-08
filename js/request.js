@@ -100,17 +100,27 @@ function showCheckEmail(){
 	}
 }
 
+function checkBox(){
+	var checkbox = document.getElementById("checkBox");
+	if(checkbox.checked){
+		return true;
+	}else{
+		return false;
+	}
+}
+
 //----------------------------- At start ----------------------------------
 function start(){
 	hide("submitButton");
 	document.getElementById("email").value = '';
 	document.getElementById("userId").value = '';
+	document.getElementById("checkBox").checked = false;
 }
 
 //----------------------------- At every update ---------------------------
 function update(){
 	//Check if the form is filled
-	if(checkPassword() && validateEmail() && checkEmail() && isIdOk){
+	if(checkPassword() && validateEmail() && checkEmail() && checkBox() && isIdOk){
 		show("submitButton");
 	} else { hide("submitButton"); }
 }

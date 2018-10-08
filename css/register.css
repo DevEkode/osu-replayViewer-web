@@ -51,6 +51,18 @@ button:hover {
   margin:auto;
 }
 
+input[type=checkbox]{
+   transform: scale(2);
+   margin-top: 1%;
+   margin-bottom: 3%;
+   margin-left: 1%;
+}
+
+#textCheckBox{
+  padding-left: 2%;
+  font-size: 1em;
+}
+
 label{
   font-weight: bold;
   font-family: "verdana";

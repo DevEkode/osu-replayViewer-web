@@ -5,7 +5,8 @@ $errors = array (
   0 => "",
   1 => "The reCaptcha is invalid, try again",
   2 => "This player doesn't exists",
-  3 => "The user or the email is already used"
+  3 => "The user or the email is already used",
+  4 => "You must accept the terms of uses"
 );
 $error_id = isset($_GET['error']) ? (int)$_GET['error'] : 0;
 
@@ -45,7 +46,7 @@ function getUserInterests($userId){
 }
 
 function isFormSubmitted(){
-	if(isset($_POST["userId"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["cPassword"])){
+	if(isset($_POST["userId"]) && isset($_POST["email"]) && isset($_POST["password"]) && isset($_POST["cPassword"]) && isset($_POST["TU"])){
 		return true;
 	}else {return false;}
 }
@@ -101,6 +102,12 @@ function verifyCaptcha($secretCaptcha,$cResponse){
 //----------------------------- core ----------------------------------
 require_once 'secure/recaptcha.php';
 if(isFormSubmitted()){
+  //Check the term of uses
+  if($_POST["TU"] != "true"){
+    header("Location:register.php?error=4");
+    exit();
+  }
+
   //Check the reCaptcha
   if(!verifyCaptcha($secretCaptcha,$_POST['g-recaptcha-response'])){
     header("Location:register.php?error=1");
@@ -214,6 +221,7 @@ if(isFormSubmitted()){
 		<input type="password" name="password" id="pass" onkeyup="update()" required><br>
 		<label>confirm password: </label>
 		<input type="password" name="cPassword" id="confPass" onkeyup="showCheckPass(); update()" required> <span id="checkPass"></span><br>
+    <input type="checkbox" name="TU" id="checkBox" onclick="update()" required><span id="textCheckBox"> I accept the <a href="legal/TU.php?TU=user" target="_blank">terms of uses</a></span><br>
     <div class="g-recaptcha" data-sitekey="6LcYyk8UAAAAAHmsgHYvmnCIr3I6hIlKv7VWANSo" id="recaptcha" required></div>
 
     <?php

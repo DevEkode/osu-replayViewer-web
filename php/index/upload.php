@@ -10,11 +10,17 @@ $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatab
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-	header("Location:index.php?error=3");
+	header("Location:../../index.php?error=3");
 	exit;
 }
 
 //---- get all the Informations ----
+//Cancel if the TU is not accepted
+if(!isset($_POST['checkboxTU']) && $_POST['checkboxTU'] != "true"){
+  header("Location:../../index.php");
+  exit;
+}
+
 //get replay file Informations
 $replayJSON = getReplayContent("../../uploads/".$_POST['filename']);
 

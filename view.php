@@ -7,7 +7,11 @@
   require 'secure/mysql_pass.php';
   require 'secure/admins.php';
 
-  $owa->setPageTitle('View page');
+  function URL_exists($url){
+   $headers=get_headers($url);
+   return stripos($headers[0],"200 OK")?true:false;
+ }
+
   $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
 
   // Check connection
@@ -37,20 +41,18 @@
 
   $userJSON = getUserJSON($replayDATA['userId'],$osuApiKey);
 
-  $urlRaw = "./replayList/".$_GET['id']."/".$_GET['id'].".mp4";
-  if(file_exists($urlRaw)){
+  $urlRaw = "https://peertube.osureplayviewer.xyz/client/assets/replayList/".$_GET['id']."/".$_GET['id'].".mp4";
+  if(URL_exists($urlRaw)){
     $showRaw = true;
-    $videoURL = $urlRaw;
-    $metaUrl = "https://osureplayviewer.xyz/replayList/".$_GET['id']."/".$_GET['id'].".mp4";
+    $metaUrl = "https://peertube.osureplayviewer.xyz/client/assets/replayList/".$_GET['id']."/".$_GET['id'].".mp4";
   }else{
     $showRaw = false;
-    $videoURL = "https://www.youtube.com/watch?v=".$replayDATA['youtubeId'];
   }
 
-  $osrUrl = "./replayList/".$_GET['id']."/".base64_decode($replayDATA['OFN']);
-  if(file_exists($osrUrl)){
+  $osrUrl = "https://peertube.osureplayviewer.xyz/client/assets/replayList/".$_GET['id']."/".base64_decode($replayDATA['OFN']);
+  if(URL_exists($osrUrl)){
     $showOsr = true;
-    $osuUrl2 = "./replayList/".$_GET['id']."/".rawurlencode(base64_decode($replayDATA['OFN']));
+    $osuUrl2 = "https://peertube.osureplayviewer.xyz/client/assets/replayList/".$_GET['id']."/".rawurlencode(base64_decode($replayDATA['OFN']));
   }else{
     $showOsr = false;
   }
@@ -176,7 +178,7 @@
         }else{
           //echo "<iframe class=\"videoYt\" src=".generateYoutubeLink($replayDATA['youtubeId'])." frameborder=\"1\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
           echo '<div class="plyr__video-embed" id="player">';
-          echo  "<iframe src=".'"'.generateYoutubeLink($replayDATA['youtubeId']).'"'." frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
+          echo '<iframe sandbox="allow-same-origin allow-scripts" src='.'"'.'https://peertube.osureplayviewer.xyz/videos/embed/'.$replayDATA['youtubeId'].'"'.' frameborder="0" allowfullscreen></iframe>';
           echo '</div>';
         }
       ?>
@@ -209,10 +211,10 @@
             }
 
             if(!empty($replayDATA['youtubeId'])){
-              $ytLink = "https://www.youtube.com/watch?v=".$replayDATA['youtubeId'];
-              echo "<a href=".$ytLink." target=\"_blank\"><img src=\"images/view/youtube_logo.png\"/></a>";
+              $ytLink = "https://peertube.osureplayviewer.xyz/videos/watch/".$replayDATA['youtubeId'];
+              echo "<a href=".$ytLink." target=\"_blank\"><img src=\"images/view/peertube_logo.png\"/></a>";
             }else{
-              echo "<img src=\"images/view/youtube_logo.png\" class=\"disabled\"/>";
+              echo "<img src=\"images/view/peertube_logo.png\" class=\"disabled\"/>";
             }
           ?>
           <!-- <a href="#"><img src="images/view/download_skin.png"/> -->

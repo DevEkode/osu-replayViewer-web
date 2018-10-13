@@ -3,7 +3,8 @@ session_start();
 var_dump($_SESSION);
 include '../osuApiFunctions.php';
 require_once '../../secure/osu_api_key.php';
-require '../../secure/mysql_pass.php';
+require '../../secure/mysql_pass.php'
+require '../ftp_agent.class.php';
 
 $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
 

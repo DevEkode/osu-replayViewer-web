@@ -1,10 +1,6 @@
 *.[mp4]
-secure/mysql_pass.php
-secure/osu_api_key.php
-secure/uploadKey.php
-secure/encoding.php
+secure/
 test2.php
-secure/recaptcha.php
 client_secret.json
 client/
 replayList/

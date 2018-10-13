@@ -2,6 +2,7 @@
 session_start();
 require '../../secure/mysql_pass.php';
 require 'functions.php';
+require '../ftp_agent.class.php';
 
 $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
 
@@ -38,10 +39,13 @@ function removeFolder($dir){
 	rmdir($dir);
 }
 
+//Initialize FTP
+$ftp = new ftp_agent();
+$ftp->connect();
+
 //Delete replay folder in replayList
-$file_dir = "../../replayList/".$_POST['replayId'];
-if(file_exists($file_dir)){
-  removeFolder($file_dir);
+if($ftp->dirExists($_POST['replayId'])){
+  $ftp->removeFolder($_POST['replayId']);
 }
 
 //Delete replay from database

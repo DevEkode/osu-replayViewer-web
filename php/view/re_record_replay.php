@@ -4,6 +4,7 @@ require '../../secure/mysql_pass.php';
 require '../osuApiFunctions.php';
 require '../../secure/osu_api_key.php';
 require 'functions.php';
+require '../ftp_agent.class.php';
 
 $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
 
@@ -48,22 +49,29 @@ if(!file_exists($folder_dir)){
   mkdir($folder_dir);
 }
 
-$replayDATA = getReplayArray($_POST['replayId'],$conn);
-$replay_dir = "../../replayList/".$_POST['replayId']."/".base64_decode($replayDATA['OFN']);
+//Initialize ftp
+$ftp = new ftp_agent();
+$ftp->connect();
 
+
+//Download replay
+$replayDATA = getReplayArray($_POST['replayId'],$conn);
+$replay_dir = $_POST['replayId']."/".base64_decode($replayDATA['OFN']);
+$ftp->downloadFile($replay_dir,$_SERVER['DOCUMENT_ROOT'].'/uploads/'.base64_decode($replayDATA['OFN']));
+
+$replay_dir = $_SERVER['DOCUMENT_ROOT']."/uploads/".base64_decode($replayDATA['OFN']);
 $replayJSON = getReplayContent($replay_dir);
 $beatmapJSON = getBeatmapJSONwMD5($replayJSON['md5'],$osuApiKey);
 
-
+//Check replay variables
 $replayDuration = $beatmapJSON[0]['total_length'];
 if(isDT($replayJSON['Mods'])){
   $replayDuration = $replayDuration - ($replayDuration * (33/100));
 }
 
 //Move the .osr in the folder
-$old_dir = '../../replayList/'.$_POST['replayId'].'/'.base64_decode($replayDATA['OFN']);
 $new_dir = '../../requestList/'.$_POST['replayId'].'/'.base64_decode($replayDATA['OFN']);
-rename($old_dir,$new_dir);
+rename($replay_dir,$new_dir);
 
 //--Create the row in requestlist table
 $query = $conn->prepare("INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
@@ -79,9 +87,8 @@ $query->execute();
 $query->close();
 
 //--Delete the folder in replayList
-$folder_dir = "../../replayList/".$_POST['replayId'];
-if(file_exists($folder_dir)){
-  removeFolder($folder_dir);
+if($ftp->dirExists($_POST['replayId'])){
+  $ftp->removeFolder($_POST['replayId']);
 }
 
 //--Redirect on the waiting page

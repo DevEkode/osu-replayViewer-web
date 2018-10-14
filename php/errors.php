@@ -7,7 +7,8 @@ $uploadErrors = array(
   5 => 'INSERT INTO mysql database failed',
   6 => 'Cannot create replay directory',
   7 => 'Cannot move replay to final destination',
-  8 => 'You have to accept terms of uses'
+  8 => 'You have to accept terms of uses',
+  9 => 'Uploads are disabled'
 );
 
 $indexOfPages = array(

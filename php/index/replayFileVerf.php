@@ -57,8 +57,13 @@ function getIniKey($userId,$key){
 }
 
 //----- CORE ------
+require_once '../../secure/admins.php';
+if(isset($_SESSION['userId']) && in_array($_SESSION['userId'],$admins)){
+  $disableUploads = false;
+}
+
 if($disableUploads || !isset($_FILES['fileToUpload'])){
-  header("Location:../../index.php");
+  header("Location:../../index.php?error=9");
   exit;
 }
 

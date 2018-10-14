@@ -288,6 +288,11 @@ include('php/analytics.php');
     <!-- Upload box -->
     <?php
     require_once 'php/disableUploads.php';
+    require_once 'secure/admins.php';
+    if(isset($_SESSION['userId']) && in_array($_SESSION['userId'],$admins)){
+      $disableUploads = false;
+    }
+
     if(!$disableUploads){
       echo '<form action="php/index/replayFileVerf.php" method="post" enctype="multipart/form-data" id="upload_box">';
       echo    '<input type="file" name="fileToUpload" id="fileToUpload" oninput="submitForm()">';

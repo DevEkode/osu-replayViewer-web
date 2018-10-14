@@ -228,9 +228,12 @@
         echo'<div class="third_block">
           <span id="section_title">Manage the replay</span>
           <div id="manage_section">
-            <a onclick="openModalRerecord()"><img src="images/view/rerecord_replay.png"/></a>
-            <a onclick="openModalDelete()"><img src="images/view/delete_replay.png"/></a>
-          </div>
+            <a onclick="openModalDelete()"><img src="images/view/delete_replay.png"/></a>';
+            require_once 'php/disableUploads.php';
+            if(!$disableUploads){
+              echo '<a onclick="openModalRerecord()"><img src="images/view/rerecord_replay.png"/></a>';
+            }
+        echo '</div>
         </div>';
       }
     }

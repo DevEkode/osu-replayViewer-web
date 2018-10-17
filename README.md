@@ -18,7 +18,6 @@ Easy to use website. Just upload your .osr, wait for processing and share it to 
 * Deploy osu!replayClient. A recording client.
 * Page to compare two replays (with graphs and stats)
 * Use mirror for beatmaps not available on the osu website
-* Add option to upload the replay on another youtube channel
 
 ## Authors
 

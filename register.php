@@ -103,7 +103,7 @@ function verifyCaptcha($secretCaptcha,$cResponse){
 require_once 'secure/recaptcha.php';
 if(isFormSubmitted()){
   //Check the term of uses
-  if($_POST["TU"] != "true"){
+  if($_POST["TU"] != "on"){
     header("Location:register.php?error=4");
     exit();
   }

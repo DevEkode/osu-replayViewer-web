@@ -247,6 +247,15 @@
       </form>
     </div>
 
+    <div class="block" id="email">
+      <h2> Delete account </h2>
+
+      <form action="php/profile/deleteProfile.php" method="post">
+        <input type="hidden" name="id" value=<?php echo $_SESSION['userId']; ?> />
+        <input type="submit" value="Delete my account" />
+      </form>
+    </div>
+
     <footer>
       <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
       <div class="footer_img">

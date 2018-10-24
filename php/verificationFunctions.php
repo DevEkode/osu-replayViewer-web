@@ -1,84 +1,136 @@
 <?php
-function sendEmail($email,$username,$verfId){
-  $link = "https://osureplayviewer.xyz/emailVerification.php?id=".$verfId;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-  $subject = "osu!replayViewer - email verification";
+//Load Composer's autoloader
+require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+
+function sendEmail($email,$username,$verfId){
+  require_once $_SERVER['DOCUMENT_ROOT'].'/secure/smtp.php';
+  $link = "https://osureplayviewer.xyz/emailVerification.php?id=".$verfId;
+  $mail = new PHPMailer(true);
+  //Server settings
+  $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+  $mail->isSMTP();                                      // Set mailer to use SMTP
+  $mail->Host = $SMTP_host;                             // Specify main and backup SMTP servers
+  $mail->SMTPAuth = true;                               // Enable SMTP authentication
+  $mail->Username = $SMTP_user;                 // SMTP username
+  $mail->Password = $SMTP_pass;                           // SMTP password
+  $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+  $mail->Port = $SMTP_port;                             // TCP port to connect to
+
+  $mail->setFrom('codevirtuel@osureplayviewer.xyz', 'osu!replayViewer');
+  $mail->addAddress($email, 'user');
+
+  //Content
+  $mail->isHTML(true);
+  $mail->Subject = "osu!replayViewer - email verification";
+
   $message = "
-  <html>
-    <body>
       <p>Hello ".$username." ! please click the link below to continue the verification process</p>
 
       <a href=".$link."> ".$link." </a>
-    </body>
-
-  </html>
   ";
 
-  $headers = "MIME-Version: 1.0" . "\r\n";
-  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-  $headers .= "X-Priority: 1 (Highest)\n";
-  $headers .= "X-MSMail-Priority: High\n";
-  $headers .= "Importance: High\n";
-  $headers .= "From: osu!replayViewer <codevirtuel@osureplayviewer.xyz> \r\n";
-
-  $return = mail($email,$subject,$message,$headers);
-  var_dump($return);
-  return $return;
+  $mail->Body = $message;
+  $mail->send();
 }
 
 function sendPasswordRecoveryEmail($email,$userId,$verfId){
+  require_once $_SERVER['DOCUMENT_ROOT'].'/secure/smtp.php';
   $link = "https://osureplayviewer.xyz/forgotPassword.php?id=".$userId."&verf=".$verfId;
+  $mail = new PHPMailer(true);
+  //Server settings
+  $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+  $mail->isSMTP();                                      // Set mailer to use SMTP
+  $mail->Host = $SMTP_host;                             // Specify main and backup SMTP servers
+  $mail->SMTPAuth = true;                               // Enable SMTP authentication
+  $mail->Username = $SMTP_user;                 // SMTP username
+  $mail->Password = $SMTP_pass;                           // SMTP password
+  $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+  $mail->Port = $SMTP_port;                             // TCP port to connect to
 
-  $subject = "osu!replayViewer - password reset";
+  $mail->setFrom('codevirtuel@osureplayviewer.xyz', 'osu!replayViewer');
+  $mail->addAddress($email, 'user');
+
+  //Content
+  $mail->isHTML(true);
+  $mail->Subject = "osu!replayViewer - password reset";
+
   $message = "
-  <html>
-    <body>
       <p>Hello ! a password reset was asked on your osu!replayViewer account</p>
       <p>If you have not requested this action, please change your password on your profile</p>
 
       <p>Click on the link below to continue the password reset</p>
       <a href=".$link."> Reset my password </a>
-    </body>
-
-  </html>
   ";
 
-  $headers = "MIME-Version: 1.0" . "\r\n";
-  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-  $headers .= "X-Priority: 1 (Highest)\n";
-  $headers .= "X-MSMail-Priority: High\n";
-  $headers .= "Importance: High\n";
-  $headers .= "From: osu!replayViewer <codevirtuel@osureplayviewer.xyz> \r\n";
-
-  $return = mail($email,$subject,$message,$headers);
-  return $return;
+  $mail->Body = $message;
+  $mail->send();
 }
 
 function sendTempPassword($email,$password){
+  require_once $_SERVER['DOCUMENT_ROOT'].'/secure/smtp.php';
   $link = "https://osureplayviewer.xyz/login.php";
+  $mail = new PHPMailer(true);
+  //Server settings
+  $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+  $mail->isSMTP();                                      // Set mailer to use SMTP
+  $mail->Host = $SMTP_host;                             // Specify main and backup SMTP servers
+  $mail->SMTPAuth = true;                               // Enable SMTP authentication
+  $mail->Username = $SMTP_user;                 // SMTP username
+  $mail->Password = $SMTP_pass;                           // SMTP password
+  $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+  $mail->Port = $SMTP_port;                             // TCP port to connect to
 
-  $subject = "osu!replayViewer - your temporary password";
+  $mail->setFrom('codevirtuel@osureplayviewer.xyz', 'osu!replayViewer');
+  $mail->addAddress($email, 'user');
+
+  //Content
+  $mail->isHTML(true);
+  $mail->Subject = "osu!replayViewer - your temporary password";
+
   $message = "
-  <html>
-    <body>
       <p>Hello ! a password reset was asked on your osu!replayViewer account</p>
       <p>If you have not requested this action, please change your password on your profile</p>
 
       <p>Here is your temporary password : ".$password."</p>
       <a href=".$link."> Click here to go on the login page </a>
-    </body>
-
-  </html>
   ";
 
-  $headers = "MIME-Version: 1.0" . "\r\n";
-  $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-  $headers .= "X-Priority: 1 (Highest)\n";
-  $headers .= "X-MSMail-Priority: High\n";
-  $headers .= "Importance: High\n";
-  $headers .= "From: osu!replayViewer <codevirtuel@osureplayviewer.xyz> \r\n";
+  $mail->Body = $message;
+  $mail->send();
+}
 
-  $return = mail($email,$subject,$message,$headers);
-  return $return;
+function sendDeleteVerification($email,$deleteVerfId){
+  require_once $_SERVER['DOCUMENT_ROOT'].'/secure/smtp.php';
+  $link = "https://osureplayviewer.xyz/login.php";
+  $mail = new PHPMailer(true);
+  //Server settings
+  $mail->SMTPDebug = 2;                                 // Enable verbose debug output
+  $mail->isSMTP();                                      // Set mailer to use SMTP
+  $mail->Host = $SMTP_host;                             // Specify main and backup SMTP servers
+  $mail->SMTPAuth = true;                               // Enable SMTP authentication
+  $mail->Username = $SMTP_user;                 // SMTP username
+  $mail->Password = $SMTP_pass;                           // SMTP password
+  $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+  $mail->Port = $SMTP_port;                             // TCP port to connect to
+
+  $mail->setFrom('codevirtuel@osureplayviewer.xyz', 'osu!replayViewer');
+  $mail->addAddress($email, 'user');
+
+  //Content
+  $mail->isHTML(true);
+  $mail->Subject = "osu!replayViewer - Account deletion request";
+
+  $message = "
+      <p>Hello ! a deletion has been asked on your osu!replayViewer account</p>
+      <p>If you have not requested this action, please change your password on your profile</p>
+
+      <a href=".$link.">Click here to acknowledge this request</a>
+  ";
+
+  $mail->Body = $message;
+  $mail->send();
 }
  ?>

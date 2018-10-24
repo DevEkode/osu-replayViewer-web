@@ -11,8 +11,14 @@ $uploadErrors = array(
   9 => 'Uploads are disabled'
 );
 
+$editProfileErrors = array(
+  1 => 'Session error',
+  2 => 'This user doesn\'t exists'
+);
+
 $indexOfPages = array(
-  '/index.php' => $uploadErrors
+  '/index.php' => $uploadErrors,
+  '/editProfile.php' => $editProfileErrors
 );
 
 function showErrorModal($error){

@@ -17,7 +17,6 @@ if(!userHasAaccount($userId)){
 
 //Create a new verificationId
 require '../../secure/mysql_pass.php';
-//$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
 $conn = new PDO("mysql:host=$mySQLservername;dbname=$mySQLdatabase", $mySQLusername, $mySQLpassword);
 
 $deleteVerfId = uniqid('dVerf_');
@@ -53,7 +52,7 @@ $email = $line['email'];
 
 //Send verification email
 require_once '../verificationFunctions.php';
-sendDeleteVerification($email,$deleteVerfId);
+sendDeleteVerification($email,$userId,$deleteVerfId);
 
 
  ?>

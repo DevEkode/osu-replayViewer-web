@@ -102,9 +102,9 @@ function sendTempPassword($email,$password){
   $mail->send();
 }
 
-function sendDeleteVerification($email,$deleteVerfId){
+function sendDeleteVerification($email,$userId,$deleteVerfId){
   require_once $_SERVER['DOCUMENT_ROOT'].'/secure/smtp.php';
-  $link = "https://osureplayviewer.xyz/login.php";
+  $link = "https://osureplayviewer.xyz/php/profile/verfDeleteProfile.php?userId=$userId&id=$deleteVerfId";
   $mail = new PHPMailer(true);
   //Server settings
   $mail->SMTPDebug = 2;                                 // Enable verbose debug output

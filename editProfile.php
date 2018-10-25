@@ -61,12 +61,26 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script src="js/loader.js"></script>
     <script src="js/profile/uploadSkin.js"></script>
+    <script src="js/profile/modal.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
   </head>
 
   <body onload="showDim(); updateCustomSkin()">
+    <!-- Modal -->
+    <div class="modal" id="delete_modal">
+      <div class="modal-content">
+        <h2>Do you really want to delete your account ?</h2>
+        <h4>A verification email will be send if you accept</h4>
+        <form action="php/profile/deleteProfile.php" method="post">
+          <input type="submit" id="button_yes" value="Yes please !"/>
+          <input type="hidden" name="id" value=<?php echo $_SESSION['userId']; ?> />
+        </form>
+        <button id="button_no" onclick="closeModalDelete()">No stop !</button>
+      </div>
+    </div>
+
     <div class="loader"></div>
     <!-- Top navigation bar -->
     <div class="top-nav">
@@ -249,11 +263,8 @@
 
     <div class="block" id="email">
       <h2> Delete account </h2>
-
-      <form action="php/profile/deleteProfile.php" method="post">
-        <input type="hidden" name="id" value=<?php echo $_SESSION['userId']; ?> />
-        <input type="submit" value="Delete my account" />
-      </form>
+      <br>
+        <button onclick="openModalDelete()">Delete my account</button>
     </div>
 
     <footer>

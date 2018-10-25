@@ -54,5 +54,5 @@ $email = $line['email'];
 require_once '../verificationFunctions.php';
 sendDeleteVerification($email,$userId,$deleteVerfId);
 
-
+header("Location:/editProfile.php");
  ?>

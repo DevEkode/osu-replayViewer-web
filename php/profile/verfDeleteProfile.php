@@ -1,7 +1,7 @@
 <?php
 //Filter $_GET
-$deleteVerfId = filter_var($_POST['id'],FILTER_SANITIZE_STRING);
-$userId = filter_var($_POST['userId'],FILTER_SANITIZE_NUMBER_INT);
+$deleteVerfId = filter_var($_GET['id'],FILTER_SANITIZE_STRING);
+$userId = filter_var($_GET['userId'],FILTER_SANITIZE_NUMBER_INT);
 
 //Delete account
 require $_SERVER['DOCUMENT_ROOT'].'/secure/mysql_pass.php';

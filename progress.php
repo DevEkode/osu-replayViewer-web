@@ -2,14 +2,28 @@
 session_start();
 //include 'php/analytics.php';
   include 'php/progress/functions.php';
+  require_once 'php/errors.php';
 
-  //Refresh every 30s
-  //header('Refresh: 30');
+  //Placeholder
+  $placeholder = array(
+    'beatmapSetId' => 0,
+    'BFN' => "placeholder",
+    'playerId' => 0,
+    'currentStatut' => 0,
+    'date' => '25-10-2018',
+    'duration' => 0
+  );
 
-  $replayDATA = getRequestArray($_GET['id']);
-  if(empty($replayDATA)){
-    header("Location:view.php?id=".$_GET['id']);
+  if(strcmp($_GET['id'],0) == 0){
+    $replayDATA = $placeholder;
+  }else{
+    $replayDATA = getRequestArray($_GET['id']);
+    if(empty($replayDATA)){
+      header("Location:view.php?id=".$_GET['id']);
+    }
   }
+
+
 
   //Get beatmap name
   $beatmapName = base64_decode($replayDATA['BFN']);
@@ -49,6 +63,7 @@ session_start();
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script src="js/loader.js"></script>
+    <script src="js/progress/autoUpload.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
@@ -111,6 +126,7 @@ session_start();
   </head>
 
   <body>
+    <?php showError(); ?>
     <div class="loader"></div>
     <!-- Top navigation bar -->
     <div class="top-nav">
@@ -173,9 +189,25 @@ session_start();
 
     <div id="list_section">
       <h3>State list</h3>
-      <?php drawStates($replayDATA['currentStatut'],getClassement($_GET['id'])) ?>
+      <?php
+      if(strcmp($_GET['id'],0) == 0){
+        drawStates($replayDATA['currentStatut'],1);
+      }else{
+        drawStates($replayDATA['currentStatut'],getClassement($_GET['id']));
+      }
+      ?>
     </div>
-    
+
+    <div id="cancel_section">
+      <h3>Cancel this replay</h3>
+      <h4>Drag and drop or upload the original .osr</h4>
+      <form id="upload_box" action="php/progress/cancelReplay.php" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" oninput="submitForm()">
+        <input type="hidden" name="replayId" value=<?php echo $_GET['id']; ?> >
+      </form>
+      <h4>If this file matches with the original, the replay will be canceled</h4>
+    </div>
+
     <div class="spacer">
 			<br>
 		</div>

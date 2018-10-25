@@ -16,9 +16,15 @@ $editProfileErrors = array(
   2 => 'This user doesn\'t exists'
 );
 
+$progressErrors = array(
+  1 => 'This file doesn\'t matches with the original'
+);
+
+//Index
 $indexOfPages = array(
   '/index.php' => $uploadErrors,
-  '/editProfile.php' => $editProfileErrors
+  '/editProfile.php' => $editProfileErrors,
+  '/progress.php' => $progressErrors
 );
 
 function showErrorModal($error){

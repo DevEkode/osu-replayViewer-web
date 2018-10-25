@@ -56,6 +56,6 @@ $query2 = $conn->prepare('DELETE FROM accounts WHERE userId=:user');
 $query2->bindParam('user',$userId,PDO::PARAM_STR);
 $query2->execute();
 
-header('Location:logout.php');
+header('Location:/logout.php');
 
  ?>

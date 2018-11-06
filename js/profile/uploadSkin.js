@@ -7,13 +7,28 @@ if (file.size > max) {
     window.location.replace(pathname+"?skinError=5");
     document.getElementById("fileToUpload").value = null; // Clear the field.
   }else{
-    document.getElementById("submit_skin").submit();
+    return true;
   }
+}
+
+function checkFileCharacters(file){
+  var patt = /['^£$%&*()}{@#~?><>,|=_+¬-]/;
+  if(patt.test(file)){
+    var pathname = window.location.pathname;
+    removeHeaders = false;
+    window.location.replace(pathname+"?skinError=4");
+    document.getElementById("fileToUpload").value = null; // Clear the field.
+  }else{
+    return true;
+  }
+
 }
 
 function onClick(){
   var file = document.getElementById("fileToUpload").files[0];
-  checkFileSize(file);
+  if(checkFileSize(file) && checkFileCharacters(file)){
+    document.getElementById("submit_skin").submit();
+  }
 }
 
 window.onchange = function() {

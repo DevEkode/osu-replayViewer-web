@@ -1,42 +1,13 @@
 <?php
   session_start();
   include 'php/analytics.php';
+  require 'php/errors.php';
 
   if(empty($_SESSION['userId'])){
     header("Location:index.php");
   }
 
   require 'php/profile/replaySettings.php';
-
-//Password edit error
-  $pswErrorArray = array(
-    0 => "Password successfully updated",
-    1 => "Actual password doesn't match",
-    2 => "Database error",
-    3 => "New password doesn't match with the verification"
-  );
-
-  $verfLink = "userVerification.php?id=".$_SESSION["userId"];
-  $emailErrorArray = array(
-    0 => "",
-    1 => "Email successfully updated, ". "<a href=$verfLink>click here to validate this new email</a>",
-    2 => "Database error"
-  );
-
-  $skinUploadError = array(
-    0 => "Upload successfully finished",
-    1 => "This skin has already been uploaded",
-    2 => "Only .osk are allowed",
-    3 => "Sorry your skin couldn't be uploaded",
-    4 => "Your skin file name cannot contain special characters",
-    5 => "Your skin file size is more that 50Mo"
-  );
-
-  $skinRemoveError = array(
-    0 => "",
-    1 => "This skin doesn't exists",
-    2 => "Remove error"
-  );
 
   //Query user information
   checkUserFile($_SESSION["userId"]);
@@ -68,6 +39,7 @@
   </head>
 
   <body onload="showDim(); updateCustomSkin()">
+    <?php showError(); ?>
     <!-- Modal -->
     <div class="modal" id="delete_modal">
       <div class="modal-content">

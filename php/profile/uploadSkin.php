@@ -46,7 +46,7 @@ function error($error_code){
     unlink($target_file);
   }
 
-  $var = "Location:../../editProfile.php?skinError=".$error_code;
+  $var = "Location:../../editProfile.php?error=".$error_code;
   header($var);
   exit();
 }
@@ -54,7 +54,7 @@ function error($error_code){
 if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', basename($_FILES["fileToUpload"]["name"])))
 {
   $uploadOk = 0;
-  error('4');
+  error('10');
 }
 
 // Check if file already exists
@@ -62,27 +62,27 @@ $account_folder = "../../accounts/".$_SESSION["userId"]."/".basename($_FILES["fi
 if (file_exists($account_folder)) {
     echo "Sorry, file already exists.";
     $uploadOk = 0;
-    error('1');
+    error('7');
 }
 
 // Allow certain file formats
 if($imageFileType != "osk") {
     echo "Sorry, only OSK files are allowed.";
     $uploadOk = 0;
-    error('2');
+    error('8');
 }
 
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 50*1048576) {
     echo "Sorry, your file is too large.";
     $uploadOk = 0;
-    error('5');
+    error('11');
 }
 
 // -- Upload file --
 if ($uploadOk == 0) {
     echo "Sorry, your file was not uploaded.";
-    error('3');
+    error('9');
 // if everything is ok, try to upload file
 } else {
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
@@ -93,12 +93,12 @@ if ($uploadOk == 0) {
           echo 'extract Ok';
           if(!isSkinValid($target_dir."export")){
             $uploadOk = 0;
-            error('2');
+            error('9');
           }
         }else{
           echo 'extract Fail';
           $uploadOk = 0;
-          error('2');
+          error('9');
         }
         $zip->close();
 
@@ -107,11 +107,12 @@ if ($uploadOk == 0) {
         $new_target = "../../accounts/".$_SESSION["userId"]."/".basename($_FILES["fileToUpload"]["name"]);
         rename($target_file,$new_target);
         removeFolder($target_dir."export");
+        //TODO add success message
         error('0');
     } else {
         echo "Sorry, there was an error uploading your file.";
+        error('9');
         exit;
-        //error('3');
     }
 }
  ?>

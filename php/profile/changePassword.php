@@ -21,9 +21,8 @@
   }
   //-------- core ---------
   //Check if the new password match
-  //var_dump($_POST['newPassword'], $_POST['newPasswordVerf']);
   if(strcmp($_POST['newPassword'], $_POST['newPasswordVerf']) !== 0){
-    header("Location:../../editProfile.php?pswError=3");
+    header("Location:../../editProfile.php?error=5");
     closeConn();
   }
 
@@ -48,15 +47,16 @@
     $query->bind_param("si",$newPasswordHash,$_SESSION["userId"]);
     if($query->execute()){
       $query->close();
-      header("Location:../../editProfile.php?pswError=0#password");
+      //TODO Add success message
+      header("Location:../../editProfile.php#password");
       closeConn();
     }else{
-      header("Location:../../editProfile.php?pswError=2#password");
+      header("Location:../../editProfile.php?error=4#password");
       closeConn();
     }
 
   }else{
-    header("Location:../../editProfile.php?pswError=1#password");
+    header("Location:../../editProfile.php?error=3#password");
     closeConn();
   }
  ?>

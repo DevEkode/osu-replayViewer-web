@@ -1,4 +1,6 @@
 <?php
+
+// ----- Error list -----
 $uploadErrors = array(
   1 => 'Mysql connection error',
   2 => 'Cannot get replay data',
@@ -13,14 +15,31 @@ $uploadErrors = array(
 
 $editProfileErrors = array(
   1 => 'Session error',
-  2 => 'This user doesn\'t exists'
+  2 => 'This user doesn\'t exists',
+  //Password
+  3 => "Actual password doesn't match",
+  4 => "Database error",
+  5 => "New password doesn't match with the verification",
+  //email
+  //6 => "Email successfully updated, an verification email has been sent",
+  6 => "Database error",
+  //skin
+  //8 => "Upload successfully finished",
+  7 => "This skin has already been uploaded",
+  8 => "Only .osk are allowed",
+  9 => "Sorry your skin couldn't be uploaded",
+  10 => "Your skin file name cannot contain special characters",
+  11 => "Your skin file size is more that 50Mo",
+  12 => "This skin doesn't exists",
+  13 => "Remove error"
 );
 
 $progressErrors = array(
   1 => 'This file doesn\'t matches with the original'
 );
 
-//Index
+// ---- Index ----
+//Link array with corresponding page
 $indexOfPages = array(
   '/index.php' => $uploadErrors,
   '/editProfile.php' => $editProfileErrors,

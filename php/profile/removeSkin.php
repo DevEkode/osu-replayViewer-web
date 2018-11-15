@@ -6,7 +6,7 @@ if(empty($_SESSION)){
 require 'replaySettings.php';
 
 function error($error_code){
-  header("Location:../../editProfile.php?removeError=".$error_code);
+  header("Location:../../editProfile.php?error=".$error_code);
   exit();
 }
 
@@ -31,7 +31,7 @@ function listAllSkins2($userId){
 
   //Check if this skin exists
   if(!file_exists($userURL.$skinToRemove)){
-    error(1);
+    error(12);
   }
 
   //update ini file
@@ -57,8 +57,9 @@ function listAllSkins2($userId){
 
   //Delete the file
   if(unlink($userURL.$skinToRemove)){
+    //TODO add success message
     error(0);
   }else{
-    error(2);
+    error(13);
   }
  ?>

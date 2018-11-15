@@ -248,6 +248,11 @@ body {
   height: 10vh;
 }
 
+#disqus_thread {
+  width: 62vw;
+  margin: auto;
+}
+
 /*Mobiles*/
 @media only screen and (orientation: portrait){
   /* Titles */

@@ -176,7 +176,6 @@
     			echo "<source src=$urlRaw  type='video/mp4'>";
     			echo '</video>';
         }else{
-          //echo "<iframe class=\"videoYt\" src=".generateYoutubeLink($replayDATA['youtubeId'])." frameborder=\"1\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>";
           echo '<div class="plyr__video-embed" id="player">';
           echo '<iframe sandbox="allow-same-origin allow-scripts" src='.'"'.'https://peertube.osureplayviewer.xyz/videos/embed/'.$replayDATA['youtubeId'].'"'.' frameborder="0" allowfullscreen></iframe>';
           echo '</div>';
@@ -222,11 +221,25 @@
       </div>
     </div>
 
+    <div class="bottom_block">
+      <span id="section_title">Share</span><br>
+      <div id="share_section">
+        <a class="twitter-share-button" target="_blank"
+        href=<?php echo $twitterURL; ?>>
+        <img src="images/twitter_icon.png"/></a>
+
+        <a class="reddit-share-button" target="_blank"
+        href=<?php echo $redditURL; ?>>
+        <img src="images/reddit_icon.png"/></a>
+      </div>
+    <br>
+
     <?php
+
     if(isset($_SESSION['userId'])){
       if(strcmp($_SESSION['userId'],$userJSON[0]['user_id']) == 0 || isAdmin($_SESSION['userId'])){
-        echo'<div class="third_block">
-          <span id="section_title">Manage the replay</span>
+        echo'<span id="section_title">Manage the replay</span>
+          <div class="third_block">
           <div id="manage_section">
             <a onclick="openModalDelete()"><img src="images/view/delete_replay.png"/></a>';
             require_once 'php/disableUploads.php';
@@ -238,24 +251,7 @@
       }
     }
     ?>
-
-    <br>
-    <div class="second_block">
-      <span id="section_title">Share</span>
-      <div id="share_section">
-        <a class="twitter-share-button" target="_blank"
-        href=<?php echo $twitterURL; ?>>
-        <img src="images/twitter_icon.png"/></a>
-
-        <a class="reddit-share-button" target="_blank"
-        href=<?php echo $redditURL; ?>>
-        <img src="images/reddit_icon.png"/></a>
-
-        <iframe src=<?php echo $facebookURL; ?> width="91" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
-      </div>
-    </div>
-
-    <br>
+  </div>
 
     <!-- Disqus -->
     <div id="disqus_thread"></div>

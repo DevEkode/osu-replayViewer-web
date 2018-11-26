@@ -111,12 +111,14 @@ body {
   display:flex;
   flex-direction: column;
   height:auto;
-  width:31vw;
+  width:30%;
   padding-top: 2vh;
   margin: auto;
   margin-top: 2%;
   margin-bottom: 2%;
+  margin-right: 10%;
   padding-bottom: 2%;
+  float: right;
 }
 
 #beatmap_image{
@@ -200,9 +202,7 @@ body {
   background-color: lightgray;
   border-radius: 10px;
   margin-top: 2%;
-  margin-left: 1%;
-  margin: auto;
-  width: 62vw;
+  width: auto;
   height:15vh;
   padding: 1%;
   display: flex;
@@ -212,6 +212,13 @@ body {
 
 #share_section {
   display: inline-block;
+  background-color: lightgray;
+  border-radius:10px;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: 90%;
 }
 #share_section a:hover{
   opacity: 0.5;
@@ -249,8 +256,28 @@ body {
 }
 
 #disqus_thread {
-  width: 62vw;
+  /*width: 62vw;*/
   margin: auto;
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+.bottom_block{
+  background-color: rgba(150, 150, 150, .5);
+  border-radius: 50px;
+  height:auto;
+  width:48%;
+  margin: auto;
+  margin-left: 10%;
+  margin-top: 2%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  float:left;
+  display: inline;
 }
 
 /*Mobiles*/
@@ -310,6 +337,12 @@ body {
 
   #manage_section img{
     height: 10vh;
+  }
+
+  .bottom_block{
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 90%;
   }
 
 }

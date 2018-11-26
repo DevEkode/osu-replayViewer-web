@@ -57,8 +57,7 @@ function listAllSkins2($userId){
 
   //Delete the file
   if(unlink($userURL.$skinToRemove)){
-    //TODO add success message
-    error(0);
+    header('Location:../../editProfile.php?success=1');
   }else{
     error(13);
   }

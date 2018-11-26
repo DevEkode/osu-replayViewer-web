@@ -47,8 +47,7 @@
     $query->bind_param("si",$newPasswordHash,$_SESSION["userId"]);
     if($query->execute()){
       $query->close();
-      //TODO Add success message
-      header("Location:../../editProfile.php#password");
+      header("Location:../../editProfile.php?success=4#password");
       closeConn();
     }else{
       header("Location:../../editProfile.php?error=4#password");

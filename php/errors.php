@@ -21,10 +21,8 @@ $editProfileErrors = array(
   4 => "Database error",
   5 => "New password doesn't match with the verification",
   //email
-  //6 => "Email successfully updated, an verification email has been sent",
   6 => "Database error",
   //skin
-  //8 => "Upload successfully finished",
   7 => "This skin has already been uploaded",
   8 => "Only .osk are allowed",
   9 => "Sorry your skin couldn't be uploaded",

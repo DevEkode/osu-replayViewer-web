@@ -39,10 +39,10 @@ session_start();
     require_once '../verificationFunctions.php';
     sendEmail($_POST['newEmail'],$_SESSION["username"],$verfIdEmail);
 
-    header("Location:../../editProfile?emailError=1#email");
+    header("Location:../../editProfile?success=3#email");
     closeConn();
   }else{
-    header("Location:../../editProfile?emailError=2#email");
+    header("Location:../../editProfile?error=6#email");
     closeConn();
   }
   $query->close();

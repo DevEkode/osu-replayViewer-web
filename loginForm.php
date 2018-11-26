@@ -9,8 +9,8 @@ $servername = $mySQLservername;
 $username = $mySQLusername;
 $password = $mySQLpassword;
 
-$userId = $_POST['userId'];
-$userPassword = $_POST['psw'];
+$userId = filter_var($_POST['userId'],FILTER_SANITIZE_STRING);
+$userPassword = filter_var($_POST['psw'],FILTER_SANITIZE_STRING);
 // ******************** Connection **********************************
 // Create connection
 $conn = new mysqli($servername, $username, $password, $mySQLdatabase);
@@ -81,8 +81,6 @@ if(!password_verify($userPassword,$passwordHash)){
   header("Location:login.php?error=2");
   close($conn);
 }
-
-//var_dump(empty($verfUserId) && empty($verfIdEmail));
 
 if((empty($verfUserId) && empty($verfIdEmail)) == false){
   header("Location:login.php?error=1&userId=".$userId);

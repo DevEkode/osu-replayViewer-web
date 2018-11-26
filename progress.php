@@ -10,7 +10,7 @@ session_start();
     'BFN' => "placeholder",
     'playerId' => 0,
     'currentStatut' => 0,
-    'date' => '25-10-2018',
+    'date' => '26-11-2018',
     'duration' => 0
   );
 
@@ -78,9 +78,9 @@ session_start();
 
         // Get todays date and time
         var d = new Date();
-        var utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+        var utc = d.getTime() + (d.getTimezoneOffset() * 60000); //60000
 
-        var now = new Date(utc + (3600000*2));
+        var now = new Date(utc + (3600000*1));
         // Find the distance between now an the count down date
         var distance = now - countDownDate;
 

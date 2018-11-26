@@ -108,7 +108,7 @@ if ($uploadOk == 0) {
         rename($target_file,$new_target);
         removeFolder($target_dir."export");
         //TODO add success message
-        error('0');
+        header('Location:../../editProfile.php?success=0');
     } else {
         echo "Sorry, there was an error uploading your file.";
         error('9');

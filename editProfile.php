@@ -2,6 +2,7 @@
   session_start();
   include 'php/analytics.php';
   require 'php/errors.php';
+  require 'php/success.php';
 
   if(empty($_SESSION['userId'])){
     header("Location:index.php");
@@ -96,6 +97,7 @@
 
       <div id="uploadSkinZone">
         <h3>- Custom skin uploader -</h3>
+        <?php showSuccess(0); ?>
         <form action="php/profile/uploadSkin.php" method="post" enctype="multipart/form-data" id="submit_skin">
           Select skin to upload (or drag and drop): <br>
 
@@ -116,6 +118,7 @@
 
       <div id="removeSkinZone">
         <h3>- Custom skin remover -</h3>
+        <?php showSuccess(1); ?>
         <form action="php/profile/removeSkin.php" method="post" enctype="multipart/form-data">
 
           <?php
@@ -147,7 +150,7 @@
       <form action="php/profile/saveUserIni.php" method="post">
         <div id="skinZone">
           <h3>- Custom skin and dim chooser -</h3>
-
+          <?php showSuccess(2); ?>
         <?php
           if(empty($skins)){
             echo "<h2 style=\"color:red\"> You have to upload at least one skin to use this functionnality</h2>";
@@ -200,7 +203,7 @@
 
     <div class="block" id="password">
       <h2> Change password </h2>
-
+      <?php showSuccess(4); ?>
       <form action="php/profile/changePassword.php" method="post">
         Current password : <br>
         <input type="password" name="oldPassword" required /><br>
@@ -220,7 +223,7 @@
 
     <div class="block" id="email">
       <h2> Change email </h2>
-
+      <?php showSuccess(3); ?>
       <form action="php/profile/changeEmail.php" method="post">
         New email address : <br>
         <input type="email" name="newEmail" required /><br>

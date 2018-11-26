@@ -18,6 +18,6 @@ else $dim = 50;
 
 updateIniFile('../../accounts/',$_SESSION["userId"],$customSkin,$skin,$dim,"true");
 
-header("Location:../../editProfile.php");
+header("Location:../../editProfile.php?success=2");
 exit();
  ?>

@@ -70,11 +70,13 @@ button{
   background-color: red;
 }
 
-#title{
+#TopTitle{
   text-align: center;
   color:#FF66AA;
-   text-shadow: 3px 3px white;
-   margin-bottom: 3%;
+  text-shadow: 3px 3px white;
+  margin-bottom: 3%;
+  font-size: 200%;
+  font-weight:bold;
 }
 
 .align_center{
@@ -88,6 +90,20 @@ button{
   margin-right: 10%;
   background-color: rgba(150, 150, 150, .5);
   border-radius:50px;
+}
+
+#columnBack{
+  border-radius: 50px;
+  background-color: rgba(150, 150, 150, .3);
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+#itemLabel{
+  font-size: 110%;
+  font-weight: bold;
+  color: black;
+  text-shadow: 1px 1px white;
 }
 
 .back{
@@ -188,7 +204,10 @@ h1{
 }
 
 #fileToUpload{
-  padding:5% 5% 5% 5%;
+  width:90%;
+  padding-top: 5%;
+  padding-bottom: 5%;
+  text-align: center;
   border-radius: 20px;
   border: 3px dotted black;
   margin-bottom: 2%;

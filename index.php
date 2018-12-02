@@ -28,8 +28,8 @@ include('php/analytics.php');
 
     <link rel="icon" type="image/png" href="images/icon.png" />
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+    <script src="js/jquery-min.js"></script>
+    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>-->
     <script src="js/loader.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
@@ -54,9 +54,9 @@ include('php/analytics.php');
             <?php
               if(isset($_SESSION['beatmapSetId'])){
                 $url = "https://b.ppy.sh/thumb/".$_SESSION['beatmapSetId']."l.jpg";
-                echo "<img src='".$url."'/>";
+                echo "<img src='".$url."' alt=\"replay preview image\" />";
               }else{
-                echo '<img src="images/preview.jpg"/>';
+                echo '<img src="images/preview.jpg" alt="replay preview image" />';
               }
             ?>
           </div>
@@ -230,7 +230,7 @@ include('php/analytics.php');
       </div>
 
       <a href="#" id="logo">
-        <img src="images/icon.png" />
+        <img src="images/icon.png" alt="osu!replayViewer logo" />
       </a>
 
       <?php
@@ -260,17 +260,26 @@ include('php/analytics.php');
 
     <div id="etapes">
       <div class="item">
-        <img src="images/etape1.png"/>
+        <picture>
+          <img
+          sizes="(max-width: 500px) 100vw, 500px"
+          srcset="
+          images/small/index/etape1.png 200w,
+          images/medium/index/etape1.png 361w,
+          images/large/index/etape1.png 500w"
+          src="images/large/index/etape1.png 500w"
+          alt="First step of replay processing">
+        </picture>
         <span class="caption">1. Upload your replay</span>
       </div>
 
       <div class="item">
-        <img src="images/etape2.png"/>
+        <img src="images/etape2.png" alt="Etape 2 of replay processing" />
         <span class="caption">2. Wait processing time</span>
       </div>
 
       <div class="item">
-        <img src="images/etape3.png"/>
+        <img src="images/etape3.png" alt="Last step of replay processing" />
         <span class="caption">3. Share it !</span>
       </div>
     </div>
@@ -310,21 +319,64 @@ include('php/analytics.php');
       <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
       <div class="footer_img">
         <a href="https://discord.gg/pqvhvxx" title="join us on discord!" target="_blank">
-          <img src="images/index/discord_logo.png"/>
+          <picture>
+            <img
+            sizes="(max-width: 1400px) 100vw, 1400px"
+            srcset="images/small/index/Discord_logo.png 200w,
+            images/medium/index/Discord_logo.png 699w,
+            images/large/index/Discord_logo.png 1048w,
+            images/xlarge/index/Discord_logo.png 1400w"
+            src="images/xlarge/index/Discord_logo.png"
+            alt="Discord_logo">
+          </picture>
         </a>
         <a href="https://osu.ppy.sh/community/forums/topics/697883" target="_blank">
-          <img src="images/index/osu forums.png"/>
+          <picture>
+            <img
+            sizes="(max-width: 280px) 100vw, 280px"
+            srcset="
+            images/small/index/osu_forums.png 200w,
+            images/medium/index/osu_forums.png 280w"
+            src="images/medium/index/osu_forums.png"
+            alt="osu forums logo">
+          </picture>
         </a>
         <a href="https://github.com/codevirtuel/osu-replayViewer-web" target="_blank">
-          <img src="images/index/github_logo.png"/>
+          <picture>
+            <img
+            sizes="(max-width: 512px) 100vw, 512px"
+            srcset="
+            images/small/index/github_logo.png 200w,
+            images/medium/index/github_logo.png 512w"
+            src="images/medium/index/github_logo.png"
+            alt="github logo">
+          </picture>
         </a>
         <a href="https://paypal.me/codevirtuel" target="_blank">
-          <img src="images/index/paypal_me.png"/>
+          <picture>
+            <img
+            sizes="(max-width: 300px) 100vw, 300px"
+            srcset="
+            images/small/index/paypal_me.png 200w,
+            images/medium/index/paypal_me.png 300w"
+            src="images/medium/index/paypal_me.png"
+            alt="paypal logo">
+          </picture>
         </a>
       </div>
 
       <div id="created">
-        <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank"><img src="images/codevirtuel.jpg"/></a></span>
+        <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank">
+          <picture>
+            <img
+            sizes="(max-width: 400px) 100vw, 400px"
+            srcset="
+            images/small/index/codevirtuel.jpg 200w,
+            images/medium/index/codevirtuel.jpg 400w"
+            src="images/medium/index/codevirtuel.jpg"
+            alt="codevirtuel profile image">
+          </picture>
+        </a></span>
       </div>
     </footer>
 </body>

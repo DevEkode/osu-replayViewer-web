@@ -8,7 +8,7 @@ include('php/analytics.php');
 <!DOCTYPE html>
 <html>
   <head>
-    <!-- Discord metadata -->
+    <!-- Metadatas -->
     <meta content="osu!replayViewer" property="og:title">
     <meta content="Share your osu! performance to everyone !" property="og:description">
     <meta content="osu!replayViewer" property="og:site_name">
@@ -21,19 +21,26 @@ include('php/analytics.php');
     <meta itemprop="image" content="http://osureplayviewer.xyz/images/icon.png">
 
     <title>osu!replayViewer - A online osu replay viewer</title>
+    <link rel="icon" type="image/png" href="images/icon.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- libraries -->
+    <script src="lib/jquery/jquery.min.js"></script> <!-- jQuery -->
+    <script src="lib/bootstrap/bootstrap.bundle.min.js"></script> <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
+
+    <!-- css -->
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
     <link rel="stylesheet" type="text/css" href="css/loader.css">
 
-    <link rel="icon" type="image/png" href="images/icon.png" />
+    
 
-    <script src="js/jquery-min.js"></script>
-    <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>-->
+    <!-- javascript -->
     <script src="js/loader.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
     <script src="js/index/validateUsername.js"></script>
+
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
   </head>
@@ -287,6 +294,22 @@ include('php/analytics.php');
     <form action="#upload_section" class="align_center">
       <input type="submit" value="Begin !" class="button" />
     </form>
+
+    <!-- Announcement -->
+    <div class="alert alert-warning" role="alert" style="width:50vw; margin: auto;">
+    <b style="color: red">Announcement !</b><br>
+    <br>
+    Because of holidays and schedules issues with the development, upload and replay processing are suspended temporarily.<br>
+    <br>
+    <b>A note from the main developer :</b> <br>
+    A lot of work is done into the core functionality of the website. This is why updates are a lot less frequent these days. <br>
+    I'm trying to build new features (like adding more replay settings) and making the website more secure.<br>
+    Building this website is not my all day project, I have also an IT school to fulfill. <br>
+    So I hope you do understand why this takes a lot of time.<br>
+        <br>
+    And also, have a happy new year everyone!<br>
+    <i style="color:gray">codevirtuel ~ main dev of osu!replayViewer</i>
+    </div>
 
     <!-- Upload -->
     <section id="upload_section"> </section>

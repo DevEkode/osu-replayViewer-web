@@ -16,6 +16,10 @@ i {
   text-align:center;
 }
 
+h2, h1 {
+  font-weight: bold;
+}
+
 /* Presentation */
 #title{
   text-align: center;

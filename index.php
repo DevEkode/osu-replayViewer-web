@@ -2,6 +2,7 @@
 session_start();
 require 'secure/uploadKey.php';
 require 'php/errors.php';
+require 'php/navbar.php';
 $name='index';
 include('php/analytics.php');
 ?>
@@ -31,12 +32,9 @@ include('php/analytics.php');
 
     <!-- css -->
     <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
     <link rel="stylesheet" type="text/css" href="css/loader.css">
-
     
-
     <!-- javascript -->
     <script src="js/loader.js"></script>
     <script src="js/index/validateUsername.js"></script>
@@ -228,37 +226,7 @@ include('php/analytics.php');
     ?>
 
     <!-- Top navigation bar -->
-    <div class="top-nav">
-      <div class="floatleft">
-        <a href="search.php" class="nav-link">
-          <i class="material-icons">search</i> Search</a>
-        <a href="faq.php" class="nav-link">
-          <i class="material-icons">question_answer</i> FAQ</a>
-      </div>
-
-      <a href="#" id="logo">
-        <img src="images/icon.png" alt="osu!replayViewer logo" />
-      </a>
-
-      <?php
-        if(isset($_SESSION['userId']) && isset($_SESSION['username'])){
-          $userUrl = "userProfile.php?id=".$_SESSION['userId'];
-          echo '<div class="floatright">';
-          echo  "<a href=$userUrl class=\"nav-link\">";
-          echo    '<i class="material-icons">account_circle</i> Profile</a>';
-          echo  '<a href="logout.php" class="nav-link">';
-          echo    '<i class="material-icons">cloud_off</i> Logout</a>';
-          echo '</div>';
-        }else{
-          echo '<div class="floatright">';
-          echo  '<a href="register.php" class="nav-link">';
-          echo    '<i class="material-icons">how_to_reg</i> Register</a>';
-          echo  '<a href="login.php" class="nav-link">';
-          echo    '<i class="material-icons">vpn_key</i> Login</a>';
-          echo '</div>';
-        }
-      ?>
-    </div>
+    <?php showNavbar(); ?>
 
     <!-- presentation -->
     <h1 id="title">osu!replayViewer</h1>
@@ -296,6 +264,7 @@ include('php/analytics.php');
     </form>
 
     <!-- Announcement -->
+    <!--
     <div class="alert alert-warning" role="alert" style="width:50vw; margin: auto;">
     <b style="color: red">Announcement !</b><br>
     <br>
@@ -310,6 +279,7 @@ include('php/analytics.php');
     And also, have a happy new year everyone!<br>
     <i style="color:gray">codevirtuel ~ main dev of osu!replayViewer</i>
     </div>
+    -->
 
     <!-- Upload -->
     <section id="upload_section"> </section>

@@ -62,5 +62,5 @@ if(strcmp($fileMD5,$databaseMD5) == 0){
 }
 
 //Redirect
-//header("Location:/index.php");
+header("Location:/index.php");
  ?>

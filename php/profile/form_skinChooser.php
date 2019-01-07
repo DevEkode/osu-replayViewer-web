@@ -3,8 +3,10 @@
   session_start();
 
   //Sanitize data
-  $checkBox = filter_var($_POST['customSkin'],FILTER_SANITIZE_STRING);
-  $skinPost = filter_var($_POST['skin'],FILTER_SANITIZE_STRING);
+  if(!empty($_POST)){
+    $checkBox = filter_var($_POST['customSkin'],FILTER_SANITIZE_STRING);
+    $skinPost = filter_var($_POST['skin'],FILTER_SANITIZE_STRING);
+  }
 
   //Check ini file
   $ini_dir = '../../accounts/'.$_SESSION["userId"].'/'.$_SESSION["userId"].'.ini';
@@ -22,5 +24,5 @@
   $ini->set('skin','fileName',$skin);
   $ini->write($ini_dir);
 
-  header('Location:../../editProfile.php');
+  header('Location:../../editProfile.php?block=skin&success=2');
  ?>

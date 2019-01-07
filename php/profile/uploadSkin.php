@@ -46,7 +46,7 @@ function error($error_code){
     unlink($target_file);
   }
 
-  $var = "Location:../../editProfile.php?error=".$error_code;
+  $var = "Location:../../editProfile.php?block=skin&error=".$error_code;
   header($var);
   exit();
 }
@@ -108,7 +108,7 @@ if ($uploadOk == 0) {
         rename($target_file,$new_target);
         removeFolder($target_dir."export");
         //TODO add success message
-        header('Location:../../editProfile.php?success=0');
+        header('Location:../../editProfile.php?block=skin&success=0');
     } else {
         echo "Sorry, there was an error uploading your file.";
         error('9');

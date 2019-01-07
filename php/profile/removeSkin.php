@@ -7,7 +7,7 @@ if(empty($_SESSION)){
 require 'replaySettings.php';
 
 function error($error_code){
-  header("Location:../../editProfile.php?error=".$error_code);
+  header("Location:../../editProfile.php?block=skin&error=".$error_code);
   exit();
 }
 
@@ -58,7 +58,7 @@ function listAllSkins2($userId){
 
   //Delete the file
   if(unlink($userURL.$skinToRemove)){
-    header('Location:../../editProfile.php?success=1');
+    header('Location:../../editProfile.php?block=skin&success=1');
   }else{
     error(13);
   }

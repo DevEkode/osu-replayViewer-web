@@ -119,6 +119,7 @@ $userReplayList = getReplayInfo($conn,$userId);
   </head>
 
   <body>
+    <div class="loaderCustom"></div>
     <!-- Top navigation bar -->
     <?php showNavbar(); ?>
 

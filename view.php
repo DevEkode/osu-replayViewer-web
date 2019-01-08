@@ -107,7 +107,7 @@
   </head>
 
   <body>
-    <div class="loader"></div>
+    <div class="loaderCustom"></div>
     <!-- Modal -->
     <div class="modal" id="delete_modal">
       <div class="modal-content">

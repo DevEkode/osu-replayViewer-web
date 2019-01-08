@@ -23,7 +23,7 @@
   </head>
 
   <body>
-    <div class="loader"></div>
+    <div class="loaderCustom"></div>
     <!-- Top navigation bar -->
     <?php showNavbar(); ?>
 

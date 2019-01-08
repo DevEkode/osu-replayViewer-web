@@ -6,7 +6,8 @@ $uploadSkinSuccess = array(
   1 => 'The skin has successfully been removed',
   2 => 'All settings has been saved',
   3 => 'Email successfully updated, an verification email has been sent',
-  4 => 'Password successfully changed'
+  4 => 'Password successfully changed',
+  7 => 'Background dim successfully saved'
 );
 
 // ---- Index ----

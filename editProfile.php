@@ -29,10 +29,12 @@
     <title>osu!replayViewer - edit profile</title>
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
-    <link rel="stylesheet" type="text/css" href="css/loader.css">
+    
     <link rel="icon" type="image/png" href="images/icon.png" />
     <link rel="stylesheet" type="text/css" href="bulma/css/bulma.css">
     <link rel="stylesheet" type="text/css" href="css/editProfile.css">
+    
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
     <script src="js/loader.js"></script>
@@ -41,10 +43,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/loader.css">
+    <link rel="stylesheet" type="text/css" href="css/checkboxSwitch.css">
   </head>
 
   <body onload="showDim(); updateCustomSkin()">
-    <div class="loader"></div>
+    <div class="loaderCustom"></div>
     <?php showNavbar(); ?>
     <?php showError(); ?>
 
@@ -55,23 +60,76 @@
       <div class="columns">
         <div class="column is-one-quarter" id="columnBack">
           <!-- First column -->
-          <aside class="menu">
-            <p class="menu-label" id="itemLabel">Replay customisation</p>
-            <ul class="menu-list">
-              <li><a href="#" class="is-active">Skin</a></li>
-              <li><a>More</a></li>
-            </ul>
-            <p class="menu-label" id="itemLabel">Account</p>
-            <ul class="menu-list">
-              <li><a>Credentials</a></li>
-              <li><a>More</a></li>
-            </ul>
-          </aside>
+          <?php generateMenu(); ?>
         </div>
-
         <div class="column">
-        <!-- second column -->
-        <?php generateBlocks(); ?>
+          <!-- Second column -->
+          <?php generateBlocks(); ?>
+
+          <form action="php/profile/form_gameSettings.php" method="post" id="columnBack">
+            <h1 class="title is-4">- Custom game settings -</h1>
+            <h2 class="title is-6">Activate or disable osu! settings</h1>
+
+            <div class="grid-container">
+              <div class="grid-item">
+                <label class="switch_check">
+                  <input type="checkbox">
+                  <span class="slider_check round"></span>
+                </label>
+                <span>Snaking sliders</span>
+              </div>
+
+              <div class="grid-item">
+                <label class="switch_check">
+                  <input type="checkbox">
+                  <span class="slider_check round"></span>
+                </label>
+                <span>Storyboards</span>
+              </div>
+
+              <div class="grid-item">
+                <label class="switch_check">
+                  <input type="checkbox">
+                  <span class="slider_check round"></span>
+                </label>
+                <span>Background videos</span>
+              </div>
+
+              <div class="grid-item">
+                <label class="switch_check">
+                  <input type="checkbox">
+                  <span class="slider_check round"></span>
+                </label>
+                <span>Leaderboard</span>
+              </div>
+              
+              <div class="grid-item">
+                <label class="switch_check">
+                  <input type="checkbox">
+                  <span class="slider_check round"></span>
+                </label>
+                <span>Combo bursts</span>
+              </div>
+
+              <div class="grid-item">
+                <label class="switch_check">
+                  <input type="checkbox">
+                  <span class="slider_check round"></span>
+                </label>
+                <span>Hit lighting</span>
+              </div>
+            </div>
+
+            <input type="submit" value="Save all modifications" />
+          </form>
+          
+          <br>
+
+          <form action="php/profile/form_gameSettings.php" method="post" id="columnBack">
+            <h1 class="title is-4">- Custom cursor size chooser -</h1>
+            <input type="range" step="0.01" min="0" max="2" value='' class="slider" oninput="" name="cursorSize" id="cursorSizeRange"> <br>
+            <input type="submit" value="Save all modifications" />
+          </form>
 
         </div>
       </div>

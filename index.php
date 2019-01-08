@@ -46,7 +46,7 @@ include('php/analytics.php');
   <body>
     <?php showError(); ?>
     <script type="text/javascript" src="js/index/upload.js"></script>
-    <div class="loader"></div>
+    <div class="loaderCustom"></div>
     <!-- Modal -->
     <div id="myModal" class="modal" onmouseover="disableClear()">
 

@@ -7,9 +7,9 @@
 
   $(window).on("load", function() {
     // weave your magic here.
-    $(".loader").fadeOut("slow");;
+    $(".loaderCustom").fadeOut("slow");;
 });
 
 $(window).on("beforeunload", function() {
-    $('.loader').fadeIn();
+    $('.loaderCustom').fadeIn();
 });

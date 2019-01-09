@@ -4,6 +4,8 @@ require_once 'blocks/skinChooser.php';
 require_once 'blocks/skinUploader.php';
 require_once 'blocks/skinRemover.php';
 require_once 'blocks/dimChooser.php';
+require_once 'blocks/gameSettingsChooser.php';
+require_once 'blocks/cursorSizeChooser.php';
 
 function generateBlocks(){
     switch($_GET['block']){
@@ -14,6 +16,9 @@ function generateBlocks(){
             break;
         case 'game':
             block_dimChooser(); echo '<br>';
+            block_gameSettingsChooser(); echo '<br>';
+            block_cursorSizeChooser(); echo '<br>';
+            break;
     }
 }
 

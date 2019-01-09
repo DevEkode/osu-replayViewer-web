@@ -19,6 +19,7 @@
   $customSkin = getIniKey($_SESSION["userId"],"enable");
   $actualSkin = getIniKey($_SESSION["userId"],"fileName");
   $actualDim = getIniKey($_SESSION["userId"],"dim");
+  $actualCursorSize = getIniKey($_SESSION["userId"],"cursor_size");
  ?>
 
 <!DOCTYPE html>
@@ -26,6 +27,7 @@
   <head>
     <script src="js/request.js"></script>
     <script src="js/editProfile.js"></script>
+    <script src="js/profile/cursorSize.js"></script>
     <title>osu!replayViewer - edit profile</title>
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
@@ -33,7 +35,6 @@
     <link rel="icon" type="image/png" href="images/icon.png" />
     <link rel="stylesheet" type="text/css" href="bulma/css/bulma.css">
     <link rel="stylesheet" type="text/css" href="css/editProfile.css">
-    
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
@@ -48,7 +49,7 @@
     <link rel="stylesheet" type="text/css" href="css/checkboxSwitch.css">
   </head>
 
-  <body onload="showDim(); updateCustomSkin()">
+  <body onload="showDim(); showCursorSize(); updateCustomSkin();">
     <div class="loaderCustom"></div>
     <?php showNavbar(); ?>
     <?php showError(); ?>
@@ -65,72 +66,6 @@
         <div class="column">
           <!-- Second column -->
           <?php generateBlocks(); ?>
-
-          <form action="php/profile/form_gameSettings.php" method="post" id="columnBack">
-            <h1 class="title is-4">- Custom game settings -</h1>
-            <h2 class="title is-6">Activate or disable osu! settings</h1>
-
-            <div class="grid-container">
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Snaking sliders</span>
-              </div>
-
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Storyboards</span>
-              </div>
-
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Background videos</span>
-              </div>
-
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Leaderboard</span>
-              </div>
-              
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Combo bursts</span>
-              </div>
-
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Hit lighting</span>
-              </div>
-            </div>
-
-            <input type="submit" value="Save all modifications" />
-          </form>
-          
-          <br>
-
-          <form action="php/profile/form_gameSettings.php" method="post" id="columnBack">
-            <h1 class="title is-4">- Custom cursor size chooser -</h1>
-            <input type="range" step="0.01" min="0" max="2" value='' class="slider" oninput="" name="cursorSize" id="cursorSizeRange"> <br>
-            <input type="submit" value="Save all modifications" />
-          </form>
-
         </div>
       </div>
     </div>

@@ -38,7 +38,14 @@ function updateIniFile($accountURL,$userId,$enableSkin,$skinFileName,$dim,$showV
     ),
     'osu' => array(
       'dim' => $dim,
-      'showVideo' => $showVideo
+      'showVideo' => $showVideo,
+      'cursor_size' => 1,
+      'snaking_sliders' => 'false',
+      'storyboards' => 'false',
+      'background_videos' => 'false',
+      'leaderboards' => 'false',
+      'combo_bursts' => 'false',
+      'hit_lighting' => 'false'
     )
   );
 

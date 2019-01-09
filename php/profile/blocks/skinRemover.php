@@ -14,7 +14,7 @@ showSuccess(1);
   block_skinRemover_body();
   
   echo <<<EOF
-  <input type="submit" value="Remove this skin">
+  <input type="submit" value="Remove this skin" class="button is-light">
           </form>
 EOF;
 }
@@ -24,6 +24,7 @@ function block_skinRemover_body(){
   $actualSkin = getIniKey($_SESSION["userId"],"fileName");
 
   //Combobox with all skins uploaded
+  echo '<div class="select">';
   echo "<select id='skinsSelector2' class=\"select\" name='skin'>";
   foreach($skins as $skin)
   {
@@ -33,6 +34,6 @@ function block_skinRemover_body(){
       echo "<option value='".$skin."'>".$skin."</option>";
     }
   }
-  echo "</select>";
+  echo "</select></div>";
 }
 ?>

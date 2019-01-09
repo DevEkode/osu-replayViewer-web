@@ -54,6 +54,19 @@
     <?php showNavbar(); ?>
     <?php showError(); ?>
 
+    <!-- Modal -->
+    <div class="modal" id="delete_modal">
+      <div class="modal-content">
+        <h2>Do you really want to delete your account ?</h2>
+        <h4>A verification email will be send if you accept</h4>
+        <form action="php/profile/deleteProfile.php" method="post">
+          <input type="submit" id="button_yes" value="Yes please !"/>
+          <input type="hidden" name="id" value=<?php echo $_SESSION['userId']; ?> />
+        </form>
+        <button id="button_no" onclick="closeModalDelete()">No stop !</button>
+      </div>
+    </div>
+
     <h1 id="TopTitle"> Edit profile </h1>
 
     <div class="block" id="replay">

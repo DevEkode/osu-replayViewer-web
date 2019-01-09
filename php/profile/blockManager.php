@@ -6,6 +6,9 @@ require_once 'blocks/skinRemover.php';
 require_once 'blocks/dimChooser.php';
 require_once 'blocks/gameSettingsChooser.php';
 require_once 'blocks/cursorSizeChooser.php';
+require_once 'blocks/changePassword.php';
+require_once 'blocks/changeEmail.php';
+require_once 'blocks/removeAccount.php';
 
 function generateBlocks(){
     switch($_GET['block']){
@@ -19,6 +22,11 @@ function generateBlocks(){
             block_gameSettingsChooser(); echo '<br>';
             block_cursorSizeChooser(); echo '<br>';
             break;
+        case 'security':
+            block_changePassword(); echo '<br>';
+            block_changeEmail(); echo '<br>';
+            block_removeAccount(); echo '<br>';
+            break;
     }
 }
 
@@ -30,27 +38,33 @@ function generateMenu(){
 EOF;
     //Skin
     if($_GET['block'] == 'skin'){
-        echo '<li><a href="#" class="is-active">Skin</a></li>';
+        echo '<li><a href="#" class="is-active">📖 Skin</a></li>';
     }else{
-        echo '<li><a href="editProfile.php?block=skin">Skin</a></li>';
+        echo '<li><a href="editProfile.php?block=skin">📖 Skin</a></li>';
     }
 
     //Game
     if($_GET['block'] == 'game'){
-        echo '<li><a href="#" class="is-active">Game settings</a></li>';
+        echo '<li><a href="#" class="is-active">⚙️ Game settings</a></li>';
     }else{
-        echo '<li><a href="editProfile.php?block=game">Game settings</a></li>';
+        echo '<li><a href="editProfile.php?block=game">⚙️ Game settings</a></li>';
     }
     
     echo <<<EOF
     </ul>
             <p class="menu-label" id="itemLabel">Account</p>
             <ul class="menu-list">
-              <li><a>Credentials</a></li>
-              <li><a>More</a></li>
-            </ul>
-          </aside>
 EOF;
+
+    //Security
+    if($_GET['block'] == 'security'){
+        echo '<li><a href="#" class="is-active">🔐 Security</a></li>';
+    }else{
+        echo '<li><a href="editProfile.php?block=security">🔐 Security</a></li>';
+    }
+              
+    echo '</ul></aside>';
+
 
 
 }

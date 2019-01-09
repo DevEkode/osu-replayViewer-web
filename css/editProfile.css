@@ -241,3 +241,11 @@ input[type=checkBox]{
   text-align: left;
   font-size: 110%;
 }
+
+.passForm input{
+  width:50%;
+}
+
+.passForm .button{
+  width:20%;
+}

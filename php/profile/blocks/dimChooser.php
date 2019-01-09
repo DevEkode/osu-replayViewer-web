@@ -26,7 +26,7 @@ EOF;
         
 
         <br>
-        <input type="submit" value="Save background dim" />
+        <input type="submit" value="Save background dim" class="button is-light"/>
         </div>
       </form>
 EOF;

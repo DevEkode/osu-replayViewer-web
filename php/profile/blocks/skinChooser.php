@@ -13,7 +13,7 @@ function block_skinChooser(){
     echo <<<EOF
     <br>
     <br>
-    <input type="submit" value="Save all modifications" />
+    <input type="submit" value="Save all modifications" class="button is-light"/>
     </form>
 EOF;
 }
@@ -30,16 +30,19 @@ function block_skinChooser_body(){
         //Check box to enable custom skin
         echo "Enable custom skin: <br>";
         echo "<span style=\"font-size:13px\"> By default the osu!replayViewer skin is used</span><br>";
+        echo '<label class="checkbox">';
         if($customSkin == 1){
           echo '<input type="checkbox" name="customSkin" id="checkBox" oninput="updateCustomSkin()" checked>';
         }else{
           echo '<input type="checkbox" name="customSkin" oninput="updateCustomSkin()" id="checkBox">';
         }
+        echo '</label>';
         echo '<br><br>';
 
       echo "Choose your custom skin : <br>";
 
       //Combobox with all skins uploaded
+      echo '<div class="select">';
       echo "<select id='skinsSelector' name='skin'>";
         foreach($skins as $skin)
         {
@@ -49,7 +52,7 @@ function block_skinChooser_body(){
             echo "<option value='".$skin."'>".$skin."</option>";
           }
         }
-        echo "</select>";
+        echo "</select></div>";
     }
 }
             

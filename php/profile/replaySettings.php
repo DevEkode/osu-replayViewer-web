@@ -45,7 +45,8 @@ function updateIniFile($accountURL,$userId,$enableSkin,$skinFileName,$dim,$showV
       'background_videos' => 'false',
       'leaderboards' => 'false',
       'combo_bursts' => 'false',
-      'hit_lighting' => 'false'
+      'hit_lighting' => 'false',
+      'replay_hud' => 'false'
     )
   );
 

@@ -28,6 +28,9 @@ if(isset($_POST['combo_bursts'])) $ini->set('osu','combo_bursts',"true");
 if(isset($_POST['hit_lighting'])) $ini->set('osu','hit_lighting',"true");
   else $ini->set('osu','hit_lighting',"false");
 
+if(isset($_POST['replay_hud'])) $ini->set('osu','replay_hud',"true");
+  else $ini->set('osu','replay_hud',"false");
+
 $ini->write($ini_dir);
 header('Location:../../editProfile.php?block=game&success=8');
 ?>

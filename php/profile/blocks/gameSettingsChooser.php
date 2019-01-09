@@ -58,9 +58,17 @@ echo <<<EOF
                 </label>
                 <span>Hit lighting</span>
               </div>
+
+              <div class="grid-item">
+                <label class="switch_check">
+                  <input type="checkbox" name="replay_hud">
+                  <span class="slider_check round"></span>
+                </label>
+                <span>Replay HUD</span>
+              </div>
             </div>
 
-            <input type="submit" value="Save all modifications" />
+            <input type="submit" value="Save all modifications" class="button is-light"/>
           </form>
 EOF;
 }         

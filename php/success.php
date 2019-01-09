@@ -7,7 +7,9 @@ $uploadSkinSuccess = array(
   2 => 'All settings has been saved',
   3 => 'Email successfully updated, an verification email has been sent',
   4 => 'Password successfully changed',
-  7 => 'Background dim successfully saved'
+  7 => 'Background dim successfully saved',
+  8 => 'Game settings successfully saved',
+  9 => 'Cursor size successfully saved'
 );
 
 // ---- Index ----

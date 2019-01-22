@@ -7,70 +7,36 @@ echo <<<EOF
 EOF;
             showSuccess(8);
 
-echo <<<EOF
-            <h2 class="title is-6">Activate or disable osu! settings</h1>
+echo '<h2 class="title is-6">Activate or disable osu! settings</h1>';        
+echo '<div class="grid-container">';
 
-            <div class="grid-container">
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox" name="snaking_sliders">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Snaking sliders</span>
-              </div>
 
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox" name="storyboards">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Storyboards</span>
-              </div>
+generateSwitch("Snaking sliders","snaking_sliders","snaking_sliders");
+generateSwitch("Storyboards","storyboards","storyboards");
+generateSwitch("Background videos","background_videos","background_videos");
+generateSwitch("Leaderboard","leaderboards","leaderboards");
+generateSwitch("Combo bursts","combo_bursts","combo_bursts");
+generateSwitch("Hit lighting","hit_lighting","hit_lighting");
+generateSwitch("Replay HUD","replay_hud","replay_hud");
 
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox" name="background_videos">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Background videos</span>
-              </div>
+echo '</div>';
+echo '<input type="submit" value="Save all modifications" class="button is-light"/>';
+echo '</form>';
+}
 
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox" name="leaderboards">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Leaderboard</span>
-              </div>
-              
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox" name="combo_bursts">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Combo bursts</span>
-              </div>
-
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox" name="hit_lighting">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Hit lighting</span>
-              </div>
-
-              <div class="grid-item">
-                <label class="switch_check">
-                  <input type="checkbox" name="replay_hud">
-                  <span class="slider_check round"></span>
-                </label>
-                <span>Replay HUD</span>
-              </div>
-            </div>
-
-            <input type="submit" value="Save all modifications" class="button is-light"/>
-          </form>
-EOF;
-}         
+function generateSwitch($title,$name,$iniKey){
+  $activated = getIniKey($_SESSION["userId"],$iniKey);
+  echo '<div class="grid-item">';
+  echo  '<label class="switch_check">';
+  if($activated == 1){
+    echo    "<input type=\"checkbox\" name=\"$name\" checked>";
+  }else{
+    echo    "<input type=\"checkbox\" name=\"$name\">";
+  }
+  echo    '<span class="slider_check round"></span>';
+  echo  '</label>';
+  echo  "<span>$title</span>";
+  echo '</div>';
+}
 
 ?>

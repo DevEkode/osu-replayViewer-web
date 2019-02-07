@@ -2,7 +2,7 @@
 
 //Generate html block for skin remover
 function block_dimChooser(){
-  $actualDim = getIniKey($_SESSION["userId"],"dim");
+  $actualDim = getIniKey($_SESSION["userId"],'osu',"dim");
 
   echo <<<EOF
   <form action="php/profile/saveUserIni.php" method="post">

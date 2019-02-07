@@ -25,10 +25,10 @@ echo '</form>';
 }
 
 function generateSwitch($title,$name,$iniKey){
-  $activated = getIniKey($_SESSION["userId"],$iniKey);
+  $activated = getIniKey($_SESSION["userId"],'osu',$iniKey);
   echo '<div class="grid-item">';
   echo  '<label class="switch_check">';
-  if($activated == 1){
+  if($activated == 'true'){
     echo    "<input type=\"checkbox\" name=\"$name\" checked>";
   }else{
     echo    "<input type=\"checkbox\" name=\"$name\">";

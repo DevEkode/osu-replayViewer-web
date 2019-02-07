@@ -1,4 +1,5 @@
 <?php
+require_once 'php/profile/ini.class.php';
 
 //Generate html block for skin uploader
 function block_skinChooser(){
@@ -11,9 +12,7 @@ function block_skinChooser(){
     
     //Show last part
     echo <<<EOF
-    <br>
-    <br>
-    <input type="submit" value="Save all modifications" class="button is-light"/>
+    
     </form>
 EOF;
 }
@@ -26,6 +25,16 @@ function block_skinChooser_body(){
 
     if(empty($skins)){
         echo "<h2 style=\"color:red\">You have to upload at least one skin to use this functionnality</h2>";
+
+        //Check ini file
+        $ini_dir = './accounts/'.$_SESSION["userId"].'/'.$_SESSION["userId"].'.ini';
+        $ini = new Ini();
+        $ini->read($ini_dir);
+
+        $ini->set('skin','enable',"0");
+        $ini->write($ini_dir);
+
+        echo '<br/>';
       }else{
         //Check box to enable custom skin
         echo "Enable custom skin: <br>";
@@ -53,6 +62,8 @@ function block_skinChooser_body(){
           }
         }
         echo "</select></div>";
+        echo '<br/><br/>';
+        echo '<input type="submit" value="Save all modifications" class="button is-light"/>';
     }
 }
             

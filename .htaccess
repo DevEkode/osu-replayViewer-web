@@ -7,11 +7,14 @@ order allow,deny
 deny from all
 </Files>
 
-AddType application/x-httpd-php .htm .html
+#AddType application/x-httpd-php .htm .html
 Options -Indexes
 
 #Prevent directory listings
-#Options All -Indexes
+<FilesMatch "\.(ini|osk)$">
+Allow from all
+</FilesMatch>
+
 
 <ifModule mod_gzip.c>
  mod_gzip_on Yes
@@ -23,6 +26,23 @@ Options -Indexes
  mod_gzip_item_exclude mime ^image/.*
  mod_gzip_item_include handler ^cgi-script$
 </ifModule>
+
+# Add Caching.
+<IfModule mod_headers.c>
+ <FilesMatch "\.(ico|jpe?g|png|gif|swf|css|gz)$">
+	Header set Cache-Control "max-age=2592000, public"
+ </FilesMatch>
+ <FilesMatch "\.(js)$">
+	Header set Cache-Control "max-age=2592000, private"
+ </FilesMatch>
+<filesMatch "\.(html|htm)$">
+	Header set Cache-Control "max-age=7200, public"
+</filesMatch>
+# Disable caching for scripts and other dynamic files
+<FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+	Header unset Cache-Control
+</FilesMatch>
+</IfModule>
  
 #RewriteEngine On
 #RewriteBase /

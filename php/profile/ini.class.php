@@ -1,9 +1,11 @@
 <?php
 class ini {
     protected $lines;
+    protected $file;
 
     public function read($file) {
         $this->lines = array();
+        $this->file = $file;
 
         $section = '';
 
@@ -42,8 +44,46 @@ class ini {
             $line['data'] = $key . " = " . $value . "\r\n";
             return;
         }
+        
+        //Create new line if it doesn't exists
+        $section_line = $this->getLineWithString(file($this->file),'['.$section.']');
 
-        throw new Exception('Missing Section or Key');
+        //Add new key after section beginning
+        $file2 = new SplFileObject($this->file,'w+');
+        $file2->seek($section_line); // Seek to line no. 10,000
+        $file2->fwrite($key.' = '.$value);
+        $file2 = null;
+        var_dump($key.' = '.$value);
+        //throw new Exception('Missing Section or Key');
+    }
+
+    private function getLineWithString($lines, $str) {
+        foreach ($lines as $lineNumber => $line) {
+            if (strpos($line, $str) !== false) {
+                return $lineNumber;
+            }
+        }
+        return -1;
+    }
+
+    public function exists($section, $key){
+        try {
+            $this->get($section,$key);
+        } catch (Exception $e){
+            return false;
+        }
+        return true;
+    }
+
+    public function writeArray($file,$section,$data) {
+        $fp = fopen($file, 'a');
+        fwrite($fp,'['.$section."]\n");
+
+        foreach ($data as $key => $value) {
+            fwrite($fp, $key.' = '.$value."\n");
+        }
+
+        fclose($fp);
     }
 
     public function write($file) {

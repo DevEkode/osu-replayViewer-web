@@ -21,8 +21,8 @@ EOF;
 function block_skinChooser_body(){
     //Get all users skins
     $skins = listAllSkins($_SESSION["userId"]);
-    $customSkin = getIniKey($_SESSION["userId"],"enable");
-    $actualSkin = getIniKey($_SESSION["userId"],"fileName");
+    $customSkin = getIniKey($_SESSION["userId"],'skin',"enable");
+    $actualSkin = getIniKey($_SESSION["userId"],'skin',"fileName");
 
     if(empty($skins)){
         echo "<h2 style=\"color:red\">You have to upload at least one skin to use this functionnality</h2>";

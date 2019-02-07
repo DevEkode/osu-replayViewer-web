@@ -15,11 +15,11 @@
 
   //Query user information
   checkUserFile($_SESSION["userId"]);
-  $skins = listAllSkins($_SESSION["userId"]);
-  $customSkin = getIniKey($_SESSION["userId"],"enable");
+  /*$skins = listAllSkins($_SESSION["userId"]);
+  $customSkin = getIniKey($_SESSION["userId"],,"enable");
   $actualSkin = getIniKey($_SESSION["userId"],"fileName");
   $actualDim = getIniKey($_SESSION["userId"],"dim");
-  $actualCursorSize = getIniKey($_SESSION["userId"],"cursor_size");
+  $actualCursorSize = getIniKey($_SESSION["userId"],"cursor_size");*/
  ?>
 
 <!DOCTYPE html>
@@ -28,6 +28,7 @@
     <script src="js/request.js"></script>
     <script src="js/editProfile.js"></script>
     <script src="js/profile/cursorSize.js"></script>
+    <script src="js/profile/volume.js"></script>
     <title>osu!replayViewer - edit profile</title>
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
@@ -49,7 +50,7 @@
     <link rel="stylesheet" type="text/css" href="css/checkboxSwitch.css">
   </head>
 
-  <body onload="showDim(); showCursorSize(); updateCustomSkin();">
+  <body onload="showDim(); showCursorSize(); updateCustomSkin(); updateVolume();">
     <div class="loaderCustom"></div>
     <?php showNavbar(); ?>
     <?php showError(); ?>

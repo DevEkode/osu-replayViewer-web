@@ -9,6 +9,7 @@ require_once 'blocks/cursorSizeChooser.php';
 require_once 'blocks/changePassword.php';
 require_once 'blocks/changeEmail.php';
 require_once 'blocks/removeAccount.php';
+require_once 'blocks/volumeChooser.php';
 
 function generateBlocks(){
     switch($_GET['block']){
@@ -21,6 +22,7 @@ function generateBlocks(){
             block_dimChooser(); echo '<br>';
             block_gameSettingsChooser(); echo '<br>';
             block_cursorSizeChooser(); echo '<br>';
+            block_volumeChooser(); echo '<br>';
             break;
         case 'security':
             block_changePassword(); echo '<br>';

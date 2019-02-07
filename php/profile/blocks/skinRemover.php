@@ -21,7 +21,7 @@ EOF;
 
 function block_skinRemover_body(){
   $skins = listAllSkins($_SESSION["userId"]);
-  $actualSkin = getIniKey($_SESSION["userId"],"fileName");
+  $actualSkin = getIniKey($_SESSION["userId"],'skin',"fileName");
 
   //Combobox with all skins uploaded
   echo '<div class="select">';

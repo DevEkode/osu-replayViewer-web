@@ -27,8 +27,7 @@
   <head>
     <script src="js/request.js"></script>
     <script src="js/editProfile.js"></script>
-    <script src="js/profile/cursorSize.js"></script>
-    <script src="js/profile/volume.js"></script>
+    
     <title>osu!replayViewer - edit profile</title>
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
@@ -42,6 +41,8 @@
     <script src="js/loader.js"></script>
     <script src="js/profile/uploadSkin.js"></script>
     <script src="js/profile/modal.js"></script>
+    <script src="js/profile/cursorSize.js"></script>
+    <script src="js/profile/volume.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>

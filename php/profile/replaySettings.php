@@ -1,6 +1,5 @@
 <?php
 require 'iniParser.php';
-require 'ini.class.php';
 
 //Default
 $data = array(
@@ -59,17 +58,22 @@ function checkUserFile($userId){
     $defaults_keys_skin = array_keys($data['skin']);
     $defaults_keys_osu = array_keys($data['osu']);
 
+    //Check skin section
     foreach($defaults_keys_skin as &$key){
       if(!$ini->exists('skin',$key)){
         //Add missing line
-        $ini->set('skin',$key,$data['skin'][$key]);
-        $ini->write($ini_dir);
+        $ini->repairKey('skin',$key,$data);
       }
     }
 
+    //Check osu section
+    foreach($defaults_keys_osu as &$key){
+      if(!$ini->exists('osu',$key)){
+        //Add missing line
+        $ini->repairKey('osu',$key,$data);
+      }
+    }
   }
-
-  
 }
 
 function getIniKey($userId,$section,$key){

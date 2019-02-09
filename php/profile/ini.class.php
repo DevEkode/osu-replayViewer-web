@@ -32,7 +32,7 @@ class ini {
             return $line['value'];
         }
 
-        throw new Exception('Missing Section or Key');
+        throw new Exception('Missing key or section');
     }
 
     public function set($section, $key, $value) {
@@ -45,25 +45,39 @@ class ini {
             return;
         }
         
-        //Create new line if it doesn't exists
-        $section_line = $this->getLineWithString(file($this->file),'['.$section.']');
-
-        //Add new key after section beginning
-        $file2 = new SplFileObject($this->file,'w+');
-        $file2->seek($section_line); // Seek to line no. 10,000
-        $file2->fwrite($key.' = '.$value);
-        $file2 = null;
-        var_dump($key.' = '.$value);
-        //throw new Exception('Missing Section or Key');
+        throw new Exception('Missing key or section');
     }
 
-    private function getLineWithString($lines, $str) {
-        foreach ($lines as $lineNumber => $line) {
-            if (strpos($line, $str) !== false) {
-                return $lineNumber;
+    public function repairKey($section,$key,$defaultData){
+        //Create new line if it doesn't exists
+
+        //Add new key after section beginning
+        $file2 = new SplFileObject($this->file,'r');
+
+        $output = '';
+        $value = $defaultData[$section][$key];
+        while (!$file2->eof()) {
+            $line2 = $file2->fgets();
+            $compareTo = '['.$section."]";
+            $line2_clean = preg_replace('/[[:^print:]]/', "", $line2);
+
+            if($line2_clean == $compareTo){
+               $line2 .= $key.' = '.$value."\n";
             }
+            $output .= $line2;
         }
-        return -1;
+        $file2 = null;
+
+        unlink($this->file);
+
+        $explode = explode("\n",$output);
+        $array = array();
+        foreach($explode as &$line) {
+            $newLine = array('data' => $line);
+            $array[] = $newLine;
+        }
+
+        $this->write2($this->file,$array);
     }
 
     public function exists($section, $key){
@@ -91,6 +105,16 @@ class ini {
 
         foreach($this->lines as $line) {
             fwrite($fp, $line['data']);
+        }
+
+        fclose($fp);
+    }
+
+    public function write2($file,$newLines) {
+        $fp = fopen($file, 'w');
+
+        foreach($newLines as $line) {
+            fwrite($fp, $line['data']."\n");
         }
 
         fclose($fp);

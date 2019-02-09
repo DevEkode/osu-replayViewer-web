@@ -1,5 +1,5 @@
 <?php
-//require_once 'ini.class.php';
+require_once 'ini.class.php';
 require_once 'replaySettings.php';
 
 session_start();

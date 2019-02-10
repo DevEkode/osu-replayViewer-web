@@ -40,7 +40,7 @@ function block_skinChooser_body(){
         echo "Enable custom skin: <br>";
         echo "<span style=\"font-size:13px\"> By default the osu!replayViewer skin is used</span><br>";
         echo '<label class="checkbox">';
-        if($customSkin == 1){
+        if($customSkin == 'true'){
           echo '<input type="checkbox" name="customSkin" id="checkBox" oninput="updateCustomSkin()" checked>';
         }else{
           echo '<input type="checkbox" name="customSkin" oninput="updateCustomSkin()" id="checkBox">';

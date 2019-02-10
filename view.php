@@ -14,6 +14,7 @@
  }
 
   $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+  $server = "https://peertube.osureplayviewer.xyz/client/assets/replayList/";
 
   // Check connection
   if ($conn->connect_error) {
@@ -42,18 +43,18 @@
 
   $userJSON = getUserJSON($replayDATA['userId'],$osuApiKey);
 
-  $urlRaw = "https://peertube.osureplayviewer.xyz/client/assets/replayList/".$_GET['id']."/".$_GET['id'].".mp4";
+  $urlRaw = $server.$_GET['id']."/".$_GET['id'].".mp4";
   if(URL_exists($urlRaw)){
     $showRaw = true;
-    $metaUrl = "https://peertube.osureplayviewer.xyz/client/assets/replayList/".$_GET['id']."/".$_GET['id'].".mp4";
+    $metaUrl = $server.$_GET['id']."/".$_GET['id'].".mp4";
   }else{
     $showRaw = false;
   }
 
-  $osrUrl = "https://peertube.osureplayviewer.xyz/client/assets/replayList/".$_GET['id']."/".base64_decode($replayDATA['OFN']);
+  $osrUrl = $server.$_GET['id']."/".base64_decode($replayDATA['OFN']);
   if(URL_exists($osrUrl)){
     $showOsr = true;
-    $osuUrl2 = "https://peertube.osureplayviewer.xyz/client/assets/replayList/".$_GET['id']."/".rawurlencode(base64_decode($replayDATA['OFN']));
+    $osuUrl2 = $server.$_GET['id']."/".rawurlencode(base64_decode($replayDATA['OFN']));
   }else{
     $showOsr = false;
   }
@@ -143,7 +144,7 @@
       <div class="player_container">
       <?php
         if(empty($replayDATA['youtubeId'])){
-          echo '<video id="player" controls crossorigin playsinline>';
+          echo "<video id=\"player\" controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline>";
     			echo "<source src=$urlRaw  type='video/mp4'>";
     			echo '</video>';
         }else{

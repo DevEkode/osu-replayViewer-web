@@ -4,10 +4,14 @@ use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
 require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
+$server = "https://unstable.osureplayviewer.xyz";
+
 
 function sendEmail($email,$username,$verfId){
+  global $server;
+
   require_once $_SERVER['DOCUMENT_ROOT'].'/secure/smtp.php';
-  $link = "https://osureplayviewer.xyz/emailVerification.php?id=".$verfId;
+  $link = $server."/emailVerification.php?id=".$verfId;
   $mail = new PHPMailer(true);
   //Server settings
   $mail->SMTPDebug = 2;                                 // Enable verbose debug output
@@ -37,8 +41,10 @@ function sendEmail($email,$username,$verfId){
 }
 
 function sendPasswordRecoveryEmail($email,$userId,$verfId){
+  global $server;
+
   require_once $_SERVER['DOCUMENT_ROOT'].'/secure/smtp.php';
-  $link = "https://osureplayviewer.xyz/forgotPassword.php?id=".$userId."&verf=".$verfId;
+  $link = $server."/forgotPassword.php?id=".$userId."&verf=".$verfId;
   $mail = new PHPMailer(true);
   //Server settings
   $mail->SMTPDebug = 2;                                 // Enable verbose debug output
@@ -70,8 +76,10 @@ function sendPasswordRecoveryEmail($email,$userId,$verfId){
 }
 
 function sendTempPassword($email,$password){
+  global $server;
+
   require_once $_SERVER['DOCUMENT_ROOT'].'/secure/smtp.php';
-  $link = "https://osureplayviewer.xyz/login.php";
+  $link = $server."/login.php";
   $mail = new PHPMailer(true);
   //Server settings
   $mail->SMTPDebug = 2;                                 // Enable verbose debug output
@@ -103,8 +111,10 @@ function sendTempPassword($email,$password){
 }
 
 function sendDeleteVerification($email,$userId,$deleteVerfId){
+  global $server;
+  
   require_once $_SERVER['DOCUMENT_ROOT'].'/secure/smtp.php';
-  $link = "https://osureplayviewer.xyz/php/profile/verfDeleteProfile.php?userId=$userId&id=$deleteVerfId";
+  $link = $server."/php/profile/verfDeleteProfile.php?userId=$userId&id=$deleteVerfId";
   $mail = new PHPMailer(true);
   //Server settings
   $mail->SMTPDebug = 2;                                 // Enable verbose debug output

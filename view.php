@@ -100,14 +100,16 @@
     <script src="js/loader.js"></script>
     <script src="js/view/modal.js"></script>
 
-    <script src="https://cdn.plyr.io/3.2.4/plyr.js"></script>
-    <script src="js/plyr.js "></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.plyr.io/3.2.4/plyr.css">
+    <!-- <script src="https://cdn.plyr.io/3.2.4/plyr.js"></script>-->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.plyr.io/3.2.4/plyr.css"> -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.4.8/plyr.css">
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
   </head>
 
   <body>
+    <script src="https://cdn.plyr.io/3.4.8/plyr.js"></script>
+    
     <div class="loaderCustom"></div>
     <!-- Modal -->
     <div class="modal" id="delete_modal">
@@ -153,6 +155,7 @@
           echo '</div>';
         }
       ?>
+      <script>const player = new Plyr('#player');</script>
       </div>
       <!-- Right content block -->
       <div class="right_content">

@@ -8,7 +8,16 @@ header('Retry-After: 3600');
     <meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="css/maintenance.css">
 	<link rel="icon" type="image/png" href="images/icon.png" />
-    <title>Maintenance</title>
+	<title>Maintenance</title>
+	
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134700452-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-134700452-1');
+    </script>
 </head>
 
 <body>

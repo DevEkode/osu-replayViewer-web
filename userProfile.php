@@ -109,6 +109,16 @@ $userReplayList = getReplayInfo($conn,$userId);
 <html>
   <head>
     <title>osu!replayViewer - <?php echo $username; ?> profile</title>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134700452-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-134700452-1');
+    </script>
+    
     <link rel="stylesheet" type="text/css" href="css/userProfile.css">
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">

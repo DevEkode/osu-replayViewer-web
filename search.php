@@ -62,6 +62,16 @@
 <html>
 	<head>
 		<title>osu!replayViewer - Search page</title>
+
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134700452-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-134700452-1');
+		</script>
+		
 	  <link rel="icon" type="image/png" href="images/icon.png" />
 		<link rel="stylesheet" type="text/css" href="css/search.css">
 		<link rel="stylesheet" type="text/css" href="css/navbar.css">

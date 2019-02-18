@@ -21,6 +21,15 @@ include('php/analytics.php');
     <meta itemprop="description" content="Share your osu! performance to everyone !">
     <meta itemprop="image" content="http://osureplayviewer.xyz/images/icon.png">
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134700452-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-134700452-1');
+    </script>
+
     <title>osu!replayViewer - A online osu replay viewer</title>
     <link rel="icon" type="image/png" href="images/icon.png" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">

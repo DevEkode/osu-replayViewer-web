@@ -12,7 +12,8 @@ session_start();
     'playerId' => 0,
     'currentStatut' => 0,
     'date' => '26-11-2018',
-    'duration' => 0
+    'duration' => 0,
+    'rank' => 1
   );
 
   if(strcmp($_GET['id'],0) == 0){
@@ -125,7 +126,7 @@ session_start();
             data: {replayId:<?php echo '"'.$_GET['id'].'"'?>},
             success: function(response){
                 //Check if the status has been updated
-                if(response != <?php echo $replayDATA['currentStatut']?>){
+                if(response != '<?php echo $replayDATA['currentStatut'].' '.$replayDATA['rank']?>'){
                   window.location.reload();
                 }
             }
@@ -173,7 +174,7 @@ session_start();
       if(strcmp($_GET['id'],0) == 0){
         drawStates($replayDATA['currentStatut'],1);
       }else{
-        drawStates($replayDATA['currentStatut'],getClassement($_GET['id']));
+        drawStates($replayDATA['currentStatut'],$replayDATA['rank']);
       }
       ?>
     </div>

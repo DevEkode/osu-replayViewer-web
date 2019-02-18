@@ -1,4 +1,5 @@
 <?php
+require_once './functions.php';
 //--Check POST info
 if(!isset($_POST)){
   header("Location:../../index.php");
@@ -20,7 +21,7 @@ $query->execute();
 $result = $query->get_result();
 if($result->num_rows > 0){
   while($row = $result->fetch_assoc()){
-    echo $row['currentStatut'];
+    echo $row['currentStatut'].' '.getClassement($_POST['replayId']);
   }
 }
 

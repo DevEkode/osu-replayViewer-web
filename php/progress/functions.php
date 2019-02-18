@@ -1,5 +1,5 @@
 <?php
-require 'secure/mysql_pass.php';
+require __DIR__.'/../../secure/mysql_pass.php';
 //connect to mysql database
 $conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
 // Check connection
@@ -22,6 +22,9 @@ function getRequestArray($replayId){
     }
   }
   $query->close();
+
+  //Add classement
+  $return['rank'] = getClassement($replayId); 
   return $return;
 }
 

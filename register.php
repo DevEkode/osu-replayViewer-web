@@ -207,26 +207,6 @@ if(isFormSubmitted()){
       <br>
     </div>
 
-    <footer>
-      <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
-      <div class="footer_img">
-        <a href="https://discord.gg/pqvhvxx" title="join us on discord!" target="_blank">
-          <img src="images/index/Discord_logo.png"/>
-        </a>
-        <a href="https://osu.ppy.sh/community/forums/topics/697883" target="_blank">
-          <img src="images/index/osu forums.png"/>
-        </a>
-        <a href="https://github.com/codevirtuel/osu-replayViewer-web" target="_blank">
-          <img src="images/index/github_logo.png"/>
-        </a>
-        <a href="https://paypal.me/codevirtuel" target="_blank">
-          <img src="images/index/paypal_me.png"/>
-        </a>
-      </div>
-
-      <div id="created">
-        <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank"><img src="images/codevirtuel.jpg"/></a></span>
-      </div>
-    </footer>
+    <?php showFooter() ?>
 	</body>
 </html>

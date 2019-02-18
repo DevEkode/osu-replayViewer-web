@@ -308,70 +308,7 @@ include('php/analytics.php');
     }
     ?>
 
-    <footer>
-      <h3 class="align_center">osu!replayViewer is not affiliated with osu! - All credit to Dean Herbert</h3>
-      <div class="footer_img">
-        <a href="https://discord.gg/pqvhvxx" title="join us on discord!" target="_blank">
-          <picture>
-            <img
-            sizes="(max-width: 1400px) 100vw, 1400px"
-            srcset="images/small/index/Discord_logo.png 200w,
-            images/medium/index/Discord_logo.png 699w,
-            images/large/index/Discord_logo.png 1048w,
-            images/xlarge/index/Discord_logo.png 1400w"
-            src="images/xlarge/index/Discord_logo.png"
-            alt="Discord_logo">
-          </picture>
-        </a>
-        <a href="https://osu.ppy.sh/community/forums/topics/697883" target="_blank">
-          <picture>
-            <img
-            sizes="(max-width: 280px) 100vw, 280px"
-            srcset="
-            images/small/index/osu_forums.png 200w,
-            images/medium/index/osu_forums.png 280w"
-            src="images/medium/index/osu_forums.png"
-            alt="osu forums logo">
-          </picture>
-        </a>
-        <a href="https://github.com/codevirtuel/osu-replayViewer-web" target="_blank">
-          <picture>
-            <img
-            sizes="(max-width: 512px) 100vw, 512px"
-            srcset="
-            images/small/index/github_logo.png 200w,
-            images/medium/index/github_logo.png 512w"
-            src="images/medium/index/github_logo.png"
-            alt="github logo">
-          </picture>
-        </a>
-        <a href="https://paypal.me/codevirtuel" target="_blank">
-          <picture>
-            <img
-            sizes="(max-width: 300px) 100vw, 300px"
-            srcset="
-            images/small/index/paypal_me.png 200w,
-            images/medium/index/paypal_me.png 300w"
-            src="images/medium/index/paypal_me.png"
-            alt="paypal logo">
-          </picture>
-        </a>
-      </div>
-
-      <div id="created">
-        <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank">
-          <picture>
-            <img
-            sizes="(max-width: 400px) 100vw, 400px"
-            srcset="
-            images/small/index/codevirtuel.jpg 200w,
-            images/medium/index/codevirtuel.jpg 400w"
-            src="images/medium/index/codevirtuel.jpg"
-            alt="codevirtuel profile image">
-          </picture>
-        </a></span>
-      </div>
-    </footer>
+    <?php showFooter() ?>
 </body>
 
 </html>

@@ -78,8 +78,8 @@ EOF;
             alt="github logo">
           </picture>
         </a>
-        <a href="https://fr.tipeee.com/osu-replayviewer" target="_blank">
-          <img src="images/index/tipeee_logo.png"/>
+        <a href="https://www.patreon.com/codevirtuel" target="_blank">
+          <img src="images/index/patreon_logo.png"/>
         </a>
       </div>
 

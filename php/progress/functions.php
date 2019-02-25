@@ -62,7 +62,7 @@ function drawStates($currentState,$classement){
 
   $url = "images/progress/";
 
-  echo "<div><img src=$url$state[0]> <span>Waiting his turn - Current rank : $classement#<span><br></div>";
+  echo "<div><img src=$url$state[0]> <span>In position : $classement#<span><br></div>";
   echo "<div><img src=$url$state[1]> <span>Setting up recorder<span><br></div>";
   echo "<div><img src=$url$state[2]> <span>Recording<span><br></div>";
   echo "<div><img src=$url$state[3]> <span>Encoding<span><br></div>";

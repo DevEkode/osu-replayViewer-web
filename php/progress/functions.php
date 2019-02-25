@@ -24,7 +24,9 @@ function getRequestArray($replayId){
   $query->close();
 
   //Add classement
-  $return['rank'] = getClassement($replayId); 
+  if(!empty($return)){
+    $return['rank'] = getClassement($replayId); 
+  }
   return $return;
 }
 

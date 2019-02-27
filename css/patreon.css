@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-image: url("../images/background.png");
+      /*padding-bottom:5%;*/
+    padding-top: 20vh;
+    font-family: "Verdana";
+  }
+  
+  i {
+    height: 3vh;
+    color: white;
+    text-align:center;
+  }
+  
+  h2, h1 {
+    font-weight: bold;
+  }
+  
+  /* Presentation */
+  #title{
+    text-align: center;
+    color:#FF66AA;
+     text-shadow: 3px 3px white;
+     margin-bottom: 3%;
+  }
+  
+  #slogan{
+    text-align:center;
+    font-size: 3vw;
+    color: #CC5288;
+    text-shadow: 3px 3px white;
+    margin-bottom: 3%;
+  }
+
+  .align_center{
+    text-align:center;
+  }
+
+  /* Tier block */
+  #tier_block{
+      background-color: white;
+      border: 2px solid rgb(231, 113, 166);
+      padding-top: 1%;
+      padding-bottom: 1%;
+  }
+
+  #join_block_button{
+      text-align: right;
+  }
+
+  #join_block_button button{
+      width: 100%;
+      font-size: 1.1vw;
+  }
+
+  @media only screen and (max-width: 1080px) and (orientation: portrait){
+    #join_block_button button{
+        display: none;
+    }
+  }

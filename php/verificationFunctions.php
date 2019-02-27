@@ -4,7 +4,7 @@ use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
 require_once $_SERVER['DOCUMENT_ROOT'].'/vendor/autoload.php';
-$server = "https://unstable.osureplayviewer.xyz";
+$server = "https://osureplayviewer.xyz";
 
 
 function sendEmail($email,$username,$verfId){

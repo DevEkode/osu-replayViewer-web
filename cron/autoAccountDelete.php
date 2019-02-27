@@ -27,10 +27,7 @@ function getRemovableAccounts($conn,$timeLimit){
   $result = $query->get_result();
     while ($row = $result->fetch_assoc()) {
       $userId = $row["userId"];
-      $canBeDeleted = $row["canBeDeleted"];
-      if($canBeDeleted){
-        array_push($array,$userId);
-      }
+      array_push($array,$userId);
     }
   $query->close();
   return $array;
@@ -61,6 +58,8 @@ function removeFolder($dir){
 	//delete folder
 	rmdir($dir);
 }
+
+echo "==== Deleting account with register time expired ===";
 
 $accountsToRemove = getRemovableAccounts($conn,$timeLimit);
 if(!empty($accountsToRemove)){

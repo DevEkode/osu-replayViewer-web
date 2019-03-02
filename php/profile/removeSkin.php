@@ -17,12 +17,18 @@ function getIniKey2($userId,$key){
   return $ini[$key];
 }
 
+function multiexplode ($delimiters,$string) {
+  $ready = str_replace($delimiters, $delimiters[0], $string);
+  $launch = explode($delimiters[0], $ready);
+  return  $launch;
+}
+
 function listAllSkins2($userId){
   $skins = array();
   $path = __DIR__.'/../../accounts/'.$userId;
   foreach (glob($path.'/*.osk') as $filename) {
     var_dump($filename);
-    $tab = explode("/",$filename);
+    $tab = multiexplode(array("/","\\"),$filename);
     array_push($skins,$tab[11]);
   }
   return $skins;

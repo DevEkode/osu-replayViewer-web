@@ -95,6 +95,28 @@ function listAllSkins($userId){
 /*Check skin content*/
 function isSkinValid($folder_dir){
   $valide = true;
+  $ignore_dir = array(
+      ".",
+      "..",
+      "__MACOSX"
+  );
+  $dir_count = 0;
+  $last_dir = "";
+
+  //Check if another folder exists
+  $files = scandir($folder_dir,1);
+
+  foreach($files as $file){
+    if(!in_array($file,$ignore_dir)){
+      $dir_count++;
+      $last_dir = $file;
+    }
+  }
+
+  if($dir_count == 1) {
+    $folder_dir .= "/" . $last_dir;
+  }
+
   //Check ini file
   if(!file_exists($folder_dir."/skin.ini")){
     $valide = false;

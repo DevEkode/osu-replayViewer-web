@@ -78,7 +78,7 @@ EOF;
             alt="github logo">
           </picture>
         </a>
-        <a href="https://www.patreon.com/codevirtuel" target="_blank">
+        <a href="patreon.php">
           <img src="images/index/patreon_logo.png"/>
         </a>
       </div>

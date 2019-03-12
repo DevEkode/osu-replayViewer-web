@@ -21,11 +21,11 @@ $editProfileErrors = array(
   5 => "New password doesn't match with the verification",
   6 => "Database error",
   7 => "This skin has already been uploaded",
-  8 => "Only .osk are allowed",
-  9 => "Sorry your skin couldn't be uploaded",
+  8 => "Only .osk files are allowed",
+  9 => "Sorry, your skin couldn't be uploaded",
   10 => "Your skin file name cannot contain special characters",
-  11 => "Your skin file size is more that 50Mo",
-  12 => "This skin doesn't exists",
+  11 => "Your skin file size is more than 50Mb",
+  12 => "This skin doesn't exist",
   13 => "Remove error"
 );
 

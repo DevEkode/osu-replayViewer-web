@@ -18,6 +18,8 @@ generateSwitch("Leaderboard","leaderboards","leaderboards");
 generateSwitch("Combo bursts","combo_bursts","combo_bursts");
 generateSwitch("Hit lighting","hit_lighting","hit_lighting");
 generateSwitch("Replay HUD","replay_hud","replay_hud");
+generateSwitch("Spectator HUD","spec_hud","spec_hud");
+generateSwitch("Beatmap skins","beatmap_skin","beatmap_skin");
 
 echo '</div>';
 echo '<input type="submit" value="Save all modifications" class="button is-light"/>';

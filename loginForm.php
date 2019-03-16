@@ -1,5 +1,4 @@
 <?php
-include 'php/analytics.php';
 require 'secure/osu_api_key.php';
 require 'php/osuApiFunctions.php';
 // ******************** Variables **********************************

@@ -17,6 +17,8 @@ $data = array(
     'combo_bursts' => 'false',
     'hit_lighting' => 'false',
     'replay_hud' => 'true',
+      'spec_hud' => 'true',
+      'beatmap_skin' => 'false',
     'music_volume' => 50,
     'effects_volume' => 50
   )

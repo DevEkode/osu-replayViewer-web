@@ -1,6 +1,5 @@
 <?php
 session_start();
-include 'php/analytics.php';
 require 'php/navbar.php';
 // ******************** Variables **********************************
 //--Connect to osu API --

@@ -64,10 +64,10 @@ require 'php/navbar.php';
 
 <h2 id="slogan">Help me build this project !</h2>
 
-<div class="align_center" style="margin-bottom: 1%">
+<div style="margin-bottom: 1%; width:175px; margin:auto;">
     <a href="https://www.patreon.com/bePatron?u=17710775" data-patreon-widget-type="become-patron-button">Become a Patron!</a><script async src="https://c6.patreon.com/becomePatronButton.bundle.js"></script>
 </div>
-
+<br/>
 <div id="tier_container" style="margin-left:5%; margin-right:5%">
 
 </div>

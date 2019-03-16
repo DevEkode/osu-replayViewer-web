@@ -1,6 +1,5 @@
 <?php
   session_start();
-  include 'php/analytics.php';
   require 'php/errors.php';
   require 'php/success.php';
   require 'php/navbar.php';

@@ -1,7 +1,6 @@
 <?php
 	session_start();
 	require 'php/navbar.php';
-	include 'php/analytics.php';
 	ini_set('display_errors', 0);
 	include 'php/osuApiFunctions.php';
 	include 'php/search/blockModel.php';

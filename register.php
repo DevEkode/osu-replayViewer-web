@@ -1,5 +1,4 @@
 <?php
-include 'php/analytics.php';
 require 'php/navbar.php';
 // ******************** Variables **********************************
 $errors = array (

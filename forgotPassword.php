@@ -1,5 +1,4 @@
 <?php
-include 'php/analytics.php';
 require 'php/navbar.php';
 //ini_set('display_errors', 1);
 //-- Connect to mysql request database --

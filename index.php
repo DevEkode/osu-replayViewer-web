@@ -3,8 +3,6 @@ session_start();
 require 'secure/uploadKey.php';
 require 'php/errors.php';
 require 'php/navbar.php';
-$name='index';
-include('php/analytics.php');
 ?>
 <!DOCTYPE html>
 <html>

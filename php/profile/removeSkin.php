@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'ini.class.php';
 
 if(empty($_SESSION)){
   header("Location:index.php");
@@ -16,12 +17,18 @@ function getIniKey2($userId,$key){
   return $ini[$key];
 }
 
+function multiexplode ($delimiters,$string) {
+  $ready = str_replace($delimiters, $delimiters[0], $string);
+  $launch = explode($delimiters[0], $ready);
+  return  $launch;
+}
+
 function listAllSkins2($userId){
   $skins = array();
   $path = __DIR__.'/../../accounts/'.$userId;
   foreach (glob($path.'/*.osk') as $filename) {
     var_dump($filename);
-    $tab = explode("/",$filename);
+    $tab = multiexplode(array("/","\\"),$filename);
     array_push($skins,$tab[11]);
   }
   return $skins;
@@ -44,17 +51,25 @@ function listAllSkins2($userId){
   }
 
   if(count($skins) <= 0){
-    $customSkin = 0;
-    $skin = "default";
+    
   }else{
     $customSkin = getIniKey2($_SESSION["userId"],"enable");
     $array = array_rand($skins,1);
     $skin = $skins[$array];
   }
 
+  $customSkin = 'false';
+  $skin = "default";
+
 
   $dim = getIniKey2($_SESSION["userId"],"dim");
-  updateIniFile('../../accounts/',$_SESSION["userId"],$customSkin,$skin,$dim,"true");
+
+  $ini_dir = '../../accounts/'.$_SESSION["userId"].'/'.$_SESSION["userId"].'.ini';
+  $ini = new Ini();
+  $ini->read($ini_dir);
+  $ini->set("skin","enable",$customSkin);
+  $ini->set("skin","fileName",$skin);
+  $ini->write($ini_dir);
 
   //Delete the file
   if(unlink($userURL.$skinToRemove)){

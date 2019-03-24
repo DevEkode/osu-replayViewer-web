@@ -3,6 +3,7 @@
         "phpunit/phpunit": "6"
     },
     "require": {
-        "phpmailer/phpmailer": "^6.0"
+        "phpmailer/phpmailer": "^6.0",
+        "patreon/patreon": "^0.3.1"
     }
 }

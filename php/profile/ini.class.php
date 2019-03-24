@@ -62,7 +62,7 @@ class ini {
             $line2_clean = preg_replace('/[[:^print:]]/', "", $line2);
 
             if($line2_clean == $compareTo){
-               $line2 .= $key.' = '.$value."\n";
+               $line2 .= $key.' = '.$value.PHP_EOL;
             }
             $output .= $line2;
         }
@@ -91,10 +91,10 @@ class ini {
 
     public function writeArray($file,$section,$data) {
         $fp = fopen($file, 'a');
-        fwrite($fp,'['.$section."]\n");
+        fwrite($fp,'['.$section."]".PHP_EOL);
 
         foreach ($data as $key => $value) {
-            fwrite($fp, $key.' = '.$value."\n");
+            fwrite($fp, $key.' = '.$value.PHP_EOL);
         }
 
         fclose($fp);

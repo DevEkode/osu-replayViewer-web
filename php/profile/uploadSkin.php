@@ -25,6 +25,21 @@ function removeFolder($dir){
 	rmdir($dir);
 }
 
+function rrmdir($dir) {
+    if (is_dir($dir)) {
+        $objects = scandir($dir);
+        foreach ($objects as $object) {
+            if ($object != "." && $object != "..") {
+                if (is_dir($dir."/".$object))
+                    rrmdir($dir."/".$object);
+                else
+                    unlink($dir."/".$object);
+            }
+        }
+        rmdir($dir);
+    }
+}
+
 require 'replaySettings.php';
 
 $target_dir = "../../accounts/".$_SESSION["userId"]."/uploads/";
@@ -61,28 +76,28 @@ if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', basename($_FILES["fileToUploa
 // Check if file already exists
 $account_folder = "../../accounts/".$_SESSION["userId"]."/".basename($_FILES["fileToUpload"]["name"]);
 if (file_exists($account_folder)) {
-    echo "Sorry, file already exists.";
+    //echo "Sorry, file already exists.";
     $uploadOk = 0;
     error('7');
 }
 
 // Allow certain file formats
 if($imageFileType != "osk") {
-    echo "Sorry, only OSK files are allowed.";
+    //echo "Sorry, only OSK files are allowed.";
     $uploadOk = 0;
     error('8');
 }
 
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 50*1048576) {
-    echo "Sorry, your file is too large.";
+    //echo "Sorry, your file is too large.";
     $uploadOk = 0;
     error('11');
 }
 
 // -- Upload file --
 if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
+    //echo "Sorry, your file was not uploaded.";
     error('9');
 // if everything is ok, try to upload file
 } else {
@@ -91,27 +106,28 @@ if ($uploadOk == 0) {
         $zip = new ZipArchive();
         $zip->open($target_file);
         if($zip->extractTo($target_dir."export")){
-          echo 'extract Ok';
+          //echo 'extract Ok';
           if(!isSkinValid($target_dir."export")){
             $uploadOk = 0;
             error('9');
           }
         }else{
-          echo 'extract Fail';
+          //echo 'extract Fail';
           $uploadOk = 0;
           error('9');
         }
         $zip->close();
 
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         //Move the uploaded file
         $new_target = "../../accounts/".$_SESSION["userId"]."/".basename($_FILES["fileToUpload"]["name"]);
         rename($target_file,$new_target);
-        removeFolder($target_dir."export");
+        //removeFolder($target_dir."export");
+        rrmdir($target_dir."export");
         //TODO add success message
         header('Location:../../editProfile.php?block=skin&success=0');
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        //echo "Sorry, there was an error uploading your file.";
         error('9');
         exit;
     }

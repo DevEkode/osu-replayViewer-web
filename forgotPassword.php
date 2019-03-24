@@ -1,5 +1,4 @@
 <?php
-include 'php/analytics.php';
 require 'php/navbar.php';
 //ini_set('display_errors', 1);
 //-- Connect to mysql request database --
@@ -123,7 +122,7 @@ function exitPage(){
   <h1 id="title"> Forgot password </h1>
 
   <div class="block" id="block">
-  <h2>Enter your email account to recover your password</h2>
+  <h2>Enter your email to recover your password</h2>
   <form method="post">
     <input type="email" name="email" required><br>
     <input type="submit"><br>
@@ -136,8 +135,8 @@ function exitPage(){
       if(isset($_GET['id']) && isset($_GET['verf'])){
         echo '<br>';
         echo "<span> Your temporary password is ".$tempPasswordClear."</span>";
-        echo "<span> You I'll soon recieve an email with this temporary password</span>";
-        echo "<span> Please update your password into your user account options </span>";
+        echo "<span> You'll soon receive an email with this temporary password</span>";
+        echo "<span> Please update your password in your user account options </span>";
       }
      ?>
   </form>

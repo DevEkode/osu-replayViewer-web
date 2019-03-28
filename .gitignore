@@ -16,5 +16,6 @@ googlef02d221e2c7a486e.html
 .htaccess
 .scannerwork
 .idea
+node_modules/
 
 secure/admins.php

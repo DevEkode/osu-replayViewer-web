@@ -7,7 +7,6 @@ require 'secure/uploadKey.php';
 require_once 'secure/osu_api_key.php';
 $apiKey = $osuApiKey;
 
-
 //-- Connect to mysql request database --
 require 'secure/mysql_pass.php';
 $servername = $mySQLservername;
@@ -194,19 +193,6 @@ if($_POST["checkbox"] != NULL){
 }else{
 	$persistance = 0;
 }
-// Check if image file is a actual replay osu file or fake
-/*if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-    if($check !== false) {
-        //osr
-        $uploadOk = 1;
-    } else {
-        //not a osr
-        $uploadOk = 0;
-	    header("Location:index.php?error=1");
-	    closeUpload($conn);
-    }
-}*/
 
 // Allow certain file formats
 if($imageFileType != "osr") {
@@ -317,10 +303,11 @@ if ($uploadOk == 0) {
 		$beatmapName = base64_encode(generateBtFileName($beatmapId,$apiKey));
 		$replayName = base64_encode($file_name);
 
-
 		//----- Send record -----
-		$sql = "INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES ('$replayId','$beatmapId','$beatmapSetId','$replayName','$beatmapName','$replayDuration','$playerId','$fileMD5','$replayMod','$binaryMods','$persistance')";
-		if ($conn->query($sql) === TRUE) {
+		$query = $conn->prepare("INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+		$query->bind_param("siissiisiii",$replayId,$beatmapId,$beatmapSetId,$replayName,$beatmapName,$replayDuration,$playerId,$fileMD5,$replayMod,$binaryMods,$persistance);
+
+		if ($query->execute()) {
 			//row created
 		} else {
 			echo "Error: " . $sql . "<br>" . $conn->error;

@@ -41,7 +41,7 @@
     </script>
     
     <link rel="icon" type="image/png" href="images/icon.png" />
-    <link rel="stylesheet" type="text/css" href="bulma/css/bulma.css">
+    <link rel="stylesheet" type="text/css" href="node_modules/bulma/css/bulma.css">
     <link rel="stylesheet" type="text/css" href="css/editProfile.css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

@@ -61,6 +61,7 @@ session_start();
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+
       gtag('config', 'UA-134700452-1');
     </script>
 
@@ -90,7 +91,7 @@ session_start();
         var d = new Date();
         var utc = d.getTime() + (d.getTimezoneOffset() * 60000); //60000
 
-        var now = new Date(utc + (3600000*1));
+          var now = new Date(utc + (3600000 * 2));
         // Find the distance between now an the count down date
         var distance = now - countDownDate;
 

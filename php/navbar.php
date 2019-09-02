@@ -84,7 +84,7 @@ EOF;
       </div>
 
       <div id="created">
-        <span> website created by codevirtuel <a href="https://osu.ppy.sh/u/3481725" target="_blank">
+        <span> website created by Ekode <a href="https://osu.ppy.sh/u/3481725" target="_blank">
           <picture>
             <img
             sizes="(max-width: 400px) 100vw, 400px"

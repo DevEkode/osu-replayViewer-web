@@ -102,7 +102,9 @@ if($replayStructure){
     header("Location:../../index.php?error=3");
   }
 
-  if(isBeatmapAvailable($beatmapJSON[0]['beatmapset_id'])) {$beatmapAvailable = true;}
+  if (isBeatmapAvailable($beatmapJSON[0]['beatmap_id'], $osuApiKey)) {
+    $beatmapAvailable = true;
+  }
 
   //Check osu account
   $userJSON = getUserJSON($replay_content['user'],$osuApiKey);

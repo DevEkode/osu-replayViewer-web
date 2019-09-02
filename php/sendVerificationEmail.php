@@ -18,7 +18,8 @@ if ($conn->connect_error) {
 	exit;
 }
 
-function exitPage(){
+function exitPage($conn)
+{
   $conn->close();
   exit;
 }
@@ -35,12 +36,11 @@ if($result ->num_rows >0){
       header("Location:../index.php");
       exitPage();
     }else{
-      $return = sendEmail($row['email'],$row['username'],$row['verfIdEmail']);
-	  var_dump($return);
+      sendEmail($row['email'], $row['username'], $row['verfIdEmail']);
     }
   }
 }
 
 header("Location:../userVerification.php?id=".$_GET['userId']);
-exitPage();
+exitPage($conn);
  ?>

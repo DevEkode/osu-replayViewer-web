@@ -4,7 +4,7 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
   <head>
     <title>osu!replayViewer - A online osu replay viewer</title>
@@ -19,6 +19,21 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Cookie bar -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
+
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134700452-1"></script>
+      <script>
+          window.dataLayer = window.dataLayer || [];
+
+          function gtag() {
+              dataLayer.push(arguments);
+          }
+
+          gtag('js', new Date());
+
+          gtag('config', 'UA-134700452-1');
+      </script>
+
   </head>
 
   <body>

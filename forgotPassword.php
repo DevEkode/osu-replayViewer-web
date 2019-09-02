@@ -45,7 +45,6 @@ function exitPage(){
         $userId = $row['userId'];
       }
       $verfId = uniqid('pVerf_');
-      var_dump($verfId);
       $query2 = $conn->prepare("UPDATE accounts SET verfPassword=? WHERE email=?");
       $query2->bind_param("ss",$verfId,$_POST['email']);
       $query2->execute();

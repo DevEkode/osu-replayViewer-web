@@ -36,7 +36,7 @@ if(isset($_GET['id'])){
 
 // ******************** Functions **********************************
 function getUserInterests($userId){
-	$page = file_get_contents('https://osu.ppy.sh/users/'.$userId);
+    $page = file_get_contents('https://osu.ppy.sh/users/' . $userId);
 	preg_match("/\"interests\":\".*\",\"occupation\"/", $page, $output_array);
 	if(!empty($output_array)){
 		$web = explode("\"", $output_array[0]);
@@ -130,6 +130,7 @@ if(empty($verfUserId)){
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+
       gtag('config', 'UA-134700452-1');
     </script>
     

@@ -2,8 +2,6 @@
 <project version="4">
   <component name="PhpIncludePathManager">
     <include_path>
-      <path value="$PROJECT_DIR$/vendor/art4/json-api-client" />
-      <path value="$PROJECT_DIR$/vendor/patreon/patreon" />
       <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/vendor/phpmailer/phpmailer" />
@@ -32,6 +30,8 @@
       <path value="$PROJECT_DIR$/vendor/sebastian/environment" />
       <path value="$PROJECT_DIR$/vendor/sebastian/comparator" />
       <path value="$PROJECT_DIR$/vendor/sebastian/code-unit-reverse-lookup" />
+      <path value="$PROJECT_DIR$/vendor/art4/json-api-client" />
+      <path value="$PROJECT_DIR$/vendor/patreon/patreon" />
     </include_path>
   </component>
   <component name="PhpUnit">

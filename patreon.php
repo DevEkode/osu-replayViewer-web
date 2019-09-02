@@ -29,6 +29,7 @@ require 'php/navbar.php';
         }
 
         gtag('js', new Date());
+
         gtag('config', 'UA-134700452-1');
     </script>
 

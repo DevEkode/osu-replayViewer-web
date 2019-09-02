@@ -37,10 +37,12 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+
       gtag('config', 'UA-134700452-1');
     </script>
-    
-    <link rel="icon" type="image/png" href="images/icon.png" />
+
+
+      <link rel="icon" type="image/png" href="images/icon.png"/>
     <link rel="stylesheet" type="text/css" href="node_modules/bulma/css/bulma.css">
     <link rel="stylesheet" type="text/css" href="css/editProfile.css">
     

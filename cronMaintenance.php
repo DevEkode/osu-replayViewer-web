@@ -2,6 +2,7 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
 // ******************** Variables **********************************
 //--Connect to osu API --
 require_once 'secure/osu_api_key.php';
@@ -13,6 +14,9 @@ require 'secure/mysql_pass.php';
 $servername = $mySQLservername;
 $username = $mySQLusername;
 $password = $mySQLpassword;
+
+//-- Connect to FTP Storage
+require_once 'secure/ftp.php';
 
 //Time limit in days
 $timeLimit = 30;
@@ -27,6 +31,23 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 	exit;
 }
+
+//FTP
+$conn_id = ftp_connect($ftp_host);
+$login_result = ftp_login($conn_id, $ftp_user, $ftp_password);
+
+
+// check connection
+if ((!$conn_id) || (!$login_result)) {
+	die("FTP connection has failed !");
+}
+
+if (ftp_chdir($conn_id, $ftp_replay_dir)) {
+	echo "Current directory is now: " . ftp_pwd($conn_id) . "\n";
+} else {
+	echo "Couldn't change directory\n";
+}
+
 
 // ******************** Functions **********************************
 function getRemovableReplays($conn,$timeLimit){
@@ -69,7 +90,8 @@ function cleanRequestFolder($conn){
 	}
 }
 
-function cleanReplayFolder($conn){
+function cleanReplayFolder($conn, $conn_id)
+{
 	$array = array();
 
 	$result = $conn->query("SELECT * FROM replaylist");
@@ -78,10 +100,10 @@ function cleanReplayFolder($conn){
 			array_push($array,$replayId);
 		}
 
-	$folders = scandir("./replayList/");
+	$folders = ftp_nlist($conn_id, ".");
 	foreach($folders as $folder){
 		if(!in_array($folder,$array) && $folder != "." && $folder != ".."){
-			removeFolder("./replayList/".$folder);
+			removeRemoteFolder($folder, $conn_id);
 		}
 	}
 }
@@ -102,14 +124,32 @@ function removeFolder($dir){
 	rmdir($dir);
 }
 
+function cleanRemoteFolder($dir, $conn_id)
+{
+	//delete all folder files
+	$files = ftp_nlist($conn_id, "./" . $dir); // get all file names
+	foreach ($files as $file) { // iterate files
+		if (is_file($file)) {
+			ftp_delete($conn_id, $file);
+		}
+	}
+}
+
+function removeRemoteFolder($dir, $conn_id)
+{
+	cleanRemoteFolder($dir, $conn_id);
+	//delete folder
+	ftp_rmdir($conn_id, $dir);
+}
+
 //**************** Maintenance *************************
 
 //Show some infos
-$ds = disk_total_space("/")*0.0000001;
-$df = disk_free_space("/")*0.0000001 ;
-$du = $ds-$df;
+//$ds = disk_total_space("/")*0.0000001;
+//$df = disk_free_space("/")*0.0000001 ;
+//$du = $ds-$df;
 //$ds = $ds*0.000001;
-echo "Disk total space : ".ceil($du)." Mb remaining on ".ceil($ds)." Mb total <br>";
+//echo "Disk total space : ".ceil($du)." Mb remaining on ".ceil($ds)." Mb total <br>";
 
 //clean upload folder
 echo "Cleaning upload folder... <br>";
@@ -117,14 +157,14 @@ cleanFolder("./uploads");
 echo "Cleaning request folder...<br>";
 cleanRequestFolder($conn);
 
-cleanReplayFolder($conn);
-
 $array = getRemovableReplays($conn,$timeLimit);
 echo count($array)." replays can be removed";
 
 foreach($array as $replay){
-	removeFolder("./replayList/".$replay);
+	echo $replay;
+	removeRemoteFolder($replay, $conn_id);
 	removeRow($conn,$replay);
 }
+
 
 ?>

@@ -46,7 +46,8 @@ Allow from all
  
 #RewriteEngine On
 #RewriteBase /
-#RewriteCond %{REMOTE_ADDR} !^176\.167\.22\.175
+#RewriteCond %{REMOTE_ADDR} !^90\.12\.17\.114
 #RewriteCond %{REQUEST_URI} !^/maintenance\.php$
+#RewriteCond %{REQUEST_URI} !^/client/
 #RewriteCond %{REQUEST_FILENAME} !\.(gif|png|jpg|jpeg|jfif|bmp|css|js)$ [NC]
 #RewriteRule ^(.*)$ http://osureplayviewer.xyz/maintenance.php [R=307,L]

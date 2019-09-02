@@ -1,4 +1,6 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+
   session_start();
   require 'php/view/functions.php';
   require 'php/osuApiFunctions.php';
@@ -95,6 +97,7 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+
       gtag('config', 'UA-134700452-1');
     </script>
 
@@ -192,12 +195,14 @@
               echo "<img src=\"images/view/download_replay.png\" class=\"disabled\"/>";
             }
 
-            if(!empty($replayDATA['youtubeId'])){
-              $ytLink = "https://peertube.osureplayviewer.xyz/videos/watch/".$replayDATA['youtubeId'];
-              echo "<a href=".$ytLink." target=\"_blank\"><img src=\"images/view/peertube_logo.png\"/></a>";
-            }else{
-              echo "<img src=\"images/view/peertube_logo.png\" class=\"disabled\"/>";
-            }
+          /*
+          if(!empty($replayDATA['youtubeId'])){
+            $ytLink = "https://peertube.osureplayviewer.xyz/videos/watch/".$replayDATA['youtubeId'];
+            echo "<a href=".$ytLink." target=\"_blank\"><img src=\"images/view/peertube_logo.png\"/></a>";
+          }else{
+            echo "<img src=\"images/view/peertube_logo.png\" class=\"disabled\"/>";
+          }
+          */
           ?>
           <!-- <a href="#"><img src="images/view/download_skin.png"/> -->
         </div>
@@ -226,7 +231,7 @@
           <div id="manage_section">
             <a onclick="openModalDelete()"><img src="images/view/delete_replay.png"/></a>';
             require_once 'php/disableUploads.php';
-            if(!$disableUploads){
+          if (!$disableUploads || isAdmin($_SESSION['userId'])) {
               echo '<a onclick="openModalRerecord()"><img src="images/view/rerecord_replay.png"/></a>';
             }
         echo '</div>
@@ -238,8 +243,7 @@
 
     <!-- Disqus -->
     <div id="disqus_thread"></div>
-      <script>
-
+    <script>
       /**
       *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
       *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
@@ -259,6 +263,9 @@
       <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 
     <!-- Footer -->
+    <div class="spacer">
+        <br>
+    </div>
     <?php showFooter() ?>
     <script id="dsq-count-scr" src="//osureplayviewer.disqus.com/count.js" async></script>
   </body>

@@ -93,16 +93,6 @@
     </div>
 
     <div class="question">
-      <h2 class="question_title">The youtube video of my replay has no sound, why?</h2>
-
-      <span class="question_text">
-        It's due to youtube content id bot.<br>
-        Sometimes, when it detect a song copyrighted, it remove the sound of the video.<br><br>
-        Solution : Check out the source .mp4 file on the download section.
-      </span>
-    </div>
-
-    <div class="question">
       <h2 class="question_title">Why do I have to confirm that I'm the owner of this osu! account during registering ?</h2>
 
       <span class="question_text">

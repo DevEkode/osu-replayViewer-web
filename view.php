@@ -52,7 +52,7 @@ header("Access-Control-Allow-Origin: *");
     $showRaw = false;
   }
 
-  $osrUrl = $server.$_GET['id']."/".base64_decode($replayDATA['OFN']);
+$osrUrl = $server . $_GET['id'] . "/" . rawurlencode(base64_decode($replayDATA['OFN']));
   if(URL_exists($osrUrl)){
     $showOsr = true;
     $osuUrl2 = $server.$_GET['id']."/".rawurlencode(base64_decode($replayDATA['OFN']));

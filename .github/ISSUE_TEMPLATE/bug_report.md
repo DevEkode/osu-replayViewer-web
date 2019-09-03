@@ -1,6 +1,9 @@
 ---
 name: Bug report
 about: Create a report to help us improve
+title: ''
+labels: ''
+assignees: ''
 
 ---
 
@@ -31,7 +34,7 @@ If applicable, add screenshots to help explain your problem.
  - Browser [e.g. stock browser, safari]
  - Version [e.g. 22]
 
-**Link replay/skin or usefull file(s)**
+**Link replay/skin or useful file(s)**
 
 **Additional context**
 Add any other context about the problem here.

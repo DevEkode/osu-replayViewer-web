@@ -1,7 +1,15 @@
 <?php
     //Generate the top navigation bar
 
+$unstable_url = "unstable.osureplayviewer.xyz";
+if ($_SERVER['HTTP_HOST'] === $unstable_url) {
+    $icon_url = "images/u_icon.png";
+} else {
+    $icon_url = "images/icon.png";
+}
+
     function showNavbar(){
+        global $icon_url;
         //Show first part in html
         echo <<<EOF
         <link rel="stylesheet" type="text/css" href="css/navbar.css">
@@ -14,7 +22,7 @@
             </div>
     
             <a href="index.php" id="logo">
-                <img src="images/icon.png" alt="osu!replayViewer logo" />
+                <img src="$icon_url" alt="osu!replayViewer logo" />
             </a>
 EOF;
         //Show php part

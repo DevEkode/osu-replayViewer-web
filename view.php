@@ -60,6 +60,7 @@ $urlsRaw = array(
     $server . $_GET['id'] . "/" . $_GET['id'] . "_480p.mp4"
 );
 
+//Video URLS
 if (URLS_exists($urlsRaw)) { //Check if multiple resolutions are available
     $showRaw = true;
     $multiple_res = true;
@@ -74,12 +75,20 @@ if (URLS_exists($urlsRaw)) { //Check if multiple resolutions are available
     $showRaw = false;
 }
 
+//Replay file URL
 $osrUrl = $server . $_GET['id'] . "/" . rawurlencode(base64_decode($replayDATA['OFN']));
 if (URL_exists($osrUrl)) {
     $showOsr = true;
     $osuUrl2 = $server . $_GET['id'] . "/" . rawurlencode(base64_decode($replayDATA['OFN']));
 } else {
     $showOsr = false;
+}
+
+//Thumbnail URL
+$thumbUrl = $server . $_GET['id'] . "/" . "thumbnail.jpg";
+if (!URL_exists($thumbUrl)) {
+    //Use placeholder instead
+    $thumbUrl = "./images/preview.jpg";
 }
 
 $BFN = base64_decode($replayDATA['BFN']);
@@ -184,7 +193,7 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
     <div class="player_container">
         <?php
         if (empty($replayDATA['youtubeId'])) {
-            echo "<video id=\"player\" controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline>";
+            echo "<video id=\"player\" poster='$thumbUrl' controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline>";
             if ($multiple_res) {
                 echo "<source src=" + $urlsRaw[0] + "  type='video/mp4' size='720'>";
                 echo "<source src=" + $urlsRaw[1] + "  type='video/mp4' size='480'>";

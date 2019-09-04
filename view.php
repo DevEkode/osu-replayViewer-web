@@ -148,14 +148,14 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
 
     <!-- <script src="https://cdn.plyr.io/3.2.4/plyr.js"></script>-->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.plyr.io/3.2.4/plyr.css"> -->
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.4.8/plyr.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.5.4/plyr.css">
     <!-- Cookie bar -->
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
 </head>
 
 <body>
-<script src="https://cdn.plyr.io/3.4.8/plyr.js"></script>
+<script src="https://cdn.plyr.io/3.5.4/plyr.js"></script>
 
 <div class="loaderCustom"></div>
 <!-- Modal -->
@@ -193,10 +193,10 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
     <div class="player_container">
         <?php
         if (empty($replayDATA['youtubeId'])) {
-            echo "<video id=\"player\" poster='$thumbUrl' controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline>";
+            echo "<video id=\"player\" poster='$thumbUrl' controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline controls>";
             if ($multiple_res) {
-                echo "<source src=" + $urlsRaw[0] + "  type='video/mp4' size='720'>";
-                echo "<source src=" + $urlsRaw[1] + "  type='video/mp4' size='480'>";
+                echo "<source src=$urlsRaw[0] type='video/mp4' size='720'>";
+                echo "<source src=$urlsRaw[1] type='video/mp4' size='480'>";
             } else {
                 echo "<source src=$urlRaw  type='video/mp4'>";
             }

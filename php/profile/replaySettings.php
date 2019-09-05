@@ -19,6 +19,7 @@ $data = array(
     'replay_hud' => 'true',
       'spec_hud' => 'true',
       'beatmap_skin' => 'false',
+      'beatmap_sample' => 'false',
     'music_volume' => 50,
     'effects_volume' => 50
   )
@@ -36,6 +37,9 @@ function checkIfIniExists($userId){
 
 function checkUserFile($userId){
   global $data;
+
+  //Check if account folder exists
+  if(!is_dir("accounts")) mkdir("accounts");
 
   //Check if his folder exists
   if(!userFileExists($userId)){

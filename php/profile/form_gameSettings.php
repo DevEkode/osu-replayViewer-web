@@ -34,8 +34,11 @@ if(isset($_POST['replay_hud'])) $ini->set('osu','replay_hud',"true");
 if(isset($_POST['spec_hud'])) $ini->set('osu','spec_hud',"true");
     else $ini->set('osu','spec_hud',"false");
 
-if(isset($_POST['spec_hud'])) $ini->set('osu','beatmap_skin',"true");
+if(isset($_POST['beatmap_skin'])) $ini->set('osu','beatmap_skin',"true");
     else $ini->set('osu','beatmap_skin',"false");
+
+if(isset($_POST['beatmap_sample'])) $ini->set('osu','beatmap_sample',"true");
+    else $ini->set('osu','beatmap_sample',"false");
 
 $ini->write($ini_dir);
 header('Location:../../editProfile.php?block=game&success=8');

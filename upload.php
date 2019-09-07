@@ -315,6 +315,7 @@ if ($uploadOk == 0) {
 			closeUpload($conn);
 		}
 
+
 		//Deplacement du fichier en liste d'attente
 		mkdir('requestList/'.$replayId, 0777, true);
 		rename('uploads/'.$file_name,'requestList/'.$replayId.'/'.$file_name);

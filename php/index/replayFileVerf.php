@@ -56,6 +56,26 @@ function getIniKey($userId,$key){
   return $ini[$key];
 }
 
+function hasImpossibleMods($mods_bin)
+{
+    //List of the impossible configurations
+    $configs = array(
+        0 => array("HD", "DT"),
+        1 => array("PF", "NF"),
+        2 => array("EZ", "HR")
+    );
+
+    //Get the converted array of mods
+    $mods = getModsArray($mods_bin);
+
+    //Check if at least one of this configs are in the array
+    foreach ($configs as $config) {
+        if (in_array($configs[0], $mods) && in_array($configs[1], $mods)) return true;
+    }
+
+    return false;
+}
+
 //----- CORE ------
 require_once '../../secure/admins.php';
 if(isset($_SESSION['userId']) && in_array($_SESSION['userId'],$admins)){
@@ -163,7 +183,6 @@ if(isset($replay_content)){
   $_SESSION['mods'] = 'none';
 }
 
-var_dump($_SESSION);
 header("Location:../../index.php");
 
 ?>

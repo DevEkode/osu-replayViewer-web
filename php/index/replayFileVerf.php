@@ -163,7 +163,6 @@ if(isset($replay_content)){
   $_SESSION['mods'] = 'none';
 }
 
-var_dump($_SESSION);
 header("Location:../../index.php");
 
 ?>

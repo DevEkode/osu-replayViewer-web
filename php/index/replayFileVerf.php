@@ -56,40 +56,6 @@ function getIniKey($userId,$key){
   return $ini[$key];
 }
 
-function hasImpossibleMods($mods_bin)
-{
-    //List of the impossible configurations
-    $configs = array(
-        0 => array("PF", "NF"),
-        1 => array("EZ", "HR"),
-        2 => array("NF", "SD"),
-        3 => array("HT", "DT"),
-        4 => array("HT", "NC"),
-        5 => array("SD", "AP"),
-        6 => array("RL", "AP"),
-        7 => array("SO", "AP"),
-        8 => array("NF", "AP"),
-    );
-
-    //Get the converted array of mods
-    $mods = getModsArray($mods_bin);
-
-    //Check if at least one of this configs are in the array
-    foreach ($configs as $config) {
-        if (in_array($configs[0], $mods) && in_array($configs[1], $mods)) return true;
-    }
-
-    //Second check for mania mods
-    //(You cannot have multiple 4K,5K... mods)
-    $counter = 0;
-    foreach ($mods as $mod) {
-        if (preg_match('/.K/', $mod)) $counter++;
-        if ($counter >= 2) return false;
-    }
-
-    return false;
-}
-
 //----- CORE ------
 require_once '../../secure/admins.php';
 if(isset($_SESSION['userId']) && in_array($_SESSION['userId'],$admins)){

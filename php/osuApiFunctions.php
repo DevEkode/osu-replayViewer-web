@@ -130,7 +130,7 @@ function hasImpossibleMods($mods_bin)
         5 => array("SD", "AP"),
         6 => array("RL", "AP"),
         7 => array("SO", "AP"),
-        8 => array("NF", "AP"),
+        8 => array("NF", "AP")
     );
 
     //Get the converted array of mods
@@ -138,7 +138,7 @@ function hasImpossibleMods($mods_bin)
 
     //Check if at least one of this configs are in the array
     foreach ($configs as $config) {
-        if (in_array($configs[0], $mods) && in_array($configs[1], $mods)) return true;
+        if (in_array($config[0], $mods) && in_array($config[1], $mods)) return true;
     }
 
     //Second check for mania mods

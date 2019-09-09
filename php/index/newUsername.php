@@ -1,7 +1,9 @@
 <?php
   session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
   require '../osuApiFunctions.php';
-  require '../../secure/osu_api_key.php';
+
+$osuApiKey = getenv('OSU_KEY');
 
   $session = base64_decode($_POST['session']);
   $session = unserialize($session);

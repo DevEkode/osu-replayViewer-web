@@ -1,30 +1,23 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+
+
+$osuApiKey = getenv('OSU_KEY');
 
 // ******************** Variables **********************************
 //--Connect to osu API --
-require_once 'secure/osu_api_key.php';
 $apiKey = $osuApiKey;
 
-
 //-- Connect to mysql request database --
-require 'secure/mysql_pass.php';
-$servername = $mySQLservername;
-$username = $mySQLusername;
-$password = $mySQLpassword;
-
-//-- Connect to FTP Storage
-require_once 'secure/ftp.php';
 
 //Time limit in days
 $timeLimit = 30;
 
 // ******************** Connection **********************************
 // Create connection
-$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
-//$conn = new PDO('mysql:host=mysql.hostinger.fr;dbname=u611457272_osu','u611457272_code','123');
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 // Check connection
 if ($conn->connect_error) {
@@ -33,8 +26,8 @@ if ($conn->connect_error) {
 }
 
 //FTP
-$conn_id = ftp_connect($ftp_host);
-$login_result = ftp_login($conn_id, $ftp_user, $ftp_password);
+$conn_id = ftp_connect(getenv('FTP_HOST'));
+$login_result = ftp_login($conn_id, getenv('FTP_USER'), getenv('FTP_PASS'));
 
 
 // check connection

@@ -1,18 +1,16 @@
 <?php
 session_start();
 error_reporting(0);
-
-require 'secure/osu_api_key.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require 'php/osuApiFunctions.php';
 require 'php/navbar.php';
 
-//-------- Connect to mysql request database ---------
-require 'secure/mysql_pass.php';
-$servername = $mySQLservername;
-$username = $mySQLusername;
-$password = $mySQLpassword;
 
-$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
+$osuApiKey = getenv('OSU_KEY');
+
+//-------- Connect to mysql request database ---------
+
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);

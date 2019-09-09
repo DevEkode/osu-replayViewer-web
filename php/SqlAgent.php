@@ -1,5 +1,5 @@
 <?php
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 
 class MysqlAgent
 {
@@ -7,9 +7,7 @@ class MysqlAgent
 
     public function __construct()
     {
-        //Import env
-        $dotenv = Dotenv\Dotenv::create(__DIR__);
-        $dotenv->load();
+
     }
 
     public function connect()

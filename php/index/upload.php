@@ -1,10 +1,12 @@
 <?php
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 include '../osuApiFunctions.php';
-require_once '../../secure/osu_api_key.php';
-require '../../secure/mysql_pass.php';
 
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+
+$osuApiKey = getenv('OSU_KEY');
+
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 // Check connection
 if ($conn->connect_error) {

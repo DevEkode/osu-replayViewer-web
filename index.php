@@ -1,6 +1,5 @@
 <?php
 session_start();
-require 'secure/uploadKey.php';
 require 'php/errors.php';
 require 'php/navbar.php';
 ?>
@@ -163,7 +162,7 @@ require 'php/navbar.php';
                 echo '<input id="checkBox" type="checkbox" name="checkboxTU"> <span id="checkboxText"> I accept the <a href="legal/TU.php?TU=replay" target="_blank">terms of uses</a></span><br>';
                 echo '<input id="filename" name="filename" type="hidden" value=' . '"' . $_SESSION['filename'] . '"' . '>';
                 echo '<input id="duration" name="duration" type="hidden" value=' . '"' . $_SESSION['duration'] . '"' . '>';
-                echo '<input id="duration" name="keyHash" type="hidden" value=' . '"' . password_hash($upload_replay_key, PASSWORD_DEFAULT) . '"' . '>';
+                echo '<input id="duration" name="keyHash" type="hidden" value=' . '"' . password_hash(getenv('UPLOAD_REPLAY_KEY'), PASSWORD_DEFAULT) . '"' . '>';
                 echo '<input name="userId" type="hidden" value=' . '"' . $_SESSION['replay_playerId'] . '"' . '>';
                 echo '<input type="submit" value="Start processing" id="start_processing">';
                 echo '</form>';

@@ -1,11 +1,13 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
+
 $user = filter_var($_POST['user'],FILTER_SANITIZE_STRING);
 $pass = filter_var($_POST['pass'],FILTER_SANITIZE_STRING);
 $token = filter_var($_POST['token'],FILTER_SANITIZE_STRING);
 
-require '../../secure/mysql_pass.php';
+$osuApiKey = getenv('OSU_KEY');
 
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 // Check connection
 if ($conn->connect_error) {
@@ -16,7 +18,7 @@ if ($conn->connect_error) {
 
 //Get userId
 require_once '../osuApiFunctions.php';
-require_once '../../secure/osu_api_key.php';
+
 $userJSON = getUserJSON($user,$osuApiKey);
 $userId = $userJSON[0]['user_id'];
 

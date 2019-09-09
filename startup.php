@@ -12,12 +12,18 @@ $dotenv->load();
 //Debug config
 if (getenv('DEBUG_VERSION')) {
     # Debug
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
+    error_reporting(E_ALL); // Error engine - always TRUE!
+    ini_set('ignore_repeated_errors', TRUE); // always TRUE
+    ini_set('display_errors', TRUE); // Error display - FALSE only in production environment or real server
+    ini_set('log_errors', TRUE); // Error logging engine
+    ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . '/errors.log'); // Logging file path
+    ini_set('log_errors_max_len', 1024); // Logging file size
 } else {
     # Production
-    ini_set('display_errors', 0);
-    ini_set('display_startup_errors', 0);
-    error_reporting(E_STRICT);
+    error_reporting(E_ALL); // Error engine - always TRUE!
+    ini_set('ignore_repeated_errors', TRUE); // always TRUE
+    ini_set('display_errors', FALSE); // Error display - FALSE only in production environment or real server
+    ini_set('log_errors', TRUE); // Error logging engine
+    ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . '/errors.log'); // Logging file path
+    ini_set('log_errors_max_len', 1024); // Logging file size
 }

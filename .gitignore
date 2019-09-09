@@ -20,4 +20,4 @@ vendor/
 node_modules/
 .env
 
-secure/admins.php
+php/admins.php

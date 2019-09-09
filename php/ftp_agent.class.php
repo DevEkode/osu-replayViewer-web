@@ -1,4 +1,6 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
+
 class ftp_agent{
 
   private $conn;
@@ -6,9 +8,7 @@ class ftp_agent{
 
   public function __construct()
   {
-    //Import env
-    $dotenv = Dotenv\Dotenv::create(__DIR__);
-    $dotenv->load();
+
   }
 
   //Connect to ftp server

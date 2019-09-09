@@ -1,18 +1,16 @@
 <?php
-require 'secure/osu_api_key.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require 'php/osuApiFunctions.php';
+
+$osuApiKey = getenv('OSU_KEY');
+
 // ******************** Variables **********************************
-//-- Connect to mysql request database --
-require 'secure/mysql_pass.php';
-$servername = $mySQLservername;
-$username = $mySQLusername;
-$password = $mySQLpassword;
 
 $userId = filter_var($_POST['userId'],FILTER_SANITIZE_STRING);
 $userPassword = filter_var($_POST['psw'],FILTER_SANITIZE_STRING);
 // ******************** Connection **********************************
 // Create connection
-$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 // Check connection
 if ($conn->connect_error) {
@@ -27,9 +25,11 @@ function close($conn){
   exit;
 }
 
-function verifyCaptcha($secretCaptcha,$cResponse){
+function verifyCaptcha($cResponse)
+{
   //POST request
-  $url = "https://www.google.com/recaptcha/api/siteverify?secret=$secretCaptcha&response=$cResponse";
+  $key = getenv('CAPTCHA_KEY');
+  $url = "https://www.google.com/recaptcha/api/siteverify?secret=$key&response=$cResponse";
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -56,8 +56,7 @@ if(strcmp(intval($userId),$userId) != 0){
 }
 
 //check reCaptcha (avoid bot)
-require_once 'secure/recaptcha.php';
-if(!verifyCaptcha($secretCaptcha,$_POST['g-recaptcha-response'])){
+if (!verifyCaptcha($_POST['g-recaptcha-response'])) {
   header("Location:login.php?error=3");
   close($conn);
 }

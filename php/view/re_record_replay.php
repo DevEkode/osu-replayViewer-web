@@ -1,12 +1,13 @@
 <?php
 session_start();
-require '../../secure/mysql_pass.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require '../osuApiFunctions.php';
-require '../../secure/osu_api_key.php';
 require 'functions.php';
 require '../ftp_agent.class.php';
 
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+$osuApiKey = getenv('OSU_KEY');
+
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));;
 
 // Check connection
 if ($conn->connect_error) {

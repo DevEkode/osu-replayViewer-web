@@ -1,17 +1,18 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
+
 //Get post
 $replayId = filter_var($_POST['replayId'],FILTER_SANITIZE_STRING);
 
 //Check md5
-require $_SERVER['DOCUMENT_ROOT'].'/secure/mysql_pass.php';
-$conn = new PDO("mysql:host=$mySQLservername;dbname=$mySQLdatabase", $mySQLusername, $mySQLpassword);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 //get md5 from file
 $fileMD5 = md5_file($_FILES["file"]["tmp_name"]);
 
 //get md5 from database
-$query = $conn->prepare('SELECT md5 FROM requestlist WHERE replayId=:id');
-$query->bindParam('id',$replayId);
+$query = $conn->prepare('SELECT md5 FROM requestlist WHERE replayId=?');
+$query->bindParam('s', $replayId);
 $query->execute();
 $line = $query->fetch();
 

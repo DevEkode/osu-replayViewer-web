@@ -2,12 +2,13 @@
 header("Access-Control-Allow-Origin: *");
 
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require 'php/view/functions.php';
 require 'php/osuApiFunctions.php';
-require 'secure/osu_api_key.php';
-require 'secure/mysql_pass.php';
 require 'secure/admins.php';
 require 'php/navbar.php';
+
+$osuApiKey = getenv('OSU_KEY');
 
 function URL_exists($url)
 {
@@ -23,7 +24,7 @@ function URLS_exists(array $urls)
     return true;
 }
 
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 $server = "https://peertube.osureplayviewer.xyz/client/assets/replayList/";
 
 // Check connection

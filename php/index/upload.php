@@ -54,9 +54,22 @@ $playerJSON = getUserJSON($replayJSON['user'],$osuApiKey);
 $playerId = $_POST['userId'];
 
 //---- Send the Informations into the database ----
-$sql = "INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES ('$replayId','$beatmapId','$beatmapSetId','$replayName','$beatmapName','$replayDuration','$playerId','$fileMD5','$replayMod','$binaryMods','$persistance')";
+$sql = "INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-if ($conn->query($sql) === TRUE) {
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("siissiisiii",
+    $replayId,
+    $beatmapId,
+    $beatmapSetId,
+    $replayName,
+    $beatmapName,
+    $replayDuration,
+    $playerId,
+    $fileMD5,
+    $replayMod,
+    $binaryMods,
+    $persistance);
+if ($stmt->execute()) {
   //row created
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;

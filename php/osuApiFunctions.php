@@ -25,6 +25,19 @@ function getBeatmapJSONwMD5($beatmapMD5, $api)
     return json_decode($result, true);
 }
 
+function getBeatmapJSONwMods($beatmapHash, $mods, $api)
+{
+    $url = "https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$beatmapHash&mode=$mods";
+    var_dump($url);
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_URL, $url);
+    $result = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($result, true);
+}
+
 function getUserJSON($username, $api)
 {
     $url = "https://osu.ppy.sh/api/get_user?k=$api&u=$username";
@@ -116,6 +129,35 @@ function getReplayContent($filedir)
 function isValidMd5($md5 = '')
 {
     return preg_match('/^[a-f0-9]{32}$/', $md5);
+}
+
+function getReplayAccuracy(array $replayContent)
+{
+    $acc = 0.0;
+    switch ($replayContent['gamemode']) {
+        case 0 : //osu!
+            $top = 50 * $replayContent['x50'] + 100 * $replayContent['x100'] + 300 * $replayContent['x300'];
+            $down = 300 * ($replayContent['Miss'] + $replayContent['x50'] + $replayContent['x100'] + $replayContent['x300']);
+
+            $acc = $top / $down;
+            break;
+        case 1 : //osu!taiko
+            $top = 0.5 * $replayContent['x100'] + $replayContent['x300'];
+            $down = $replayContent['Miss'] + $replayContent['x100'] + $replayContent['x300'];
+            $acc = $top / $down;
+            break;
+        case 2 : //osu!catch
+            $top = $replayContent['x50'] + $replayContent['x100'] + $replayContent['x300'];
+            $down = $replayContent['Gekis'] + $replayContent['Katus'] + $replayContent['Miss'] + $top;
+            $acc = $top / $down;
+            break;
+        case 3 :
+            $top = 50 * $replayContent['x50'] + 100 * $replayContent['Katus'] + 200 * $replayContent['x100'] + 300 * ($replayContent['x300'] + $replayContent['Gekis']);
+            $down = 300 * ($replayContent['Miss'] + $replayContent['x50'] + $replayContent['Katus'] + $replayContent['x100'] + $replayContent['x300'] + $replayContent['Gekis']);
+            $acc = $top / $down;
+    }
+
+    return round($acc * 100, 2);
 }
 
 function hasImpossibleMods($mods_bin)

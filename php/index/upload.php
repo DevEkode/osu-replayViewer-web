@@ -1,6 +1,5 @@
 <?php
 session_start();
-var_dump($_SESSION);
 include '../osuApiFunctions.php';
 require_once '../../secure/osu_api_key.php';
 require '../../secure/mysql_pass.php';
@@ -69,6 +68,7 @@ $stmt->bind_param("siissiisiii",
     $replayMod,
     $binaryMods,
     $persistance);
+
 if ($stmt->execute()) {
   //row created
 } else {

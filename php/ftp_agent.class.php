@@ -4,13 +4,19 @@ class ftp_agent{
   private $conn;
   private $root_dir;
 
+  public function __construct()
+  {
+    //Import env
+    $dotenv = Dotenv\Dotenv::create(__DIR__);
+    $dotenv->load();
+  }
+
   //Connect to ftp server
   public function connect(){
-    require_once $_SERVER['DOCUMENT_ROOT'].'/secure/ftp.php';
-    $this->root_dir = $ftp_replay_dir;
-    $this->conn = ftp_connect($ftp_host);
+    $this->root_dir = getenv('FTP_DIR');
+    $this->conn = ftp_connect(getenv('FTP_HOST'));
 
-    $login_result = ftp_login($this->conn,$ftp_user,$ftp_password);
+    $login_result = ftp_login($this->conn, getenv('FTP_USER'), getenv('FTP_PASS'));
     ftp_pasv($this->conn, true);
 
     // Vérification de la connexion
@@ -93,6 +99,11 @@ class ftp_agent{
     $result = ftp_get($this->conn,$newDir,$this->root_dir.$fileDir,FTP_BINARY);
     if($result) {return true;}
     else {return false;}
+  }
+
+  public function listFiles($fileDir)
+  {
+    return ftp_mlsd($this->conn, $fileDir);
   }
 
 }

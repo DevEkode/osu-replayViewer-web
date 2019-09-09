@@ -64,7 +64,7 @@ function getIniKey($userId, $key)
 }
 
 //----- CORE ------
-require_once '../../secure/admins.php';
+require_once '../../php/admins.php';
 if (isset($_SESSION['userId']) && in_array($_SESSION['userId'], $admins)) {
     $disableUploads = false;
 }

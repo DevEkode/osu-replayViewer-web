@@ -5,7 +5,7 @@ session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require 'php/view/functions.php';
 require 'php/osuApiFunctions.php';
-require 'secure/admins.php';
+require 'php/admins.php';
 require 'php/navbar.php';
 
 $osuApiKey = getenv('OSU_KEY');

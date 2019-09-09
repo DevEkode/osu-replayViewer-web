@@ -19,3 +19,4 @@ googlef02d221e2c7a486e.html
 vendor/
 node_modules/
 .env
+errors.log

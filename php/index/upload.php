@@ -54,15 +54,60 @@ $playerJSON = getUserJSON($replayJSON['user'],$osuApiKey);
 $playerId = $_POST['userId'];
 
 //---- Send the Informations into the database ----
-$sql = "INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES ('$replayId','$beatmapId','$beatmapSetId','$replayName','$beatmapName','$replayDuration','$playerId','$fileMD5','$replayMod','$binaryMods','$persistance')";
+$sql = "INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-if ($conn->query($sql) === TRUE) {
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("siissiisiii",
+    $replayId,
+    $beatmapId,
+    $beatmapSetId,
+    $replayName,
+    $beatmapName,
+    $replayDuration,
+    $playerId,
+    $fileMD5,
+    $replayMod,
+    $binaryMods,
+    $persistance);
+if ($stmt->execute()) {
   //row created
 } else {
   echo "Error: " . $sql . "<br>" . $conn->error;
   $conn->close();
   header("Location:../../index.php?error=5");
   exit;
+}
+
+$btContent = getBeatmapJSONwMods($replayJSON['md5'], $replayJSON['Mods'], $osuApiKey);
+$replayAcc = getReplayAccuracy($replayJSON);
+
+$stmt = $conn->prepare("INSERT INTO replaystats (replayId, gamemode, modsBinary, stars, pp, acc, ar, BPM, x300, x100, x50, gekis, katus, miss, t_score, max_combo, perfect) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+$stmt->bind_param('siidddddiiiiiiiii',
+    $replayId,
+    $replayJSON['gamemode'],
+    $replayJSON['Mods'],
+    $btContent[0]['difficultyrating'],
+    $pp = 0,
+    $replayAcc,
+    $btContent[0]['diff_approach'],
+    $btContent[0]['bpm'],
+    $replayJSON['x300'],
+    $replayJSON['x100'],
+    $replayJSON['x50'],
+    $replayJSON['Gekis'],
+    $replayJSON['Katus'],
+    $replayJSON['Miss'],
+    $replayJSON['Score'],
+    $replayJSON['MaxCombo'],
+    $replayJSON['perfectCombo']);
+
+if ($stmt->execute()) {
+    //row created
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+    header("Location:../../index.php?error=3&sqlErr=" . $conn->error);
+    closeUpload($conn);
 }
 
 //Deplacement du fichier en liste d'attente

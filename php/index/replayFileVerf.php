@@ -32,9 +32,13 @@ $beatmapJSON = null;
 function replayExist($filedir, $table, $conn)
 {
     $md5 = md5_file($filedir);
-    $result = $conn->query("SELECT * FROM $table WHERE md5='$md5'");
+    $stmt = $conn->prepare("SELECT * FROM " . $table . " WHERE md5=?");
+    $stmt->bind_param("s", $md5);
 
-    if ($result->num_rows > 0) {
+    $stmt->execute();
+    $stmt->fetch();
+
+    if ($stmt->num_rows > 0) {
         return true;
     } else {
         return false;

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require 'php/errors.php';
 require 'php/navbar.php';
 ?>
@@ -337,7 +338,7 @@ if (isset($_SESSION['replayStructure'])) {
 <!-- Upload box -->
 <?php
 require_once 'php/disableUploads.php';
-require_once 'secure/admins.php';
+require_once 'php/admins.php';
 if (isset($_SESSION['userId']) && in_array($_SESSION['userId'], $admins)) {
     $disableUploads = false;
 }

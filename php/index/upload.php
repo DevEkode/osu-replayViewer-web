@@ -66,32 +66,34 @@ if ($conn->query($sql) === TRUE) {
 }
 
 $btContent = getBeatmapJSONwMods($replayJSON['md5'], $replayJSON['Mods'], $osuApiKey);
+$replayAcc = getReplayAccuracy($replayJSON);
 
-$stmt = $conn->prepare("INSERT INTO replaystats (replayId, gamemode, modsBinary, stars, pp, acc, ar, BPM, x300, x100, x50, gekis, katus, miss, t_score, max_combo, perfect) VALUES (:replayId, :gamemode, :modsBinary, :stars, 0, :acc, :ar, :BPM, :x300, :x100, :x50, :gekis, :katus, :miss, :t_score, :max_combo, :perfect)");
+$stmt = $conn->prepare("INSERT INTO replaystats (replayId, gamemode, modsBinary, stars, pp, acc, ar, BPM, x300, x100, x50, gekis, katus, miss, t_score, max_combo, perfect) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-//$query->bind_param(':pp',);
-$stmt->bind_param(':replayId', $replayId);
-$stmt->bind_param(':gamemode', $replayJSON['gamemode']);
-$stmt->bind_param(':modsBinary', $replayJSON['Mods']);
-$stmt->bind_param(':stars', $btContent[0]['difficultyrating']);
-$stmt->bind_param(':acc', getReplayAccuracy($replayJSON));
-$stmt->bind_param(':ar', $btContent[0]['diff_approach']);
-$stmt->bind_param(':BPM', $btContent[0]['bpm']);
-$stmt->bind_param(':x300', $replayJSON['x300']);
-$stmt->bind_param(':x100', $replayJSON['x100']);
-$stmt->bind_param(':x50', $replayJSON['x50']);
-$stmt->bind_param(':gekis', $replayJSON['Gekis']);
-$stmt->bind_param(':katus', $replayJSON['Katus']);
-$stmt->bind_param(':miss', $replayJSON['Miss']);
-$stmt->bind_param(':t_score', $replayJSON['Score']);
-$stmt->bind_param(':max_combo', $replayJSON['MaxCombo']);
-$stmt->bind_param(':perfect', $replayJSON['perfectCombo']);
+$stmt->bind_param('siidddddiiiiiiiii',
+    $replayId,
+    $replayJSON['gamemode'],
+    $replayJSON['Mods'],
+    $btContent[0]['difficultyrating'],
+    $pp = 0,
+    $replayAcc,
+    $btContent[0]['diff_approach'],
+    $btContent[0]['bpm'],
+    $replayJSON['x300'],
+    $replayJSON['x100'],
+    $replayJSON['x50'],
+    $replayJSON['Gekis'],
+    $replayJSON['Katus'],
+    $replayJSON['Miss'],
+    $replayJSON['Score'],
+    $replayJSON['MaxCombo'],
+    $replayJSON['perfectCombo']);
 
 if ($stmt->execute()) {
     //row created
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
-    header("Location:index.php?error=3&sqlErr=" . $conn->error);
+    header("Location:../../index.php?error=3&sqlErr=" . $conn->error);
     closeUpload($conn);
 }
 

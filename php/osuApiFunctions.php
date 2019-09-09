@@ -27,7 +27,8 @@ function getBeatmapJSONwMD5($beatmapMD5, $api)
 
 function getBeatmapJSONwMods($beatmapHash, $mods, $api)
 {
-    $url = "https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$beatmapHash&m=$mods";
+    $url = "https://osu.ppy.sh/api/get_beatmaps?k=$api&h=$beatmapHash&mode=$mods";
+    var_dump($url);
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -136,7 +137,8 @@ function getReplayAccuracy(array $replayContent)
     switch ($replayContent['gamemode']) {
         case 0 : //osu!
             $top = 50 * $replayContent['x50'] + 100 * $replayContent['x100'] + 300 * $replayContent['x300'];
-            $down = 300 * ($replayContent['Miss'] * $replayContent['x50'] * $replayContent['x100'] * $replayContent['x300']);
+            $down = 300 * ($replayContent['Miss'] + $replayContent['x50'] + $replayContent['x100'] + $replayContent['x300']);
+
             $acc = $top / $down;
             break;
         case 1 : //osu!taiko

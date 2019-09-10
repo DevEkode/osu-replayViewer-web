@@ -13,6 +13,10 @@ require_once 'blocks/volumeChooser.php';
 
 function generateBlocks(){
     switch($_GET['block']){
+        case 'posted':
+            break;
+        case 'graveyard':
+            break;
         case 'skin':
             block_skinChooser(); echo '<br>';
             block_skinUploader(); echo '<br>';
@@ -35,6 +39,23 @@ function generateBlocks(){
 function generateMenu(){
     echo <<<EOF
           <aside class="menu">
+            <p class="menu-label" id="itemLabel">Replay database</p>
+            <ul class="menu-list">
+EOF;
+    //Replay database
+    if ($_GET['block'] == 'posted') {
+        echo '<li><a href="#" class="is-active">📡 Posted replays</a></li>';
+    } else {
+        echo '<li><a href="editProfile.php?block=posted">📡 Posted replays</a></li>';
+    }
+    //Replay graveyard
+    if ($_GET['block'] == 'graveyard') {
+        echo '<li><a href="#" class="is-active">⚰️ Graveyard</a></li>';
+    } else {
+        echo '<li><a href="editProfile.php?block=graveyard">⚰️ Graveyard</a></li>';
+    }
+    echo <<<EOF
+          </ul>
             <p class="menu-label" id="itemLabel">Replay customisation</p>
             <ul class="menu-list">
 EOF;
@@ -53,7 +74,7 @@ EOF;
     }
     
     echo <<<EOF
-    </ul>
+    
             <p class="menu-label" id="itemLabel">Account</p>
             <ul class="menu-list">
 EOF;

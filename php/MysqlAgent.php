@@ -3,7 +3,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 
 class MysqlAgent
 {
-    private mysqli $mysql_conn;
+    private $mysql_conn;
 
     public function __construct()
     {

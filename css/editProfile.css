@@ -275,3 +275,10 @@ input[type=checkBox]{
     transform: scale(2) translateX(-2%);
 }
 
+.progress_card {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 0 !important;
+    color: black;
+}
+

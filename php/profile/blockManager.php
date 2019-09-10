@@ -10,10 +10,13 @@ require_once 'blocks/changePassword.php';
 require_once 'blocks/changeEmail.php';
 require_once 'blocks/removeAccount.php';
 require_once 'blocks/volumeChooser.php';
+require_once 'blocks/replayDatabase.php';
 
 function generateBlocks(){
     switch($_GET['block']){
         case 'posted':
+            block_replayDatabase();
+            echo '<br>';
             break;
         case 'graveyard':
             break;

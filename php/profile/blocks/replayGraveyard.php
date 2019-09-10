@@ -2,13 +2,12 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/osuApiFunctions.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/MysqlAgent.php';
 
-function block_replayDatabase()
+function block_replayGraveyard()
 {
     echo <<<EOF
     <div class="columns is-desktop is-multiline">
                 <div class="column is-12">
                     <div class="buttons has-addons">
-                        <span class="button is-outlined" disabled>⚰️Send to graveyard</span>
                         <span class="button is-outlined" disabled>🗑️ Delete</span>
                     </div>
                 </div>
@@ -21,18 +20,18 @@ EOF;
     $bdd = new MysqlAgent();
     $bdd_conn = $bdd->connect();
 
-    $stmt = $bdd_conn->prepare("SELECT * FROM replaylist WHERE userId = ? AND compressed IS FALSE ORDER BY date desc ");
+    $stmt = $bdd_conn->prepare("SELECT * FROM replaylist WHERE userId = ? AND compressed IS TRUE ORDER BY date desc ");
     $stmt->bind_param('i', $user_id);
     $stmt->execute();
 
     $result = $stmt->get_result();
     while ($row = $result->fetch_assoc()) {
-        echo elem_replayLine_posted($row);
+        echo elem_replayLine_graveyard($row);
     }
     echo '</div>';
 }
 
-function elem_replayLine_posted(array $replay_row)
+function elem_replayLine_graveyard(array $replay_row)
 {
     $beatmap = getBeatmapJSON($replay_row['beatmapId'], getenv('OSU_KEY'));
     $beatmap_name = $beatmap[0]['title'];
@@ -93,7 +92,7 @@ function elem_replayLine_posted(array $replay_row)
                             <a href="#" class="card-footer-item tooltip"
                                data-tooltip="Copy link">🔗</a>
                             <a href="#" class="card-footer-item tooltip"
-                               data-tooltip="Send to graveyard">⚰️</a>
+                               data-tooltip="Re-record">📡</a>
                             <a href="#" class="card-footer-item tooltip" data-tooltip="Delete">🗑️</a>
                         </div>
                     </div>

@@ -262,3 +262,16 @@ input[type=checkBox]{
     transition: all 0.3s ease;
 }
 
+.container_check {
+    position: relative;
+}
+
+.checkbox_card {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    text-align: start;
+    transform-origin: top right;
+    transform: scale(2) translateX(-2%);
+}
+

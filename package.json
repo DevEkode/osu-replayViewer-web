@@ -23,5 +23,8 @@
     "bulma": "^0.7.5",
     "bulma-tooltip": "^2.0.2",
     "cool-checkboxes-for-bulma.io": "^1.1.0"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.2"
   }
 }

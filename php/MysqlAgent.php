@@ -10,7 +10,7 @@ class MysqlAgent
 
     }
 
-    public function connect()
+    public function connect(): mysqli
     {
         //Create new mysql connection
         $this->mysql_conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
@@ -18,6 +18,7 @@ class MysqlAgent
         if ($this->mysql_conn->connect_error) {
             die("Connection failed: " . $this->mysql_conn->connect_error);
         }
+        return $this->mysql_conn;
     }
 
     public function close()

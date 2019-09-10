@@ -44,6 +44,7 @@
 
       <link rel="icon" type="image/png" href="images/icon.png"/>
     <link rel="stylesheet" type="text/css" href="node_modules/bulma/css/bulma.css">
+      <link rel="stylesheet" type="text/css" href="node_modules/bulma-tooltip/dist/css/bulma-tooltip.min.css">
     <link rel="stylesheet" type="text/css" href="css/editProfile.css">
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -83,14 +84,51 @@
 
     <div class="block" id="replay">
 
-      <div class="columns">
-        <div class="column is-one-quarter" id="columnBack">
+        <div class="columns is-desktop">
+            <div class="column is-one-quarter-desktop is-full-tablet" id="columnBack">
           <!-- First column -->
           <?php generateMenu(); ?>
         </div>
         <div class="column">
           <!-- Second column -->
           <?php generateBlocks(); ?>
+            <div class="columns is-desktop is-multiline">
+                <div class="column is-4-fullhd is-6-desktop is-12-tablet">
+                    <div class="card grow">
+                        <div class="card-image">
+                            <figure class="image is-4by2">
+                                <img src="images/preview.jpg" alt="Placeholder image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-left">
+                                    <figure class="image is-48x48">
+                                        <img class="is-rounded has-background-grey-dark" src="images/osuCTB.png"
+                                             alt="Placeholder image">
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <p class="title is-4 card_title">Watashi no Tame no Monogatari ~My Uncompleted
+                                        Story~</p>
+                                    <p class="subtitle is-6">Shizuku's Expert</p>
+                                </div>
+                            </div>
+
+                            <div class="content">
+                                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="card-footer-item tooltip is-tooltip-bottom"
+                               data-tooltip="Copy link">🔗</a>
+                            <a href="#" class="card-footer-item tooltip is-tooltip-bottom"
+                               data-tooltip="Send to graveyard">⚰️</a>
+                            <a href="#" class="card-footer-item tooltip is-tooltip-bottom" data-tooltip="Delete">🗑️</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
       </div>
     </div>

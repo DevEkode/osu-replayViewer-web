@@ -100,55 +100,6 @@ $actualCursorSize = getIniKey($_SESSION["userId"],"cursor_size");*/
         <div class="column">
             <!-- Second column -->
             <?php generateBlocks(); ?>
-            <div class="columns is-desktop is-multiline">
-                <div class="column is-12">
-                    <div class="buttons has-addons">
-                        <span class="button is-outlined" disabled>⚰️Send to graveyard</span>
-                        <span class="button is-outlined" disabled>🗑️ Delete</span>
-                    </div>
-                </div>
-                <!-- Posted card -->
-
-                <!-- waiting list card -->
-                <div class="column is-4-fullhd is-6-desktop is-12-tablet">
-                    <div class="card grow">
-                        <div class="card-image">
-                            <figure class="image is-4by2 container_check">
-                                <img src="images/preview.jpg" alt="Placeholder image">
-                                <div class="b-checkbox checkbox_card">
-                                    <input id="checkbox" class="styled" type="checkbox">
-                                    <label for="checkbox">
-                                    </label>
-                                </div>
-                            </figure>
-                            <progress class="progress is-warning progress_card" value="75" max="100">75%</progress>
-                        </div>
-                        <div class="card-content">
-                            <div class="media">
-                                <div class="media-left">
-                                    <figure class="image is-48x48 tooltip" data-tooltip="Osu!CTB">
-                                        <img class="is-rounded has-background-grey-dark" src="images/osuCTB.png"
-                                             alt="Placeholder image">
-                                    </figure>
-                                </div>
-                                <div class="media-content">
-                                    <p class="title is-4 card_title">Watashi no Tame no Monogatari ~My Uncompleted
-                                        Story~</p>
-                                    <p class="subtitle is-6">Shizuku's Expert</p>
-                                </div>
-                            </div>
-
-                            <div class="content">
-                                <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <a href="#" class="card-footer-item tooltip" data-tooltip="Cancel">❌</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
     </div>
 </div>

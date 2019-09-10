@@ -249,3 +249,16 @@ input[type=checkBox]{
 .passForm .button{
   width:20%;
 }
+
+/* card formating */
+.card_title {
+    font-size: 1rem !important;
+}
+
+.grow:hover {
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+

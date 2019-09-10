@@ -11,12 +11,17 @@ require_once 'blocks/changeEmail.php';
 require_once 'blocks/removeAccount.php';
 require_once 'blocks/volumeChooser.php';
 require_once 'blocks/replayDatabase.php';
+require_once 'blocks/replayPending.php';
 require_once 'blocks/replayGraveyard.php';
 
 function generateBlocks(){
     switch($_GET['block']){
         case 'posted':
             block_replayDatabase();
+            echo '<br>';
+            break;
+        case 'pending':
+            block_replayPending();
             echo '<br>';
             break;
         case 'graveyard':
@@ -53,6 +58,12 @@ EOF;
         echo '<li><a href="#" class="is-active">📡 Posted replays</a></li>';
     } else {
         echo '<li><a href="editProfile.php?block=posted">📡 Posted replays</a></li>';
+    }
+    //Replay database
+    if ($_GET['block'] == 'pending') {
+        echo '<li><a href="#" class="is-active">⏲️ Pending replays</a></li>';
+    } else {
+        echo '<li><a href="editProfile.php?block=pending">⏲️ Pending replays</a></li>';
     }
     //Replay graveyard
     if ($_GET['block'] == 'graveyard') {

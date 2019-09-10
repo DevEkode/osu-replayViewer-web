@@ -11,6 +11,7 @@ require_once 'blocks/changeEmail.php';
 require_once 'blocks/removeAccount.php';
 require_once 'blocks/volumeChooser.php';
 require_once 'blocks/replayDatabase.php';
+require_once 'blocks/replayGraveyard.php';
 
 function generateBlocks(){
     switch($_GET['block']){
@@ -19,6 +20,8 @@ function generateBlocks(){
             echo '<br>';
             break;
         case 'graveyard':
+            block_replayGraveyard();
+            echo '<br>';
             break;
         case 'skin':
             block_skinChooser(); echo '<br>';

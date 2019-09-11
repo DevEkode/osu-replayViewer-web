@@ -101,6 +101,19 @@ $actualCursorSize = getIniKey($_SESSION["userId"],"cursor_size");*/
     </div>
 </div>
 
+<div class="modal" id="graveyard_replay_modal">
+    <div class="modal-content">
+        <h2>Do you really want to graveyard this replay ?</h2>
+        <h4>Only the replay and skin file will be saved</h4>
+        <form action="php/view/deleteReplay.php" method="get" id="form_graveyard_replay_modal">
+            <input type="submit" id="button_yes" value="Yes please !"/>
+            <input type="hidden" id="value_replayId" name="replayId" value=""/>
+            <input type="hidden" id="value_redirect" name="redirect" value=""/>
+        </form>
+        <button id="button_no" onclick="closeModalGraveyardReplay()">No stop !</button>
+    </div>
+</div>
+
 <h1 id="TopTitle"> Edit profile </h1>
 
 <div class="block" id="replay">

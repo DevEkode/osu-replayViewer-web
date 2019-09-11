@@ -58,7 +58,6 @@ function elem_replayLine_posted(array $replay_row)
 
     $beatmap_img = "https://b.ppy.sh/thumb/" . $replay_row['beatmapSetId'] . "l.jpg";
     $replay_link = 'http://' . $_SERVER['HTTP_HOST'] . '/view.php?id=' . $replay_row['replayId'];
-    $delete_link = 'http://' . $_SERVER['HTTP_HOST'] . '/php/view/deleteReplay.php?replayId=' . $replay_row['replayId'] . '&redirect=posted';
 
     $replayId = $replay_row['replayId'];
     $redirect = "posted";
@@ -99,7 +98,7 @@ function elem_replayLine_posted(array $replay_row)
                         <div class="card-footer">
                             <a href="$replay_link" class="card-footer-item tooltip"
                                data-tooltip="Go to replay">🔗</a>
-                            <a href="#" class="card-footer-item tooltip"
+                            <a onclick="openModalGraveyardReplay('$replayId','$redirect')" class="card-footer-item tooltip"
                                data-tooltip="Send to graveyard">⚰️</a>
                             <a onclick="openModalDeleteReplay('$replayId','$redirect')" class="card-footer-item tooltip" data-tooltip="Delete">🗑️</a>
                         </div>

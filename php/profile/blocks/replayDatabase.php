@@ -5,7 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/MysqlAgent.php';
 function block_replayDatabase()
 {
     echo <<<EOF
-    <div class="columns is-desktop is-multiline">
+    <div class="columns is-desktop is-multiline" id="multi_card_buttons">
                 <div class="column is-12">
                     <div class="buttons has-addons">
                         <span class="button is-outlined" disabled>⚰️Send to graveyard</span>
@@ -57,15 +57,22 @@ function elem_replayLine_posted(array $replay_row)
     }
 
     $beatmap_img = "https://b.ppy.sh/thumb/" . $replay_row['beatmapSetId'] . "l.jpg";
+    $replay_link = 'http://' . $_SERVER['HTTP_HOST'] . '/view.php?id=' . $replay_row['replayId'];
+    $delete_link = 'http://' . $_SERVER['HTTP_HOST'] . '/php/view/deleteReplay.php?replayId=' . $replay_row['replayId'] . '&redirect=posted';
+
+    $replayId = $replay_row['replayId'];
+    $redirect = "posted";
+
+    $js = "openModalDeleteReplay(\'' + $replayId + '\')";
 
     echo <<<EOF
-    <div class="column is-4-fullhd is-6-desktop is-12-tablet">
+    <div class="column is-4-fullhd is-6-desktop is-12-tablet" id="replay_$replayId">
                     <div class="card grow">
                         <div class="card-image">
                             <figure class="image is-4by2 container_check">
                                 <img src="$beatmap_img" alt="beatmap background">
                                 <div class="b-checkbox checkbox_card">
-                                    <input id="checkbox" class="styled" type="checkbox">
+                                    <input id="checkbox" class="styled" type="checkbox" onchange="onCheckboxUpdated(this,'$replayId')">
                                     <label for="checkbox">
                                     </label>
                                 </div>
@@ -90,11 +97,11 @@ function elem_replayLine_posted(array $replay_row)
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="card-footer-item tooltip"
-                               data-tooltip="Copy link">🔗</a>
+                            <a href="$replay_link" class="card-footer-item tooltip"
+                               data-tooltip="Go to replay">🔗</a>
                             <a href="#" class="card-footer-item tooltip"
                                data-tooltip="Send to graveyard">⚰️</a>
-                            <a href="#" class="card-footer-item tooltip" data-tooltip="Delete">🗑️</a>
+                            <a onclick="openModalDeleteReplay('$replayId','$redirect')" class="card-footer-item tooltip" data-tooltip="Delete">🗑️</a>
                         </div>
                     </div>
                 </div>

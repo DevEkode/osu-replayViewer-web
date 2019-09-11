@@ -5,7 +5,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/MysqlAgent.php';
 function block_replayGraveyard()
 {
     echo <<<EOF
-    <div class="columns is-desktop is-multiline">
+    <div class="columns is-desktop is-multiline" id="multi_card_buttons">
                 <div class="column is-12">
                     <div class="buttons has-addons">
                         <span class="button is-outlined" disabled>🗑️ Delete</span>

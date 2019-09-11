@@ -13,12 +13,14 @@ if ($conn->connect_error) {
   exit;
 }
 
-if(!isset($_POST['replayId'])){
+if (!isset($_GET['replayId'])) {
   header('Location:../../index.php');
 }
 
+$replayId = filter_var($_GET['replayId'], FILTER_SANITIZE_STRING);
+
 //Check if the correct user delete the replay
-$replayJSON = getReplayArray($_POST['replayId'],$conn);
+$replayJSON = getReplayArray($replayId, $conn);
 if(strcmp($_SESSION['userId'],$replayJSON['userId']) != 0){
   header('Location:../../index.php');
 }
@@ -44,15 +46,21 @@ $ftp = new ftp_agent();
 $ftp->connect();
 
 //Delete replay folder in replayList
-if($ftp->dirExists($_POST['replayId'])){
-  $ftp->removeFolder($_POST['replayId']);
+if ($ftp->dirExists($replayId)) {
+	$ftp->removeFolder($replayId);
 }
 
 //Delete replay from database
 $query = $conn->prepare("DELETE FROM replaylist WHERE replayId=?");
-$query->bind_param("s",$_POST['replayId']);
+$query->bind_param("s", $replayId);
 $query->execute();
 $query->close();
 
-header("Location:../../index.php");
+if (isset($_GET['redirect'])) {
+	$redirect = filter_var($_GET['redirect'], FILTER_SANITIZE_STRING);
+	header("Location:../../editProfile.php?block=" . $redirect);
+} else {
+	header("Location:../../index.php");
+}
+
 ?>

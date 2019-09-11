@@ -22,8 +22,8 @@ class ftp_agent{
     // Vérification de la connexion
     if ((!$this->conn) || (!$login_result)) {
       return false;
-      exit;
     } else {
+      ftp_chdir($this->conn, $this->root_dir);
       return true;
     }
   }
@@ -34,15 +34,15 @@ class ftp_agent{
 
   //Folders
   public function mkdir($dir){
-    $result = ftp_mkdir($this->conn,$this->root_dir.$dir);
-    ftp_chmod($this->conn,0777,$this->root_dir.$dir);
+    $result = ftp_mkdir($this->conn, $dir);
+    ftp_chmod($this->conn, 0777, $dir);
     if($result) {return true;}
     else {return false;}
   }
 
   public function dirExists($dir){
     $dir = $dir.'/';
-    if(ftp_chdir($this->conn,$this->root_dir.$dir)){
+    if (ftp_chdir($this->conn, $dir)) {
       return true;
     }else{
       return false;
@@ -53,14 +53,14 @@ class ftp_agent{
     $dir = $dir.'/';
     var_dump($this->root_dir.$dir);
     $this->cleanFolder($dir);
-    $result = ftp_rmdir($this->conn,$this->root_dir.$dir);
+    $result = ftp_rmdir($this->conn, $dir);
 
     if($result) {return true;}
     else {return false;}
   }
 
   public function cleanFolder($dir){ //remove all files from a folder
-    $fichiers = ftp_nlist($this->conn,$this->root_dir.$dir);
+    $fichiers = ftp_nlist($this->conn, $dir);
     var_dump($fichiers);
 
     foreach($fichiers as &$fichier){
@@ -70,7 +70,7 @@ class ftp_agent{
 
   //files
   public function fileExists($fileName,$dir){
-    $contents_on_server = ftp_nlist($this->conn, $this->root_dir.$dir);
+    $contents_on_server = ftp_nlist($this->conn, $dir);
     if(in_array($fileName,$contents_on_server)){
       return true;
     }else{
@@ -79,13 +79,13 @@ class ftp_agent{
   }
 
   public function removeFile($dir){
-    $result = ftp_delete($this->conn,$this->root_dir.$dir);
+    $result = ftp_delete($this->conn, $dir);
     if($result) {return true;}
     else {return false;}
   }
 
   public function sendFile($fileDir,$newDir){
-    $upload = ftp_put($this->conn,$this->root_dir.$newDir,$fileDir,FTP_BINARY);
+    $upload = ftp_put($this->conn, $newDir, $fileDir, FTP_BINARY);
 
     // Vérification du status du chargement
     if (!$upload) {
@@ -96,7 +96,7 @@ class ftp_agent{
   }
 
   public function downloadFile($fileDir,$newDir){
-    $result = ftp_get($this->conn,$newDir,$this->root_dir.$fileDir,FTP_BINARY);
+    $result = ftp_get($this->conn, $newDir, $fileDir, FTP_BINARY);
     if($result) {return true;}
     else {return false;}
   }

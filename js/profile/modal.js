@@ -13,8 +13,8 @@ function closeModalDelete(){
 function openModalDeleteReplay(replayId, redirect) {
     var modal = document.getElementById("delete_replay_modal");
     modal.style.display = "block";
-    document.getElementById("value_replayId").value = replayId;
-    document.getElementById("value_redirect").value = redirect;
+    document.getElementById("value_delete_replayId").value = replayId;
+    document.getElementById("value_delete_redirect").value = redirect;
 }
 
 function closeModalDeleteReplay() {
@@ -27,8 +27,8 @@ function closeModalDeleteReplay() {
 function openModalGraveyardReplay(replayId, redirect) {
     var modal = document.getElementById("graveyard_replay_modal");
     modal.style.display = "block";
-    document.getElementById("value_replayId").value = replayId;
-    document.getElementById("value_redirect").value = redirect;
+    document.getElementById("value_graveyard_replayId").value = replayId;
+    document.getElementById("value_graveyard_redirect").value = redirect;
 }
 
 function closeModalGraveyardReplay() {

@@ -54,7 +54,7 @@ class ReplayCompressor
      * Compress a replay by deleting videos and keeping only the .osr and .osk
      * @param String $replayId
      */
-    private function compressReplay(String $replayId)
+    public function compressReplay(String $replayId)
     {
         //Fetch and delete every .mp4 in the replay folder
         $files = $this->ftp_conn->listFiles($replayId);

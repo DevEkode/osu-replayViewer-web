@@ -1,12 +1,13 @@
 <?php
-
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/ftp_agent.class.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/MysqlAgent.php';
 
 class ReplayCompressor
 {
-    private static int $life_days = 30;
+    private static $life_days = 30;
 
-    private ftp_agent $ftp_conn;
-    private mysqli $mysql_conn;
+    private $ftp_conn;
+    private $mysql_conn;
 
     public function __construct()
     {
@@ -46,7 +47,7 @@ class ReplayCompressor
     {
         //Set this replay as "compressed" (or not) in the database
         $stmt = $this->mysql_conn->prepare("UPDATE replaylist SET compressed = ? WHERE replayId = ?");
-        $stmt->bind_param("bs", $replayId, $compressed);
+        $stmt->bind_param("sb", $replayId, $compressed);
         $stmt->execute();
     }
 
@@ -60,8 +61,8 @@ class ReplayCompressor
         $files = $this->ftp_conn->listFiles($replayId);
 
         foreach ($files as $file) {
-            if (preg_match('/\.mp4$/i', $file)) {
-                $this->ftp_conn->removeFile($replayId . '/' . $file);
+            if (preg_match('/\.mp4$/i', $file['name'])) {
+                $this->ftp_conn->removeFile($replayId . '/' . $file['name']);
             }
         }
 

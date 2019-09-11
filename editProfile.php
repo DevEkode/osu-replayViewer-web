@@ -94,8 +94,8 @@ $actualCursorSize = getIniKey($_SESSION["userId"],"cursor_size");*/
         <h2>Do you really want to delete this replay ?</h2>
         <form action="php/view/deleteReplay.php" method="get" id="form_delete_replay_modal">
             <input type="submit" id="button_yes" value="Yes please !"/>
-            <input type="hidden" id="value_replayId" name="replayId" value=""/>
-            <input type="hidden" id="value_redirect" name="redirect" value=""/>
+            <input type="hidden" id="value_delete_replayId" name="replayId" value=""/>
+            <input type="hidden" id="value_delete_redirect" name="redirect" value=""/>
         </form>
         <button id="button_no" onclick="closeModalDeleteReplay()">No stop !</button>
     </div>
@@ -105,10 +105,10 @@ $actualCursorSize = getIniKey($_SESSION["userId"],"cursor_size");*/
     <div class="modal-content">
         <h2>Do you really want to graveyard this replay ?</h2>
         <h4>Only the replay and skin file will be saved</h4>
-        <form action="php/view/deleteReplay.php" method="get" id="form_graveyard_replay_modal">
+        <form action="php/view/sendToGraveyard.php" method="get" id="form_graveyard_replay_modal">
             <input type="submit" id="button_yes" value="Yes please !"/>
-            <input type="hidden" id="value_replayId" name="replayId" value=""/>
-            <input type="hidden" id="value_redirect" name="redirect" value=""/>
+            <input type="hidden" id="value_graveyard_replayId" name="replayId" value=""/>
+            <input type="hidden" id="value_graveyard_redirect" name="redirect" value=""/>
         </form>
         <button id="button_no" onclick="closeModalGraveyardReplay()">No stop !</button>
     </div>

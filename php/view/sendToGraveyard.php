@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . 'php/MysqlAgent.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . 'cron/ReplayCompressor.php';
 
 //Redirect if user is not auth or missing arguments

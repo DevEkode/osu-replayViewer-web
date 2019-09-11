@@ -164,7 +164,7 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
     <div class="modal-content">
         <h2>Do you really want to delete this replay ?</h2>
         <h4>The replay link will no longer work after this</h4>
-        <form action="php/view/deleteReplay.php" method="post">
+        <form action="php/view/deleteReplay.php" method="get">
             <input type="submit" id="button_yes" value="Yes please !"/>
             <input type="hidden" name="replayId" value=<?php echo '"' . $replayDATA['replayId'] . '"' ?>/>
         </form>

@@ -61,6 +61,7 @@ $actualCursorSize = getIniKey($_SESSION["userId"],"cursor_size");*/
     <script src="js/profile/modal.js"></script>
     <script src="js/profile/cursorSize.js"></script>
     <script src="js/profile/volume.js"></script>
+    <script src="js/profile/replaySelect.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <!-- Cookie bar -->
     <script type="text/javascript"
@@ -85,6 +86,18 @@ $actualCursorSize = getIniKey($_SESSION["userId"],"cursor_size");*/
             <input type="hidden" name="id" value=<?php echo $_SESSION['userId']; ?>/>
         </form>
         <button id="button_no" onclick="closeModalDelete()">No stop !</button>
+    </div>
+</div>
+
+<div class="modal" id="delete_replay_modal">
+    <div class="modal-content">
+        <h2>Do you really want to delete this replay ?</h2>
+        <form action="php/view/deleteReplay.php" method="get" id="form_delete_replay_modal">
+            <input type="submit" id="button_yes" value="Yes please !"/>
+            <input type="hidden" id="value_replayId" name="replayId" value=""/>
+            <input type="hidden" id="value_redirect" name="redirect" value=""/>
+        </form>
+        <button id="button_no" onclick="closeModalDeleteReplay()">No stop !</button>
     </div>
 </div>
 

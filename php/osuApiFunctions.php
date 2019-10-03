@@ -175,7 +175,7 @@ function isBeatmapAvailable($beatmapId, $key)
     }
 
     //Check mods
-    if ($replayDATA['Mods'] > 1073741824)) {
+    if ($replayDATA['Mods'] > 1073741824) {
       echo 'Mods not valid <br>';
       $valide = false;
     }

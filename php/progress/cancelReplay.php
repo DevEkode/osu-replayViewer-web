@@ -3,12 +3,26 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 
 //Get post
 $replayId = filter_var($_POST['replayId'],FILTER_SANITIZE_STRING);
+if (isset($_POST['replayMd5'])) {
+    $replayMd5 = filter_var($_POST['replayMd5'], FILTER_SANITIZE_STRING);
+}
+
+$redirectTo = "index";
+if (isset($_POST['redirectTo'])) {
+    $redirectTo = filter_var($_POST['redirectTo'], FILTER_SANITIZE_STRING);
+}
+
 
 //Check md5
 $conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
-//get md5 from file
-$fileMD5 = md5_file($_FILES["file"]["tmp_name"]);
+//get md5 from file (if replayMd5 is not posted)
+if (!isset($_POST['replayMd5'])) {
+    $fileMD5 = md5_file($_FILES["file"]["tmp_name"]);
+} else {
+    $fileMD5 = $replayMd5;
+}
+
 
 //get md5 from database
 $query = $conn->prepare('SELECT md5 FROM requestlist WHERE replayId=?');
@@ -63,5 +77,12 @@ if(strcmp($fileMD5,$databaseMD5) == 0){
 }
 
 //Redirect
-header("Location:/index.php");
+switch ($redirectTo) {
+    case "profile" :
+        header("Location:/editProfile.php?block=pending");
+        break;
+    default :
+        header("Location:/index.php");
+}
+
  ?>

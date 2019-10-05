@@ -14,11 +14,6 @@ require 'php/profile/replaySettings.php';
 
 //Query user information
 checkUserFile($_SESSION["userId"]);
-/*$skins = listAllSkins($_SESSION["userId"]);
-$customSkin = getIniKey($_SESSION["userId"],,"enable");
-$actualSkin = getIniKey($_SESSION["userId"],"fileName");
-$actualDim = getIniKey($_SESSION["userId"],"dim");
-$actualCursorSize = getIniKey($_SESSION["userId"],"cursor_size");*/
 ?>
 
 <!DOCTYPE html>
@@ -111,6 +106,19 @@ $actualCursorSize = getIniKey($_SESSION["userId"],"cursor_size");*/
             <input type="hidden" id="value_graveyard_redirect" name="redirect" value=""/>
         </form>
         <button id="button_no" onclick="closeModalGraveyardReplay()">No stop !</button>
+    </div>
+</div>
+
+<div class="modal" id="pending_replay_modal">
+    <div class="modal-content">
+        <h2>Do you really want to cancel this replay ?</h2>
+        <form action="php/progress/cancelReplay.php" method="post" id="form_pending_replay_modal">
+            <input type="submit" id="button_yes" value="Yes please !"/>
+            <input type="hidden" id="value_pending_replayId" name="replayId" value=""/>
+            <input type="hidden" id="value_pending_redirect" name="redirectTo" value=""/>
+            <input type="hidden" id="value_pending_md5" name="replayMd5" value=""/>
+        </form>
+        <button id="button_no" onclick="closeModalPendingReplay()">No stop !</button>
     </div>
 </div>
 

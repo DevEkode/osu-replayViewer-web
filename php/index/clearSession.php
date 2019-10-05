@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 //unset session
 unset($_SESSION['filename']);
 unset($_SESSION['skinName']);

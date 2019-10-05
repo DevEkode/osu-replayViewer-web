@@ -82,15 +82,15 @@ if ($stmt->execute()) {
 
 $btContent = getBeatmapJSONwMods($replayJSON['md5'], $replayJSON['Mods'], $osuApiKey);
 $replayAcc = getReplayAccuracy($replayJSON);
+$pp = 0;
 
 $stmt = $conn->prepare("INSERT INTO replaystats (replayId, gamemode, modsBinary, stars, pp, acc, ar, BPM, x300, x100, x50, gekis, katus, miss, t_score, max_combo, perfect) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
 $stmt->bind_param('siidddddiiiiiiiii',
     $replayId,
     $replayJSON['gamemode'],
     $replayJSON['Mods'],
     $btContent[0]['difficultyrating'],
-    $pp = 0,
+    $pp,
     $replayAcc,
     $btContent[0]['diff_approach'],
     $btContent[0]['bpm'],
@@ -122,7 +122,6 @@ if(!rename('../../uploads/'.$_POST['filename'],'../../requestList/'.$replayId.'/
 
 $conn->close();
 include 'clearSession.php';
-//clear();
 header("Location:../../progress.php?id=".$replayId);
 exit;
 

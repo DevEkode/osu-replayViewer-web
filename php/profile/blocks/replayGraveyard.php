@@ -38,6 +38,9 @@ function elem_replayLine_graveyard(array $replay_row)
     $beatmap_mods = drawMods($replay_row['binaryMods']);
     $time = $replay_row['date'];
 
+    $replayId = $replay_row['replayId'];
+    $redirect = "profile";
+
     $gamemode_img = '/images/osuStdr.png';
     $gamemode_name = 'osu!';
     switch ($replay_row['playMod']) {
@@ -91,9 +94,9 @@ function elem_replayLine_graveyard(array $replay_row)
                         <div class="card-footer">
                             <a href="#" class="card-footer-item tooltip"
                                data-tooltip="Copy link">🔗</a>
-                            <a href="#" class="card-footer-item tooltip"
+                            <a onclick="openModalRerecordReplay('$replayId','$redirect')" class="card-footer-item tooltip"
                                data-tooltip="Re-record">📡</a>
-                            <a href="#" class="card-footer-item tooltip" data-tooltip="Delete">🗑️</a>
+                            <a onclick="openModalDeleteReplay('$replayId','$redirect')" class="card-footer-item tooltip" data-tooltip="Delete">🗑️</a>
                         </div>
                     </div>
                 </div>

@@ -122,6 +122,18 @@ checkUserFile($_SESSION["userId"]);
     </div>
 </div>
 
+<div class="modal" id="rerecord_replay_modal">
+    <div class="modal-content">
+        <h2>Do you really want to re-record this replay ?</h2>
+        <form action="php/view/re_record_replay.php" method="post" id="form_rerecord_replay_modal">
+            <input type="submit" id="button_yes" value="Yes please !"/>
+            <input type="hidden" id="value_rerecord_replayId" name="replayId" value=""/>
+            <input type="hidden" id="value_rerecord_redirect" name="redirectTo" value=""/>
+        </form>
+        <button id="button_no" onclick="closeModalRerecordReplay()">No stop !</button>
+    </div>
+</div>
+
 <h1 id="TopTitle"> Edit profile </h1>
 
 <div class="block" id="replay">

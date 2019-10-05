@@ -50,3 +50,17 @@ function closeModalPendingReplay() {
     var modal = document.getElementById("pending_replay_modal");
     modal.style.display = "none";
 }
+
+/* Modal replay re-record */
+
+function openModalRerecordReplay(replayId, redirect) {
+    var modal = document.getElementById("rerecord_replay_modal");
+    modal.style.display = "block";
+    document.getElementById("value_rerecord_replayId").value = replayId;
+    document.getElementById("value_rerecord_redirect").value = redirect;
+}
+
+function closeModalRerecordReplay() {
+    var modal = document.getElementById("rerecord_replay_modal");
+    modal.style.display = "none";
+}

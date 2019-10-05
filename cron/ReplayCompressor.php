@@ -47,7 +47,7 @@ class ReplayCompressor
     {
         //Set this replay as "compressed" (or not) in the database
         $stmt = $this->mysql_conn->prepare("UPDATE replaylist SET compressed = ? WHERE replayId = ?");
-        $stmt->bind_param("sb", $replayId, $compressed);
+        $stmt->bind_param("is", $compressed, $replayId);
         $stmt->execute();
     }
 

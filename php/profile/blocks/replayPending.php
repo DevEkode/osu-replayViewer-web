@@ -38,6 +38,10 @@ function elem_replayLine_pending(array $replay_row)
     $beatmap_mods = drawMods($replay_row['binaryMods']);
     $time = $replay_row['date'];
 
+    $replayId = $replay_row['replayId'];
+    $redirect = "profile";
+    $replayMd5 = $replay_row['md5'];
+
     $gamemode_img = '/images/osuStdr.png';
     $gamemode_name = 'osu!';
     switch ($replay_row['playMod']) {
@@ -96,7 +100,7 @@ function elem_replayLine_pending(array $replay_row)
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="card-footer-item tooltip" data-tooltip="Cancel">❌</a>
+                            <a onclick="openModalPendingReplay('$replayId','$redirect','$replayMd5')" class="card-footer-item tooltip" data-tooltip="Cancel">❌</a>
                         </div>
                     </div>
                 </div>

@@ -26,9 +26,12 @@ if (!isset($_POST['replayMd5'])) {
 
 //get md5 from database
 $query = $conn->prepare('SELECT md5 FROM requestlist WHERE replayId=?');
-$query->bindParam('s', $replayId);
+$query->bind_param('s', $replayId);
 $query->execute();
-$line = $query->fetch();
+$result = $query->get_result();
+while ($row = $result->fetch_assoc()) {
+    $line = $row;
+}
 
 if(empty($line)){
   $databaseMD5 = uniqid();
@@ -68,8 +71,8 @@ if(strcmp($fileMD5,$databaseMD5) == 0){
   removeFolder($dir);
 
   //Remove from database
-  $query2 = $conn->prepare('DELETE FROM requestlist WHERE replayId=:id');
-  $query2->bindParam('id',$replayId);
+    $query2 = $conn->prepare('DELETE FROM requestlist WHERE replayId=?');
+    $query2->bind_param('s', $replayId);
   $query2->execute();
 }else{
   //Not the same, sending error

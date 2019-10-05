@@ -21,6 +21,7 @@ if(!isset($_POST['replayId'])){
 }
 
 
+
 //Check if the correct user delete the replay
 $replayJSON = getReplayArray($_POST['replayId'],$conn);
 if(strcmp($_SESSION['userId'],$replayJSON['userId']) != 0){
@@ -78,7 +79,6 @@ rename($replay_dir,$new_dir);
 $query = $conn->prepare("INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 $query->bind_param("siissiisiii",$replayDATA['replayId'],$replayDATA['beatmapId'],$replayDATA['beatmapSetId'],$replayDATA['OFN'],$replayDATA['BFN'],$replayDuration,$replayDATA['userId'],$replayDATA['md5'],$replayDATA['playMod'],$replayDATA['binaryMods'],$replayDATA['permanent']);
 $query->execute();
-var_dump($query);
 $query->close();
 
 //--Delete the row in replaylist table
@@ -93,6 +93,17 @@ if($ftp->dirExists($_POST['replayId'])){
 }
 
 //--Redirect on the waiting page
-header("Location:../../progress.php?id=".$_POST['replayId']);
+if (isset($_POST['redirectTo'])) {
+    switch ($_POST['redirectTo']) {
+        case 'profile':
+            header("Location:/editProfile.php?block=graveyard");
+            break;
+        default :
+            header("Location:../../progress.php?id=" . $_POST['replayId']);
+    }
+} else {
+    header("Location:../../progress.php?id=" . $_POST['replayId']);
+}
+
 
 ?>

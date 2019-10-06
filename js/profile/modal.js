@@ -75,6 +75,19 @@ function closeModalPendingReplay() {
     modal.style.display = "none";
 }
 
+function openMultipleModalPendingReplay(redirect) {
+    var modal = document.getElementById("pending_multiple_replay_modal");
+    modal.style.display = "block";
+    document.getElementById("value_pending_multiple_replayId").value = JSON.stringify(selectedReplays);
+    document.getElementById("value_pending_multiple_redirect").value = redirect;
+    document.getElementById("value_pending_multiple_md5").value = JSON.stringify(selectedReplaysMd5);
+}
+
+function closeMultipleModalPendingReplay() {
+    var modal = document.getElementById("pending_multiple_replay_modal");
+    modal.style.display = "none";
+}
+
 /* Modal replay re-record */
 
 function openModalRerecordReplay(replayId, redirect) {

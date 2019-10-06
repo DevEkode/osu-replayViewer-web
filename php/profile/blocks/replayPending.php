@@ -8,7 +8,7 @@ function block_replayPending()
     <div class="columns is-desktop is-multiline" id="multi_card_buttons">
                 <div class="column is-12">
                     <div class="buttons has-addons">
-                        <span class="button is-outlined" disabled>❌ Cancel</span>
+                        <span onclick="openMultipleModalPendingReplay('profile')" class="button is-outlined" disabled>❌ Cancel</span>
                     </div>
                 </div>
 EOF;
@@ -74,7 +74,7 @@ function elem_replayLine_pending(array $replay_row)
                             <figure class="image is-4by2 container_check">
                                 <img src="$beatmap_img" alt="Beatmap background">
                                 <div class="b-checkbox checkbox_card">
-                                    <input id="checkbox" class="styled" type="checkbox" onchange="onCheckboxUpdated(this,'$replayId')">
+                                    <input id="checkbox" class="styled" type="checkbox" onchange="onCheckboxUpdated(this,'$replayId','$replayMd5')">
                                     <label for="checkbox">
                                     </label>
                                 </div>

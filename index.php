@@ -34,7 +34,7 @@ require 'php/navbar.php';
     </script>
 
 
-    <title>osu!replayViewer - A online osu replay viewer</title>
+    <title>osu!replayViewer - An online osu replay viewer</title>
     <link rel="icon" type="image/png" href="images/icon.png"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 

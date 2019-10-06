@@ -74,7 +74,7 @@ function elem_replayLine_pending(array $replay_row)
                             <figure class="image is-4by2 container_check">
                                 <img src="$beatmap_img" alt="Beatmap background">
                                 <div class="b-checkbox checkbox_card">
-                                    <input id="checkbox" class="styled" type="checkbox">
+                                    <input id="checkbox" class="styled" type="checkbox" onchange="onCheckboxUpdated(this,'$replayId')">
                                     <label for="checkbox">
                                     </label>
                                 </div>

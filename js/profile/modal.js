@@ -22,6 +22,18 @@ function closeModalDeleteReplay() {
     modal.style.display = "none";
 }
 
+function openMultipleModalDeleteReplay(redirect) {
+    var modal = document.getElementById("delete_multiple_replay_modal");
+    modal.style.display = "block";
+    document.getElementById("value_delete_multiple_replayId").value = JSON.stringify(selectedReplays);
+    document.getElementById("value_delete_multiple_redirect").value = redirect;
+}
+
+function closeMultipleModalDeleteReplay() {
+    var modal = document.getElementById("delete_multiple_replay_modal");
+    modal.style.display = "none";
+}
+
 /* Modal replay graveyard */
 
 function openModalGraveyardReplay(replayId, redirect) {
@@ -33,6 +45,18 @@ function openModalGraveyardReplay(replayId, redirect) {
 
 function closeModalGraveyardReplay() {
     var modal = document.getElementById("graveyard_replay_modal");
+    modal.style.display = "none";
+}
+
+function openMultipleModalGraveyardReplay(redirect) {
+    var modal = document.getElementById("graveyard_multiple_replay_modal");
+    modal.style.display = "block";
+    document.getElementById("value_graveyard_multiple_replayId").value = JSON.stringify(selectedReplays);
+    document.getElementById("value_graveyard_multiple_redirect").value = redirect;
+}
+
+function closeMultipleModalGraveyardReplay() {
+    var modal = document.getElementById("graveyard_multiple_replay_modal");
     modal.style.display = "none";
 }
 

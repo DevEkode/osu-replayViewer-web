@@ -22,6 +22,13 @@ if(!isset($_POST['checkboxTU']) && $_POST['checkboxTU'] != "true"){
   exit;
 }
 
+//Check rate limit
+$limiter = UploadLimiter::getINSTANCE();
+if (!$limiter->canUserUpload()) {
+    header("Location:../../index.php?error=10");
+    exit;
+}
+
 //get replay file Informations
 $replayJSON = getReplayContent("../../uploads/".$_POST['filename']);
 
@@ -30,11 +37,12 @@ date_default_timezone_set('Europe/Paris');
 $replayId = uniqid();
 
 //persistance
-if(isset($_POST['checkbox']) && $_POST["checkbox"] != NULL){
-	$persistance = 1;
-}else{
-	$persistance = 0;
-}
+//if(isset($_POST['checkbox']) && $_POST["checkbox"] != NULL){
+//	$persistance = 1;
+//}else{
+//	$persistance = 0;
+//}
+$persistance = 0;
 
 //beatmap Informations
 $beatmapJSON = getBeatmapJSONwMD5($replayJSON['md5'],$osuApiKey);

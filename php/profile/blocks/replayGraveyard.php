@@ -8,7 +8,7 @@ function block_replayGraveyard()
     <div class="columns is-desktop is-multiline" id="multi_card_buttons">
                 <div class="column is-12">
                     <div class="buttons has-addons">
-                        <span class="button is-outlined" disabled>🗑️ Delete</span>
+                        <span onclick="openMultipleModalDeleteReplay('profile')" class="button is-outlined" disabled>🗑️ Delete</span>
                     </div>
                 </div>
 EOF;

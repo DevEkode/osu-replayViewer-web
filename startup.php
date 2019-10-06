@@ -9,6 +9,10 @@ if (file_exists(DIR_VENDOR . 'autoload.php')) {
 $dotenv = Dotenv\Dotenv::create(__DIR__);
 $dotenv->load();
 
+//Load limiter
+require_once $_SERVER['DOCUMENT_ROOT'] . '/php/index/UploadLimiter.php';
+UploadLimiter::getINSTANCE();
+
 //Debug config
 if (getenv('DEBUG_VERSION')) {
     # Debug

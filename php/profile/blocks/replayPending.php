@@ -80,7 +80,7 @@ function elem_replayLine_pending(array $replay_row)
                                     </label>
                                 </div>
                             </figure>
-                            <progress class="progress is-warning progress_card" value="$barWidth" max="100">$barWidth%</progress>
+                            <!--<progress class="progress is-warning progress_card" value="$barWidth" max="100">$barWidth%</progress>-->
                         </div>
                         <div class="card-content">
                             <div class="media">

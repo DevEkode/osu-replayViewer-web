@@ -157,9 +157,16 @@ require 'php/navbar.php';
 
         <div id="replay_start">
             <?php
-            if ($_SESSION['replayStructure'] && $_SESSION['beatmapAvailable'] && $_SESSION['playerOsuAccount'] && $_SESSION['replayBelow10'] && $_SESSION['replayNotDuplicate'] && $_SESSION['replayNotWaiting']) {
+            require_once 'php/index/UploadLimiter.php';
+            $limiter = UploadLimiter::getINSTANCE();
+            $uploadRemaining = $limiter->getUploadsRemaining();
+            $limit = getenv("UPLOAD_LIMIT_PER_DAY");
+
+            echo "<div class='text-center'><span>Uploads remaining : $uploadRemaining / $limit</span></div><br>";
+
+            if ($uploadRemaining != 0 && $_SESSION['replayStructure'] && $_SESSION['beatmapAvailable'] && $_SESSION['playerOsuAccount'] && $_SESSION['replayBelow10'] && $_SESSION['replayNotDuplicate'] && $_SESSION['replayNotWaiting']) {
                 echo '<form class="align_center" method="post" enctype="multipart/form-data" action="php/index/upload.php">';
-                echo '<input id="checkBox" type="checkbox" name="checkbox"> <span id="checkboxText"> do not delete my replay after 30 days</span><br>';
+//                echo '<input id="checkBox" type="checkbox" name="checkbox"> <span id="checkboxText"> do not delete my replay after 30 days</span><br>';
                 echo '<input id="checkBox" type="checkbox" name="checkboxTU"> <span id="checkboxText"> I accept the <a href="legal/TU.php?TU=replay" target="_blank">terms of uses</a></span><br>';
                 echo '<input id="filename" name="filename" type="hidden" value=' . '"' . $_SESSION['filename'] . '"' . '>';
                 echo '<input id="duration" name="duration" type="hidden" value=' . '"' . $_SESSION['duration'] . '"' . '>';

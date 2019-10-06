@@ -43,6 +43,9 @@ if (empty($replayDATA)) {
     header("Location:index.php");
 }
 
+//Check if the replay is graveyarded
+$isGraveyarded = (bool)$replayDATA['compressed'];
+
 //Check if the user is logged
 if (isset($_SESSION['userId']) && isset($_SESSION['username'])) {
     if (strcmp($_SESSION['userId'], $replayDATA['userId']) == 0) {
@@ -193,19 +196,24 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
 <div class="first_block">
     <div class="player_container">
         <?php
-        if (empty($replayDATA['youtubeId'])) {
-            echo "<video id=\"player\" poster='$thumbUrl' controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline controls>";
-            if ($multiple_res) {
-                echo "<source src=$urlsRaw[0] type='video/mp4' size='720'>";
-                echo "<source src=$urlsRaw[1] type='video/mp4' size='480'>";
+        if (!$isGraveyarded) {
+            if (empty($replayDATA['youtubeId'])) {
+                echo "<video id=\"player\" poster='$thumbUrl' controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline controls>";
+                if ($multiple_res) {
+                    echo "<source src=$urlsRaw[0] type='video/mp4' size='720'>";
+                    echo "<source src=$urlsRaw[1] type='video/mp4' size='480'>";
+                } else {
+                    echo "<source src=$urlRaw  type='video/mp4'>";
+                }
+                echo '</video>';
             } else {
-                echo "<source src=$urlRaw  type='video/mp4'>";
+                echo '<div class="plyr__video-embed" id="player">';
+                echo '<iframe sandbox="allow-same-origin allow-scripts" src=' . '"' . 'https://peertube.osureplayviewer.xyz/videos/embed/' . $replayDATA['youtubeId'] . '"' . ' frameborder="0" allowfullscreen></iframe>';
+                echo '</div>';
             }
-            echo '</video>';
         } else {
-            echo '<div class="plyr__video-embed" id="player">';
-            echo '<iframe sandbox="allow-same-origin allow-scripts" src=' . '"' . 'https://peertube.osureplayviewer.xyz/videos/embed/' . $replayDATA['youtubeId'] . '"' . ' frameborder="0" allowfullscreen></iframe>';
-            echo '</div>';
+            echo "<h3 class='align_center'>This content has been send to the graveyard, ask the author to re-record this replay</h3>";
+            echo "<h4 class='align_center' style='color:gray'>You can still download the original replay and view the beatmap page</h4>";
         }
         ?>
         <script>const player = new Plyr('#player');</script>

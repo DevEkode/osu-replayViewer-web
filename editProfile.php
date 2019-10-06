@@ -84,6 +84,8 @@ checkUserFile($_SESSION["userId"]);
     </div>
 </div>
 
+<!-- Delete replay modals -->
+
 <div class="modal" id="delete_replay_modal">
     <div class="modal-content">
         <h2>Do you really want to delete this replay ?</h2>
@@ -95,6 +97,20 @@ checkUserFile($_SESSION["userId"]);
         <button id="button_no" onclick="closeModalDeleteReplay()">No stop !</button>
     </div>
 </div>
+
+<div class="modal" id="delete_multiple_replay_modal">
+    <div class="modal-content">
+        <h2>Do you really want to delete all the replays selected ?</h2>
+        <form action="php/view/deleteReplay.php" method="get" id="form_delete_multiple_replay_modal">
+            <input type="submit" id="button_yes" value="Yes please !"/>
+            <input type="hidden" id="value_delete_multiple_replayId" name="replayId" value=""/>
+            <input type="hidden" id="value_delete_multiple_redirect" name="redirect" value=""/>
+        </form>
+        <button id="button_no" onclick="closeMultipleModalDeleteReplay()">No stop !</button>
+    </div>
+</div>
+
+<!-- Graveyard replay modals -->
 
 <div class="modal" id="graveyard_replay_modal">
     <div class="modal-content">
@@ -109,6 +125,21 @@ checkUserFile($_SESSION["userId"]);
     </div>
 </div>
 
+<div class="modal" id="graveyard_multiple_replay_modal">
+    <div class="modal-content">
+        <h2>Do you really want to graveyard this replay ?</h2>
+        <h4>Only the replay and skin file will be saved</h4>
+        <form action="php/view/sendToGraveyard.php" method="get" id="form_multiple_graveyard_replay_modal">
+            <input type="submit" id="button_yes" value="Yes please !"/>
+            <input type="hidden" id="value_graveyard_multiple_replayId" name="replayId" value=""/>
+            <input type="hidden" id="value_graveyard_multiple_redirect" name="redirect" value=""/>
+        </form>
+        <button id="button_no" onclick="closeMultipleModalGraveyardReplay()">No stop !</button>
+    </div>
+</div>
+
+<!-- Cancel replay modals -->
+
 <div class="modal" id="pending_replay_modal">
     <div class="modal-content">
         <h2>Do you really want to cancel this replay ?</h2>
@@ -121,6 +152,8 @@ checkUserFile($_SESSION["userId"]);
         <button id="button_no" onclick="closeModalPendingReplay()">No stop !</button>
     </div>
 </div>
+
+<!-- Re-record replay modals -->
 
 <div class="modal" id="rerecord_replay_modal">
     <div class="modal-content">

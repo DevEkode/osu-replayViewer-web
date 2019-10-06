@@ -41,6 +41,8 @@ function elem_replayLine_graveyard(array $replay_row)
     $replayId = $replay_row['replayId'];
     $redirect = "profile";
 
+    $replay_link = 'http://' . $_SERVER['HTTP_HOST'] . '/view.php?id=' . $replay_row['replayId'];
+
     $gamemode_img = '/images/osuStdr.png';
     $gamemode_name = 'osu!';
     switch ($replay_row['playMod']) {
@@ -67,7 +69,7 @@ function elem_replayLine_graveyard(array $replay_row)
                             <figure class="image is-4by2 container_check">
                                 <img src="$beatmap_img" alt="beatmap background">
                                 <div class="b-checkbox checkbox_card">
-                                    <input id="checkbox" class="styled" type="checkbox">
+                                    <input id="checkbox" class="styled" type="checkbox" onchange="onCheckboxUpdated(this,'$replayId')">
                                     <label for="checkbox">
                                     </label>
                                 </div>
@@ -92,8 +94,8 @@ function elem_replayLine_graveyard(array $replay_row)
                             </div>
                         </div>
                         <div class="card-footer">
-                            <a href="#" class="card-footer-item tooltip"
-                               data-tooltip="Copy link">🔗</a>
+                            <a href="$replay_link" class="card-footer-item tooltip"
+                               data-tooltip="Go to replay">🔗</a>
                             <a onclick="openModalRerecordReplay('$replayId','$redirect')" class="card-footer-item tooltip"
                                data-tooltip="Re-record">📡</a>
                             <a onclick="openModalDeleteReplay('$replayId','$redirect')" class="card-footer-item tooltip" data-tooltip="Delete">🗑️</a>

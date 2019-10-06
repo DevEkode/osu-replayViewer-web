@@ -8,11 +8,26 @@ if (!isset($_GET['replayId']) || empty($_SESSION['userId'])) {
     header('Location:../index.php');
 }
 
-$replayId = filter_var($_GET['replayId'], FILTER_SANITIZE_STRING);
+//Construct sanitized replay array
+$replays = array();
+$json_get = json_decode($_GET['replayId']);
+if ($json_get == null) {
+    //Not an array
+    $replayId = filter_var($_GET['replayId'], FILTER_SANITIZE_STRING);
+    array_push($replays, $replayId);
+} else {
+    //Is an array
+    foreach ($json_get as $elem) {
+        $replayId = filter_var($elem, FILTER_SANITIZE_STRING);
+        array_push($replays, $replayId);
+    }
+}
 
 //Engage replay compression
 $compressor = new ReplayCompressor();
-$compressor->compressReplay($replayId);
+foreach ($replays as $replay) {
+    $compressor->compressReplay($replayId);
+}
 
 //Redirect user to index or requested page
 if (isset($_GET['redirect'])) {

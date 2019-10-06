@@ -60,6 +60,7 @@ function elem_replayLine_pending(array $replay_row)
     }
 
     $beatmap_img = "https://b.ppy.sh/thumb/" . $replay_row['beatmapSetId'] . "l.jpg";
+    $pending_link = 'http://' . $_SERVER['HTTP_HOST'] . '/progress.php?id=' . $replay_row['replayId'];
 
     if ($replay_row['currentStatut'] != 4) {
         $barWidth = 20 * ($replay_row['currentStatut'] + 1);
@@ -100,6 +101,8 @@ function elem_replayLine_pending(array $replay_row)
                             </div>
                         </div>
                         <div class="card-footer">
+                            <a href="$pending_link" class="card-footer-item tooltip"
+                               data-tooltip="Go to progress page">🔗</a>
                             <a onclick="openModalPendingReplay('$replayId','$redirect','$replayMd5')" class="card-footer-item tooltip" data-tooltip="Cancel">❌</a>
                         </div>
                     </div>

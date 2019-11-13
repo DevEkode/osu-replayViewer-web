@@ -95,7 +95,6 @@ session_start();
         // Get todays date and time
         var d = new Date();
         var utc = d.getTime() + (d.getTimezoneOffset() * 60000); //60000
-
           let offset = 1;
           if(isDST(d)){
               offset = 2;

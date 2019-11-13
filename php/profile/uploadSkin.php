@@ -1,6 +1,7 @@
 <?php
 session_start();
-var_dump($_FILES);
+
+require_once 'replaySettings.php';
 
 if(empty($_SESSION)){
   header("Location:index.php");
@@ -40,31 +41,35 @@ function rrmdir($dir) {
     }
 }
 
-require 'replaySettings.php';
+function error($error_code,$reason = null){
+    global $target_dir;
+    global $target_file;
+    if(file_exists($target_dir."export")){
+        removeFolder($target_dir."export");
+    }
+
+    if(file_exists($target_file) && strcmp($error_code,'0') != 0){
+        unlink($target_file);
+    }
+
+    if($reason == null) $var = "Location:../../editProfile.php?block=skin&error=".$error_code;
+    else $var = "Location:../../editProfile.php?block=skin&error=".$error_code."&errorMsg=".$reason;
+    header($var);
+    exit();
+}
+
+if(empty($_FILES)){
+    error('14');
+}
 
 $target_dir = "../../accounts/".$_SESSION["userId"]."/uploads/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
+$uploadErrorMsg = "";
 $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 if(!file_exists($target_dir)){
   mkdir($target_dir);
-}
-
-function error($error_code){
-  global $target_dir;
-  global $target_file;
-  if(file_exists($target_dir."export")){
-    removeFolder($target_dir."export");
-  }
-
-  if(file_exists($target_file) && strcmp($error_code,'0') != 0){
-    unlink($target_file);
-  }
-
-  $var = "Location:../../editProfile.php?block=skin&error=".$error_code;
-  header($var);
-  exit();
 }
 
 if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', basename($_FILES["fileToUpload"]["name"])))
@@ -107,14 +112,15 @@ if ($uploadOk == 0) {
         $zip->open($target_file);
         if($zip->extractTo($target_dir."export")){
           //echo 'extract Ok';
-          if(!isSkinValid($target_dir."export")){
+            $skinValidityMsg = isSkinValid($target_dir."export");
+          if($skinValidityMsg != null){
             $uploadOk = 0;
-            error('9');
+            error('9',$skinValidityMsg);
           }
         }else{
           //echo 'extract Fail';
           $uploadOk = 0;
-          error('9');
+          error('9','.osk extraction test failed');
         }
         $zip->close();
 
@@ -128,7 +134,7 @@ if ($uploadOk == 0) {
         header('Location:../../editProfile.php?block=skin&success=0');
     } else {
         //echo "Sorry, there was an error uploading your file.";
-        error('9');
+        error('9','Cannot move the uploaded file');
         exit;
     }
 }

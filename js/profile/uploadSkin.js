@@ -26,11 +26,12 @@ function checkFileCharacters(file){
 
 function onClick(form){
   let file = document.getElementById("fileToUpload").files[0];
+  console.log(file);
   if(checkFileSize(file) && checkFileCharacters(file)){
     form.parentNode.submit();
   }
 }
 
 window.onchange = function() {
-  onClick();
+  //onClick();
 };

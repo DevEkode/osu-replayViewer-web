@@ -1,17 +1,14 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
+
 //-- Connect to mysql request database --
-require '../secure/mysql_pass.php';
-$servername = $mySQLservername;
-$username = $mySQLusername;
-$password = $mySQLpassword;
 
 //Time limit in days
 $timeLimit = 1;
 
 // ******************** Connection **********************************
 // Create connection
-$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
-//$conn = new PDO('mysql:host=mysql.hostinger.fr;dbname=u611457272_osu','u611457272_code','123');
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 // Check connection
 if ($conn->connect_error) {

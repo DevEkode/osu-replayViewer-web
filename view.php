@@ -2,12 +2,13 @@
 header("Access-Control-Allow-Origin: *");
 
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require 'php/view/functions.php';
 require 'php/osuApiFunctions.php';
-require 'secure/osu_api_key.php';
-require 'secure/mysql_pass.php';
-require 'secure/admins.php';
+require 'php/admins.php';
 require 'php/navbar.php';
+
+$osuApiKey = getenv('OSU_KEY');
 
 function URL_exists($url)
 {
@@ -23,7 +24,7 @@ function URLS_exists(array $urls)
     return true;
 }
 
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 $server = "https://peertube.osureplayviewer.xyz/client/assets/replayList/";
 
 // Check connection
@@ -41,6 +42,9 @@ $beatmapURL = "https://osu.ppy.sh/beatmapsets/" . $replayDATA['beatmapSetId'];
 if (empty($replayDATA)) {
     header("Location:index.php");
 }
+
+//Check if the replay is graveyarded
+$isGraveyarded = (bool)$replayDATA['compressed'];
 
 //Check if the user is logged
 if (isset($_SESSION['userId']) && isset($_SESSION['username'])) {
@@ -163,7 +167,7 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
     <div class="modal-content">
         <h2>Do you really want to delete this replay ?</h2>
         <h4>The replay link will no longer work after this</h4>
-        <form action="php/view/deleteReplay.php" method="post">
+        <form action="php/view/deleteReplay.php" method="get">
             <input type="submit" id="button_yes" value="Yes please !"/>
             <input type="hidden" name="replayId" value=<?php echo '"' . $replayDATA['replayId'] . '"' ?>/>
         </form>
@@ -192,19 +196,24 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
 <div class="first_block">
     <div class="player_container">
         <?php
-        if (empty($replayDATA['youtubeId'])) {
-            echo "<video id=\"player\" poster='$thumbUrl' controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline controls>";
-            if ($multiple_res) {
-                echo "<source src=$urlsRaw[0] type='video/mp4' size='720'>";
-                echo "<source src=$urlsRaw[1] type='video/mp4' size='480'>";
+        if (!$isGraveyarded) {
+            if (empty($replayDATA['youtubeId'])) {
+                echo "<video id=\"player\" poster='$thumbUrl' controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline controls>";
+                if ($multiple_res) {
+                    echo "<source src=$urlsRaw[0] type='video/mp4' size='720'>";
+                    echo "<source src=$urlsRaw[1] type='video/mp4' size='480'>";
+                } else {
+                    echo "<source src=$urlRaw  type='video/mp4'>";
+                }
+                echo '</video>';
             } else {
-                echo "<source src=$urlRaw  type='video/mp4'>";
+                echo '<div class="plyr__video-embed" id="player">';
+                echo '<iframe sandbox="allow-same-origin allow-scripts" src=' . '"' . 'https://peertube.osureplayviewer.xyz/videos/embed/' . $replayDATA['youtubeId'] . '"' . ' frameborder="0" allowfullscreen></iframe>';
+                echo '</div>';
             }
-            echo '</video>';
         } else {
-            echo '<div class="plyr__video-embed" id="player">';
-            echo '<iframe sandbox="allow-same-origin allow-scripts" src=' . '"' . 'https://peertube.osureplayviewer.xyz/videos/embed/' . $replayDATA['youtubeId'] . '"' . ' frameborder="0" allowfullscreen></iframe>';
-            echo '</div>';
+            echo "<h3 class='align_center'>This content has been send to the graveyard, ask the author to re-record this replay</h3>";
+            echo "<h4 class='align_center' style='color:gray'>You can still download the original replay and view the beatmap page</h4>";
         }
         ?>
         <script>const player = new Plyr('#player');</script>

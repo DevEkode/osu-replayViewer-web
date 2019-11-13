@@ -1,13 +1,10 @@
 <?php
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 
 //-------- Connect to mysql request database ---------
-  require '../../secure/mysql_pass.php';
-  $servername = $mySQLservername;
-  $username = $mySQLusername;
-  $password = $mySQLpassword;
 
-  $conn = new mysqli($servername, $username, $password, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
   // Check connection
   if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
@@ -16,6 +13,7 @@ session_start();
   }
 
   function closeConn(){
+    global $conn;
     $conn->close();
     exit;
   }

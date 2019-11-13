@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 
 //check if the user is logged
 if(!isset($_SESSION['userId'])){
@@ -10,9 +11,8 @@ if(!isset($_SESSION['userId'])){
 $secretToken = bin2hex(openssl_random_pseudo_bytes(16));
 
 //Insert into database
-require '../../secure/mysql_pass.php';
 
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 // Check connection
 if ($conn->connect_error) {

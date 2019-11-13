@@ -1,16 +1,19 @@
 {
-    "require-dev": {
-      "doctrine/instantiator": "1.0.5",
-      "myclabs/deep-copy": "1.7.0",
-      "phpdocumentor/reflection-common": "1.0.1",
-      "phpdocumentor/reflection-docblock": "4.3.0",
-      "phpdocumentor/type-resolver": "0.4.0",
-      "phpspec/prophecy": "1.8.0"
-    },
-    "require": {
-      "phpmailer/phpmailer": "^6.0",
-      "patreon/patreon": "^0.3.1",
-      "ext-curl": "*",
-      "ext-json": "*"
-    }
+  "require-dev": {
+    "doctrine/instantiator": "1.0.5",
+    "myclabs/deep-copy": "1.7.0",
+    "phpdocumentor/reflection-common": "1.0.1",
+    "phpdocumentor/reflection-docblock": "4.3.0",
+    "phpdocumentor/type-resolver": "0.4.0",
+    "phpspec/prophecy": "1.8.0"
+  },
+  "require": {
+    "phpmailer/phpmailer": "^6.0",
+    "patreon/patreon": "^0.3.1",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "vlucas/phpdotenv": "^3.5",
+    "palepurple/rate-limit": "^2.0",
+    "tedivm/stash": "^0.15.2"
+  }
 }

@@ -1,15 +1,16 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
+
 //Filter $_GET
 $deleteVerfId = filter_var($_GET['id'],FILTER_SANITIZE_STRING);
 $userId = filter_var($_GET['userId'],FILTER_SANITIZE_NUMBER_INT);
 
 //Delete account
-require $_SERVER['DOCUMENT_ROOT'].'/secure/mysql_pass.php';
-$conn = new PDO("mysql:host=$mySQLservername;dbname=$mySQLdatabase", $mySQLusername, $mySQLpassword);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 //Check if the verf id is correct
-$query = $conn->prepare('SELECT * FROM verfIds WHERE userId=:user');
-$query->bindParam('user',$userId,PDO::PARAM_STR);
+$query = $conn->prepare('SELECT * FROM verfIds WHERE userId=?');
+$query->bindParam('s', $userId);
 $query->execute();
 
 $result = $query->fetch();
@@ -20,8 +21,8 @@ if(strcmp($deleteVerfId,$result['deleteVerfId']) != 0){
 
 unset($query);
 //Delete verf id
-$query = $conn->prepare('DELETE FROM verfIds WHERE userId=:user');
-$query->bindParam('user',$userId,PDO::PARAM_STR);
+$query = $conn->prepare('DELETE FROM verfIds WHERE userId=?');
+$query->bindParam('s', $userId);
 $query->execute();
 
 //Delete account files
@@ -52,8 +53,8 @@ if(is_dir($accountDir)){
 
 //Delete account for database
 echo 'deleting from database';
-$query2 = $conn->prepare('DELETE FROM accounts WHERE userId=:user');
-$query2->bindParam('user',$userId,PDO::PARAM_STR);
+$query2 = $conn->prepare('DELETE FROM accounts WHERE userId=?');
+$query2->bindParam('s', $userId);
 $query2->execute();
 
 header('Location:/logout.php');

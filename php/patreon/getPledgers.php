@@ -5,8 +5,7 @@
  * Date: 02/03/2019
  * Time: 13:25
  */
-require_once '../../vendor/autoload.php';
-require_once '../../secure/patreon_key.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 
 //Get pledgers names
 $files = array(
@@ -16,7 +15,7 @@ $files = array(
 
 //Creating URL request
 
-$url = 'https://www.patreon.com/api/oauth2/api/current_user/campaigns?access_token='.$patreon_access_token;
+$url = 'https://www.patreon.com/api/oauth2/api/current_user/campaigns?access_token=' . getenv('PATREON_KEY');
 
 //Get response json
 $url_content = file_get_contents($url);

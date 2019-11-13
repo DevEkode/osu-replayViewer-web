@@ -25,8 +25,7 @@ function checkFileCharacters(file){
 }
 
 function onClick(form){
-  console.log(form.parentNode);
-  var file = document.getElementById("fileToUpload").files[0];
+  let file = document.getElementById("fileToUpload").files[0];
   if(checkFileSize(file) && checkFileCharacters(file)){
     form.parentNode.submit();
   }

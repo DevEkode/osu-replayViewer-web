@@ -13,7 +13,7 @@ EOF;
     echo <<<EOF
       Select skin to upload (or drag and drop): <br>
       <br>
-      <input type="file" name="fileToUpload" id="fileToUpload" oninput="onClick(this)"/> <br>
+      <input type="file" name="fileToUpload" id="fileToUpload" accept=".osk" oninput="onClick(this)"/> <br>
     </form>
 EOF;
     

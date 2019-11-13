@@ -27,7 +27,8 @@ $editProfileErrors = array(
   10 => "Your skin file name cannot contain special characters",
   11 => "Your skin file size is more than 50Mb",
   12 => "This skin doesn't exist",
-  13 => "Remove error"
+  13 => "Remove error",
+  14 => 'The server has received a null $_FILES'
 );
 
 $progressErrors = array(
@@ -42,7 +43,7 @@ $indexOfPages = array(
   '/progress.php' => $progressErrors
 );
 
-function showErrorModal($error){
+function showErrorModal($error,$errorMsg = null){
   date_default_timezone_set("Europe/Paris");
   $date = date('d/m/Y - H:i');
   $page = $_SERVER['PHP_SELF'];
@@ -55,6 +56,12 @@ function showErrorModal($error){
       <h3 id="errorModal">$error</h3><br>
       <span><b>date :</b> $date (UTC+2)</span><br>
       <span><b>page :</b> $page</span><br>
+EOF;
+
+  if($errorMsg != null){
+    echo "<span><b>reason :</b> $errorMsg</span><br>";
+  }
+  echo <<<EOF
       <button class="close-error" onclick="closeErrorModal();">Close</button>
     </div>
   </div>
@@ -66,7 +73,11 @@ function showError(){
   global $indexOfPages;
   $array = $indexOfPages[$_SERVER['PHP_SELF']];
   if(isset($_GET['error']) && !empty($array) && in_array($_GET['error'],array_keys($array))){
-    showErrorModal($array[$_GET['error']]);
+    if(isset($_GET['errorMsg'])){
+      showErrorModal($array[$_GET['error']],$_GET['errorMsg']);
+    }else{
+      showErrorModal($array[$_GET['error']]);
+    }
   }
 }
  ?>

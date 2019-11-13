@@ -58,6 +58,7 @@ function elem_replayLine_posted(array $replay_row)
 
     $beatmap_img = "https://b.ppy.sh/thumb/" . $replay_row['beatmapSetId'] . "l.jpg";
     $replay_link = 'http://' . $_SERVER['HTTP_HOST'] . '/view.php?id=' . $replay_row['replayId'];
+    $replayMd5 = $replay_row['md5'];
 
     $replayId = $replay_row['replayId'];
     $redirect = "posted";
@@ -71,8 +72,8 @@ function elem_replayLine_posted(array $replay_row)
                             <figure class="image is-4by2 container_check">
                                 <img src="$beatmap_img" alt="beatmap background">
                                 <div class="b-checkbox checkbox_card">
-                                    <input id="checkbox" class="styled" type="checkbox" onchange="onCheckboxUpdated(this,'$replayId')">
-                                    <label for="checkbox">
+                                    <input id="checkbox_$replayId" class="styled" type="checkbox" onchange="onCheckboxUpdated(this,'$replayId','$replayMd5')">
+                                    <label for="checkbox_$replayId">
                                     </label>
                                 </div>
                             </figure>

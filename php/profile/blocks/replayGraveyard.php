@@ -69,8 +69,8 @@ function elem_replayLine_graveyard(array $replay_row)
                             <figure class="image is-4by2 container_check">
                                 <img src="$beatmap_img" alt="beatmap background">
                                 <div class="b-checkbox checkbox_card">
-                                    <input id="checkbox" class="styled" type="checkbox" onchange="onCheckboxUpdated(this,'$replayId')">
-                                    <label for="checkbox">
+                                    <input id="checkbox_$replayId" class="styled" type="checkbox" onchange="onCheckboxUpdated(this,'$replayId')">
+                                    <label for="checkbox_$replayId">
                                     </label>
                                 </div>
                             </figure>

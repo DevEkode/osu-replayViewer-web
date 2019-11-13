@@ -13,8 +13,11 @@ $dotenv->load();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/index/UploadLimiter.php';
 UploadLimiter::getINSTANCE();
 
+//Load bugsnag
+$bugsnag = Bugsnag\Client::make(getenv('BUGSNAG_API_KEY'));
+
 //Debug config
-if (getenv('DEBUG_VERSION')) {
+if (getenv('DEBUG_VERSION') == 'true') {
     # Debug
     error_reporting(E_ALL); // Error engine - always TRUE!
     ini_set('ignore_repeated_errors', TRUE); // always TRUE
@@ -30,4 +33,8 @@ if (getenv('DEBUG_VERSION')) {
     ini_set('log_errors', TRUE); // Error logging engine
     ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . '/errors.log'); // Logging file path
     ini_set('log_errors_max_len', 1024); // Logging file size
+
+    $bugsnag->setReleaseStage('production');
+    Bugsnag\Handler::register($bugsnag);
 }
+

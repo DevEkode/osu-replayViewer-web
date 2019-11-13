@@ -1,14 +1,14 @@
 <?php
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require_once '../disableUploads.php';
-
 require '../osuApiFunctions.php';
-require_once '../../secure/osu_api_key.php';
-require '../../secure/mysql_pass.php';
 require '../websiteFunctions.php';
 
+$osuApiKey = getenv('OSU_KEY');
+
 // Create connection
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 // Check connection
 if ($conn->connect_error) {
@@ -64,7 +64,7 @@ function getIniKey($userId, $key)
 }
 
 //----- CORE ------
-require_once '../../secure/admins.php';
+require_once '../../php/admins.php';
 if (isset($_SESSION['userId']) && in_array($_SESSION['userId'], $admins)) {
     $disableUploads = false;
 }

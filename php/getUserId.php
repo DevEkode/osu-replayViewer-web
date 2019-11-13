@@ -1,8 +1,10 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 	//--Connect to osu API --
-	require_once '../secure/osu_api_key.php';
-	$apiKey = $osuApiKey;
 	require 'osuApiFunctions.php';
+
+$osuApiKey = getenv('OSU_KEY');
+$apiKey = $osuApiKey;
 
 	$q = $_REQUEST["q"];
 

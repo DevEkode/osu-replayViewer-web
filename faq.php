@@ -44,6 +44,21 @@
     <h1 id="title">FAQ</h1>
 
     <div class="question">
+        <h2 class="question_title">What is the "Graveyard" ?</h2>
+
+        <span class="question_text">
+            It's a place to store old replays.<br>
+            After 30 days, your replays will be automatically send to the graveyard.<br>
+            The video will be deleted and only the skin will remain on the server.<br>
+            <br>
+            At any time you can re-record this replay and have a new video.<br>
+            (Go to your profile settings > graveyard menu).<br>
+            <br>
+            This is a way to save space for others replays.
+        </span>
+    </div>
+
+    <div class="question">
       <h2 class="question_title">How long does it usually take until a Replay is uploaded?</h2>
 
       <span class="question_text">

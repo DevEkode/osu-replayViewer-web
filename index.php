@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'secure/uploadKey.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require 'php/errors.php';
 require 'php/navbar.php';
 ?>
@@ -34,7 +34,7 @@ require 'php/navbar.php';
     </script>
 
 
-    <title>osu!replayViewer - A online osu replay viewer</title>
+    <title>osu!replayViewer - An online osu replay viewer</title>
     <link rel="icon" type="image/png" href="images/icon.png"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
@@ -157,13 +157,20 @@ require 'php/navbar.php';
 
         <div id="replay_start">
             <?php
-            if ($_SESSION['replayStructure'] && $_SESSION['beatmapAvailable'] && $_SESSION['playerOsuAccount'] && $_SESSION['replayBelow10'] && $_SESSION['replayNotDuplicate'] && $_SESSION['replayNotWaiting']) {
+            require_once 'php/index/UploadLimiter.php';
+            $limiter = UploadLimiter::getINSTANCE();
+            $uploadRemaining = $limiter->getUploadsRemaining();
+            $limit = getenv("UPLOAD_LIMIT_PER_DAY");
+
+            echo "<div class='text-center'><span>Uploads remaining : $uploadRemaining / $limit</span></div><br>";
+
+            if ($uploadRemaining != 0 && $_SESSION['replayStructure'] && $_SESSION['beatmapAvailable'] && $_SESSION['playerOsuAccount'] && $_SESSION['replayBelow10'] && $_SESSION['replayNotDuplicate'] && $_SESSION['replayNotWaiting']) {
                 echo '<form class="align_center" method="post" enctype="multipart/form-data" action="php/index/upload.php">';
-                echo '<input id="checkBox" type="checkbox" name="checkbox"> <span id="checkboxText"> do not delete my replay after 30 days</span><br>';
+//                echo '<input id="checkBox" type="checkbox" name="checkbox"> <span id="checkboxText"> do not delete my replay after 30 days</span><br>';
                 echo '<input id="checkBox" type="checkbox" name="checkboxTU"> <span id="checkboxText"> I accept the <a href="legal/TU.php?TU=replay" target="_blank">terms of uses</a></span><br>';
                 echo '<input id="filename" name="filename" type="hidden" value=' . '"' . $_SESSION['filename'] . '"' . '>';
                 echo '<input id="duration" name="duration" type="hidden" value=' . '"' . $_SESSION['duration'] . '"' . '>';
-                echo '<input id="duration" name="keyHash" type="hidden" value=' . '"' . password_hash($upload_replay_key, PASSWORD_DEFAULT) . '"' . '>';
+                echo '<input id="duration" name="keyHash" type="hidden" value=' . '"' . password_hash(getenv('UPLOAD_REPLAY_KEY'), PASSWORD_DEFAULT) . '"' . '>';
                 echo '<input name="userId" type="hidden" value=' . '"' . $_SESSION['replay_playerId'] . '"' . '>';
                 echo '<input type="submit" value="Start processing" id="start_processing">';
                 echo '</form>';
@@ -338,7 +345,7 @@ if (isset($_SESSION['replayStructure'])) {
 <!-- Upload box -->
 <?php
 require_once 'php/disableUploads.php';
-require_once 'secure/admins.php';
+require_once 'php/admins.php';
 if (isset($_SESSION['userId']) && in_array($_SESSION['userId'], $admins)) {
     $disableUploads = false;
 }

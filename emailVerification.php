@@ -1,21 +1,18 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 // ******************** Variables **********************************
 //--Connect to osu API --
 require 'php/osuApiFunctions.php';
-require_once 'secure/osu_api_key.php';
+
+
+$osuApiKey = getenv('OSU_KEY');
+
 $apiKey = $osuApiKey;
-
-
-//-- Connect to mysql request database --
-require 'secure/mysql_pass.php';
-$servername = $mySQLservername;
-$username = $mySQLusername;
-$password = $mySQLpassword;
 
 
 // ******************** Connection **********************************
 // Create connection
-$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 // Check connection
 if ($conn->connect_error) {

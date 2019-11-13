@@ -10,7 +10,7 @@ session_start();
     'BFN' => "placeholder",
     'playerId' => 0,
     'currentStatut' => 0,
-    'date' => '26-11-2018',
+    'date' => '13-11-2019',
     'duration' => 0,
     'rank' => 1
   );
@@ -81,6 +81,11 @@ session_start();
 
     <!-- Timer -->
     <script>
+        function isDST(d) {
+            let jan = new Date(d.getFullYear(), 0, 1).getTimezoneOffset();
+            let jul = new Date(d.getFullYear(), 6, 1).getTimezoneOffset();
+            return Math.max(jan, jul) !== d.getTimezoneOffset();
+        }
       // Set the date we're counting down to
       var countDownDate = new Date(<?php echo "'".date_format($date, 'Y-m-d H:i:s')."'";?>).getTime();
 
@@ -91,7 +96,12 @@ session_start();
         var d = new Date();
         var utc = d.getTime() + (d.getTimezoneOffset() * 60000); //60000
 
-          var now = new Date(utc + (3600000 * 2));
+          let offset = 1;
+          if(isDST(d)){
+              offset = 2;
+          }
+
+          var now = new Date(utc + (3600000 * offset));
         // Find the distance between now an the count down date
         var distance = now - countDownDate;
 

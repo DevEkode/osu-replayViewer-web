@@ -13,9 +13,6 @@ $dotenv->load();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/php/index/UploadLimiter.php';
 UploadLimiter::getINSTANCE();
 
-//Load bugsnag
-$bugsnag = Bugsnag\Client::make(getenv('BUGSNAG_API_KEY'));
-
 //Debug config
 if (getenv('DEBUG_VERSION') == 'true') {
     # Debug
@@ -25,6 +22,11 @@ if (getenv('DEBUG_VERSION') == 'true') {
     ini_set('log_errors', TRUE); // Error logging engine
     ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . '/errors.log'); // Logging file path
     ini_set('log_errors_max_len', 1024); // Logging file size
+
+    Sentry\init([
+        'dsn' => getenv('SENTRY_URL'),
+        'release' => 'debug'
+    ]);
 } else {
     # Production
     error_reporting(E_ALL); // Error engine - always TRUE!
@@ -34,7 +36,9 @@ if (getenv('DEBUG_VERSION') == 'true') {
     ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . '/errors.log'); // Logging file path
     ini_set('log_errors_max_len', 1024); // Logging file size
 
-    $bugsnag->setReleaseStage('production');
-    Bugsnag\Handler::register($bugsnag);
+    Sentry\init([
+        'dsn' => getenv('SENTRY_URL'),
+        'release' => 'production'
+    ]);
 }
 

@@ -44,13 +44,12 @@ function disableProcessing(){
 }
 
 function clearSession(){
-  var file = '<%= Session["filename"] %>';
-  console.log(file);
   $.ajax({
      url: './php/index/clearSession.php',
      dataType: 'json',
-     async:false,
+      async: true,
      success: function(data){
+         console.log('success');
           //data returned from php
      }
   });

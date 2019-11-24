@@ -39,7 +39,10 @@ require 'php/navbar.php';
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
     <!-- libraries -->
-    <script src="lib/jquery/jquery.min.js"></script> <!-- jQuery -->
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
     <script src="lib/bootstrap/bootstrap.bundle.min.js"></script> <!-- Bootstrap -->
     <link rel="stylesheet" type="text/css" href="lib/bootstrap/bootstrap.css">
 
@@ -166,7 +169,6 @@ require 'php/navbar.php';
 
             if ($uploadRemaining != 0 && $_SESSION['replayStructure'] && $_SESSION['beatmapAvailable'] && $_SESSION['playerOsuAccount'] && $_SESSION['replayBelow10'] && $_SESSION['replayNotDuplicate'] && $_SESSION['replayNotWaiting']) {
                 echo '<form class="align_center" method="post" enctype="multipart/form-data" action="php/index/upload.php">';
-//                echo '<input id="checkBox" type="checkbox" name="checkbox"> <span id="checkboxText"> do not delete my replay after 30 days</span><br>';
                 echo '<input id="checkBox" type="checkbox" name="checkboxTU"> <span id="checkboxText"> I accept the <a href="legal/TU.php?TU=replay" target="_blank">terms of uses</a></span><br>';
                 echo '<input id="filename" name="filename" type="hidden" value=' . '"' . $_SESSION['filename'] . '"' . '>';
                 echo '<input id="duration" name="duration" type="hidden" value=' . '"' . $_SESSION['duration'] . '"' . '>';

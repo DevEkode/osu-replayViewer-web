@@ -18,5 +18,5 @@ googlef02d221e2c7a486e.html
 .idea
 vendor/
 node_modules/
-.env
+.env.test
 errors.log

@@ -105,6 +105,11 @@ $twitterURL = '"' . "https://twitter.com/intent/tweet?text=" . $twitterText . '"
 $facebookURL = '"' . "https://www.facebook.com/plugins/share_button.php?href=" . urlencode('http://osureplayviewer.xyz/view.php?id=' . $_GET['id']) . "&layout=button&size=large&mobile_iframe=true&width=91&height=28&appId" . '"';
 
 $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osureplayviewer.xyz/view.php?id=' . $_GET['id']) . '"';
+
+//Get expiration date
+$publishedDate = new DateTime($replayDATA['date']);
+$expirationDate = $publishedDate->modify('+30 day');
+
 ?>
 
 <!DOCTYPE html>
@@ -160,6 +165,49 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
 
 <body>
 <script src="https://cdn.plyr.io/3.5.4/plyr.js"></script>
+<!-- Timer -->
+<script>
+    function isDST(d) {
+        let jan = new Date(d.getFullYear(), 0, 1).getTimezoneOffset();
+        let jul = new Date(d.getFullYear(), 6, 1).getTimezoneOffset();
+        return Math.max(jan, jul) !== d.getTimezoneOffset();
+    }
+
+    // Set the date we're counting down to
+    var countDownDate = new Date(<?php echo "'" . date_format($expirationDate, 'Y-m-d H:i:s') . "'";?>).getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+        // Get todays date and time
+        var d = new Date();
+        var utc = d.getTime() + (d.getTimezoneOffset() * 60000); //60000
+        let offset = 1;
+        if (isDST(d)) {
+            offset = 2;
+        }
+
+        var now = new Date(utc + (3600000 * offset));
+        // Find the distance between now an the count down date
+        var distance = now - countDownDate;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("timer").innerHTML = "less than 1sec";
+        }
+    }, 1000);
+</script>
 
 <div class="loaderCustom"></div>
 <!-- Modal -->
@@ -269,6 +317,11 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
         <a class="reddit-share-button" target="_blank"
            href=<?php echo $redditURL; ?>>
             <img src="images/reddit_icon.png"/></a>
+    </div>
+    <br>
+    <span id="section_title">Time remaining</span><br>
+    <div id="share_section">
+        <span id="timer">Share</span><br>
     </div>
     <br>
 

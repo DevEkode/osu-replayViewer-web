@@ -10,8 +10,6 @@
   "require": {
     "phpmailer/phpmailer": "^6.0",
     "patreon/patreon": "^0.3.1",
-    "ext-curl": "*",
-    "ext-json": "*",
     "vlucas/phpdotenv": "^3.5",
     "palepurple/rate-limit": "^2.0",
     "tedivm/stash": "^0.15.2",

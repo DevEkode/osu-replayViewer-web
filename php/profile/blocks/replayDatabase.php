@@ -4,17 +4,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/MysqlAgent.php';
 
 function block_replayDatabase()
 {
-    echo <<<EOF
-    <div class="columns is-desktop is-multiline" id="multi_card_buttons">
-                <div class="column is-12">
-                    <div class="buttons has-addons">
-                        <span onclick="openMultipleModalGraveyardReplay('profile')" class="button is-outlined" disabled>⚰️Send to graveyard</span>
-                        <span onclick="openMultipleModalDeleteReplay('profile')" class="button is-outlined" disabled>🗑️ Delete</span>
-                    </div>
-                </div>
-EOF;
-
-
     $user_id = filter_var($_SESSION["userId"], FILTER_VALIDATE_INT);
 
     //Get every replays (not compressed) of this user from the database
@@ -26,8 +15,23 @@ EOF;
     $stmt->execute();
 
     $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        echo elem_replayLine_posted($row);
+
+    if ($result->num_rows > 0) {
+        echo <<<EOF
+    <div class="columns is-desktop is-multiline" id="multi_card_buttons">
+                <div class="column is-12">
+                    <div class="buttons has-addons">
+                        <span onclick="openMultipleModalGraveyardReplay('profile')" class="button is-outlined" disabled>⚰️Send to graveyard</span>
+                        <span onclick="openMultipleModalDeleteReplay('profile')" class="button is-outlined" disabled>🗑️ Delete</span>
+                    </div>
+                </div>
+EOF;
+
+        while ($row = $result->fetch_assoc()) {
+            echo elem_replayLine_posted($row);
+        }
+    } else {
+        echo '<span>No replays in database</span>';
     }
     echo '</div>';
 }

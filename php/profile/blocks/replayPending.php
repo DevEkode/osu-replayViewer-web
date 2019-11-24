@@ -4,16 +4,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/php/MysqlAgent.php';
 
 function block_replayPending()
 {
-    echo <<<EOF
-    <div class="columns is-desktop is-multiline" id="multi_card_buttons">
-                <div class="column is-12">
-                    <div class="buttons has-addons">
-                        <span onclick="openMultipleModalPendingReplay('profile')" class="button is-outlined" disabled>❌ Cancel</span>
-                    </div>
-                </div>
-EOF;
-
-
     $user_id = filter_var($_SESSION["userId"], FILTER_VALIDATE_INT);
 
     //Get every replays (not compressed) of this user from the database
@@ -25,9 +15,25 @@ EOF;
     $stmt->execute();
 
     $result = $stmt->get_result();
-    while ($row = $result->fetch_assoc()) {
-        echo elem_replayLine_pending($row);
+
+    if ($result->num_rows > 0) {
+        echo <<<EOF
+    <div class="columns is-desktop is-multiline" id="multi_card_buttons">
+                <div class="column is-12">
+                    <div class="buttons has-addons">
+                        <span onclick="openMultipleModalPendingReplay('profile')" class="button is-outlined" disabled>❌ Cancel</span>
+                    </div>
+                </div>
+EOF;
+
+
+        while ($row = $result->fetch_assoc()) {
+            echo elem_replayLine_pending($row);
+        }
+    } else {
+        echo '<span>No pending replay</span>';
     }
+
     echo '</div>';
 }
 

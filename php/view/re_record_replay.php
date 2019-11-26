@@ -1,12 +1,13 @@
 <?php
 session_start();
-require '../../secure/mysql_pass.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require '../osuApiFunctions.php';
-require '../../secure/osu_api_key.php';
 require 'functions.php';
 require '../ftp_agent.class.php';
 
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+$osuApiKey = getenv('OSU_KEY');
+
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));;
 
 // Check connection
 if ($conn->connect_error) {
@@ -18,6 +19,7 @@ if ($conn->connect_error) {
 if(!isset($_POST['replayId'])){
   header('Location:../../index.php');
 }
+
 
 
 //Check if the correct user delete the replay
@@ -77,7 +79,6 @@ rename($replay_dir,$new_dir);
 $query = $conn->prepare("INSERT INTO requestlist (replayId,beatmapId,beatmapSetId,OFN,BFN,duration,playerId,md5,playMod,binaryMods,persistance) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 $query->bind_param("siissiisiii",$replayDATA['replayId'],$replayDATA['beatmapId'],$replayDATA['beatmapSetId'],$replayDATA['OFN'],$replayDATA['BFN'],$replayDuration,$replayDATA['userId'],$replayDATA['md5'],$replayDATA['playMod'],$replayDATA['binaryMods'],$replayDATA['permanent']);
 $query->execute();
-var_dump($query);
 $query->close();
 
 //--Delete the row in replaylist table
@@ -92,6 +93,17 @@ if($ftp->dirExists($_POST['replayId'])){
 }
 
 //--Redirect on the waiting page
-header("Location:../../progress.php?id=".$_POST['replayId']);
+if (isset($_POST['redirectTo'])) {
+    switch ($_POST['redirectTo']) {
+        case 'profile':
+            header("Location:/editProfile.php?block=graveyard");
+            break;
+        default :
+            header("Location:../../progress.php?id=" . $_POST['replayId']);
+    }
+} else {
+    header("Location:../../progress.php?id=" . $_POST['replayId']);
+}
+
 
 ?>

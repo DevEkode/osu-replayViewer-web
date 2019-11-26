@@ -10,9 +10,24 @@ require_once 'blocks/changePassword.php';
 require_once 'blocks/changeEmail.php';
 require_once 'blocks/removeAccount.php';
 require_once 'blocks/volumeChooser.php';
+require_once 'blocks/replayDatabase.php';
+require_once 'blocks/replayPending.php';
+require_once 'blocks/replayGraveyard.php';
 
 function generateBlocks(){
     switch($_GET['block']){
+        case 'posted':
+            block_replayDatabase();
+            echo '<br>';
+            break;
+        case 'pending':
+            block_replayPending();
+            echo '<br>';
+            break;
+        case 'graveyard':
+            block_replayGraveyard();
+            echo '<br>';
+            break;
         case 'skin':
             block_skinChooser(); echo '<br>';
             block_skinUploader(); echo '<br>';
@@ -35,6 +50,29 @@ function generateBlocks(){
 function generateMenu(){
     echo <<<EOF
           <aside class="menu">
+            <p class="menu-label" id="itemLabel">Replay database</p>
+            <ul class="menu-list">
+EOF;
+    //Replay database
+    if ($_GET['block'] == 'posted') {
+        echo '<li><a href="#" class="is-active">📡 Posted replays</a></li>';
+    } else {
+        echo '<li><a href="editProfile.php?block=posted">📡 Posted replays</a></li>';
+    }
+    //Replay database
+    if ($_GET['block'] == 'pending') {
+        echo '<li><a href="#" class="is-active">⏲️ Pending replays</a></li>';
+    } else {
+        echo '<li><a href="editProfile.php?block=pending">⏲️ Pending replays</a></li>';
+    }
+    //Replay graveyard
+    if ($_GET['block'] == 'graveyard') {
+        echo '<li><a href="#" class="is-active">⚰️ Graveyard</a></li>';
+    } else {
+        echo '<li><a href="editProfile.php?block=graveyard">⚰️ Graveyard</a></li>';
+    }
+    echo <<<EOF
+          </ul>
             <p class="menu-label" id="itemLabel">Replay customisation</p>
             <ul class="menu-list">
 EOF;
@@ -53,7 +91,7 @@ EOF;
     }
     
     echo <<<EOF
-    </ul>
+    
             <p class="menu-label" id="itemLabel">Account</p>
             <ul class="menu-list">
 EOF;

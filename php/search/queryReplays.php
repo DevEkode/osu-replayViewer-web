@@ -1,11 +1,13 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 include '../osuApiFunctions.php';
-require '../../secure/mysql_pass.php';
-require '../../secure/osu_api_key.php';
+
+
+$osuApiKey = getenv('OSU_KEY');
 
 $blockPerPages = 5;
 // Create connection
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 // Check connection
 if ($conn->connect_error) {

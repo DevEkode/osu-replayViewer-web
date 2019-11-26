@@ -1,23 +1,5 @@
 <?php
-//-- Connect to mysql request database --
-require '../secure/mysql_pass.php';
-$servername = $mySQLservername;
-$username = $mySQLusername;
-$password = $mySQLpassword;
-
-//Time limit in days
-$timeLimit = 1;
-
-// ******************** Connection **********************************
-// Create connection
-$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
-//$conn = new PDO('mysql:host=mysql.hostinger.fr;dbname=u611457272_osu','u611457272_code','123');
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-	exit;
-}
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 
 function getRemovableAccounts($conn,$timeLimit){
   $array = array();
@@ -57,17 +39,5 @@ function removeFolder($dir){
 	cleanFolder($dir);
 	//delete folder
 	rmdir($dir);
-}
-
-echo "==== Deleting account with register time expired ===";
-
-$accountsToRemove = getRemovableAccounts($conn,$timeLimit);
-if(!empty($accountsToRemove)){
-  foreach($accountsToRemove as $userId){
-    deleteAccount($conn,$userId);
-    echo 'Deleted account with id '.$userId.' <br>';
-  }
-}else{
-  echo 'No account to delete';
 }
  ?>

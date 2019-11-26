@@ -100,7 +100,7 @@ function listAllSkins($userId){
 
 /*Check skin content*/
 function isSkinValid($folder_dir){
-  $valide = true;
+  $reason = null;
   $ignore_dir = array(
       ".",
       "..",
@@ -125,9 +125,9 @@ function isSkinValid($folder_dir){
 
   //Check ini file
   if(!file_exists($folder_dir."/skin.ini")){
-    $valide = false;
+    $reason = "skin.ini doesn't exists";
   }
-  return $valide;
+  return $reason;
 }
 
  ?>

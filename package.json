@@ -1,0 +1,30 @@
+{
+  "name": "osu-replayviewer-web",
+  "version": "1.0.0",
+  "description": "Easy to use website. Just upload your .osr, wait for processing and share it to your friends",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DevEkode/osu-replayViewer-web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DevEkode/osu-replayViewer-web/issues"
+  },
+  "homepage": "https://github.com/DevEkode/osu-replayViewer-web#readme",
+  "dependencies": {
+    "bulma": "^0.7.5",
+    "bulma-tooltip": "^2.0.2",
+    "cool-checkboxes-for-bulma.io": "^1.1.0"
+  },
+  "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.10.2"
+  }
+}

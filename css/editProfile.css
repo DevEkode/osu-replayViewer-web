@@ -14,7 +14,7 @@ body {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 100; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -249,3 +249,36 @@ input[type=checkBox]{
 .passForm .button{
   width:20%;
 }
+
+/* card formating */
+.card_title {
+    font-size: 1rem !important;
+}
+
+.grow:hover {
+    -webkit-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+}
+
+.container_check {
+    position: relative;
+}
+
+.checkbox_card {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    text-align: start;
+    transform-origin: top right;
+    transform: scale(2) translateX(-2%);
+}
+
+.progress_card {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 0 !important;
+    color: black;
+}
+

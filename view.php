@@ -2,12 +2,13 @@
 header("Access-Control-Allow-Origin: *");
 
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require 'php/view/functions.php';
 require 'php/osuApiFunctions.php';
-require 'secure/osu_api_key.php';
-require 'secure/mysql_pass.php';
-require 'secure/admins.php';
+require 'php/admins.php';
 require 'php/navbar.php';
+
+$osuApiKey = getenv('OSU_KEY');
 
 function URL_exists($url)
 {
@@ -23,7 +24,7 @@ function URLS_exists(array $urls)
     return true;
 }
 
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 $server = "https://peertube.osureplayviewer.xyz/client/assets/replayList/";
 
 // Check connection
@@ -41,6 +42,9 @@ $beatmapURL = "https://osu.ppy.sh/beatmapsets/" . $replayDATA['beatmapSetId'];
 if (empty($replayDATA)) {
     header("Location:index.php");
 }
+
+//Check if the replay is graveyarded
+$isGraveyarded = (bool)$replayDATA['compressed'];
 
 //Check if the user is logged
 if (isset($_SESSION['userId']) && isset($_SESSION['username'])) {
@@ -101,6 +105,11 @@ $twitterURL = '"' . "https://twitter.com/intent/tweet?text=" . $twitterText . '"
 $facebookURL = '"' . "https://www.facebook.com/plugins/share_button.php?href=" . urlencode('http://osureplayviewer.xyz/view.php?id=' . $_GET['id']) . "&layout=button&size=large&mobile_iframe=true&width=91&height=28&appId" . '"';
 
 $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osureplayviewer.xyz/view.php?id=' . $_GET['id']) . '"';
+
+//Get expiration date
+$publishedDate = new DateTime($replayDATA['date']);
+$expirationDate = $publishedDate->modify('+30 day');
+
 ?>
 
 <!DOCTYPE html>
@@ -156,6 +165,49 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
 
 <body>
 <script src="https://cdn.plyr.io/3.5.4/plyr.js"></script>
+<!-- Timer -->
+<script>
+    function isDST(d) {
+        let jan = new Date(d.getFullYear(), 0, 1).getTimezoneOffset();
+        let jul = new Date(d.getFullYear(), 6, 1).getTimezoneOffset();
+        return Math.max(jan, jul) !== d.getTimezoneOffset();
+    }
+
+    // Set the date we're counting down to
+    var countDownDate = new Date(<?php echo "'" . date_format($expirationDate, 'Y-m-d H:i:s') . "'";?>).getTime();
+
+    // Update the count down every 1 second
+    var x = setInterval(function () {
+
+        // Get todays date and time
+        var d = new Date();
+        var utc = d.getTime() + (d.getTimezoneOffset() * 60000); //60000
+        let offset = 1;
+        if (isDST(d)) {
+            offset = 2;
+        }
+
+        var now = new Date(utc + (3600000 * offset));
+        // Find the distance between now an the count down date
+        var distance = now - countDownDate;
+
+        // Time calculations for days, hours, minutes and seconds
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the result in the element with id="demo"
+        document.getElementById("timer").innerHTML = days + "d " + hours + "h "
+            + minutes + "m " + seconds + "s ";
+
+        // If the count down is finished, write some text
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("timer").innerHTML = "less than 1sec";
+        }
+    }, 1000);
+</script>
 
 <div class="loaderCustom"></div>
 <!-- Modal -->
@@ -163,7 +215,7 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
     <div class="modal-content">
         <h2>Do you really want to delete this replay ?</h2>
         <h4>The replay link will no longer work after this</h4>
-        <form action="php/view/deleteReplay.php" method="post">
+        <form action="php/view/deleteReplay.php" method="get">
             <input type="submit" id="button_yes" value="Yes please !"/>
             <input type="hidden" name="replayId" value=<?php echo '"' . $replayDATA['replayId'] . '"' ?>/>
         </form>
@@ -192,19 +244,24 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
 <div class="first_block">
     <div class="player_container">
         <?php
-        if (empty($replayDATA['youtubeId'])) {
-            echo "<video id=\"player\" poster='$thumbUrl' controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline controls>";
-            if ($multiple_res) {
-                echo "<source src=$urlsRaw[0] type='video/mp4' size='720'>";
-                echo "<source src=$urlsRaw[1] type='video/mp4' size='480'>";
+        if (!$isGraveyarded) {
+            if (empty($replayDATA['youtubeId'])) {
+                echo "<video id=\"player\" poster='$thumbUrl' controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline controls>";
+                if ($multiple_res) {
+                    echo "<source src=$urlsRaw[0] type='video/mp4' size='720'>";
+                    echo "<source src=$urlsRaw[1] type='video/mp4' size='480'>";
+                } else {
+                    echo "<source src=$urlRaw  type='video/mp4'>";
+                }
+                echo '</video>';
             } else {
-                echo "<source src=$urlRaw  type='video/mp4'>";
+                echo '<div class="plyr__video-embed" id="player">';
+                echo '<iframe sandbox="allow-same-origin allow-scripts" src=' . '"' . 'https://peertube.osureplayviewer.xyz/videos/embed/' . $replayDATA['youtubeId'] . '"' . ' frameborder="0" allowfullscreen></iframe>';
+                echo '</div>';
             }
-            echo '</video>';
         } else {
-            echo '<div class="plyr__video-embed" id="player">';
-            echo '<iframe sandbox="allow-same-origin allow-scripts" src=' . '"' . 'https://peertube.osureplayviewer.xyz/videos/embed/' . $replayDATA['youtubeId'] . '"' . ' frameborder="0" allowfullscreen></iframe>';
-            echo '</div>';
+            echo "<h3 class='align_center'>This content has been send to the graveyard, ask the author to re-record this replay</h3>";
+            echo "<h4 class='align_center' style='color:gray'>You can still download the original replay and view the beatmap page</h4>";
         }
         ?>
         <script>const player = new Plyr('#player');</script>
@@ -260,6 +317,11 @@ $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osure
         <a class="reddit-share-button" target="_blank"
            href=<?php echo $redditURL; ?>>
             <img src="images/reddit_icon.png"/></a>
+    </div>
+    <br>
+    <span id="section_title">Time remaining</span><br>
+    <div id="share_section">
+        <span id="timer">Share</span><br>
     </div>
     <br>
 

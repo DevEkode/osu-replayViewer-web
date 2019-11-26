@@ -21,7 +21,7 @@ Easy to use website. Just upload your .osr, wait for processing and share it to 
 
 ## Authors
 
-* **codevirtuel** - *Creator of osu!replayViewer* - [osu!profile](https://osu.ppy.sh/users/3481725) - [Github](https://github.com/codevirtuel)
+* **Ekode** - *Creator of osu!replayViewer* - [osu!profile](https://osu.ppy.sh/users/3481725) - [Github](https://github.com/codevirtuel)
 
 ## License
 

@@ -1,25 +1,22 @@
 <?php
 session_start();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 require 'php/navbar.php';
 // ******************** Variables **********************************
 //--Connect to osu API --
 require 'php/osuApiFunctions.php';
-require_once 'secure/osu_api_key.php';
+
+
+$osuApiKey = getenv('OSU_KEY');
 $apiKey = $osuApiKey;
 
-
-//-- Connect to mysql request database --
-require 'secure/mysql_pass.php';
-$servername = $mySQLservername;
-$username = $mySQLusername;
-$password = $mySQLpassword;
 
 $imageOK = "images/ok.png";
 $imageNOK = "images/cross.png";
 $timeToVerif = 1; //day
 // ******************** Connection **********************************
 // Create connection
-$conn = new mysqli($servername, $username, $password, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 // Check connection
 if ($conn->connect_error) {

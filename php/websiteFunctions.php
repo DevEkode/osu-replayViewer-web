@@ -1,8 +1,8 @@
 <?php
-//mySQL
-require '../../secure/mysql_pass.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
+
 //connect to mysql database
-$conn = new mysqli($mySQLservername, $mySQLusername, $mySQLpassword, $mySQLdatabase);
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv("MYSQL_PASS"), getenv('MYSQL_DB'));
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);

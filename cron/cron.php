@@ -28,9 +28,9 @@ if ((!$conn_id) || (!$login_result)) {
 }
 
 if (ftp_chdir($conn_id, getenv('FTP_DIR'))) {
-    echo "Current directory is now: " . ftp_pwd($conn_id) . "\n";
+    echo "Current directory is now: " . ftp_pwd($conn_id) . "<br>";
 } else {
-    echo "Couldn't change directory\n";
+    echo "Couldn't change directory<br>";
 }
 
 // --- Functions
@@ -88,7 +88,7 @@ function cleanReplayFolder($conn, $conn_id)
     }
 }
 
-echo "==== Deleting account with register time expired ====\n";
+echo "==== Deleting account with register time expired ====<br>";
 
 $accountsToRemove = getRemovableAccounts($conn,$timeLimit);
 if(!empty($accountsToRemove)){
@@ -100,15 +100,16 @@ if(!empty($accountsToRemove)){
     echo 'No account to delete';
 }
 
-echo "==== Deleting replays expired  ====\n";
+echo "==== Deleting replays expired  ====<br>";
 
 $compressor = new ReplayCompressor();
 $compressor->compressExpiredReplays();
+$compressor->removeVideos();
 
-echo "==== Clean database ====\n";
+echo "==== Clean database ====<br>";
 
-echo "==== Clean filesystem ====\n";
+echo "==== Clean filesystem ====<br>";
 cleanRequestFolder($conn);
-cleanReplayFolder($conn, $conn_id);
+//cleanReplayFolder($conn, $conn_id);
 
 

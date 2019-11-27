@@ -10,7 +10,7 @@ $timeLimit = 1;
 
 // ******************** Connection **********************************
 // Create connection
-$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_HOST'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
+$conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
 
 // Check connection
 if ($conn->connect_error) {

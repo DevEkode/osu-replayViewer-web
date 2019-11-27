@@ -62,10 +62,10 @@ function cleanRequestFolder($conn)
         array_push($array, $replayId);
     }
 
-    $folders = scandir("./requestList/");
+    $folders = scandir("../requestList/");
     foreach ($folders as $folder) {
         if (!in_array($folder, $array) && $folder != "." && $folder != "..") {
-            removeFolder("./requestList/" . $folder);
+            removeFolder("../requestList/" . $folder);
         }
     }
 }
@@ -88,7 +88,7 @@ function cleanReplayFolder($conn, $conn_id)
     }
 }
 
-echo "==== Deleting account with register time expired ====";
+echo "==== Deleting account with register time expired ====\n";
 
 $accountsToRemove = getRemovableAccounts($conn,$timeLimit);
 if(!empty($accountsToRemove)){
@@ -100,14 +100,14 @@ if(!empty($accountsToRemove)){
     echo 'No account to delete';
 }
 
-echo "==== Deleting replays expired  ====";
+echo "==== Deleting replays expired  ====\n";
 
 $compressor = new ReplayCompressor();
 $compressor->compressExpiredReplays();
 
-echo "==== Clean database ====";
+echo "==== Clean database ====\n";
 
-echo "==== Clean filesystem ====";
+echo "==== Clean filesystem ====\n";
 cleanRequestFolder($conn);
 cleanReplayFolder($conn, $conn_id);
 

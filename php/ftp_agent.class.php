@@ -103,7 +103,7 @@ class ftp_agent{
 
   public function listFiles($fileDir)
   {
-    return ftp_mlsd($this->conn, $fileDir);
+      return ftp_nlist($this->conn, $fileDir);
   }
 
 }

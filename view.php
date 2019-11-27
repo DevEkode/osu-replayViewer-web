@@ -186,7 +186,7 @@ $expirationDate = date('Y-m-d H:i:s', strtotime($replayDATA['date'] . '+30 days'
             offset = 2;
         }
 
-        var now = new Date(utc + (3600000 * offset));²
+        var now = new Date(utc + (3600000 * offset));
         // Find the distance between now an the count down date
         var distance = countDownDate - now;
 

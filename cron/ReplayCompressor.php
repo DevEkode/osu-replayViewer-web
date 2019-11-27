@@ -70,6 +70,17 @@ class ReplayCompressor
         $this->setCompressedStatus($replayId, true);
     }
 
+    /**
+     * Compress an array of replays
+     * @param array $replays
+     */
+    public function compressReplays(array $replays)
+    {
+        foreach ($replays as $replay) {
+            $this->compressReplay($replay);
+        }
+    }
+
     public function compressExpiredReplays()
     {
         $replays = $this->getExpiredReplays();

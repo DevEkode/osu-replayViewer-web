@@ -25,9 +25,8 @@ if ($json_get == null) {
 
 //Engage replay compression
 $compressor = new ReplayCompressor();
-foreach ($replays as $replay) {
-    $compressor->compressReplay($replayId);
-}
+$compressor->compressReplays($replays);
+
 
 //Redirect user to index or requested page
 if (isset($_GET['redirect'])) {

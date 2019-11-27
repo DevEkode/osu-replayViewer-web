@@ -34,24 +34,6 @@ if (ftp_chdir($conn_id, getenv('FTP_DIR'))) {
 }
 
 // --- Functions
-function cleanFolder($dir)
-{
-    //delete all folder files
-    $files = glob($dir . "/*"); // get all file names
-    foreach ($files as $file) { // iterate files
-        if (is_file($file)) {
-            unlink($file); // delete file
-        }
-    }
-}
-
-function removeFolder($dir)
-{
-    cleanFolder($dir);
-    //delete folder
-    rmdir($dir);
-}
-
 function cleanRemoteFolder($dir, $conn_id)
 {
     //delete all folder files

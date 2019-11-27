@@ -43,6 +43,23 @@ class ReplayCompressor
         return $replay_array;
     }
 
+    private function getCompressedReplays(): array
+    {
+        $replay_array = array();
+
+        //Select every replay older than $life_days and not already compressed
+        $stmt = $this->mysql_conn->prepare("SELECT * FROM replaylist WHERE compressed IS TRUE");
+        $stmt->execute();
+
+        //Get results
+        $result = $stmt->get_result();
+        while ($row = $result->fetch_assoc()) {
+            array_push($replay_array, $row['replayId']);
+        }
+
+        return $replay_array;
+    }
+
     private function setCompressedStatus(String $replayId, bool $compressed)
     {
         //Set this replay as "compressed" (or not) in the database
@@ -63,6 +80,7 @@ class ReplayCompressor
         foreach ($files as $file) {
             if (preg_match('/\.mp4$/i', $file['name'])) {
                 $this->ftp_conn->removeFile($replayId . '/' . $file['name']);
+                sleep(0.02);
             }
         }
 
@@ -86,6 +104,32 @@ class ReplayCompressor
         $replays = $this->getExpiredReplays();
         foreach ($replays as $replay) {
             $this->compressReplay($replay);
+        }
+    }
+
+    private function hasVideo($replayId)
+    {
+        $files = $this->ftp_conn->listFiles($replayId);
+
+        foreach ($files as $file) {
+            if (preg_match('/\.mp4$/i', $file)) {
+                return $replayId . '/' . $file;
+            }
+        }
+    }
+
+    public function removeVideos()
+    {
+        $compressedReplays = $this->getCompressedReplays();
+        foreach ($compressedReplays as $replay) {
+            $video = $this->hasVideo($replay);
+            if (!empty($video)) {
+                var_dump($video);
+                echo "Deleting videos from replayId : " . $replay . "<br>";
+                $this->ftp_conn->removeFile($video);
+                sleep(0.02);
+            }
+
         }
     }
 }

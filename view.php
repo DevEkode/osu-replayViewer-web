@@ -107,8 +107,7 @@ $facebookURL = '"' . "https://www.facebook.com/plugins/share_button.php?href=" .
 $redditURL = '"' . "http://www.reddit.com/submit?url=" . urlencode('http://osureplayviewer.xyz/view.php?id=' . $_GET['id']) . '"';
 
 //Get expiration date
-$publishedDate = new DateTime($replayDATA['date']);
-$expirationDate = $publishedDate->modify('+30 day');
+$expirationDate = date('Y-m-d H:i:s', strtotime($replayDATA['date'] . '+30 days'));
 
 ?>
 
@@ -174,7 +173,7 @@ $expirationDate = $publishedDate->modify('+30 day');
     }
 
     // Set the date we're counting down to
-    var countDownDate = new Date(<?php echo "'" . date_format($expirationDate, 'Y-m-d H:i:s') . "'";?>).getTime();
+    var countDownDate = new Date(<?php echo "'" . $expirationDate . "'";?>).getTime();
 
     // Update the count down every 1 second
     var x = setInterval(function () {
@@ -189,7 +188,7 @@ $expirationDate = $publishedDate->modify('+30 day');
 
         var now = new Date(utc + (3600000 * offset));
         // Find the distance between now an the count down date
-        var distance = now - countDownDate;
+        var distance = countDownDate - now;
 
         // Time calculations for days, hours, minutes and seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));

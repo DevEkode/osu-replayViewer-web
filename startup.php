@@ -23,10 +23,6 @@ if (getenv('DEBUG_VERSION') == 'true') {
     ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . '/errors.log'); // Logging file path
     ini_set('log_errors_max_len', 1024); // Logging file size
 
-    Sentry\init([
-        'dsn' => getenv('SENTRY_URL'),
-        'release' => 'debug'
-    ]);
 } else {
     # Production
     error_reporting(E_ALL); // Error engine - always TRUE!
@@ -36,9 +32,11 @@ if (getenv('DEBUG_VERSION') == 'true') {
     ini_set('error_log', $_SERVER['DOCUMENT_ROOT'] . '/errors.log'); // Logging file path
     ini_set('log_errors_max_len', 1024); // Logging file size
 
-    Sentry\init([
-        'dsn' => getenv('SENTRY_URL'),
-        'release' => 'production'
-    ]);
-}
+    //Sentry.io
+    $client = new Raven_Client('https://3abd86198c1f4fbe8be591e1c84c9fe6@sentry.io/1832416');
 
+    $error_handler = new Raven_ErrorHandler($client);
+    $error_handler->registerExceptionHandler();
+    $error_handler->registerErrorHandler();
+    $error_handler->registerShutdownFunction();
+}

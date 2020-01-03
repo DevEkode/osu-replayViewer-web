@@ -17,7 +17,7 @@ class ftp_agent{
     $this->conn = new \phpseclib\Net\SFTP(getenv('FTP_HOST'));
 
     $login_result = $this->conn->login(getenv('FTP_USER'), getenv('FTP_PASS'));
-
+    $this->conn->chdir($this->root_dir);
     // Vérification de la connexion
     if ((!$this->conn) || (!$login_result)) {
       return false;
@@ -95,7 +95,6 @@ class ftp_agent{
   }
 
   public function downloadFile($fileDir,$newDir){
-    var_dump($fileDir,$newDir);
     $result = $this->conn->get($fileDir, $newDir);
     if($result) {return true;}
     else {return false;}

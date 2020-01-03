@@ -25,7 +25,7 @@ function URLS_exists(array $urls)
 }
 
 $conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PASS'), getenv('MYSQL_DB'));
-$server = "https://peertube.osureplayviewer.xyz/client/assets/replayList/";
+$server = "https://storage.osureplayviewer.xyz/";
 
 // Check connection
 if ($conn->connect_error) {
@@ -134,15 +134,12 @@ $expirationDate = date('Y-m-d H:i:s', strtotime($replayDATA['date'] . '+30 days'
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-134700452-1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-
+        function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
         gtag('config', 'UA-134700452-1');
     </script>
+
 
     <link rel="stylesheet" type="text/css" href="css/navbar.css">
     <link rel="stylesheet" type="text/css" href="css/footer.css">
@@ -156,14 +153,14 @@ $expirationDate = date('Y-m-d H:i:s', strtotime($replayDATA['date'] . '+30 days'
 
     <!-- <script src="https://cdn.plyr.io/3.2.4/plyr.js"></script>-->
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.plyr.io/3.2.4/plyr.css"> -->
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.5.4/plyr.css">
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.5.6/plyr.css">
     <!-- Cookie bar -->
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/npm/cookie-bar/cookiebar-latest.min.js?theme=flying&tracking=1&always=1&scrolling=1"></script>
 </head>
 
 <body>
-<script src="https://cdn.plyr.io/3.5.4/plyr.js"></script>
+<script src="https://cdn.plyr.io/3.5.6/plyr.js"></script>
 <!-- Timer -->
 <script>
     function isDST(d) {
@@ -245,7 +242,7 @@ $expirationDate = date('Y-m-d H:i:s', strtotime($replayDATA['date'] . '+30 days'
         <?php
         if (!$isGraveyarded) {
             if (empty($replayDATA['youtubeId'])) {
-                echo "<video id=\"player\" poster='$thumbUrl' controls data-plyr-config=' {\"debug\": true, \"title\":\"Test\", \"ads\": { \"enabled\": true, \"publisherId\": \"853789262363088\" } } ' crossorigin playsinline controls>";
+                echo "<video id=\"player\" poster='$thumbUrl' playsinline controls>";
                 if ($multiple_res) {
                     echo "<source src=$urlsRaw[0] type='video/mp4' size='720'>";
                     echo "<source src=$urlsRaw[1] type='video/mp4' size='480'>";

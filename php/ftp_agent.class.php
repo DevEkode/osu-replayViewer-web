@@ -17,7 +17,6 @@ class ftp_agent{
     $this->conn = new \phpseclib\Net\SFTP(getenv('FTP_HOST'));
 
     $login_result = $this->conn->login(getenv('FTP_USER'), getenv('FTP_PASS'));
-    $this->conn->pasv(true);
 
     // Vérification de la connexion
     if ((!$this->conn) || (!$login_result)) {
@@ -85,7 +84,7 @@ class ftp_agent{
   }
 
   public function sendFile($fileDir,$newDir){
-    $upload = $this->conn->put($newDir, $fileDir, FTP_BINARY);
+    $upload = $this->conn->put($fileDir, $newDir);
 
     // Vérification du status du chargement
     if (!$upload) {
@@ -96,7 +95,8 @@ class ftp_agent{
   }
 
   public function downloadFile($fileDir,$newDir){
-    $result = $this->conn->get($newDir, $fileDir, FTP_BINARY);
+    var_dump($fileDir,$newDir);
+    $result = $this->conn->get($fileDir, $newDir);
     if($result) {return true;}
     else {return false;}
   }

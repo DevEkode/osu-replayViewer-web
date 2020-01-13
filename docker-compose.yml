@@ -1,0 +1,25 @@
+version: '3'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    image: osurv-docker
+    ports:
+      - 8080:80
+    #volumes:
+    #  - .:/app
+    links:
+      - mysql
+    environment:
+      - DEBUG_VERSION=${DEBUG_VERSION}
+  mysql:
+    image: mysql:8
+    ports:
+      - 13306:3306
+    environment:
+      MYSQL_DATABASE: osurv
+      MYSQL_USER: app
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+

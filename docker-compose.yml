@@ -1,4 +1,4 @@
-version: '3'
+version: "3.5"
 services:
   app:
     build:
@@ -7,19 +7,38 @@ services:
     image: osurv-docker
     ports:
       - 8080:80
-    #volumes:
-    #  - .:/app
+    volumes:
+      - .:/app #For developement only
+      - /app/node_modules
+      - /app/vendor
+      - /app/ssh
+      - app_files:/app
     links:
       - mysql
-    environment:
-      - DEBUG_VERSION=${DEBUG_VERSION}
   mysql:
-    image: mysql:8
+    build:
+      context: .
+      dockerfile: .docker/mysql/Dockerfile
+    image: mymysql
     ports:
-      - 13306:3306
+      - "13306:3306"
     environment:
       MYSQL_DATABASE: osurv
       MYSQL_USER: app
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
-
+  sftp:
+    image: atmoz/sftp
+    depends_on:
+      - app
+    volumes:
+    - ./.docker/ssh/host_keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
+    - ./.docker/ssh/host_keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
+    - ./.docker/ssh/keys/id_recorder.pub:/home/foo/.ssh/keys/id_recorder.pub:ro
+    - ./.docker/ssh/keys/id_storage.pub:/home/foo/.ssh/keys/id_storage.pub:ro
+    - app_files:/home/foo
+    ports:
+    - "2222:22"
+    command: foo::1001
+volumes:
+  app_files:

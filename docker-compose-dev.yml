@@ -6,25 +6,27 @@ services:
       dockerfile: .docker/Dockerfile
     image: osurv-docker
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
+      - .:/app #For developement only
+      - /app/node_modules #For developement only
+      - /app/vendor #For developement only
+      - /app/ssh #For developement only
       - app_files:/app
     links:
-      - mysql
-    depends_on:
       - mysql
   mysql:
     image: mysql:5.6
     ports:
-      - "3306:3306"
+      - "13306:3306"
     environment:
       MYSQL_DATABASE: ${MYSQL_DB}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASS}
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASS}
     volumes:
-    - ./.docker/mysql/osurv.sql:/docker-entrypoint-initdb.d/osurv.sql #Import database structure
-    - ./.docker/mysql/data:/var/lib/mysql
+      - ./.docker/mysql/osurv.sql:/docker-entrypoint-initdb.d/osurv.sql
+      - ./.docker/mysql/data:/var/lib/mysql
   sftp:
     image: atmoz/sftp
     depends_on:
@@ -36,7 +38,7 @@ services:
     - ./.docker/ssh/keys/id_storage.pub:/home/foo/.ssh/keys/id_storage.pub:ro
     - app_files:/home/foo
     ports:
-    - "22:22"
+    - "2222:22"
     command: foo::1001
 volumes:
   app_files:

@@ -26,3 +26,4 @@ errors.log
 .docker/ssh/host_keys/ssh_host_rsa_key
 .docker/ssh/keys/id_recorder.pub
 .docker/ssh/keys/id_storage.pub
+!.idea

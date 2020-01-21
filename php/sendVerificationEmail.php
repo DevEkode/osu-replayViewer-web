@@ -38,6 +38,7 @@ if($result ->num_rows >0){
   }
 }
 
-header("Location:../userVerification.php?id=".$_GET['userId']);
+$redirectUrl = "https://".$_SERVER['SERVER_NAME']."/userVerification.php?id=".$_GET['userId'];
+header("Location:$redirectUrl");
 exitPage($conn);
- ?>
+

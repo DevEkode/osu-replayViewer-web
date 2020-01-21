@@ -27,3 +27,5 @@ errors.log
 .docker/ssh/keys/id_recorder.pub
 .docker/ssh/keys/id_storage.pub
 !.idea
+.docker/mysql/data/*
+.docker/apache/data/*

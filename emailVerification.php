@@ -52,7 +52,6 @@ $queryInfos->bind_param("s",$userId);
 $queryInfos->execute();
 $queryInfos->close();
 
-echo 'Thanks '.$usernameOsu." ! Your email has been validated";
+$redirectUrl = "https://".$_SERVER['SERVER_NAME']."/userVerification.php?id=".$userId;
+header("Location:$redirectUrl");
 
-header("Location:userVerification.php?id=$userId");
- ?>

@@ -65,7 +65,7 @@
    <div class="g-recaptcha" data-sitekey="6LcYyk8UAAAAAHmsgHYvmnCIr3I6hIlKv7VWANSo"></div>
 
    <?php
-    $baseLink = "http://osureplayviewer.xyz/";
+    $baseLink = "https://".$_SERVER['SERVER_NAME'];
 
      $error_id = isset($_GET['error']) ? (int)$_GET['error'] : 0;
      if ($error_id != -1 && $error_id != 0) {
@@ -73,11 +73,11 @@
        echo '<span style="text-align:center" class=errorText>'.$errors[$error_id];
        switch($error_id){
          case 1 :
-          $link = $baseLink."userVerification.php?id=".$_GET['userId'];
+          $link = $baseLink."/userVerification.php?id=".$_GET['userId'];
           echo ' <a href='.$link.'>click here! </a></span>';
           break;
         case 2 :
-          $link = $baseLink."register.php";
+          $link = $baseLink."/register.php";
           echo ' <a href='.$link.'>create an account here! </a></span>';
           break;
         default :

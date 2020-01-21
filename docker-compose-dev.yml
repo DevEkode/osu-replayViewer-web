@@ -1,24 +1,38 @@
 version: "3.5"
 services:
+  https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - app
+    restart: always
+    volumes:
+      - ./.docker/apache/data/ssl_certs:/var/lib/https-portal
+      - ./.docker/app_data/accounts:/app/accounts:rw
+      - ./.docker/app_data/requestList:/app/requestList:rw
+      - ./.docker/app_data/pledgers:/app/php/patreon/pledgers:ro
+    environment:
+      DOMAINS: 'osurv.com -> http://app'
+      STAGE: 'local'
+      # STAGE: 'production'
+      # FORCE_RENEW: 'true'
   app:
     build:
       context: .
-      dockerfile: .docker/Dockerfile
+      dockerfile: .docker/DockerfileDev
     image: osurv-docker
-    ports:
-      - "8080:80"
     volumes:
-      - .:/app #For developement only
-      - /app/node_modules #For developement only
-      - /app/vendor #For developement only
-      - /app/ssh #For developement only
       - app_files:/app
     links:
       - mysql
+    environment:
+      XDEBUG_CONFIG: remote_host=172.17.0.1 #Change with your local ip address
   mysql:
     image: mysql:5.6
     ports:
-      - "13306:3306"
+      - "3306:3306"
     environment:
       MYSQL_DATABASE: ${MYSQL_DB}
       MYSQL_USER: ${MYSQL_USER}
@@ -38,7 +52,7 @@ services:
     - ./.docker/ssh/keys/id_storage.pub:/home/foo/.ssh/keys/id_storage.pub:ro
     - app_files:/home/foo
     ports:
-    - "2222:22"
-    command: foo::1001
+    - "22:22"
+    command: foo::33
 volumes:
   app_files:

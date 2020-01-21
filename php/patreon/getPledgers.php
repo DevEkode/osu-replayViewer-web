@@ -31,7 +31,7 @@ foreach($json->included as $data){
         $newData = $data->attributes;
 
         //Add pledgers names
-        $pledgers = explode(";",file_get_contents('./'.$files[$index]));
+        $pledgers = explode(";",file_get_contents('./pledgers/'.$files[$index]));
         $newData->pledgers = $pledgers;
 
         array_push($rewards,$newData);

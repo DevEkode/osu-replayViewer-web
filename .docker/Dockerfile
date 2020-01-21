@@ -3,10 +3,9 @@ FROM php:7.3-apache
 MAINTAINER DevEkode
 
 # Configure PHP
-RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 RUN docker-php-ext-install mysqli
 
-# Copy applications files to docker folder app
+# Copy applications files to docker folder app_data
 COPY . /app
 
 # Copy vhost.conf to docker

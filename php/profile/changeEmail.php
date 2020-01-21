@@ -37,10 +37,10 @@ $conn = new mysqli(getenv('MYSQL_HOST'), getenv('MYSQL_USER'), getenv('MYSQL_PAS
     require_once '../verificationFunctions.php';
     sendEmail($_POST['newEmail'],$_SESSION["username"],$verfIdEmail);
 
-    header("Location:../../editProfile?success=3#email");
+    header("Location:../../editProfile.php?success=3&block=security#email");
     closeConn();
   }else{
-    header("Location:../../editProfile?error=6#email");
+    header("Location:../../editProfile.php?error=6&block=security#email");
     closeConn();
   }
   $query->close();

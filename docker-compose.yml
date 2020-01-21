@@ -8,7 +8,9 @@ services:
     ports:
       - "80:80"
     volumes:
-      - app_files:/app
+      - app_files:/app_data
+      - ./accounts:/app_data/accounts
+      - ./requestList:/app_data/requestList
     links:
       - mysql
     depends_on:
@@ -37,6 +39,6 @@ services:
     - app_files:/home/foo
     ports:
     - "22:22"
-    command: foo::1001
+    command: foo::33
 volumes:
   app_files:

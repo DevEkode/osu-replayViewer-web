@@ -2,17 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6379a9ba-5f95-4987-b99d-74479a993554" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/composerJson.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/discord.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/osu-replayViewer-web.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/docker_compose_yml__Developement.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations/docker_compose_yml__Production.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.docker/mysql/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/mysql/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.docker/app_data/pledgers/5_pledgers.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.docker/DockerfileDev" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/DockerfileDev" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.docker/ssh/startup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/ssh/startup.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.docker/vhost.conf" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/apache/vhost.conf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/emailVerification.php" beforeDir="false" afterPath="$PROJECT_DIR$/emailVerification.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/patreon/1_pledgers.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/patreon/5_pledgers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/app_data/pledgers/1_pledgers.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/patreon/getPledgers.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/patreon/getPledgers.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/profile/changeEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/profile/changeEmail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/profile/saveUserIni.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/profile/saveUserIni.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/sendVerificationEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/sendVerificationEmail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/verificationFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/verificationFunctions.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +48,17 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="PhpDebugGeneral" xdebug_show_addresses="true" />
+  <component name="PhpServers">
+    <servers>
+      <server host="localhost" id="7f0187b3-369b-4326-b5c6-73a62524b4e4" name="localhost" />
+      <server host="172.18.0.3" id="d68c2e8e-c0ad-4072-9258-41a0643a6f47" name="172.18.0.3" use_path_mappings="true">
+        <path_mappings>
+          <mapping local-root="$PROJECT_DIR$" remote-root="/app" />
+        </path_mappings>
+      </server>
+    </servers>
+  </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
@@ -68,6 +85,7 @@
       <path value="$PROJECT_DIR$/vendor/webmozart/assert" />
     </include_path>
   </component>
+  <component name="PhpXdebugProxy" host="172.17.0.1" />
   <component name="ProjectId" id="1WaC8Jbcub1w1Y9MnofftRBbxg5" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -78,22 +96,39 @@
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="add_unversioned_files" value="$PROJECT_DIR$/.docker/ssh/host_keys/PUT SSH HOST FILES HERE" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/docker-compose-dev.yml" />
+    <property name="add_unversioned_files" value="$PROJECT_DIR$/.env&#10;/home/ekode/Documents/git/osu-replayViewer-web/.docker/ssh/host_keys/PUT SSH HOST FILES HERE" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.docker" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsDialog.application.dockerMachine" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.docker/app/pledgers" />
+      <recent name="$PROJECT_DIR$/php/patreon/pledgers" />
+      <recent name="$PROJECT_DIR$/.docker/apache" />
+      <recent name="$PROJECT_DIR$/.docker/ssh/host_keys" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.docker" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/.docker/ssh/keys" />
       <recent name="$PROJECT_DIR$/.docker/mysql" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/.docker/ssh/host_keys" />
-    </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml: Production">
+  <component name="RunManager" selected="Docker.docker-compose.yml: Developement">
+    <configuration name="docker-compose-dev.yml.app: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="app" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose-dev.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="docker-compose-dev.yml.mysql: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -120,17 +155,33 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.sftp: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="sftp" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Docker.docker-compose.yml: Production" />
       <item itemvalue="Docker.docker-compose.yml: Developement" />
       <item itemvalue="Docker.docker-compose.yml.mysql: Compose Deployment" />
       <item itemvalue="Docker.docker-compose-dev.yml.mysql: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.sftp: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose-dev.yml.app: Compose Deployment" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose-dev.yml.app: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.sftp: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.mysql: Compose Deployment" />
         <item itemvalue="Docker.docker-compose-dev.yml.mysql: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml: Production" />
       </list>
     </recent_temporary>
   </component>
@@ -143,6 +194,11 @@
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="Docker" type="9fbbdea:ServiceModel$ServiceNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Docker" type="9fbbdea:ServiceModel$ServiceNode" />
+                <item name="Images" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -166,7 +222,13 @@
       <workItem from="1579383067401" duration="1290000" />
       <workItem from="1579426223746" duration="235000" />
       <workItem from="1579426478459" duration="8515000" />
-      <workItem from="1579435185958" duration="11615000" />
+      <workItem from="1579435185958" duration="16587000" />
+      <workItem from="1579464605546" duration="2089000" />
+      <workItem from="1579544307387" duration="1637000" />
+      <workItem from="1579549352397" duration="5247000" />
+      <workItem from="1579630171927" duration="8910000" />
+      <workItem from="1579722484308" duration="5794000" />
+      <workItem from="1579806349352" duration="2661000" />
     </task>
     <servers />
   </component>
@@ -186,18 +248,22 @@
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
     <state x="556" y="182" key="#Volume_binding/0.0.1920.1044@0.0.1920.1044" timestamp="1579429712225" />
-    <state x="967" y="253" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579444845172">
+    <state x="836" y="253" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1579728046280">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state x="967" y="253" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1044@0.0.1920.1044" timestamp="1579444845172" />
-    <state x="694" y="326" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579439810957">
+    <state x="836" y="253" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1044@0.0.1920.1044" timestamp="1579728046280" />
+    <state x="694" y="326" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579453749989">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state x="694" y="326" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1044@0.0.1920.1044" timestamp="1579439810957" />
+    <state x="694" y="326" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1044@0.0.1920.1044" timestamp="1579453749989" />
     <state x="661" y="245" width="596" height="556" key="#docker-compose.yml:_Compose_Deployment" timestamp="1579382432034">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
     <state x="661" y="245" width="596" height="556" key="#docker-compose.yml:_Compose_Deployment/0.0.1920.1044@0.0.1920.1044" timestamp="1579382432034" />
+    <state x="2447" y="117" width="864" height="813" key="CommitChangelistDialog2" timestamp="1579808880921">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2447" y="117" width="864" height="813" key="CommitChangelistDialog2/1920.0.1920.1080/0.0.1920.1044@1920.0.1920.1080" timestamp="1579808880921" />
     <state x="801" y="413" key="DockerComposeFileDialog" timestamp="1579440181155">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
@@ -210,10 +276,62 @@
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
     <state x="743" y="279" key="FileChooserDialogImpl/0.0.1920.1044@0.0.1920.1044" timestamp="1579440172862" />
-    <state x="457" y="155" width="1007" height="733" key="SettingsEditor" timestamp="1579445141931">
+    <state width="1874" height="340" key="GridCell.Tab.0.bottom" timestamp="1579636805004">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state x="457" y="155" width="1007" height="733" key="SettingsEditor/0.0.1920.1044@0.0.1920.1044" timestamp="1579445141931" />
+    <state width="1874" height="340" key="GridCell.Tab.0.bottom/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805004" />
+    <state width="1874" height="340" key="GridCell.Tab.0.center" timestamp="1579636805004">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.0.center/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805004" />
+    <state width="1874" height="340" key="GridCell.Tab.0.left" timestamp="1579636805003">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.0.left/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805003" />
+    <state width="1874" height="340" key="GridCell.Tab.0.right" timestamp="1579636805004">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.0.right/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805004" />
+    <state width="1874" height="340" key="GridCell.Tab.1.bottom" timestamp="1579636805005">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.1.bottom/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805005" />
+    <state width="1874" height="340" key="GridCell.Tab.1.center" timestamp="1579636805004">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.1.center/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805004" />
+    <state width="1874" height="340" key="GridCell.Tab.1.left" timestamp="1579636805004">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.1.left/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805004" />
+    <state width="1874" height="340" key="GridCell.Tab.1.right" timestamp="1579636805005">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.1.right/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805005" />
+    <state width="1874" height="340" key="GridCell.Tab.2.bottom" timestamp="1579636805006">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.2.bottom/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805006" />
+    <state width="1874" height="340" key="GridCell.Tab.2.center" timestamp="1579636805005">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.2.center/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805005" />
+    <state width="1874" height="340" key="GridCell.Tab.2.left" timestamp="1579636805005">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.2.left/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805005" />
+    <state width="1874" height="340" key="GridCell.Tab.2.right" timestamp="1579636805006">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state width="1874" height="340" key="GridCell.Tab.2.right/0.0.1920.1044@0.0.1920.1044" timestamp="1579636805006" />
+    <state x="722" y="410" key="PhpMappingAdvancedResolveDialog" timestamp="1579454991761">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state x="722" y="410" key="PhpMappingAdvancedResolveDialog/0.0.1920.1044@0.0.1920.1044" timestamp="1579454991761" />
+    <state x="457" y="155" width="1007" height="733" key="SettingsEditor" timestamp="1579636880058">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state x="457" y="155" width="1007" height="733" key="SettingsEditor/0.0.1920.1044@0.0.1920.1044" timestamp="1579636880058" />
     <state x="719" y="369" key="cloudConfig.SelfSettingsDialog" timestamp="1579378218919">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
@@ -222,9 +340,24 @@
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
     <state x="641" y="348" key="com.intellij.ide.util.TipDialog/0.0.1920.1044@0.0.1920.1044" timestamp="1579378178134" />
-    <state x="686" y="434" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1579440407791">
+    <state x="513" y="259" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1579550835998">
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
-    <state x="686" y="434" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1920.1044@0.0.1920.1044" timestamp="1579440407791" />
+    <state x="513" y="259" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1044@0.0.1920.1044" timestamp="1579550835998" />
+    <state x="623" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1579728253375">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state x="623" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1044@0.0.1920.1044" timestamp="1579728253375" />
+    <state x="686" y="434" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1579727599212">
+      <screen x="0" y="0" width="1920" height="1044" />
+    </state>
+    <state x="686" y="434" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1920.1044@0.0.1920.1044" timestamp="1579727599212" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="loginForm.php">
+        <watch expression="$baseLink" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

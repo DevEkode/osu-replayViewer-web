@@ -1,10 +1,15 @@
+RewriteEngine on
 #Change default directory page
 DirectoryIndex index.php
 
 #Prevent viewing of .htaccess file
 <Files .htaccess>
-order allow,deny
-deny from all
+    order allow,deny
+    deny from all
+</Files>
+<Files .env>
+    order allow,deny
+    deny from all
 </Files>
 
 #AddType application/x-httpd-php .htm .html
@@ -14,6 +19,8 @@ Options -Indexes
 <FilesMatch "\.(ini|osk)$">
 Allow from all
 </FilesMatch>
+
+
 
 
 <ifModule mod_gzip.c>
@@ -43,11 +50,13 @@ Allow from all
 	Header unset Cache-Control
 </FilesMatch>
 </IfModule>
- 
+
+# Error pages
+ErrorDocument 404 /404.html
+
+#Maintenance rewrite
 #RewriteEngine On
-#RewriteBase /
-#RewriteCond %{REMOTE_ADDR} !^90\.12\.17\.114
-#RewriteCond %{REQUEST_URI} !^/maintenance\.php$
+#RewriteCond %{REMOTE_ADDR} !^111.111.111.111$
+#RewriteCond %{REQUEST_URI} !.(css|gif|ico|jpg|js|png|swf|txt)$
 #RewriteCond %{REQUEST_URI} !^/client/
-#RewriteCond %{REQUEST_FILENAME} !\.(gif|png|jpg|jpeg|jfif|bmp|css|js)$ [NC]
-#RewriteRule ^(.*)$ http://osureplayviewer.xyz/maintenance.php [R=307,L]
+#RewriteRule .* maintenance.php [L]

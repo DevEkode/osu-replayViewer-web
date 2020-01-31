@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc96b671-07c8-4c0b-a34d-5f4e2345617e" name="Default Changelist" comment="Fixed volume permissi">
-      <change afterPath="$PROJECT_DIR$/.docker/apache/php.ini-development" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.docker/apache/php.ini-production" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.docker/DockerfileDev" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/DockerfileDev" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/.htaccess" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/profile/form_cursorSize.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/profile/form_cursorSize.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/profile/form_gameSettings.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/profile/form_gameSettings.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/profile/form_volume.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/profile/form_volume.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +31,10 @@
     <select />
   </component>
   <component name="DockerExecCommand">
+    <ExecCommand>
+      <option name="command" value="/bin/bash" />
+      <option name="imageId" value="sha256:48e3d60996e74393452167e5fa0b6dd3d70768ee9b492d1db94a69bcdfdfa430" />
+    </ExecCommand>
     <ExecCommand>
       <option name="command" value="/bin/bash" />
       <option name="imageId" value="sha256:9a2edd2cd9b4b49ab1edc21c554edc09ef13862737e02d1743d9f904865f1943" />
@@ -140,8 +138,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\wamp64\www\osu-replayViewer-web\.docker\apache" />
       <recent name="D:\wamp64\www\osu-replayViewer-web" />
+      <recent name="D:\wamp64\www\osu-replayViewer-web\.docker\apache" />
       <recent name="$PROJECT_DIR$/.docker/app/pledgers" />
       <recent name="$PROJECT_DIR$/php/patreon/pledgers" />
       <recent name="$PROJECT_DIR$/.docker/apache" />
@@ -263,7 +261,7 @@
       <workItem from="1579722484308" duration="5794000" />
       <workItem from="1579806349352" duration="2661000" />
       <workItem from="1580386465658" duration="12606000" />
-      <workItem from="1580458182021" duration="1307000" />
+      <workItem from="1580458182021" duration="6137000" />
     </task>
     <servers />
   </component>
@@ -381,9 +379,10 @@
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
     <state x="513" y="259" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1044@0.0.1920.1044" timestamp="1579550835998" />
-    <state x="623" y="230" width="672" height="678" key="search.everywhere.popup" timestamp="1579728253375">
-      <screen x="0" y="0" width="1920" height="1044" />
+    <state x="498" y="182" width="672" height="536" key="search.everywhere.popup" timestamp="1580462117106">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="498" y="182" width="672" height="536" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1580462117106" />
     <state x="623" y="230" width="672" height="678" key="search.everywhere.popup/0.0.1920.1044@0.0.1920.1044" timestamp="1579728253375" />
     <state x="686" y="434" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1579727599212">
       <screen x="0" y="0" width="1920" height="1044" />

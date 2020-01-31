@@ -1,19 +1,32 @@
 version: "3.5"
 services:
+  https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - app
+    restart: always
+    volumes:
+      - ./.docker/apache/data/ssl_certs:/var/lib/https-portal
+    environment:
+      DOMAINS: 'osurv.net -> http://app'
+      STAGE: 'production'
+      CLIENT_MAX_BODY_SIZE: 0
+      # FORCE_RENEW: 'true'
   app:
     build:
       context: .
-      dockerfile: .docker/Dockerfile
+      dockerfile: .docker/DockerfileDev
     image: osurv-docker
-    ports:
-      - "80:80"
     volumes:
-      - app_files:/app_data
-      - ./accounts:/app_data/accounts
-      - ./requestList:/app_data/requestList
+      - "app_files:/app"
+      - "./.docker/app_data/accounts:/app/accounts"
+      - "./.docker/app_data/requestList:/app/requestList"
+      - "./.docker/app_data/pledgers:/app/php/patreon/pledgers"
+      - "./.htaccess:/app/.htaccess"
     links:
-      - mysql
-    depends_on:
       - mysql
   mysql:
     image: mysql:5.6
@@ -25,20 +38,20 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASS}
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASS}
     volumes:
-    - ./.docker/mysql/osurv.sql:/docker-entrypoint-initdb.d/osurv.sql #Import database structure
-    - ./.docker/mysql/data:/var/lib/mysql
+      - "./.docker/mysql/osurv.sql:/docker-entrypoint-initdb.d/osurv.sql"
+      - "./.docker/mysql/data:/var/lib/mysql"
   sftp:
     image: atmoz/sftp
     depends_on:
       - app
     volumes:
-    - ./.docker/ssh/host_keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
-    - ./.docker/ssh/host_keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
-    - ./.docker/ssh/keys/id_recorder.pub:/home/foo/.ssh/keys/id_recorder.pub:ro
-    - ./.docker/ssh/keys/id_storage.pub:/home/foo/.ssh/keys/id_storage.pub:ro
-    - app_files:/home/foo
+      - "./.docker/ssh/host_keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key"
+      - "./.docker/ssh/host_keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key"
+      - "./.docker/ssh/keys/id_recorder.pub:/home/foo/.ssh/keys/id_recorder.pub:ro"
+      - "./.docker/ssh/keys/id_storage.pub:/home/foo/.ssh/keys/id_storage.pub:ro"
+      - "app_files:/home/foo"
     ports:
-    - "22:22"
+      - "22:22"
     command: foo::33
 volumes:
   app_files:

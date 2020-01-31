@@ -10,12 +10,10 @@ services:
     restart: always
     volumes:
       - ./.docker/apache/data/ssl_certs:/var/lib/https-portal
-      - ./.docker/app_data/accounts:/app/accounts:rw
-      - ./.docker/app_data/requestList:/app/requestList:rw
-      - ./.docker/app_data/pledgers:/app/php/patreon/pledgers:ro
     environment:
       DOMAINS: 'osurv.com -> http://app'
       STAGE: 'local'
+      CLIENT_MAX_BODY_SIZE: 0
       # STAGE: 'production'
       # FORCE_RENEW: 'true'
   app:
@@ -24,7 +22,11 @@ services:
       dockerfile: .docker/DockerfileDev
     image: osurv-docker
     volumes:
-      - app_files:/app
+      - "app_files:/app"
+      - "./.docker/app_data/accounts:/app/accounts"
+      - "./.docker/app_data/requestList:/app/requestList"
+      - "./.docker/app_data/pledgers:/app/php/patreon/pledgers"
+      - "./.htaccess:/app/.htaccess"
     links:
       - mysql
     environment:
@@ -39,18 +41,18 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASS}
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASS}
     volumes:
-      - ./.docker/mysql/osurv.sql:/docker-entrypoint-initdb.d/osurv.sql
-      - ./.docker/mysql/data:/var/lib/mysql
+      - "./.docker/mysql/osurv.sql:/docker-entrypoint-initdb.d/osurv.sql"
+      - "./.docker/mysql/data:/var/lib/mysql"
   sftp:
     image: atmoz/sftp
     depends_on:
       - app
     volumes:
-    - ./.docker/ssh/host_keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key
-    - ./.docker/ssh/host_keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key
-    - ./.docker/ssh/keys/id_recorder.pub:/home/foo/.ssh/keys/id_recorder.pub:ro
-    - ./.docker/ssh/keys/id_storage.pub:/home/foo/.ssh/keys/id_storage.pub:ro
-    - app_files:/home/foo
+    - "./.docker/ssh/host_keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key"
+    - "./.docker/ssh/host_keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key"
+    - "./.docker/ssh/keys/id_recorder.pub:/home/foo/.ssh/keys/id_recorder.pub:ro"
+    - "./.docker/ssh/keys/id_storage.pub:/home/foo/.ssh/keys/id_storage.pub:ro"
+    - "app_files:/home/foo"
     ports:
     - "22:22"
     command: foo::33

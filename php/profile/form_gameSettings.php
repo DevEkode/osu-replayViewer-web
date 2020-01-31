@@ -2,8 +2,6 @@
 require 'ini.class.php';
 session_start();
 
-var_dump($_POST);
-
 //Check ini file
 $ini_dir = '../../accounts/'.$_SESSION["userId"].'/'.$_SESSION["userId"].'.ini';
 $ini = new Ini();
@@ -41,5 +39,5 @@ if(isset($_POST['beatmap_sample'])) $ini->set('osu','beatmap_sample',"true");
     else $ini->set('osu','beatmap_sample',"false");
 
 $ini->write($ini_dir);
-header('Location:../../editProfile.php?block=game&success=8');
-?>
+$redirectUrl = "https://".$_SERVER['SERVER_NAME']."/editProfile.php?block=game&success=8";
+header("Location:$redirectUrl");

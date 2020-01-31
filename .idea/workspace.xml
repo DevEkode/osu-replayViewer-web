@@ -1,24 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6379a9ba-5f95-4987-b99d-74479a993554" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.docker/app_data/pledgers/5_pledgers.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/Dockerfile" afterDir="false" />
+    <list default="true" id="bc96b671-07c8-4c0b-a34d-5f4e2345617e" name="Default Changelist" comment="Fixed volume permissi">
+      <change afterPath="$PROJECT_DIR$/.docker/apache/php.ini-development" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.docker/apache/php.ini-production" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.docker/DockerfileDev" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/DockerfileDev" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.docker/ssh/startup.sh" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/ssh/startup.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.docker/vhost.conf" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/apache/vhost.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/emailVerification.php" beforeDir="false" afterPath="$PROJECT_DIR$/emailVerification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/patreon/1_pledgers.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/patreon/5_pledgers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/app_data/pledgers/1_pledgers.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/patreon/getPledgers.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/patreon/getPledgers.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/profile/changeEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/profile/changeEmail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/profile/saveUserIni.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/profile/saveUserIni.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/sendVerificationEmail.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/sendVerificationEmail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/verificationFunctions.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/verificationFunctions.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/profile/form_cursorSize.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/profile/form_cursorSize.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/profile/form_gameSettings.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/profile/form_gameSettings.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/profile/form_volume.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/profile/form_volume.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +35,52 @@
     </option>
     <expand />
     <select />
+  </component>
+  <component name="DockerExecCommand">
+    <ExecCommand>
+      <option name="command" value="/bin/bash" />
+      <option name="imageId" value="sha256:9a2edd2cd9b4b49ab1edc21c554edc09ef13862737e02d1743d9f904865f1943" />
+    </ExecCommand>
+    <ExecCommand>
+      <option name="command" value="ls" />
+      <option name="imageId" value="sha256:9a2edd2cd9b4b49ab1edc21c554edc09ef13862737e02d1743d9f904865f1943" />
+    </ExecCommand>
+    <ExecCommand>
+      <option name="command" value="/bin/bash" />
+      <option name="imageId" value="sha256:73aad8425f5e12b166fa8056c897556a5ff1b7b5f3940cf9eeb5637c046ef150" />
+    </ExecCommand>
+    <ExecCommand>
+      <option name="command" value="/bin/bash" />
+      <option name="imageId" value="sha256:a12df949bae3be7d5944315410a310164d6ca5b194063c1910fe1e341ada52a6" />
+    </ExecCommand>
+    <ExecCommand>
+      <option name="command" value="/bin/bash" />
+      <option name="imageId" value="sha256:94a7d7c5473827272e9d7a27f03975113302b784bdcb8f4fc3a4014cc93c9f25" />
+    </ExecCommand>
+    <ExecCommand>
+      <option name="command" value="/bin/bash" />
+      <option name="imageId" value="sha256:4865c84ae0eb20c28c4af143ef26062c52b14aa8b5170f7af93bff99d87cdc15" />
+    </ExecCommand>
+    <ExecCommand>
+      <option name="command" value="/bin/bash" />
+      <option name="imageId" value="sha256:28984aa80173086ad50eacca519614ccae0cd863c9fc6d98ef765e05c1c95bd3" />
+    </ExecCommand>
+    <ExecCommand>
+      <option name="command" value="/bin/bash" />
+      <option name="imageId" value="sha256:5a1bf7e782f38e90c8a786509ebd4b7f8f745ce07b4a86e9f66059d0a4734bd8" />
+    </ExecCommand>
+    <ExecCommand>
+      <option name="command" value="/bin/bash" />
+      <option name="imageId" value="sha256:1e352a34799042d5bbfc10faaf0ac0730b056a027c959b9edcf149c2db683012" />
+    </ExecCommand>
+    <ExecCommand>
+      <option name="command" value="/bin/bash" />
+      <option name="imageId" value="sha256:715cd50bf90fadf57f49ba485c17564268816f8b7b65313c7156a144e2fcb154" />
+    </ExecCommand>
+    <ExecCommand>
+      <option name="command" value="/bin/bash" />
+      <option name="imageId" value="sha256:d37c7df4ef5ac19fa024447ea9e6732ecfe9e955b274c1ca3305e9fd69508702" />
+    </ExecCommand>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -99,14 +136,15 @@
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.env&#10;/home/ekode/Documents/git/osu-replayViewer-web/.docker/ssh/host_keys/PUT SSH HOST FILES HERE" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.docker" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
+    <property name="settings.editor.selected.configurable" value="Docker" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\wamp64\www\osu-replayViewer-web\.docker\apache" />
+      <recent name="D:\wamp64\www\osu-replayViewer-web" />
       <recent name="$PROJECT_DIR$/.docker/app/pledgers" />
       <recent name="$PROJECT_DIR$/php/patreon/pledgers" />
       <recent name="$PROJECT_DIR$/.docker/apache" />
-      <recent name="$PROJECT_DIR$/.docker/ssh/host_keys" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/.docker" />
@@ -195,11 +233,6 @@
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="Docker" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="Docker" type="9fbbdea:ServiceModel$ServiceNode" />
-                <item name="Images" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
             </expand>
             <select />
           </treeState>
@@ -212,7 +245,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6379a9ba-5f95-4987-b99d-74479a993554" name="Default Changelist" comment="" />
+      <changelist id="bc96b671-07c8-4c0b-a34d-5f4e2345617e" name="Default Changelist" comment="" />
       <created>1579378160026</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -229,6 +262,8 @@
       <workItem from="1579630171927" duration="8910000" />
       <workItem from="1579722484308" duration="5794000" />
       <workItem from="1579806349352" duration="2661000" />
+      <workItem from="1580386465658" duration="12606000" />
+      <workItem from="1580458182021" duration="1307000" />
     </task>
     <servers />
   </component>
@@ -260,9 +295,10 @@
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
     <state x="661" y="245" width="596" height="556" key="#docker-compose.yml:_Compose_Deployment/0.0.1920.1044@0.0.1920.1044" timestamp="1579382432034" />
-    <state x="2447" y="117" width="864" height="813" key="CommitChangelistDialog2" timestamp="1579808880921">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="422" y="89" width="864" height="813" key="CommitChangelistDialog2" timestamp="1580394784640">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="422" y="89" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1580394784640" />
     <state x="2447" y="117" width="864" height="813" key="CommitChangelistDialog2/1920.0.1920.1080/0.0.1920.1044@1920.0.1920.1080" timestamp="1579808880921" />
     <state x="801" y="413" key="DockerComposeFileDialog" timestamp="1579440181155">
       <screen x="0" y="0" width="1920" height="1044" />
@@ -328,9 +364,10 @@
       <screen x="0" y="0" width="1920" height="1044" />
     </state>
     <state x="722" y="410" key="PhpMappingAdvancedResolveDialog/0.0.1920.1044@0.0.1920.1044" timestamp="1579454991761" />
-    <state x="457" y="155" width="1007" height="733" key="SettingsEditor" timestamp="1579636880058">
-      <screen x="0" y="0" width="1920" height="1044" />
+    <state x="366" y="117" width="914" height="707" key="SettingsEditor" timestamp="1580201175041">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="366" y="117" width="914" height="707" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1580201175041" />
     <state x="457" y="155" width="1007" height="733" key="SettingsEditor/0.0.1920.1044@0.0.1920.1044" timestamp="1579636880058" />
     <state x="719" y="369" key="cloudConfig.SelfSettingsDialog" timestamp="1579378218919">
       <screen x="0" y="0" width="1920" height="1044" />

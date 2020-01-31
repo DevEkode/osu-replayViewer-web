@@ -20,8 +20,13 @@ RUN cd /app \
 # Stage 2
 FROM php:7.3-apache AS base
 
+RUN apt-get update && apt-get install -y \
+    zlib1g-dev \
+    libzip-dev
+
 # Configure PHP
 RUN docker-php-ext-install mysqli
+RUN docker-php-ext-install zip
 
 RUN yes | pecl install xdebug \
     && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
@@ -33,12 +38,18 @@ FROM base AS app
 
 COPY . /app
 COPY .docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY .docker/apache/php.ini-development "$PHP_INI_DIR/php.ini"
 
 COPY --from=builder /app/node_modules /app/node_modules
 COPY --from=builder /app/vendor /app/vendor
 
 RUN a2enmod rewrite
 
-RUN chown -R www-data:www-data /app
+RUN mkdir /app/accounts
+RUN mkdir /app/requestList
+RUN mkdir /app/php/patreon/pledgers
+RUN mkdir /app/uploads
+
+RUN chown -R www-data: /app
 
 

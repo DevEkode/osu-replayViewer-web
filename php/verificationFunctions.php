@@ -22,7 +22,7 @@ function sendEmail($email, $username, $verfId)
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = getenv('SMTP_PORT');                             // TCP port to connect to
 
-    $mail->setFrom('contact@osureplayviewer.xyz', 'osu!replayViewer');
+    $mail->setFrom(getenv('SENDER_EMAIL'), 'osu!replayViewer');
     $mail->addAddress($email, 'user');
 
     //Content
@@ -54,7 +54,7 @@ function sendPasswordRecoveryEmail($email, $userId, $verfId)
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = getenv('SMTP_PORT');                             // TCP port to connect to
 
-    $mail->setFrom('contact@osureplayviewer.xyz', 'osu!replayViewer');
+    $mail->setFrom(getenv('SENDER_EMAIL'), 'osu!replayViewer');
     $mail->addAddress($email, 'user');
 
     //Content
@@ -88,7 +88,7 @@ function sendTempPassword($email, $password)
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = getenv('SMTP_PORT');                             // TCP port to connect to
 
-    $mail->setFrom('contact@osureplayviewer.xyz', 'osu!replayViewer');
+    $mail->setFrom(getenv('SENDER_EMAIL'), 'osu!replayViewer');
     $mail->addAddress($email, 'user');
 
     //Content
@@ -122,7 +122,7 @@ function sendDeleteVerification($email, $userId, $deleteVerfId)
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = getenv('SMTP_PASS');                             // TCP port to connect to
 
-    $mail->setFrom('contact@osureplayviewer.xyz', 'osu!replayViewer');
+    $mail->setFrom(getenv('SENDER_EMAIL'), 'osu!replayViewer');
     $mail->addAddress($email, 'user');
 
     //Content

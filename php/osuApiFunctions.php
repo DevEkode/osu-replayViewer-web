@@ -1,4 +1,5 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'] . '/startup.php';
 
 //------- GET JSONS ---------
 function getBeatmapJSON($beatmapId, $api)

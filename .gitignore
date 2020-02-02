@@ -21,6 +21,7 @@ node_modules/
 .env.test
 errors.log
 /.env
+dkim.private
 
 .docker/ssh/host_keys/ssh_host_ed25519_key
 .docker/ssh/host_keys/ssh_host_rsa_key

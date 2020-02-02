@@ -15,12 +15,18 @@ function sendEmail($email, $username, $verfId)
     $mail = new PHPMailer(true);
     //Server settings
     $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->AuthType = 'LOGIN';
     $mail->Host = getenv('SMTP_HOST');                             // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
     $mail->Username = getenv('SMTP_USER');                 // SMTP username
     $mail->Password = getenv('SMTP_PASS');                           // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = getenv('SMTP_PORT');                             // TCP port to connect to
+    $mail->DKIM_domain = 'osurv.net';
+    $mail->DKIM_private = $_SERVER['DOCUMENT_ROOT'].'/dkim.private';
+    $mail->DKIM_selector = 'mail';
+    $mail->DKIM_passphrase = '';
+    $mail->DKIM_identity = $mail->From;
 
     $mail->setFrom(getenv('SENDER_EMAIL'), 'osu!replayViewer');
     $mail->addAddress($email, 'user');
@@ -49,10 +55,16 @@ function sendPasswordRecoveryEmail($email, $userId, $verfId)
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = getenv('SMTP_HOST');                             // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->AuthType = 'LOGIN';
     $mail->Username = getenv('SMTP_USER');                 // SMTP username
     $mail->Password = getenv('SMTP_PASS');                           // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = getenv('SMTP_PORT');                             // TCP port to connect to
+    $mail->DKIM_domain = 'osurv.net';
+    $mail->DKIM_private = $_SERVER['DOCUMENT_ROOT'].'/dkim.private';
+    $mail->DKIM_selector = 'mail';
+    $mail->DKIM_passphrase = '';
+    $mail->DKIM_identity = $mail->From;
 
     $mail->setFrom(getenv('SENDER_EMAIL'), 'osu!replayViewer');
     $mail->addAddress($email, 'user');
@@ -83,10 +95,16 @@ function sendTempPassword($email, $password)
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = getenv('SMTP_HOST');                             // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->AuthType = 'LOGIN';
     $mail->Username = getenv('SMTP_USER');                 // SMTP username
     $mail->Password = getenv('SMTP_PASS');                           // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = getenv('SMTP_PORT');                             // TCP port to connect to
+    $mail->DKIM_domain = 'osurv.net';
+    $mail->DKIM_private = $_SERVER['DOCUMENT_ROOT'].'/dkim.private';
+    $mail->DKIM_selector = 'mail';
+    $mail->DKIM_passphrase = '';
+    $mail->DKIM_identity = $mail->From;
 
     $mail->setFrom(getenv('SENDER_EMAIL'), 'osu!replayViewer');
     $mail->addAddress($email, 'user');
@@ -117,10 +135,16 @@ function sendDeleteVerification($email, $userId, $deleteVerfId)
     $mail->isSMTP();                                      // Set mailer to use SMTP
     $mail->Host = getenv('SMTP_HOST');                             // Specify main and backup SMTP servers
     $mail->SMTPAuth = true;                               // Enable SMTP authentication
+    $mail->AuthType = 'LOGIN';
     $mail->Username = getenv('SMTP_USER');                 // SMTP username
     $mail->Password = getenv('SMTP_PASS');                           // SMTP password
     $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
     $mail->Port = getenv('SMTP_PASS');                             // TCP port to connect to
+    $mail->DKIM_domain = 'osurv.net';
+    $mail->DKIM_private = $_SERVER['DOCUMENT_ROOT'].'/dkim.private';
+    $mail->DKIM_selector = 'mail';
+    $mail->DKIM_passphrase = '';
+    $mail->DKIM_identity = $mail->From;
 
     $mail->setFrom(getenv('SENDER_EMAIL'), 'osu!replayViewer');
     $mail->addAddress($email, 'user');

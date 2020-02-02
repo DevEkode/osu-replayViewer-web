@@ -71,3 +71,7 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
+## App files (ignore content to avoid duplication when using COPY)
+.docker/app_data/accounts/**
+.docker/app_data/requestList/**
+

@@ -47,9 +47,8 @@ services:
     volumes:
       - "./.docker/ssh/host_keys/ssh_host_ed25519_key:/etc/ssh/ssh_host_ed25519_key"
       - "./.docker/ssh/host_keys/ssh_host_rsa_key:/etc/ssh/ssh_host_rsa_key"
-      - "./.docker/ssh/keys/id_recorder.pub:/home/foo/.ssh/keys/id_recorder.pub:ro"
-      - "./.docker/ssh/keys/id_storage.pub:/home/foo/.ssh/keys/id_storage.pub:ro"
-      - "app_files:/home/foo"
+      - "./.docker/ssh/keys/:/home/sftp/.ssh/keys/:ro"
+      - "app_files:/home/sftp"
     ports:
       - "22:22"
     command: sftp::33

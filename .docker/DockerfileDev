@@ -45,6 +45,7 @@ RUN rm -rf /app/.docker
 RUN rm -rf /app/.idea
 RUN rm -rf /app/.github
 RUN rm -rf /app/.ssh
+RUN rm -rf /app/.git
 
 # Remove useless files in container
 RUN rm -f /app/.env.example

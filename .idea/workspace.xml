@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc96b671-07c8-4c0b-a34d-5f4e2345617e" name="Default Changelist" comment="Fixed volume permissi">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.docker/DockerfileDev" beforeDir="false" afterPath="$PROJECT_DIR$/.docker/DockerfileDev" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

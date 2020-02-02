@@ -52,6 +52,6 @@ services:
       - "app_files:/home/foo"
     ports:
       - "22:22"
-    command: foo::33
+    command: sftp::33
 volumes:
   app_files:

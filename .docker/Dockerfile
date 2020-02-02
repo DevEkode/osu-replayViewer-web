@@ -35,6 +35,22 @@ COPY . /app
 COPY .docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
 COPY .docker/apache/php.ini-production "$PHP_INI_DIR/php.ini"
 
+# Remove .docker and useless folders in container
+RUN rm -rf /app/.docker
+RUN rm -rf /app/.idea
+RUN rm -rf /app/.github
+RUN rm -rf /app/.ssh
+
+# Remove useless files in container
+RUN rm -f /app/.env.example
+RUN rm -f /app/docker-compose-dev.yml
+RUN rm -f /app/docker-compose.yml
+RUN rm -f /app/.gitignore
+RUN rm -f /app/composer.json
+RUN rm -f /app/composer.lock
+RUN rm -f /app/package-lock.json
+RUN rm -f /app/package.json
+
 COPY --from=builder /app/node_modules /app/node_modules
 COPY --from=builder /app/vendor /app/vendor
 

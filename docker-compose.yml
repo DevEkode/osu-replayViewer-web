@@ -20,6 +20,7 @@ services:
       context: .
       dockerfile: .docker/DockerfileDev
     image: osurv-docker
+    restart: always
     volumes:
       - "app_files:/app"
       - "./.docker/app_data/accounts:/app/accounts"
@@ -37,11 +38,13 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASS}
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASS}
+    restart: always
     volumes:
       - "./.docker/mysql/osurv.sql:/docker-entrypoint-initdb.d/osurv.sql"
       - "./.docker/mysql/data:/var/lib/mysql"
   sftp:
     image: atmoz/sftp
+    restart: always
     depends_on:
       - app
     volumes:

@@ -53,7 +53,7 @@ services:
       - "./.docker/ssh/keys/:/home/sftp/.ssh/keys/:ro"
       - "app_files:/home/sftp"
     ports:
-      - "22:22"
+      - "222:22"
     command: sftp::33
 volumes:
   app_files:

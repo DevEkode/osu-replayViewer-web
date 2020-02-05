@@ -1,1 +1,1 @@
-chown -R :users /app_data
+chown -R 1001:33 /home/sftp/www

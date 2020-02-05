@@ -57,7 +57,7 @@ services:
       - "./.docker/app_data/pledgers:/home/sftp/php/patreon/pledgers"
       - "./.docker/app_data/client:/home/sftp/client"
       - "./.htaccess:/home/sftp/.htaccess"
-      - "app_files:/home/sftp"
+      - "app_files:/home/sftp/www"
       - "./.docker/ssh/startup.sh:/etc/sftp.d/startup.sh"
     ports:
       - "222:22"

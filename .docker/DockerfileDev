@@ -66,6 +66,7 @@ RUN mkdir /app/accounts
 RUN mkdir /app/requestList
 RUN mkdir /app/php/patreon/pledgers
 RUN mkdir /app/uploads
+RUN mkdir /app/client
 
 RUN chown -R www-data: /app
 

@@ -63,4 +63,4 @@ RUN mkdir /app/php/patreon/pledgers
 RUN mkdir /app/uploads
 RUN mkdir /app/client
 
-RUN chown -R 1001:www-data /app
+RUN chown -R www-data:www-data /app

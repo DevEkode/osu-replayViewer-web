@@ -48,7 +48,7 @@ function removeFolder($dir){
 //--Recreate the folder in requestList
 $folder_dir = "../../requestList/".$_POST['replayId'];
 if(!file_exists($folder_dir)){
-  mkdir($folder_dir);
+  mkdir($folder_dir,755, true);
 }
 
 //Initialize ftp

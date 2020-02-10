@@ -26,6 +26,7 @@ services:
       - "./.docker/app_data/requestList:/app/requestList"
       - "./.docker/app_data/pledgers:/app/php/patreon/pledgers"
       - "./.docker/app_data/client:/app/client"
+      - "./.docker/app_data/uploads:/app/uploads"
       - "./.htaccess:/app/.htaccess"
       - "app_files:/app"
     links:
@@ -56,6 +57,7 @@ services:
       - "./.docker/app_data/requestList:/home/sftp/www/requestList"
       - "./.docker/app_data/pledgers:/home/sftp/www/php/patreon/pledgers"
       - "./.docker/app_data/client:/home/sftp/www/client"
+      - "./.docker/app_data/uploads:/home/sftp/www/uploads"
       - "./.htaccess:/home/sftp/www/.htaccess"
       - "app_files:/home/sftp/www"
       - "./.docker/ssh/startup.sh:/etc/sftp.d/startup.sh"

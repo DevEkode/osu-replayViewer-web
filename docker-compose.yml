@@ -11,7 +11,7 @@ services:
     volumes:
       - ./.docker/apache/data/ssl_certs:/var/lib/https-portal
     environment:
-      DOMAINS: 'osurv.net -> http://app'
+      DOMAINS: 'osurv.net -> http://app, osureplayviewer.xyz -> http://app'
       STAGE: 'production'
       CLIENT_MAX_BODY_SIZE: 0
       # FORCE_RENEW: 'true'

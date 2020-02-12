@@ -121,7 +121,7 @@ if ($stmt->execute()) {
 }
 
 //Deplacement du fichier en liste d'attente
-if(!mkdir('../../requestList/'.$replayId, 0777, true)){
+if(!mkdir($_SERVER['DOCUMENT_ROOT'].'/requestList/'.$replayId)){
   header("Location:../../index.php?error=6");
 }
 if(!rename('../../uploads/'.$_POST['filename'],'../../requestList/'.$replayId.'/'.$_POST['filename'])){

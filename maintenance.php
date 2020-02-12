@@ -22,8 +22,10 @@ header('Retry-After: 3600');
 
 <body>
     <p>
-		maintenance in progress, please come back later.
+		I'm working on the v3 of osu!replayViewer.<br> This website will remain down until the next version is released.</br>
+        I'll send some updates on my <a href="https://discord.gg/pqvhvxx">Discord</a><br>
 		<img src="images/codevirtuel.jpg">
+        See you next time !
 	</p>
 </body>
 

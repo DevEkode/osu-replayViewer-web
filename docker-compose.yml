@@ -61,6 +61,7 @@ services:
       - "./.htaccess:/home/sftp/www/.htaccess"
       - "app_files:/home/sftp/www"
       - "./.docker/ssh/startup.sh:/etc/sftp.d/startup.sh"
+      - "./.docker/ssh/sshd_config:/etc/ssh/sshd_config"
     ports:
       - "222:22"
     command: sftp::1001:33:www

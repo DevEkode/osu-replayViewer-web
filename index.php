@@ -167,16 +167,19 @@ require 'php/navbar.php';
 
             echo "<div class='text-center'><span>Uploads remaining : $uploadRemaining / $limit</span></div><br>";
 
-            if ($uploadRemaining != 0 && $_SESSION['replayStructure'] && $_SESSION['beatmapAvailable'] && $_SESSION['playerOsuAccount'] && $_SESSION['replayBelow10'] && $_SESSION['replayNotDuplicate'] && $_SESSION['replayNotWaiting']) {
-                echo '<form class="align_center" method="post" enctype="multipart/form-data" action="php/index/upload.php">';
-                echo '<input id="checkBox" type="checkbox" name="checkboxTU"> <span id="checkboxText"> I accept the <a href="legal/TU.php?TU=replay" target="_blank">terms of uses</a></span><br>';
-                echo '<input id="filename" name="filename" type="hidden" value=' . '"' . $_SESSION['filename'] . '"' . '>';
-                echo '<input id="duration" name="duration" type="hidden" value=' . '"' . $_SESSION['duration'] . '"' . '>';
-                echo '<input id="duration" name="keyHash" type="hidden" value=' . '"' . password_hash(getenv('UPLOAD_REPLAY_KEY'), PASSWORD_DEFAULT) . '"' . '>';
-                echo '<input name="userId" type="hidden" value=' . '"' . $_SESSION['replay_playerId'] . '"' . '>';
-                echo '<input type="submit" value="Start processing" id="start_processing">';
-                echo '</form>';
+            if(isset($_SESSION['replayStructure']) && isset($_SESSION['beatmapAvailable']) && isset($_SESSION['playerOsuAccount']) && isset($_SESSION['replayBelow10']) && isset($_SESSION['replayNotDuplicate']) && isset($_SESSION['replayNotWaiting'])){
+                if ($uploadRemaining != 0 && $_SESSION['replayStructure'] && $_SESSION['beatmapAvailable'] && $_SESSION['playerOsuAccount'] && $_SESSION['replayBelow10'] && $_SESSION['replayNotDuplicate'] && $_SESSION['replayNotWaiting']) {
+                    echo '<form class="align_center" method="post" enctype="multipart/form-data" action="php/index/upload.php">';
+                    echo '<input id="checkBox" type="checkbox" name="checkboxTU"> <span id="checkboxText"> I accept the <a href="legal/TU.php?TU=replay" target="_blank">terms of uses</a></span><br>';
+                    echo '<input id="filename" name="filename" type="hidden" value=' . '"' . $_SESSION['filename'] . '"' . '>';
+                    echo '<input id="duration" name="duration" type="hidden" value=' . '"' . $_SESSION['duration'] . '"' . '>';
+                    echo '<input id="duration" name="keyHash" type="hidden" value=' . '"' . password_hash(getenv('UPLOAD_REPLAY_KEY'), PASSWORD_DEFAULT) . '"' . '>';
+                    echo '<input name="userId" type="hidden" value=' . '"' . $_SESSION['replay_playerId'] . '"' . '>';
+                    echo '<input type="submit" value="Start processing" id="start_processing">';
+                    echo '</form>';
+                }
             }
+
             ?>
 
             <button onclick="closeModal(); clearSession();">Cancel</button>

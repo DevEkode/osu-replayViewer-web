@@ -1,4 +1,7 @@
 # osu!replayViewer
+
+⚠️ This project is no longer maintained ⚠️
+
 Easy to use website. Just upload your .osr, wait for processing and share it to your friends
 
 [Click here to visit the website](https://osureplayviewer.xyz/)
